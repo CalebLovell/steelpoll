@@ -40,7 +40,7 @@ module.exports = {
 		},
 	},
 	plugins: [
-		// require(`@tailwindcss/forms`),
+		require(`@tailwindcss/forms`),
 		({ addComponents }) => {
 			addComponents({
 				'.container': {

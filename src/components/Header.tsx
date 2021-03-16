@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 export const Header = () => {
 	const { t } = useTranslation(`common`);
 	return (
-		<header className='container bg-white shadow dark:bg-brand-primary-base h-14'>
+		<header className='container bg-white shadow-md dark:bg-brand-primary-base h-14'>
 			<div className='flex items-center justify-between h-full md:hidden'>
 				<MobileMenuButton />
 				<div className='flex items-center space-x-2'>
