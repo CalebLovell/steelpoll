@@ -1,4 +1,3 @@
-import { StructError, assert } from 'superstruct';
 import { useFieldArray, useForm } from 'react-hook-form';
 
 import { Container } from '@components/Container';
@@ -8,43 +7,47 @@ import { useCreatePoll } from 'hooks/polls';
 import { useToasts } from 'react-toast-notifications';
 
 export default function CreatePage(): JSX.Element {
-	const { addToast } = useToasts();
-	const { mutate, isLoading } = useCreatePoll();
+	const toasts = useToasts();
+	const createPollMutation = useCreatePoll();
+	const user_id = `abcdefg`;
+
+	const createForm = useForm({
+		resolver: superstructResolver(newPollRequestSchema),
+		defaultValues: {
+			title: ``,
+			description: ``,
+			choices: [{ choice: `` }, { choice: `` }],
+			types: [],
+			user_id,
+		},
+	});
+
+	const choicesFieldArray = useFieldArray({
+		control: createForm.control,
+		name: `choices`,
+	});
 
 	const onSubmit = async (formData: unknown) => {
-		assert(formData, newPollRequestSchema);
-		console.log(createForm.errors);
 		console.log(formData);
 		// createForm.errors.forEach(error => {
 		// 	if (error instanceof StructError) {
 		// 		switch (error.key) {
 		// 			case `title`:
-		// 				return addToast(`Please enter a title that is no more than 100 characters long.`, { appearance: `warning` });
+		// 				return toasts.addToast(`Please enter a title that is no more than 100 characters long.`, { appearance: `warning` });
 		// 			case `description`:
-		// 				return addToast(`Please enter a description that is no more than 500 characters long.`, { appearance: `warning` });
+		// 				return toasts.addToast(`Please enter a description that is no more than 500 characters long.`, { appearance: `warning` });
 		// 			case `choices`:
-		// 				return addToast(`Please enter between 2 and 10 choices, no more than 100 characters long.`, { appearance: `warning` });
+		// 				return toasts.addToast(`Please enter between 2 and 10 choices, no more than 100 characters long.`, { appearance: `warning` });
 		// 			case `types`:
-		// 				return addToast(`Please choose at least one type of voting system.`, { appearance: `warning` });
+		// 				return toasts.addToast(`Please choose at least one type of voting system.`, { appearance: `warning` });
 		// 			default:
-		// 				return addToast(`An unexpected error occured. Sorry about that! The devs have been notified. Please try again later!`, {
+		// 				return toasts.addToast(`An unexpected error occured. Sorry about that! The devs have been notified. Please try again later!`, {
 		// 					appearance: `error`,
 		// 				});
 		// 		}
 		// 	}
 		// });
 	};
-
-	const createForm = useForm({
-		resolver: superstructResolver(newPollRequestSchema),
-		defaultValues: {
-			choices: [{ choice: `` }, { choice: `` }],
-		},
-	});
-	const choicesFieldArray = useFieldArray({
-		control: createForm.control,
-		name: `choices`,
-	});
 
 	return (
 		<Container>
@@ -60,7 +63,6 @@ export default function CreatePage(): JSX.Element {
 					</label>
 					<input
 						name='title'
-						defaultValue='test'
 						ref={createForm.register()}
 						className='block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
 						placeholder='Add a title here...'
@@ -91,7 +93,7 @@ export default function CreatePage(): JSX.Element {
 							Choices
 						</label>
 						<button
-							className='inline-flex items-center rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+							className='inline-flex items-center ml-2 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
 							type='button'
 							onClick={() => choicesFieldArray.append({ choice: `` })}
 						>
@@ -107,7 +109,6 @@ export default function CreatePage(): JSX.Element {
 								ref={createForm.register()}
 								type='text'
 								className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
-								defaultValue=''
 								placeholder='Add a choice here...'
 								required
 								aria-labelledby='choices'
@@ -123,13 +124,11 @@ export default function CreatePage(): JSX.Element {
 							</button>
 						</div>
 					))}
-
-					<fieldset className='mt-3'>
+					{/* <fieldset className='mt-3'>
 						<legend className='block text-sm font-semibold text-red-400'>Voting Systems</legend>
 						<div className='relative flex items-start mt-2'>
 							<div className='flex items-center h-5'>
 								<input
-									id='voting-system-1'
 									name='voting-system-1'
 									type='checkbox'
 									ref={createForm.register()}
@@ -144,7 +143,6 @@ export default function CreatePage(): JSX.Element {
 						<div className='relative flex items-start mt-2'>
 							<div className='flex items-center h-5'>
 								<input
-									id='voting-system-2'
 									name='voting-system-2'
 									type='checkbox'
 									ref={createForm.register()}
@@ -159,7 +157,6 @@ export default function CreatePage(): JSX.Element {
 						<div className='relative flex items-start mt-2'>
 							<div className='flex items-center h-5'>
 								<input
-									id='voting-system-3'
 									name='voting-system-3'
 									type='checkbox'
 									ref={createForm.register()}
@@ -171,13 +168,13 @@ export default function CreatePage(): JSX.Element {
 								<p className='font-normal text-gray-400'>an example description here</p>
 							</label>
 						</div>
-					</fieldset>
+					</fieldset> */}
 					<button
 						type='submit'
 						className='inline-flex items-center px-3 py-2 mt-4 text-sm font-medium leading-4 text-black bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
 					>
 						Submit
-						{isLoading ? (
+						{createPollMutation.isLoading ? (
 							<svg
 								className='w-4 h-4 ml-2 text-accent-primary animate-spin'
 								xmlns='http://www.w3.org/2000/svg'
