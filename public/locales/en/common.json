@@ -1,0 +1,14 @@
+{
+	"header": {
+		"home": "Next Starter",
+		"about": "About",
+		"blog": "Blog",
+		"contact": "Contact",
+		"signin": "Sign in",
+		"signup": "Sign up",
+		"darkModeButton": "Toggle dark mode"
+	},
+	"footer": {
+		"p": "2021 Caleb Lovell. Thanks for visiting, hope you're having a lovely day."
+	}
+}

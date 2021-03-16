@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 100 900;
+	font-display: optional;
+	src: url(/fonts/inter-var.ttf) format('.ttf');
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212,
+		U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+	--h-content-area: calc(100vh - theme('height.14'));
+}
+
+.min-height-mobile {
+	min-height: calc(100vh - theme('height.4'));
+}
+
+.focus-brand {
+	@apply focus:outline-none ring-black dark:ring-white focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-brand-primary-base;
+}
+
+.hover-brand {
+	@apply hover:bg-brand-accent-base hover:text-white dark:hover:bg-white dark:hover:text-brand-accent-base;
+}
+
+.hover-brand-inverse {
+	@apply hover:bg-brand-accent-dark hover:text-white border-brand-accent-base dark:hover:bg-white dark:hover:text-brand-accent-base;
+}
