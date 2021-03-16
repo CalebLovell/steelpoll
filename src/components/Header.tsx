@@ -19,7 +19,7 @@ export const Header = () => {
 			<nav className='items-center justify-between hidden h-full md:flex'>
 				<div className='flex items-center md:space-x-2'>
 					<Logo label={t(`header.home`)} />
-					<Link href='/about' label={t(`header.about`)} variant='link' />
+					<Link href='/create' label={t(`header.about`)} variant='link' />
 					<Link href='/blog' label={t(`header.blog`)} variant='link' />
 					<Link href='/contact' label={t(`header.contact`)} variant='link' />
 				</div>

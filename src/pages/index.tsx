@@ -32,36 +32,6 @@ const HomePage = () => {
 							{home(`h2`)}
 						</a>
 					</h2>
-					<div className='flex flex-col justify-around space-y-2 sm:space-y-0 sm:flex-row'>
-						<button
-							type='button'
-							onClick={() => addToast(toasts(`info`), { appearance: `info` })}
-							className='inline-flex items-center justify-center px-4 py-2 text-base font-medium text-center text-indigo-700 bg-indigo-100 border border-transparent rounded-md hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-						>
-							{toasts(`info`)}
-						</button>
-						<button
-							type='button'
-							onClick={() => addToast(toasts(`success`), { appearance: `success` })}
-							className='inline-flex items-center justify-center px-4 py-2 text-base font-medium text-center text-green-700 bg-green-100 border border-transparent rounded-md hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500'
-						>
-							{toasts(`success`)}
-						</button>
-						<button
-							type='button'
-							onClick={() => addToast(toasts(`warning`), { appearance: `warning` })}
-							className='inline-flex items-center justify-center px-4 py-2 text-base font-medium text-center text-yellow-700 bg-yellow-100 border border-transparent rounded-md hover:bg-yellow-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500'
-						>
-							{toasts(`warning`)}
-						</button>
-						<button
-							type='button'
-							onClick={() => addToast(toasts(`error`), { appearance: `error` })}
-							className='inline-flex items-center justify-center px-4 py-2 text-base font-medium text-center text-red-700 bg-red-100 border border-transparent rounded-md hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500'
-						>
-							{toasts(`error`)}
-						</button>
-					</div>
 				</div>
 			</main>
 		</Container>

@@ -5,11 +5,11 @@
 			"@components/*": [
 				"components/*"
 			],
-			"@types/*": [
-				"types/*"
-			],
 			"@hooks/*": [
 				"hooks/*"
+			],
+			"@types/*": [
+				"types/*"
 			],
 			"@utils/*": [
 				"utils/*"

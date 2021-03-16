@@ -10,7 +10,21 @@ import { ToastContainer } from '@components/ToastContainer';
 import { ToastProvider } from 'react-toast-notifications';
 import { appWithTranslation } from 'next-i18next';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			staleTime: 1000 * 60 * 60 * 8,
+			onError: (error: Error) => {
+				console.log(error);
+			},
+		},
+		mutations: {
+			onError: (error: Error) => {
+				console.log(error);
+			},
+		},
+	},
+});
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
 	return (

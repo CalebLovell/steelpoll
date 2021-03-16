@@ -15,10 +15,10 @@ interface Props {
 }
 
 export const Container: React.FC<Props> = ({
-	title = `Caleb Next Starter`,
-	description = `Caleb Next Starter`,
-	domain = `caleb-next-starter.vercel.app`,
-	url = `https://caleb-next-starter.vercel.app`,
+	title = `Steelpoll`,
+	description = `Create and vote on polls you can rely on`,
+	domain = `steelpoll.vercel.app`,
+	url = `https://steelpoll.vercel.app`,
 	image = `https://caleb-next-starter.vercel.app/images/caleb-next-starter.png`,
 	children,
 }) => {

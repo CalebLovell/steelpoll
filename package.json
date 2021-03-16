@@ -1,6 +1,6 @@
 {
-	"name": "caleb-next-starter",
-	"description": "starter for projects with next.js, typescript, tailwindcss, and react query",
+	"name": "steelpoll",
+	"description": "create and vote on polls you can rely on",
 	"author": "Caleb Lovell",
 	"version": "0.0.1",
 	"license": "MIT",
@@ -15,7 +15,8 @@
 	},
 	"dependencies": {
 		"@headlessui/react": "^0.3.1",
-		"@hookform/resolvers": "^1.3.5",
+		"@hookform/resolvers": "1.3.0",
+		"axios": "^0.21.1",
 		"next": "^10.0.8",
 		"next-i18next": "^8.0.1",
 		"next-plausible": "^1.5.1",
@@ -27,7 +28,8 @@
 		"react-hook-form": "^6.15.4",
 		"react-query": "3.12.0",
 		"react-toast-notifications": "^2.4.0",
-		"react-use-keypress": "^1.2.0"
+		"react-use-keypress": "^1.2.0",
+		"superstruct": "^0.14.2"
 	},
 	"devDependencies": {
 		"@tailwindcss/forms": "^0.2.1",
