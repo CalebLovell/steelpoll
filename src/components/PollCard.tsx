@@ -3,7 +3,7 @@ import { PollWithId } from '@utils/pollTypes';
 export const PollCard = ({ poll }: { poll: PollWithId }) => {
 	return (
 		<li>
-			<a href={`polls/${poll.id}`} className='flex col-span-1 rounded-md shadow-sm'>
+			<a href={`poll/${poll.id}`} className='flex col-span-1 rounded-md shadow-sm'>
 				<div className='flex items-center justify-center flex-shrink-0 w-16 text-sm font-medium text-white bg-pink-600 rounded-l-md'>
 					<svg className='inline w-8' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
 						<path

@@ -8,7 +8,7 @@ import { Container } from '@components/Container';
 
 const PollPage = () => {
 	const router = useRouter();
-	const { pollId } = router.query;
+	const { poll: pollId } = router.query;
 	const { data: poll } = usePoll(pollId);
 	const [radioChecked, setRadioChecked] = React.useState(poll?.choices[0]);
 	const [rankedChoices, setRankedChoices] = React.useState(poll?.choices);
