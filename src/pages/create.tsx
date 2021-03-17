@@ -3,8 +3,8 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { Container } from '@components/Container';
 import { newPollRequestSchema } from '@utils/dataSchemas';
 import { superstructResolver } from '@hookform/resolvers/superstruct';
-import { useCreatePoll } from 'hooks/polls';
 import { useToasts } from 'react-toast-notifications';
+import { useCreatePoll } from '@hooks/useCreatePoll';
 
 export default function CreatePage(): JSX.Element {
 	const toasts = useToasts();

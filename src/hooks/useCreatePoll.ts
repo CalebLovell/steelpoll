@@ -1,16 +1,9 @@
 import { NewPollRequest, Poll } from '@utils/dataTypes';
 import axios, { AxiosError } from 'axios';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 
 import { useRouter } from 'next/router';
 import { useToasts } from 'react-toast-notifications';
-
-export const usePolls = () => {
-	return useQuery<Poll[], AxiosError>(`polls`, async () => {
-		const { data } = await axios.get(`api/polls`);
-		return data;
-	});
-};
 
 export const useCreatePoll = () => {
 	const toasts = useToasts();
@@ -19,7 +12,7 @@ export const useCreatePoll = () => {
 	return useMutation(
 		async (newPoll: NewPollRequest) => {
 			const stringified = JSON.stringify(newPoll);
-			const { data } = await axios.post<NewPollRequest>(`api/poll`, stringified);
+			const { data } = await axios.post<NewPollRequest>(`http://localhost:3000/api/poll`, stringified);
 			return data;
 		},
 		{

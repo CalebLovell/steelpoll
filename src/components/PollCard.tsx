@@ -1,6 +1,10 @@
 import { Poll } from '@utils/dataTypes';
 
-export const PollCard = ({ poll }: { poll: Poll }) => {
+interface PollWithId extends Poll {
+	id: string;
+}
+
+export const PollCard = ({ poll }: { poll: PollWithId }) => {
 	return (
 		<li>
 			<a href={`polls/${poll.id}`} className='flex col-span-1 rounded-md shadow-sm'>
