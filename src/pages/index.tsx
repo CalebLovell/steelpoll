@@ -5,7 +5,7 @@ import { PollCard } from '@components/PollCard';
 import { usePolls } from '@hooks/usePolls';
 
 export const getStaticProps = async ({ locale }) => {
-	const translations = await serverSideTranslations(locale, [`common`, `home`, `toasts`]);
+	const translations = await serverSideTranslations(locale, [`common`, `home`]);
 	return {
 		props: {
 			...translations,
