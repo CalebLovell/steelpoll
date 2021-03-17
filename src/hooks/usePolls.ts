@@ -1,4 +1,4 @@
-import { Poll, PollResponse, PollsResponse } from '@utils/dataTypes';
+import { Poll, PollResponse, PollsResponse } from '@utils/pollTypes';
 import axios, { AxiosError } from 'axios';
 
 import { useQuery } from 'react-query';

@@ -1,6 +1,6 @@
 import { Describe, array, enums, object, optional, size, string } from 'superstruct';
 
-import { NewPollRequest } from './dataTypes';
+import { NewPollRequest } from '@utils/pollTypes';
 
 export const newPollRequestSchema: Describe<NewPollRequest> = object({
 	title: size(string(), 1, 100),

@@ -1,4 +1,4 @@
-import { NewPollRequest, Poll } from '@utils/dataTypes';
+import { NewPollRequest, Poll } from '@utils/pollTypes';
 import axios, { AxiosError } from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 

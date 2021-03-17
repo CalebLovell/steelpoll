@@ -1,8 +1,4 @@
-import { Poll } from '@utils/dataTypes';
-
-interface PollWithId extends Poll {
-	id: string;
-}
+import { PollWithId } from '@utils/pollTypes';
 
 export const PollCard = ({ poll }: { poll: PollWithId }) => {
 	return (

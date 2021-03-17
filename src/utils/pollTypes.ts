@@ -1,9 +1,3 @@
-export interface User {
-	name: string;
-	createdAt: string;
-	updatedAt: string;
-}
-
 type VotingType = `First Past The Post` | `Ranked Choice` | `Single Transferable`;
 
 export interface NewPollRequest {
@@ -23,6 +17,10 @@ export interface Poll {
 	user_id: string;
 }
 
+export interface PollWithId extends Poll {
+	id: string;
+}
+
 export interface PollResponse {
 	ref: any;
 	ts: number;
@@ -31,11 +29,4 @@ export interface PollResponse {
 
 export interface PollsResponse {
 	data: PollResponse[];
-}
-
-export interface Vote {
-	user_id: string;
-	poll_id: string;
-	choice_id: string;
-	createdAt: string;
 }
