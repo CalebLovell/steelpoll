@@ -78,31 +78,31 @@ const PollPage = () => {
 						</div>
 					</fieldset>
 				) : null}
-				{/* {poll?.types.includes(`ranked-choice`) ? ( */}
-				<DragDropContext onDragEnd={reorderChoices}>
-					<Droppable droppableId='ranked'>
-						{droppableProvided => (
-							<ul className='border rounded-md' {...droppableProvided.droppableProps} ref={droppableProvided.innerRef}>
-								{rankedChoices?.map((choice, i) => (
-									<Draggable key={choice} draggableId={choice} index={i}>
-										{draggableProvided => (
-											<li
-												ref={draggableProvided.innerRef}
-												{...draggableProvided.draggableProps}
-												{...draggableProvided.dragHandleProps}
-												className='w-full h-10'
-											>
-												<p>{choice}</p>
-											</li>
-										)}
-									</Draggable>
-								))}
-								{droppableProvided.placeholder}
-							</ul>
-						)}
-					</Droppable>
-				</DragDropContext>
-				{/* ) : null} */}
+				{poll?.types.includes(`ranked-choice`) ? (
+					<DragDropContext onDragEnd={reorderChoices}>
+						<Droppable droppableId='ranked'>
+							{droppableProvided => (
+								<ul className='border rounded-md' {...droppableProvided.droppableProps} ref={droppableProvided.innerRef}>
+									{rankedChoices?.map((choice, i) => (
+										<Draggable key={choice} draggableId={choice} index={i}>
+											{draggableProvided => (
+												<li
+													ref={draggableProvided.innerRef}
+													{...draggableProvided.draggableProps}
+													{...draggableProvided.dragHandleProps}
+													className='w-full h-10'
+												>
+													<p>{choice}</p>
+												</li>
+											)}
+										</Draggable>
+									))}
+									{droppableProvided.placeholder}
+								</ul>
+							)}
+						</Droppable>
+					</DragDropContext>
+				) : null}
 			</main>
 		</Container>
 	);
