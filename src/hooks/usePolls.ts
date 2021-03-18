@@ -9,7 +9,7 @@ const getPolls = async () => {
 };
 
 export const usePolls = () => {
-	return useQuery(`polls`, getPolls, {
+	return useQuery<PollResponse[], AxiosError, Poll[]>(`polls`, getPolls, {
 		select: data =>
 			data.map(x => {
 				return {

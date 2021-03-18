@@ -34,7 +34,7 @@ const PollPage = () => {
 
 	return (
 		<Container>
-			<main className='container flex flex-col justify-center w-full min-h-content bg-base-primary'>
+			<main className='container flex flex-col justify-center w-full min-h-content bg-brand-primary-light dark:bg-brand-primary-dark'>
 				<p className='text-base font-medium leading-6 text-gray-900'>{poll?.title}</p>
 				<p className='text-sm leading-5 text-gray-500'>{poll?.description}</p>
 				<p className='text-sm leading-5 text-gray-500'>Poll types: {poll?.types[0]}</p>
