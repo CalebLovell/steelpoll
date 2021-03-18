@@ -1,52 +1,56 @@
+import { StructError, assert } from 'superstruct';
 import { useFieldArray, useForm } from 'react-hook-form';
 
 import { Container } from '@components/Container';
 import { newPollRequestSchema } from '@utils/dataSchemas';
-import { superstructResolver } from '@hookform/resolvers/superstruct';
 import { useCreatePoll } from '@hooks/useCreatePoll';
 import { useToasts } from 'react-toast-notifications';
 import { votingSystems } from '@utils/votingSystems';
 
 export default function CreatePage(): JSX.Element {
 	const { addToast } = useToasts();
-	const { isLoading } = useCreatePoll();
-	const user_id = `abcdefg`;
+	const { mutate: createPoll, isLoading } = useCreatePoll();
 
 	const { control, register, handleSubmit } = useForm({
-		// resolver: superstructResolver(newPollRequestSchema),
 		defaultValues: {
 			title: ``,
 			description: ``,
 			choices: [{ choice: `` }, { choice: `` }],
-			types: votingSystems.map(x => {
-				return { ...x, selected: false };
-			}),
-			user_id,
 		},
 	});
-	const choicesFieldArray = useFieldArray({ control: control, name: `choices` });
-	const votingSystemsFieldArray = useFieldArray({ control: control, name: `systems` });
 
-	const onSubmit = async (formData: unknown) => {
-		console.log(formData);
-		// errors.forEach(error => {
-		// 	if (error instanceof StructError) {
-		// 		switch (error.key) {
-		// 			case `title`:
-		// 				return addToast(`Please enter a title that is no more than 100 characters long.`, { appearance: `warning` });
-		// 			case `description`:
-		// 				return addToast(`Please enter a description that is no more than 500 characters long.`, { appearance: `warning` });
-		// 			case `choices`:
-		// 				return addToast(`Please enter between 2 and 10 choices, no more than 100 characters long.`, { appearance: `warning` });
-		// 			case `types`:
-		// 				return addToast(`Please choose at least one type of voting system.`, { appearance: `warning` });
-		// 			default:
-		// 				return addToast(`An unexpected error occured. Sorry about that! The devs have been notified. Please try again later!`, {
-		// 					appearance: `error`,
-		// 				});
-		// 		}
-		// 	}
-		// });
+	const choicesFieldArray = useFieldArray({ control: control, name: `choices` });
+
+	const onSubmit = async (rawFormData: any) => {
+		const choices: string[] = [];
+		rawFormData.choices?.map(x => choices.push(x.choice));
+		const types: string[] = [];
+		votingSystems.map(x => {
+			rawFormData[x.slug] === true ? types.push(x.slug) : null;
+			delete rawFormData[x.slug];
+		});
+		const formattedData = { ...rawFormData, choices, types, user_id: `test` };
+		try {
+			assert(formattedData, newPollRequestSchema);
+			createPoll(formattedData);
+		} catch (error) {
+			if (error instanceof StructError) {
+				switch (error.key) {
+					case `title`:
+						return addToast(`Please enter a title that is no more than 100 characters long.`, { appearance: `error` });
+					case `description`:
+						return addToast(`Please enter a description that is no more than 500 characters long.`, { appearance: `error` });
+					case `choices`:
+						return addToast(`Please enter between 2 and 10 choices, no more than 100 characters long.`, { appearance: `error` });
+					case `types`:
+						return addToast(`Please choose at least one type of voting system.`, { appearance: `error` });
+					default:
+						return addToast(error.message, {
+							appearance: `error`,
+						});
+				}
+			}
+		}
 	};
 
 	return (
@@ -129,19 +133,19 @@ export default function CreatePage(): JSX.Element {
 					</div>
 					<fieldset className='mt-3'>
 						<legend className='block text-sm font-semibold text-red-400'>Voting Systems</legend>
-						{votingSystems.map(x => (
-							<div key={x.id} className='relative flex items-start mt-2'>
+						{votingSystems.map(item => (
+							<div key={item.id} className='relative flex items-start mt-2'>
 								<div className='flex items-center h-5'>
 									<input
-										name={x.slug}
-										type='checkbox'
+										name={item.slug}
 										ref={register()}
+										type='checkbox'
 										className='w-4 h-4 text-indigo-500 border-gray-300 rounded focus:ring-indigo-500'
 									/>
 								</div>
-								<label htmlFor={x.slug} className='ml-3 text-sm font-bold text-red-400'>
-									{x.name}
-									<p className='font-normal text-gray-400'>{x.description}</p>
+								<label htmlFor={item.slug} className='ml-3 text-sm font-bold text-red-400'>
+									{item.name}
+									<p className='font-normal text-gray-400'>{item.description}</p>
 								</label>
 							</div>
 						))}

@@ -1,9 +1,9 @@
-type VotingType = `First Past The Post` | `Ranked Choice` | `Single Transferable`;
+type VotingType = `first-past-the-post` | `ranked-choice` | `single-transferable`;
 
 export interface NewPollRequest {
 	title: string;
 	description?: string;
-	choices: { choice: string }[];
+	choices: string[];
 	types: VotingType[];
 	user_id: string;
 }

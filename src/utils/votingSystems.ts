@@ -1,5 +1,5 @@
 export const votingSystems = [
-	{ id: 1, name: `First Past the Post`, slug: `first-past-the-post`, description: `an example description here` },
-	{ id: 2, name: `Ranked Choice`, slug: `ranked-choice`, description: `an example description here` },
-	{ id: 3, name: `Single Transferable`, slug: `single-transferable`, description: `an example description here` },
+	{ id: 0, slug: `first-past-the-post`, name: `First Past the Post`, description: `an example description here` },
+	{ id: 1, slug: `ranked-choice`, name: `Ranked Choice`, description: `an example description here` },
+	{ id: 2, slug: `single-transferable`, name: `Single Transferable`, description: `an example description here` },
 ];
