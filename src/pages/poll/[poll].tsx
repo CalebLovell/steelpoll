@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import { DragDropContext, Draggable, DropResult, Droppable } from 'react-beautiful-dnd';
 
+import { Container } from '@components/Container';
 import { usePoll } from '@hooks/usePoll';
 import { useRouter } from 'next/router';
-import { Container } from '@components/Container';
 
 const PollPage = () => {
 	const router = useRouter();
@@ -12,6 +12,11 @@ const PollPage = () => {
 	const { data: poll } = usePoll(pollId);
 	const [radioChecked, setRadioChecked] = React.useState(poll?.choices[0]);
 	const [rankedChoices, setRankedChoices] = React.useState(poll?.choices);
+
+	React.useEffect(() => {
+		setRadioChecked(poll?.choices[0]);
+		setRankedChoices(poll?.choices);
+	}, [poll?.choices]);
 
 	const renderRoundedClasses = (i: number) => {
 		if (poll?.choices) {
@@ -26,10 +31,12 @@ const PollPage = () => {
 	const reorderChoices = (result: DropResult) => {
 		if (!result.destination) return;
 		if (result.destination.index === result.source.index) return;
-		const items = rankedChoices && Array.from(rankedChoices);
-		const [reorderedItem] = items?.splice(result.source.index, 1);
-		items?.splice(result.destination.index, 0, reorderedItem);
-		setRankedChoices(items);
+		if (rankedChoices) {
+			const items = rankedChoices && Array.from(rankedChoices);
+			const [reorderedItem] = items?.splice(result.source.index, 1);
+			items?.splice(result.destination.index, 0, reorderedItem);
+			setRankedChoices(items);
+		}
 	};
 
 	return (
@@ -37,9 +44,13 @@ const PollPage = () => {
 			<main className='container flex flex-col justify-center w-full min-h-content bg-brand-primary-light dark:bg-brand-primary-dark'>
 				<p className='text-base font-medium leading-6 text-gray-900'>{poll?.title}</p>
 				<p className='text-sm leading-5 text-gray-500'>{poll?.description}</p>
-				<p className='text-sm leading-5 text-gray-500'>Poll types: {poll?.types[0]}</p>
+				{poll?.types?.map(x => (
+					<p key={x} className='text-sm leading-5 text-gray-500'>
+						Poll types: {x}
+					</p>
+				))}
 				<p className='text-sm leading-5 text-gray-500'>User: {poll?.user_id}</p>
-				{poll?.types.includes(`First Past The Post`) ? (
+				{poll?.types?.includes(`first-past-the-post`) ? (
 					<fieldset>
 						<legend className='sr-only'>First Past The Post Voting</legend>
 						<div className='-space-y-px bg-white rounded-md'>
@@ -67,31 +78,31 @@ const PollPage = () => {
 						</div>
 					</fieldset>
 				) : null}
-				{poll?.types.includes(`First Past The Post`) ? (
-					<DragDropContext onDragEnd={reorderChoices}>
-						<Droppable droppableId='ranked'>
-							{droppableProvided => (
-								<ul className='border rounded-md' {...droppableProvided.droppableProps} ref={droppableProvided.innerRef}>
-									{rankedChoices?.map((choice, i) => (
-										<Draggable key={choice} draggableId={choice} index={i}>
-											{draggableProvided => (
-												<li
-													ref={draggableProvided.innerRef}
-													{...draggableProvided.draggableProps}
-													{...draggableProvided.dragHandleProps}
-													className='w-full h-10'
-												>
-													<p>{choice}</p>
-												</li>
-											)}
-										</Draggable>
-									))}
-									{droppableProvided.placeholder}
-								</ul>
-							)}
-						</Droppable>
-					</DragDropContext>
-				) : null}
+				{/* {poll?.types.includes(`ranked-choice`) ? ( */}
+				<DragDropContext onDragEnd={reorderChoices}>
+					<Droppable droppableId='ranked'>
+						{droppableProvided => (
+							<ul className='border rounded-md' {...droppableProvided.droppableProps} ref={droppableProvided.innerRef}>
+								{rankedChoices?.map((choice, i) => (
+									<Draggable key={choice} draggableId={choice} index={i}>
+										{draggableProvided => (
+											<li
+												ref={draggableProvided.innerRef}
+												{...draggableProvided.draggableProps}
+												{...draggableProvided.dragHandleProps}
+												className='w-full h-10'
+											>
+												<p>{choice}</p>
+											</li>
+										)}
+									</Draggable>
+								))}
+								{droppableProvided.placeholder}
+							</ul>
+						)}
+					</Droppable>
+				</DragDropContext>
+				{/* ) : null} */}
 			</main>
 		</Container>
 	);
