@@ -1,7 +1,7 @@
 import { Container } from '@components/Container';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useForm } from 'react-hook-form';
-import { useSignup } from '@hooks/useSignup';
+import { useLogin } from '@hooks/useLogin';
 import { useTranslation } from 'react-i18next';
 
 export const getStaticProps = async ({ locale }) => {
@@ -13,20 +13,20 @@ export const getStaticProps = async ({ locale }) => {
 	};
 };
 
-const SignupPage = () => {
+const LoginPage = () => {
+	const { mutate: login } = useLogin();
 	const { t } = useTranslation(`common`);
-	const { mutate: signup } = useSignup();
 
-	const { register, handleSubmit } = useForm({
+	const { control, register, handleSubmit } = useForm({
 		defaultValues: {
-			username: ``,
 			email: ``,
 			password: ``,
+			persist_user: true,
 		},
 	});
 
 	const onSubmit = async x => {
-		signup(x);
+		login({ email: x.email, password: x.password });
 	};
 
 	return (
@@ -35,25 +35,11 @@ const SignupPage = () => {
 				<div className='flex flex-col justify-center min-h-screen py-12 bg-gray-50 sm:px-6 lg:px-8'>
 					<div className='sm:mx-auto sm:w-full sm:max-w-md'>
 						<img className='w-auto h-12 mx-auto' src='https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg' alt='Workflow' />
-						<h1 className='mt-6 text-3xl font-extrabold text-center text-black dark:text-brand-primary-light '>{t(`header.signup`)}</h1>
+						<h1 className='mt-6 text-3xl font-extrabold text-center text-black dark:text-brand-primary-light '>{t(`header.signin`)}</h1>
 					</div>
 					<div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
 						<div className='px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10'>
 							<form className='space-y-6' onSubmit={handleSubmit(onSubmit)}>
-								<div>
-									<label htmlFor='email' className='block text-sm font-medium text-gray-700'>
-										Username
-									</label>
-									<div className='mt-1'>
-										<input
-											name='username'
-											type='text'
-											autoComplete='username'
-											ref={register()}
-											className='block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
-										/>
-									</div>
-								</div>
 								<div>
 									<label htmlFor='email' className='block text-sm font-medium text-gray-700'>
 										Email address
@@ -91,6 +77,7 @@ const SignupPage = () => {
 										<input
 											name='persist_user'
 											type='checkbox'
+											required
 											ref={register()}
 											className='w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500'
 										/>
@@ -152,4 +139,4 @@ const SignupPage = () => {
 	);
 };
 
-export default SignupPage;
+export default LoginPage;
