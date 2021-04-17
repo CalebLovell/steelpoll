@@ -1,7 +1,7 @@
 import { Container } from '@components/Container';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useForm } from 'react-hook-form';
-import { useLogin } from '@hooks/useLogin';
+import { useEmailLogin, useGithubLogin } from '@hooks/authentication';
 import { useTranslation } from 'react-i18next';
 
 export const getStaticProps = async ({ locale }) => {
@@ -14,10 +14,11 @@ export const getStaticProps = async ({ locale }) => {
 };
 
 const LoginPage = () => {
-	const { mutate: login } = useLogin();
+	const { mutate: loginWithEmail } = useEmailLogin();
+	const { mutate: loginWithGithub } = useGithubLogin();
 	const { t } = useTranslation(`common`);
 
-	const { control, register, handleSubmit } = useForm({
+	const { register, handleSubmit } = useForm({
 		defaultValues: {
 			email: ``,
 			password: ``,
@@ -26,7 +27,7 @@ const LoginPage = () => {
 	});
 
 	const onSubmit = async x => {
-		login({ email: x.email, password: x.password });
+		loginWithEmail({ email: x.email, password: x.password });
 	};
 
 	return (
@@ -85,12 +86,6 @@ const LoginPage = () => {
 											Remember me
 										</label>
 									</div>
-
-									<div className='text-sm'>
-										<a href='#' className='font-medium text-indigo-600 hover:text-indigo-500'>
-											Forgot your password?
-										</a>
-									</div>
 								</div>
 
 								<div>
@@ -115,8 +110,8 @@ const LoginPage = () => {
 
 								<div className='grid grid-cols-1 mt-6'>
 									<div>
-										<a
-											href='#'
+										<button
+											onClick={() => loginWithGithub()}
 											className='inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50'
 										>
 											<span className='sr-only'>Sign in with GitHub</span>
@@ -127,7 +122,7 @@ const LoginPage = () => {
 													clipRule='evenodd'
 												/>
 											</svg>
-										</a>
+										</button>
 									</div>
 								</div>
 							</div>
