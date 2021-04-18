@@ -1,7 +1,6 @@
 import '../styles/global.css';
 
 import { QueryClient, QueryClientProvider } from 'react-query';
-
 import { AppProps } from 'next/app';
 import { GlobalProvider } from '@components/GlobalProvider';
 import { ThemeProvider } from 'next-themes';
@@ -9,6 +8,7 @@ import { Toast } from '@components/Toast';
 import { ToastContainer } from '@components/ToastContainer';
 import { ToastProvider } from 'react-toast-notifications';
 import { appWithTranslation } from 'next-i18next';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -45,6 +45,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 						autoDismissTimeout={10000}
 					>
 						<Component {...pageProps} />
+						<ReactQueryDevtools initialIsOpen={false} />
 					</ToastProvider>
 				</GlobalProvider>
 			</QueryClientProvider>
