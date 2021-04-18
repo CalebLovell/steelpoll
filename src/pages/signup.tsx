@@ -1,8 +1,9 @@
+import * as React from 'react';
 import { Container } from '@components/Container';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useForm } from 'react-hook-form';
-import { useSignup } from '@hooks/useSignup';
 import { useTranslation } from 'react-i18next';
+import { useEmailSignup } from '@hooks/authentication';
 
 export const getStaticProps = async ({ locale }) => {
 	const translations = await serverSideTranslations(locale, [`common`]);
@@ -14,19 +15,20 @@ export const getStaticProps = async ({ locale }) => {
 };
 
 const SignupPage = () => {
+	const { mutate: signupWithEmail } = useEmailSignup();
 	const { t } = useTranslation(`common`);
-	const { mutate: signup } = useSignup();
+	const [persist, setPersist] = React.useState(false);
 
 	const { register, handleSubmit } = useForm({
 		defaultValues: {
-			username: ``,
+			name: ``,
 			email: ``,
 			password: ``,
 		},
 	});
 
 	const onSubmit = async x => {
-		signup(x);
+		signupWithEmail(x);
 	};
 
 	return (
@@ -42,13 +44,13 @@ const SignupPage = () => {
 							<form className='space-y-6' onSubmit={handleSubmit(onSubmit)}>
 								<div>
 									<label htmlFor='email' className='block text-sm font-medium text-gray-700'>
-										Username
+										Name
 									</label>
 									<div className='mt-1'>
 										<input
-											name='username'
+											name='name'
 											type='text'
-											autoComplete='username'
+											autoComplete='name'
 											ref={register()}
 											className='block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
 										/>
@@ -89,10 +91,10 @@ const SignupPage = () => {
 								<div className='flex items-center justify-between'>
 									<div className='flex items-center'>
 										<input
-											name='persist_user'
 											type='checkbox'
-											ref={register()}
 											className='w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500'
+											checked={persist}
+											onChange={() => setPersist(!persist)}
 										/>
 										<label htmlFor='persist_user' className='block ml-2 text-sm text-gray-900'>
 											Remember me
@@ -111,7 +113,7 @@ const SignupPage = () => {
 										type='submit'
 										className='flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
 									>
-										Sign in
+										Sign Up
 									</button>
 								</div>
 							</form>

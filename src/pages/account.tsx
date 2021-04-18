@@ -1,7 +1,8 @@
 import { Container } from '@components/Container';
-import { useChangePassword } from '@hooks/useChangePassword';
-import { useForm } from 'react-hook-form';
 import { useLogoutUser } from '@hooks/useLogout';
+import { useUser } from '@hooks/user';
+import { userInfo } from 'node:os';
+import { useForm } from 'react-hook-form';
 
 // import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 // import { useTranslation } from 'react-i18next';
@@ -16,8 +17,9 @@ import { useLogoutUser } from '@hooks/useLogout';
 // };
 
 const AccountPage = () => {
+	const { data } = useUser();
 	const { mutate: logout } = useLogoutUser();
-	const { mutate: changePassword } = useChangePassword();
+	// const { mutate: changePassword } = useChangePassword();
 	// const { t } = useTranslation(`common`);
 
 	const { register, handleSubmit } = useForm({
@@ -28,12 +30,14 @@ const AccountPage = () => {
 
 	const onSubmit = async x => {
 		console.log(x);
-		changePassword({ userRef: `295649534619419149`, newPassword: x.newPassword });
 	};
 
 	return (
 		<Container>
 			<main className='container flex items-center justify-center min-h-content bg-brand-primary-light dark:bg-brand-primary-dark'>
+				<h1>{data?.name}</h1>
+				<h1>{data?.email}</h1>
+				<h1>{data?.provider}</h1>
 				<button
 					type='button'
 					onClick={() => logout(true)}

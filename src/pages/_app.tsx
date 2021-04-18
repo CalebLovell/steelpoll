@@ -9,6 +9,7 @@ import { ToastContainer } from '@components/ToastContainer';
 import { ToastProvider } from 'react-toast-notifications';
 import { appWithTranslation } from 'next-i18next';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { FirebaseError } from 'firebase-admin';
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -17,7 +18,7 @@ const queryClient = new QueryClient({
 			onSuccess: data => {
 				console.log(data);
 			},
-			onError: (error: Error) => {
+			onError: (error: FirebaseError) => {
 				console.log(error);
 			},
 		},
@@ -25,7 +26,7 @@ const queryClient = new QueryClient({
 			onSuccess: data => {
 				console.log(data);
 			},
-			onError: (error: Error) => {
+			onError: (error: FirebaseError) => {
 				console.log(error);
 			},
 		},

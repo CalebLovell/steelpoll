@@ -1,12 +1,20 @@
+export interface CreateUserRequest {
+	uid?: string;
+	name: string;
+	email: string;
+	providerId?: string;
+}
+
 export interface User {
-	id: string
-	username: string;
+	name: string;
+	email: string;
+	provider: string;
 	createdAt: string;
 	updatedAt: string;
 }
 
 export interface SignupRequest {
-	username: string;
+	name: string;
 	email: string;
 	password: string;
 }

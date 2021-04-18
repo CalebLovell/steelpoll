@@ -4,18 +4,12 @@ import { useToasts } from 'react-toast-notifications';
 
 export const useLogoutUser = () => {
 	const toasts = useToasts();
-	return useMutation(
-		async (allTokens: boolean) => {
-			const data = await logout(allTokens);
-			return data;
+	return useMutation(logout, {
+		onError: (error: Error) => {
+			toasts.addToast(error.message, { appearance: `error` });
 		},
-		{
-			onError: (error: Error) => {
-				toasts.addToast(error.message, { appearance: `error` });
-			},
-			onSuccess: () => {
-				toasts.addToast(`Logged out.`, { appearance: `success` });
-			},
-		}
-	);
+		onSuccess: () => {
+			toasts.addToast(`Logged out.`, { appearance: `success` });
+		},
+	});
 };

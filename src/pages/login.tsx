@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Container } from '@components/Container';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useForm } from 'react-hook-form';
@@ -17,12 +18,12 @@ const LoginPage = () => {
 	const { mutate: loginWithEmail } = useEmailLogin();
 	const { mutate: loginWithGithub } = useGithubLogin();
 	const { t } = useTranslation(`common`);
+	const [persist, setPersist] = React.useState(false);
 
 	const { register, handleSubmit } = useForm({
 		defaultValues: {
 			email: ``,
 			password: ``,
-			persist_user: true,
 		},
 	});
 
@@ -76,11 +77,10 @@ const LoginPage = () => {
 								<div className='flex items-center justify-between'>
 									<div className='flex items-center'>
 										<input
-											name='persist_user'
 											type='checkbox'
-											required
-											ref={register()}
 											className='w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500'
+											checked={persist}
+											onChange={() => setPersist(!persist)}
 										/>
 										<label htmlFor='persist_user' className='block ml-2 text-sm text-gray-900'>
 											Remember me
@@ -93,7 +93,7 @@ const LoginPage = () => {
 										type='submit'
 										className='flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
 									>
-										Sign in
+										Log In
 									</button>
 								</div>
 							</form>
@@ -114,7 +114,7 @@ const LoginPage = () => {
 											onClick={() => loginWithGithub()}
 											className='inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50'
 										>
-											<span className='sr-only'>Sign in with GitHub</span>
+											<span className='sr-only'>Log In with GitHub</span>
 											<svg className='w-5 h-5' fill='currentColor' viewBox='0 0 20 20' aria-hidden='true'>
 												<path
 													fillRule='evenodd'
