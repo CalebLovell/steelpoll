@@ -1,7 +1,7 @@
 import { Container } from '@components/Container';
-import { useLogoutUser } from '@hooks/useLogout';
+import { useGlobalState } from '@components/GlobalProvider';
+import { useLogout } from '@hooks/authentication';
 import { useUser } from '@hooks/user';
-import { userInfo } from 'node:os';
 import { useForm } from 'react-hook-form';
 
 // import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -17,8 +17,9 @@ import { useForm } from 'react-hook-form';
 // };
 
 const AccountPage = () => {
-	const { data } = useUser();
-	const { mutate: logout } = useLogoutUser();
+	const state = useGlobalState();
+	const { data: user } = useUser(state.uid);
+	const { mutate: logout } = useLogout();
 	// const { mutate: changePassword } = useChangePassword();
 	// const { t } = useTranslation(`common`);
 
@@ -35,12 +36,12 @@ const AccountPage = () => {
 	return (
 		<Container>
 			<main className='container flex items-center justify-center min-h-content bg-brand-primary-light dark:bg-brand-primary-dark'>
-				<h1>{data?.name}</h1>
-				<h1>{data?.email}</h1>
-				<h1>{data?.provider}</h1>
+				<h1>{user?.name}</h1>
+				<h1>{user?.email}</h1>
+				<h1>{user?.provider}</h1>
 				<button
 					type='button'
-					onClick={() => logout(true)}
+					onClick={() => logout()}
 					className='flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
 				>
 					LOGOUT

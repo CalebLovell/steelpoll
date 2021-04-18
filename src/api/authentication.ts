@@ -2,12 +2,18 @@ import { LoginRequest, SignupRequest } from '@utils/userTypes';
 import firebase from '@utils/firebaseClient';
 import { User } from '@utils/userTypes';
 
-export const getUser = () => {
-	const user = localStorage.getItem(`user`);
-	if (user) {
-		const parsed: User = JSON.parse(user);
-		return parsed;
-	} else return null;
+const firestore = firebase.firestore();
+
+export const getUser = async (uid: string | undefined) => {
+	const collectionRef = firestore.collection(`users`);
+	if (uid) {
+		const docRef = collectionRef.doc(uid);
+		const snapshot = await docRef.get();
+		const data = snapshot.data() as User;
+		return data;
+	} else {
+		return null;
+	}
 };
 
 export const signupWithEmail = async (signupRequest: SignupRequest) => {

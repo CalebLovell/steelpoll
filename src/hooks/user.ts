@@ -5,8 +5,12 @@ import { FirebaseError } from 'firebase-admin';
 import { useMutation, useQuery } from 'react-query';
 import { useToasts } from 'react-toast-notifications';
 
-export const useUser = () => {
-	return useQuery(`user`, getUser);
+export const useUser = (uid: string | undefined) => {
+	return useQuery(`user`, () => getUser(uid), {
+		enabled: !!uid,
+		cacheTime: Infinity,
+		staleTime: 1000 * 60 * 60,
+	});
 };
 
 export const useCreateUser = () => {
