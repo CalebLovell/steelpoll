@@ -7,23 +7,29 @@ import { useGlobalState } from '@components/GlobalProvider';
 import { useRouter } from 'next/router';
 
 interface Props {
-	title?: string;
-	description?: string;
-	domain?: string;
-	url?: string;
-	image?: string;
+	metadata?: {
+		title?: string;
+		description?: string;
+		url?: string;
+		image?: string;
+	};
+	authUser: any;
 }
 
 export const Container: React.FC<Props> = ({
-	title = `Steelpoll`,
-	description = `Create and vote on polls you can rely on`,
-	domain = `steelpoll.vercel.app`,
-	url = `https://steelpoll.vercel.app`,
-	image = `https://caleb-next-starter.vercel.app/images/caleb-next-starter.png`,
+	metadata = {
+		title: `Steelpoll`,
+		description: `Create and vote on polls you can rely on`,
+		url: `https://steelpoll.vercel.app`,
+		image: `https://caleb-next-starter.vercel.app/images/caleb-next-starter.png`,
+	},
+	authUser,
 	children,
 }) => {
 	const { mobileNavOpen } = useGlobalState();
 	const router = useRouter();
+	const { title, description, url, image } = metadata;
+	const domain = `steelpoll.vercel.app`;
 	return (
 		<>
 			<PlausibleProvider domain={domain}>
@@ -50,7 +56,7 @@ export const Container: React.FC<Props> = ({
 					<meta name='twitter:image:alt' content={description} key='twimagealt' />
 				</Head>
 			</PlausibleProvider>
-			<Header />
+			<Header authUser={authUser} />
 			{mobileNavOpen ? <MobileMenu /> : null}
 			{children}
 			<Footer />

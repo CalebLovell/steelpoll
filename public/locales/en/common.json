@@ -1,10 +1,9 @@
 {
 	"header": {
-		"home": "Next Starter",
-		"about": "About",
-		"blog": "Blog",
-		"contact": "Contact",
-		"signin": "Sign in",
+		"home": "Steepoll",
+		"create": "Create a Poll",
+		"account": "Account",
+		"login": "Log in",
 		"signup": "Sign up",
 		"darkModeButton": "Toggle dark mode"
 	},

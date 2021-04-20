@@ -17,7 +17,7 @@ const GlobalReducer = (state: State, action: Action) => {
 			return { ...state, mobileNavOpen: action.payload };
 		}
 		default: {
-			throw new Error(`Unhandled action type: ${action.type}`);
+			throw new Error(`Unhandled action type: ${action}`);
 		}
 	}
 };
