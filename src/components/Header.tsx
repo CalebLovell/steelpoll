@@ -3,13 +3,11 @@ import { LanguageButton } from './LanguageButton';
 import { Link } from './Link';
 import { Logo } from './Logo';
 import { MobileMenuButton } from './MobileMenuButton';
-import { useTranslation } from 'react-i18next';
-import { useUser } from '@hooks/user';
 import { ProfileDropdown } from './ProfileDropdown';
+import { useTranslation } from 'react-i18next';
 
-export const Header = () => {
+export const Header = ({ authUser }: { authUser: any }) => {
 	const { t } = useTranslation(`common`);
-	const { data: user } = useUser();
 	return (
 		<header className='container bg-white shadow-md dark:bg-brand-primary-base h-14'>
 			<div className='flex items-center justify-between h-full md:hidden'>
@@ -31,7 +29,7 @@ export const Header = () => {
 						<DarkModeButton />
 					</div>
 					<div className='flex items-center md:space-x-2'>
-						{user ? (
+						{authUser ? (
 							<ProfileDropdown />
 						) : (
 							<>

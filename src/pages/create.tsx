@@ -1,4 +1,5 @@
 import { StructError, assert } from 'superstruct';
+import { useAuthUser, withAuthUser, withAuthUserTokenSSR } from 'next-firebase-auth';
 import { useFieldArray, useForm } from 'react-hook-form';
 
 import { Container } from '@components/Container';
@@ -7,7 +8,8 @@ import { useCreatePoll } from '@hooks/useCreatePoll';
 import { useToasts } from 'react-toast-notifications';
 import { votingSystems } from '@utils/votingSystems';
 
-export default function CreatePage(): JSX.Element {
+const CreatePage = () => {
+	const authUser = useAuthUser();
 	const { addToast } = useToasts();
 	const { mutate: createPoll, isLoading } = useCreatePoll();
 
@@ -54,7 +56,7 @@ export default function CreatePage(): JSX.Element {
 	};
 
 	return (
-		<Container>
+		<Container authUser={authUser}>
 			<main className='container flex items-center justify-center w-full min-h-content bg-brand-primary-light dark:bg-brand-primary-dark'>
 				<form
 					className='w-full px-4 py-8 my-12 bg-white shadow-md dark:bg-brand-primary-base md:w-2/3 sm:rounded-lg sm:px-10'
@@ -175,4 +177,8 @@ export default function CreatePage(): JSX.Element {
 			</main>
 		</Container>
 	);
-}
+};
+
+export const getServerSideProps = withAuthUserTokenSSR()();
+
+export default withAuthUser()(CreatePage);

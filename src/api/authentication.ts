@@ -1,20 +1,6 @@
 import { LoginRequest, SignupRequest } from '@utils/userTypes';
+
 import firebase from '@utils/firebaseClient';
-import { User } from '@utils/userTypes';
-
-const firestore = firebase.firestore();
-
-export const getUser = async (uid: string | undefined) => {
-	const collectionRef = firestore.collection(`users`);
-	if (uid) {
-		const docRef = collectionRef.doc(uid);
-		const snapshot = await docRef.get();
-		const data = snapshot.data() as User;
-		return data;
-	} else {
-		return null;
-	}
-};
 
 export const signupWithEmail = async (signupRequest: SignupRequest) => {
 	const res = await firebase.auth().createUserWithEmailAndPassword(signupRequest.email, signupRequest.password);

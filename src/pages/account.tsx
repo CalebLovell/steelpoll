@@ -1,8 +1,9 @@
+import { AuthAction, useAuthUser, withAuthUser } from 'next-firebase-auth';
+
 import { Container } from '@components/Container';
-import { useGlobalState } from '@components/GlobalProvider';
+import { useForm } from 'react-hook-form';
 import { useLogout } from '@hooks/authentication';
 import { useUser } from '@hooks/user';
-import { useForm } from 'react-hook-form';
 
 // import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 // import { useTranslation } from 'react-i18next';
@@ -17,8 +18,9 @@ import { useForm } from 'react-hook-form';
 // };
 
 const AccountPage = () => {
-	const state = useGlobalState();
-	const { data: user } = useUser(state.uid);
+	const authUser = useAuthUser();
+	const { data: user } = useUser();
+
 	const { mutate: logout } = useLogout();
 	// const { mutate: changePassword } = useChangePassword();
 	// const { t } = useTranslation(`common`);
@@ -34,11 +36,11 @@ const AccountPage = () => {
 	};
 
 	return (
-		<Container>
-			<main className='container flex items-center justify-center min-h-content bg-brand-primary-light dark:bg-brand-primary-dark'>
+		<Container authUser={authUser}>
+			<main className='container flex flex-col items-center justify-center min-h-content bg-brand-primary-light dark:bg-brand-primary-dark'>
 				<h1>{user?.name}</h1>
 				<h1>{user?.email}</h1>
-				<h1>{user?.provider}</h1>
+				<h1>{user?.providerId}</h1>
 				<button
 					type='button'
 					onClick={() => logout()}
@@ -74,4 +76,7 @@ const AccountPage = () => {
 	);
 };
 
-export default AccountPage;
+export default withAuthUser({
+	whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
+	authPageURL: `/login`,
+})(AccountPage);

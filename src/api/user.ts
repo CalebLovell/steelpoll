@@ -1,10 +1,23 @@
+import { CreateUserRequest, User } from '@utils/userTypes';
+
 import firebase from '@utils/firebaseClient';
-import { CreateUserRequest } from '@utils/userTypes';
 
 const firestore = firebase.firestore();
 
 const createdAt = new Date().toISOString();
 const updatedAt = new Date().toISOString();
+
+export const getUser = async (uid: string | null) => {
+	const collectionRef = firestore.collection(`users`);
+	if (uid) {
+		const docRef = collectionRef.doc(uid);
+		const snapshot = await docRef.get();
+		const data = snapshot.data() as User;
+		return data;
+	} else {
+		return null;
+	}
+};
 
 export const createUser = async (user: CreateUserRequest) => {
 	const usersCollectionRef = firestore.collection(`users`);

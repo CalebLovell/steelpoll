@@ -1,15 +1,17 @@
 import '../styles/global.css';
 
 import { QueryClient, QueryClientProvider } from 'react-query';
+
 import { AppProps } from 'next/app';
+import { FirebaseError } from 'firebase-admin';
 import { GlobalProvider } from '@components/GlobalProvider';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import { ThemeProvider } from 'next-themes';
 import { Toast } from '@components/Toast';
 import { ToastContainer } from '@components/ToastContainer';
 import { ToastProvider } from 'react-toast-notifications';
 import { appWithTranslation } from 'next-i18next';
-import { ReactQueryDevtools } from 'react-query/devtools';
-import { FirebaseError } from 'firebase-admin';
+import { initAuth } from '@utils/initAuth';
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -32,6 +34,8 @@ const queryClient = new QueryClient({
 		},
 	},
 });
+
+initAuth();
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
 	return (

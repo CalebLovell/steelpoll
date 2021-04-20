@@ -8,7 +8,7 @@ export interface CreateUserRequest {
 export interface User {
 	name: string;
 	email: string;
-	provider: string;
+	providerId: string;
 	photoUrl: string;
 	createdAt: string;
 	updatedAt: string;

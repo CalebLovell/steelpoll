@@ -1,8 +1,11 @@
 import * as React from 'react';
+
+import { AuthAction, useAuthUser, withAuthUser } from 'next-firebase-auth';
+import { useEmailLogin, useGithubLogin } from '@hooks/authentication';
+
 import { Container } from '@components/Container';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useForm } from 'react-hook-form';
-import { useEmailLogin, useGithubLogin } from '@hooks/authentication';
 import { useTranslation } from 'react-i18next';
 
 export const getStaticProps = async ({ locale }) => {
@@ -15,6 +18,7 @@ export const getStaticProps = async ({ locale }) => {
 };
 
 const LoginPage = () => {
+	const authUser = useAuthUser();
 	const { mutate: loginWithEmail } = useEmailLogin();
 	const { mutate: loginWithGithub } = useGithubLogin();
 	const { t } = useTranslation(`common`);
@@ -32,7 +36,7 @@ const LoginPage = () => {
 	};
 
 	return (
-		<Container>
+		<Container authUser={authUser}>
 			<main className='container flex items-center justify-center min-h-content bg-brand-primary-light dark:bg-brand-primary-dark'>
 				<div className='flex flex-col justify-center min-h-screen py-12 bg-gray-50 sm:px-6 lg:px-8'>
 					<div className='sm:mx-auto sm:w-full sm:max-w-md'>
@@ -134,4 +138,9 @@ const LoginPage = () => {
 	);
 };
 
-export default LoginPage;
+export default withAuthUser({
+	whenAuthed: AuthAction.REDIRECT_TO_APP,
+	whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
+	whenUnauthedAfterInit: AuthAction.RENDER,
+	LoaderComponent: null,
+})(LoginPage);

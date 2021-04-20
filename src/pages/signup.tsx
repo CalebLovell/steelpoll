@@ -1,9 +1,11 @@
 import * as React from 'react';
+
 import { Container } from '@components/Container';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useAuthUser } from 'next-firebase-auth';
+import { useEmailSignup } from '@hooks/authentication';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useEmailSignup } from '@hooks/authentication';
 
 export const getStaticProps = async ({ locale }) => {
 	const translations = await serverSideTranslations(locale, [`common`]);
@@ -15,6 +17,7 @@ export const getStaticProps = async ({ locale }) => {
 };
 
 const SignupPage = () => {
+	const authUser = useAuthUser();
 	const { mutate: signupWithEmail } = useEmailSignup();
 	const { t } = useTranslation(`common`);
 	const [persist, setPersist] = React.useState(false);
@@ -32,7 +35,7 @@ const SignupPage = () => {
 	};
 
 	return (
-		<Container>
+		<Container authUser={authUser}>
 			<main className='container flex items-center justify-center min-h-content bg-brand-primary-light dark:bg-brand-primary-dark'>
 				<div className='flex flex-col justify-center min-h-screen py-12 bg-gray-50 sm:px-6 lg:px-8'>
 					<div className='sm:mx-auto sm:w-full sm:max-w-md'>
