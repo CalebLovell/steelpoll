@@ -9,13 +9,18 @@ export const initAuth = () => {
 		// firebaseAuthEmulatorHost: `localhost:9099`,
 		firebaseAdminInitConfig: {
 			credential: {
+				// @ts-ignore
 				projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+				// @ts-ignore
 				clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+				// @ts-ignore
 				privateKey: process.env.FIREBASE_PRIVATE_KEY,
 			},
+			// @ts-ignore
 			databaseURL: process.env.FIREBASE_DATABASE_URL,
 		},
 		firebaseClientInitConfig: {
+			// @ts-ignore
 			apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
 			authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
 			databaseURL: process.env.FIREBASE_DATABASE_URL,

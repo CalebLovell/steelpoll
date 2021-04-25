@@ -11,6 +11,7 @@ const PollPage = () => {
 	const authUser = useAuthUser();
 	const router = useRouter();
 	const { poll: pollId } = router.query;
+	// @ts-ignore
 	const { data: poll } = usePoll(pollId);
 	const [radioChecked, setRadioChecked] = React.useState(poll?.choices[0]);
 	const [rankedChoices, setRankedChoices] = React.useState(poll?.choices);
@@ -46,13 +47,13 @@ const PollPage = () => {
 			<main className='container flex flex-col justify-center w-full min-h-content bg-brand-primary-light dark:bg-brand-primary-dark'>
 				<p className='text-base font-medium leading-6 text-gray-900'>{poll?.title}</p>
 				<p className='text-sm leading-5 text-gray-500'>{poll?.description}</p>
-				{/* {poll?.types?.map(x => (
+				{poll?.votingSystems?.map(x => (
 					<p key={x} className='text-sm leading-5 text-gray-500'>
 						Poll types: {x}
 					</p>
 				))}
-				<p className='text-sm leading-5 text-gray-500'>User: {poll?.user_id}</p>
-				{poll?.types?.includes(`first-past-the-post`) ? (
+				<p className='text-sm leading-5 text-gray-500'>User: {poll?.userId}</p>
+				{poll?.votingSystems?.includes(`first-past-the-post`) ? (
 					<fieldset>
 						<legend className='sr-only'>First Past The Post Voting</legend>
 						<div className='-space-y-px bg-white rounded-md'>
@@ -80,7 +81,7 @@ const PollPage = () => {
 						</div>
 					</fieldset>
 				) : null}
-				{poll?.types.includes(`ranked-choice`) ? (
+				{poll?.votingSystems?.includes(`ranked-choice`) ? (
 					<DragDropContext onDragEnd={reorderChoices}>
 						<Droppable droppableId='ranked'>
 							{droppableProvided => (
@@ -104,7 +105,7 @@ const PollPage = () => {
 							)}
 						</Droppable>
 					</DragDropContext>
-				) : null} */}
+				) : null}
 			</main>
 		</Container>
 	);

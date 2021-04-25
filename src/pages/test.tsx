@@ -30,6 +30,7 @@ const Demo = ({ favoriteColor }) => {
 const getAbsoluteURL = (url, req = null) => {
 	let host;
 	if (req) {
+		// @ts-ignore
 		host = req.headers.host;
 	} else {
 		if (typeof window === `undefined`) {
@@ -47,6 +48,7 @@ export const getServerSideProps = withAuthUserTokenSSR({
 })(async ({ AuthUser, req }) => {
 	// Optionally, get other props.
 	const token = await AuthUser.getIdToken();
+	// @ts-ignore
 	const endpoint = getAbsoluteURL(`/api/example`, req);
 	const response = await fetch(endpoint, {
 		method: `GET`,
@@ -67,4 +69,5 @@ export const getServerSideProps = withAuthUserTokenSSR({
 
 export default withAuthUser({
 	whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
+	// @ts-ignore
 })(Demo);

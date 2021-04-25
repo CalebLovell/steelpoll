@@ -1,6 +1,6 @@
-import { PollWithId } from '@utils/pollTypes';
+import { Poll } from '@utils/pollTypes';
 
-export const PollCard = ({ poll }: { poll: PollWithId }) => {
+export const PollCard = ({ poll }: { poll: Poll }) => {
 	return (
 		<li>
 			<a href={`poll/${poll.id}`} className='flex col-span-1 rounded-md shadow-sm'>

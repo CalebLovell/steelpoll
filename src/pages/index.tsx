@@ -4,7 +4,8 @@ import { Container } from '@components/Container';
 import { PollCard } from '@components/PollCard';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { usePolls } from '@hooks/polls';
-import { useTranslation } from 'react-i18next';
+
+// import { useTranslation } from 'react-i18next';
 
 export const getStaticProps = async ({ locale }) => {
 	const translations = await serverSideTranslations(locale, [`common`, `home`]);
@@ -18,7 +19,7 @@ export const getStaticProps = async ({ locale }) => {
 const HomePage = () => {
 	const authUser = useAuthUser();
 	const { data: polls } = usePolls();
-	const { t: home } = useTranslation(`home`);
+	// const { t: home } = useTranslation(`home`);
 
 	return (
 		<Container authUser={authUser}>
