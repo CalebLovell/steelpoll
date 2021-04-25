@@ -2,8 +2,14 @@ import { LoginRequest, SignupRequest } from '@utils/userTypes';
 
 import firebase from '@utils/firebaseClient';
 
-export const signupWithEmail = async (signupRequest: SignupRequest) => {
+export const createAuthWithEmail = async (signupRequest: SignupRequest) => {
 	const res = await firebase.auth().createUserWithEmailAndPassword(signupRequest.email, signupRequest.password);
+	return res;
+};
+
+export const createAuthWithGithub = async () => {
+	const github = new firebase.auth.GithubAuthProvider();
+	const res = await firebase.auth().signInWithPopup(github);
 	return res;
 };
 
@@ -12,13 +18,7 @@ export const loginWithEmail = async (credentials: LoginRequest) => {
 	return res;
 };
 
-export const loginWithGithub = async () => {
-	const github = new firebase.auth.GithubAuthProvider();
-	const res = await firebase.auth().signInWithPopup(github);
-	return res;
-};
-
-export const logout = async () => {
+export const authLogout = async () => {
 	const res = await firebase.auth().signOut();
 	return res;
 };

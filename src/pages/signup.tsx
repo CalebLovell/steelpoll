@@ -1,9 +1,10 @@
 import * as React from 'react';
 
+import { AuthAction, useAuthUser, withAuthUser } from 'next-firebase-auth';
+import { useAuthWithGithub, useCreateAuthWithEmail } from '@hooks/authentication';
+
 import { Container } from '@components/Container';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useAuthUser } from 'next-firebase-auth';
-import { useEmailSignup } from '@hooks/authentication';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -18,9 +19,9 @@ export const getStaticProps = async ({ locale }) => {
 
 const SignupPage = () => {
 	const authUser = useAuthUser();
-	const { mutate: signupWithEmail } = useEmailSignup();
+	const { mutate: emailAuth } = useCreateAuthWithEmail();
+	const { mutate: githubAuth } = useAuthWithGithub();
 	const { t } = useTranslation(`common`);
-	const [persist, setPersist] = React.useState(false);
 
 	const { register, handleSubmit } = useForm({
 		defaultValues: {
@@ -31,7 +32,7 @@ const SignupPage = () => {
 	});
 
 	const onSubmit = async x => {
-		signupWithEmail(x);
+		emailAuth(x);
 	};
 
 	return (
@@ -91,26 +92,6 @@ const SignupPage = () => {
 									</div>
 								</div>
 
-								<div className='flex items-center justify-between'>
-									<div className='flex items-center'>
-										<input
-											type='checkbox'
-											className='w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500'
-											checked={persist}
-											onChange={() => setPersist(!persist)}
-										/>
-										<label htmlFor='persist_user' className='block ml-2 text-sm text-gray-900'>
-											Remember me
-										</label>
-									</div>
-
-									<div className='text-sm'>
-										<a href='#' className='font-medium text-indigo-600 hover:text-indigo-500'>
-											Forgot your password?
-										</a>
-									</div>
-								</div>
-
 								<div>
 									<button
 										type='submit'
@@ -133,11 +114,11 @@ const SignupPage = () => {
 
 								<div className='grid grid-cols-1 mt-6'>
 									<div>
-										<a
-											href='#'
+										<button
+											onClick={() => githubAuth()}
 											className='inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50'
 										>
-											<span className='sr-only'>Sign in with GitHub</span>
+											<span className='sr-only'>Sign up with GitHub</span>
 											<svg className='w-5 h-5' fill='currentColor' viewBox='0 0 20 20' aria-hidden='true'>
 												<path
 													fillRule='evenodd'
@@ -145,7 +126,7 @@ const SignupPage = () => {
 													clipRule='evenodd'
 												/>
 											</svg>
-										</a>
+										</button>
 									</div>
 								</div>
 							</div>
@@ -157,4 +138,6 @@ const SignupPage = () => {
 	);
 };
 
-export default SignupPage;
+export default withAuthUser({
+	whenAuthed: AuthAction.REDIRECT_TO_APP,
+})(SignupPage);

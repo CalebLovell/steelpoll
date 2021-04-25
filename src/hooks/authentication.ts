@@ -1,27 +1,11 @@
 import { LoginRequest, SignupRequest } from '@utils/userTypes';
-import { loginWithEmail, loginWithGithub, logout, signupWithEmail } from 'api/authentication';
-import { FirebaseError } from 'firebase-admin';
-import { useMutation } from 'react-query';
-import { useToasts } from 'react-toast-notifications';
-import { useCreateUser } from './user';
+import { authLogout, createAuthWithEmail, createAuthWithGithub, loginWithEmail } from 'api/authentication';
+import { useMutation, useQueryClient } from 'react-query';
 
-export const useEmailSignup = () => {
-	const toasts = useToasts();
-	const createUserMutation = useCreateUser();
-	return useMutation((signupRequest: SignupRequest) => signupWithEmail(signupRequest), {
-		onError: (error: FirebaseError) => {
-			toasts.addToast(error.message, { appearance: `error` });
-		},
-		onSuccess: (data, vars) => {
-			createUserMutation.mutate({
-				uid: data.user?.uid,
-				name: vars.name,
-				email: vars.email,
-				providerId: data.additionalUserInfo?.providerId,
-			});
-		},
-	});
-};
+import { FirebaseError } from 'firebase-admin';
+import { useCreateUser } from './user';
+import { useRouter } from 'next/router';
+import { useToasts } from 'react-toast-notifications';
 
 export const useEmailLogin = () => {
 	const toasts = useToasts();
@@ -35,25 +19,65 @@ export const useEmailLogin = () => {
 	});
 };
 
-export const useGithubLogin = () => {
+export const useCreateAuthWithEmail = () => {
 	const toasts = useToasts();
-	return useMutation(() => loginWithGithub(), {
+	const createUserMutation = useCreateUser();
+	const emailLoginMutation = useEmailLogin();
+	const router = useRouter();
+	return useMutation((signupRequest: SignupRequest) => createAuthWithEmail(signupRequest), {
 		onError: (error: FirebaseError) => {
 			toasts.addToast(error.message, { appearance: `error` });
 		},
-		onSuccess: () => {
-			toasts.addToast(`Logged in.`, { appearance: `success` });
+		onSuccess: (data, vars) => {
+			createUserMutation.mutate(
+				{
+					uid: data.user?.uid,
+					name: vars.name,
+					email: vars.email,
+					providerId: data.additionalUserInfo?.providerId,
+				},
+				{
+					onSuccess: () => {
+						emailLoginMutation.mutate({ email: vars.email, password: vars.password });
+					},
+					onError: () => {
+						router.push(`/login`);
+					},
+				}
+			);
+		},
+	});
+};
+
+export const useAuthWithGithub = () => {
+	const toasts = useToasts();
+	const createUserMutation = useCreateUser();
+	return useMutation(() => createAuthWithGithub(), {
+		onError: (error: FirebaseError) => {
+			toasts.addToast(error.message, { appearance: `error` });
+		},
+		onSuccess: data => {
+			if (data.additionalUserInfo?.isNewUser) {
+				createUserMutation.mutate({
+					uid: data.user?.uid,
+					name: data.user?.displayName,
+					email: data.user?.email,
+					providerId: data.additionalUserInfo?.providerId,
+				});
+			}
 		},
 	});
 };
 
 export const useLogout = () => {
 	const toasts = useToasts();
-	return useMutation(logout, {
+	const queryClient = useQueryClient();
+	return useMutation(authLogout, {
 		onError: (error: FirebaseError) => {
 			toasts.addToast(error.message, { appearance: `error` });
 		},
 		onSuccess: () => {
+			queryClient.invalidateQueries(`user`);
 			toasts.addToast(`Logged out.`, { appearance: `success` });
 		},
 	});

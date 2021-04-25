@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { AuthAction, useAuthUser, withAuthUser } from 'next-firebase-auth';
-import { useEmailLogin, useGithubLogin } from '@hooks/authentication';
+import { useAuthWithGithub, useEmailLogin } from '@hooks/authentication';
 
 import { Container } from '@components/Container';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -20,9 +20,8 @@ export const getStaticProps = async ({ locale }) => {
 const LoginPage = () => {
 	const authUser = useAuthUser();
 	const { mutate: loginWithEmail } = useEmailLogin();
-	const { mutate: loginWithGithub } = useGithubLogin();
+	const { mutate: loginWithGithub } = useAuthWithGithub();
 	const { t } = useTranslation(`common`);
-	const [persist, setPersist] = React.useState(false);
 
 	const { register, handleSubmit } = useForm({
 		defaultValues: {
@@ -78,20 +77,6 @@ const LoginPage = () => {
 									</div>
 								</div>
 
-								<div className='flex items-center justify-between'>
-									<div className='flex items-center'>
-										<input
-											type='checkbox'
-											className='w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500'
-											checked={persist}
-											onChange={() => setPersist(!persist)}
-										/>
-										<label htmlFor='persist_user' className='block ml-2 text-sm text-gray-900'>
-											Remember me
-										</label>
-									</div>
-								</div>
-
 								<div>
 									<button
 										type='submit'
@@ -140,7 +125,4 @@ const LoginPage = () => {
 
 export default withAuthUser({
 	whenAuthed: AuthAction.REDIRECT_TO_APP,
-	whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
-	whenUnauthedAfterInit: AuthAction.RENDER,
-	LoaderComponent: null,
 })(LoginPage);

@@ -1,7 +1,8 @@
+import { useAuthUser, withAuthUser } from 'next-firebase-auth';
+
 import { Container } from '@components/Container';
 import { PollCard } from '@components/PollCard';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useAuthUser } from 'next-firebase-auth';
 import { useTranslation } from 'react-i18next';
 
 export const getStaticProps = async ({ locale }) => {
@@ -33,4 +34,4 @@ const HomePage = () => {
 	);
 };
 
-export default HomePage;
+export default withAuthUser()(HomePage);

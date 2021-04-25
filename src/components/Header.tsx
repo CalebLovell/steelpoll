@@ -1,3 +1,4 @@
+import { AuthUserContext } from 'next-firebase-auth';
 import { DarkModeButton } from './DarkModeButton';
 import { LanguageButton } from './LanguageButton';
 import { Link } from './Link';
@@ -6,7 +7,7 @@ import { MobileMenuButton } from './MobileMenuButton';
 import { ProfileDropdown } from './ProfileDropdown';
 import { useTranslation } from 'react-i18next';
 
-export const Header = ({ authUser }: { authUser: any }) => {
+export const Header = ({ authUser }: { authUser: AuthUserContext }) => {
 	const { t } = useTranslation(`common`);
 	return (
 		<header className='container bg-white shadow-md dark:bg-brand-primary-base h-14'>
@@ -29,7 +30,7 @@ export const Header = ({ authUser }: { authUser: any }) => {
 						<DarkModeButton />
 					</div>
 					<div className='flex items-center md:space-x-2'>
-						{authUser ? (
+						{authUser.id ? (
 							<ProfileDropdown />
 						) : (
 							<>

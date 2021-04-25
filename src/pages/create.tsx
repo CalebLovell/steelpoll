@@ -18,20 +18,19 @@ const CreatePage = () => {
 			title: ``,
 			description: ``,
 			choices: [{ choice: `` }, { choice: `` }],
+			votingSystems: votingSystems.map(x => {
+				return { ...x, selected: false };
+			}),
 		},
 	});
 
-	const choicesFieldArray = useFieldArray({ control: control, name: `choices` });
+	const choicesFieldArray = useFieldArray({ control, name: `choices` });
+	const votingSystemsArray = useFieldArray({ control, name: `votingSystems` });
 
 	const onSubmit = async (rawFormData: any) => {
-		const choices: string[] = [];
-		rawFormData.choices?.map(x => choices.push(x.choice));
-		const types: string[] = [];
-		votingSystems.map(x => {
-			rawFormData[x.slug] === true ? types.push(x.slug) : null;
-			delete rawFormData[x.slug];
-		});
-		const formattedData = { ...rawFormData, choices, types, user_id: `test` };
+		const systems: any[] = [];
+		rawFormData.votingSystems?.forEach((x, i) => (x.selected === true ? systems.push(votingSystems[i]) : null));
+		const formattedData = { ...rawFormData, votingSystems: systems, userId: authUser.id };
 		try {
 			assert(formattedData, newPollRequestSchema);
 			createPoll(formattedData);
@@ -41,15 +40,14 @@ const CreatePage = () => {
 					case `title`:
 						return addToast(`Please enter a title that is no more than 100 characters long.`, { appearance: `error` });
 					case `description`:
-						return addToast(`Please enter a description that is no more than 500 characters long.`, { appearance: `error` });
+						return addToast(`Please enter a description that is no more than 2000 characters long.`, { appearance: `error` });
 					case `choices`:
-						return addToast(`Please enter between 2 and 10 choices, no more than 100 characters long.`, { appearance: `error` });
-					case `types`:
+						return addToast(`Please enter between 2 and 10 choices, no more than 500 characters long each.`, { appearance: `error` });
+					case `votingSystems`:
 						return addToast(`Please choose at least one type of voting system.`, { appearance: `error` });
 					default:
-						return addToast(error.message, {
-							appearance: `error`,
-						});
+						console.log(error.message);
+						return addToast(`An unexpected error has been logged. Please try again later.`, { appearance: `error` });
 				}
 			}
 		}
@@ -110,6 +108,7 @@ const CreatePage = () => {
 								placeholder='Add a choice here...'
 								required
 								aria-labelledby='choices'
+								maxLength={500}
 							/>
 							<button
 								className='inline-flex items-center p-2 ml-3 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
@@ -135,11 +134,11 @@ const CreatePage = () => {
 					</div>
 					<fieldset className='mt-3'>
 						<legend className='block text-sm font-semibold text-red-400'>Voting Systems</legend>
-						{votingSystems.map(item => (
+						{votingSystemsArray.fields.map((item, index) => (
 							<div key={item.id} className='relative flex items-start mt-2'>
 								<div className='flex items-center h-5'>
 									<input
-										name={item.slug}
+										name={`votingSystems[${index}].selected`}
 										ref={register()}
 										type='checkbox'
 										className='w-4 h-4 text-indigo-500 border-gray-300 rounded focus:ring-indigo-500'
