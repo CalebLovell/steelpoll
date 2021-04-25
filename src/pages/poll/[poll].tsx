@@ -4,7 +4,7 @@ import { DragDropContext, Draggable, DropResult, Droppable } from 'react-beautif
 import { useAuthUser, withAuthUser } from 'next-firebase-auth';
 
 import { Container } from '@components/Container';
-import { usePoll } from '@hooks/usePoll';
+import { usePoll } from '@hooks/polls';
 import { useRouter } from 'next/router';
 
 const PollPage = () => {
@@ -46,7 +46,7 @@ const PollPage = () => {
 			<main className='container flex flex-col justify-center w-full min-h-content bg-brand-primary-light dark:bg-brand-primary-dark'>
 				<p className='text-base font-medium leading-6 text-gray-900'>{poll?.title}</p>
 				<p className='text-sm leading-5 text-gray-500'>{poll?.description}</p>
-				{poll?.types?.map(x => (
+				{/* {poll?.types?.map(x => (
 					<p key={x} className='text-sm leading-5 text-gray-500'>
 						Poll types: {x}
 					</p>
@@ -104,7 +104,7 @@ const PollPage = () => {
 							)}
 						</Droppable>
 					</DragDropContext>
-				) : null}
+				) : null} */}
 			</main>
 		</Container>
 	);

@@ -1,8 +1,8 @@
-import { Describe, array, object, optional, size, string } from 'superstruct';
+import { Describe, array, nullable, object, optional, size, string } from 'superstruct';
 
-import { NewPollRequest } from '@utils/pollTypes';
+import { CreatePollRequest } from '@utils/pollTypes';
 
-export const newPollRequestSchema: Describe<NewPollRequest> = object({
+export const newPollRequestSchema: Describe<CreatePollRequest> = object({
 	title: size(string(), 1, 100),
 	description: optional(size(string(), 0, 2000)),
 	choices: size(array(object({ choice: size(string(), 1, 500) })), 1, 10),
@@ -18,5 +18,5 @@ export const newPollRequestSchema: Describe<NewPollRequest> = object({
 		1,
 		3
 	),
-	userId: size(string(), 1, 50),
+	userId: nullable(size(string(), 1, 50)),
 });
