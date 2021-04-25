@@ -4,7 +4,7 @@ import { useFieldArray, useForm } from 'react-hook-form';
 
 import { Container } from '@components/Container';
 import { newPollRequestSchema } from '@utils/dataSchemas';
-import { useCreatePoll } from '@hooks/useCreatePoll';
+import { useCreatePoll } from '@hooks/polls';
 import { useToasts } from 'react-toast-notifications';
 import { votingSystems } from '@utils/votingSystems';
 
