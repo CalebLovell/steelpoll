@@ -1,4 +1,4 @@
-import { CreatePollRequest, Poll, PollWithId } from '@utils/pollTypes';
+import { CreatePollRequest, Poll } from '@utils/pollTypes';
 
 import firebase from '@utils/firebaseClient';
 
@@ -37,6 +37,7 @@ export const getPolls = async () => {
 
 	const polls: Poll[] = [];
 
+	// @ts-ignore
 	snapshot.forEach(doc => polls.push({ id: doc.id, ...doc.data() }));
 
 	return polls;

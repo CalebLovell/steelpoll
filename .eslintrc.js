@@ -28,6 +28,7 @@ module.exports = {
 	rules: {
 		'@typescript-eslint/explicit-module-boundary-types': `off`,
 		'@typescript-eslint/no-explicit-any': `off`,
+		'@typescript-eslint/ban-ts-comment': `off`,
 		'react/react-in-jsx-scope': `off`,
 		'array-bracket-spacing': [`error`, `never`],
 		'block-spacing': `error`,
