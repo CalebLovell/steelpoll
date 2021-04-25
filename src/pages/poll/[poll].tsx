@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 import { DragDropContext, Draggable, DropResult, Droppable } from 'react-beautiful-dnd';
+import { useAuthUser, withAuthUser } from 'next-firebase-auth';
 
 import { Container } from '@components/Container';
-import { useAuthUser } from 'next-firebase-auth';
 import { usePoll } from '@hooks/usePoll';
 import { useRouter } from 'next/router';
 
@@ -110,4 +110,4 @@ const PollPage = () => {
 	);
 };
 
-export default PollPage;
+export default withAuthUser()(PollPage);

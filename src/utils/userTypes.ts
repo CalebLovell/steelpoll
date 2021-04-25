@@ -1,7 +1,7 @@
 export interface CreateUserRequest {
 	uid?: string;
-	name: string;
-	email: string;
+	name?: string | null;
+	email?: string | null;
 	providerId?: string;
 }
 
