@@ -1,11 +1,16 @@
 import * as React from 'react';
 
 import { DragDropContext, Draggable, DropResult, Droppable } from 'react-beautiful-dnd';
+import { StructError, assert } from 'superstruct';
+import { newPollRequestSchema, newVoteRequestSchema } from '@utils/dataSchemas';
 import { useAuthUser, withAuthUser } from 'next-firebase-auth';
 
 import { Container } from '@components/Container';
+import { createVote } from 'api/votes';
+import { useForm } from 'react-hook-form';
 import { usePoll } from '@hooks/polls';
 import { useRouter } from 'next/router';
+import { useToasts } from 'react-toast-notifications';
 
 const PollPage = () => {
 	const authUser = useAuthUser();
@@ -13,13 +18,50 @@ const PollPage = () => {
 	const { poll: pollId } = router.query;
 	// @ts-ignore
 	const { data: poll } = usePoll(pollId);
-	const [radioChecked, setRadioChecked] = React.useState(poll?.choices[0]);
-	const [rankedChoices, setRankedChoices] = React.useState(poll?.choices);
+	const { addToast } = useToasts();
 
-	React.useEffect(() => {
-		setRadioChecked(poll?.choices[0]);
-		setRankedChoices(poll?.choices);
-	}, [poll?.choices]);
+	const { control, register, handleSubmit } = useForm({
+		defaultValues: {
+			FPTP: poll?.choices[0],
+			rankedChoice: poll?.choices,
+			STAR: poll?.choices,
+		},
+	});
+
+	const vote = {
+		userId: authUser.id,
+		'first-past-the-post': { id: 1, value: 1 },
+		'ranked-choice': [
+			{ id: 0, value: 1 },
+			{ id: 1, value: 0 },
+		],
+		STAR: [
+			{ id: 0, value: 3 },
+			{ id: 1, value: 5 },
+		],
+	};
+
+	// TODO fix errors for this component
+	const onSubmit = async (rawFormData: any) => {
+		try {
+			assert(rawFormData, newVoteRequestSchema);
+			createVote(rawFormData);
+		} catch (error) {
+			if (error instanceof StructError) {
+				switch (error.key) {
+					case `first-past-the-post`:
+						return addToast(`Please enter a title that is no more than 100 characters long.`, { appearance: `error` });
+					case `ranked-choice`:
+						return addToast(`Please enter a description that is no more than 2000 characters long.`, { appearance: `error` });
+					case `STAR`:
+						return addToast(`Please enter between 2 and 10 choices, no more than 500 characters long each.`, { appearance: `error` });
+					default:
+						console.log(error.message);
+						return addToast(`An unexpected error has been logged. Please try again later.`, { appearance: `error` });
+				}
+			}
+		}
+	};
 
 	const renderRoundedClasses = (i: number) => {
 		if (poll?.choices) {
@@ -53,13 +95,13 @@ const PollPage = () => {
 					</p>
 				))}
 				<p className='text-sm leading-5 text-gray-500'>User: {poll?.userId}</p>
-				{poll?.votingSystems?.includes(`first-past-the-post`) ? (
-					<fieldset>
+				{poll?.votingSystems?.includes(`first-past-the-post`) && (
+					<section>
 						<legend className='sr-only'>First Past The Post Voting</legend>
 						<div className='-space-y-px bg-white rounded-md'>
 							{poll?.choices?.map((choice, i) => (
 								<div
-									key={i}
+									key={choice}
 									className={`flex items-center border ${renderRoundedClasses(i)} ${
 										radioChecked === choice ? `bg-indigo-50 border-indigo-200 z-10` : `border-gray-200`
 									}`}
@@ -79,9 +121,9 @@ const PollPage = () => {
 								</div>
 							))}
 						</div>
-					</fieldset>
-				) : null}
-				{poll?.votingSystems?.includes(`ranked-choice`) ? (
+					</section>
+				)}
+				{poll?.votingSystems?.includes(`ranked-choice`) && (
 					<DragDropContext onDragEnd={reorderChoices}>
 						<Droppable droppableId='ranked'>
 							{droppableProvided => (
@@ -105,7 +147,27 @@ const PollPage = () => {
 							)}
 						</Droppable>
 					</DragDropContext>
-				) : null}
+				)}
+				{poll?.votingSystems?.includes(`STAR`) && (
+					<ul className='bg-white border rounded-md'>
+						{rankedChoices?.map((choice, i) => (
+							<li key={choice} className='flex w-full h-10'>
+								<label htmlFor={`choice ${i} value`} className='sr-only'>
+									Choice
+								</label>
+								<input
+									name={`choice ${i} value`}
+									type='number'
+									placeholder={1}
+									min={1}
+									max={5}
+									className='block w-20 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-brand-primary-base'
+								/>
+								<p className='text-brand-primary-base'>{choice}</p>
+							</li>
+						))}
+					</ul>
+				)}
 			</main>
 		</Container>
 	);

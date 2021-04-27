@@ -13,6 +13,8 @@ const CreatePage = () => {
 	const { addToast } = useToasts();
 	const { mutate: createPoll, isLoading } = useCreatePoll();
 
+	// TODO add ids to choice and voting systems
+
 	const { control, register, handleSubmit } = useForm({
 		defaultValues: {
 			title: ``,
