@@ -18,15 +18,14 @@ export const createVote = async (createVoteRequest: CreateVoteRequest) => {
 	return res;
 };
 
-// export const getVotes = async () => {
-// 	const collectionRef = firestore.collection(`votes`);
-// 	const docRef = collectionRef.orderBy(`createdAt`).limit(50);
-// 	const snapshot = await docRef.get();
+export const getVotes = async (pollId: string) => {
+	const collectionRef = firestore.collection(`votes`).where(`pollId`, `==`, pollId);
+	const docRef = collectionRef.orderBy(`createdAt`);
+	const snapshot = await docRef.get();
 
-// 	const votes: Vote[] = [];
+	// const votes: Vote[] = [];
+	// @ts-ignore
+	// snapshot.forEach(doc => votes.push({ id: doc.id, ...doc.data() }));
 
-// 	// @ts-ignore
-// 	snapshot.forEach(doc => votes.push({ id: doc.id, ...doc.data() }));
-
-// 	return votes;
-// };
+	return snapshot;
+};

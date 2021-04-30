@@ -1,11 +1,17 @@
-import { votingSystems } from '@utils/votingSystems';
+interface Choice {
+	id: number;
+	choice: string;
+}
 
-type VotingSystem = typeof votingSystems[0];
+interface VotingSystem {
+	id: number;
+	slug: string;
+}
 
 export interface CreatePollRequest {
 	title: string;
 	description?: string;
-	choices: { choice: string }[];
+	choices: Choice[];
 	votingSystems: VotingSystem[];
 	userId: string | null;
 }
@@ -14,8 +20,8 @@ export interface Poll {
 	id: string;
 	title: string;
 	description?: string;
-	choices: string[];
-	votingSystems: string[];
+	choices: Choice[];
+	votingSystems: VotingSystem[];
 	createdAt: string;
 	updatedAt: string;
 	userId: string;

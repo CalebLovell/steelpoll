@@ -12,9 +12,6 @@ const CreatePage = () => {
 	const authUser = useAuthUser();
 	const { addToast } = useToasts();
 	const { mutate: createPoll, isLoading } = useCreatePoll();
-
-	// TODO add ids to choice and voting systems
-
 	const { control, register, handleSubmit } = useForm({
 		defaultValues: {
 			title: ``,
@@ -25,14 +22,18 @@ const CreatePage = () => {
 			}),
 		},
 	});
-
-	const choicesFieldArray = useFieldArray({ control, name: `choices` });
-	const votingSystemsArray = useFieldArray({ control, name: `votingSystems` });
+	const choicesFieldArray = useFieldArray({ control, name: `choices`, keyName: `key` });
+	const votingSystemsArray = useFieldArray({ control, name: `votingSystems`, keyName: `key` });
 
 	const onSubmit = async (rawFormData: any) => {
-		const systems: any[] = [];
-		rawFormData.votingSystems?.forEach((x, i) => (x.selected === true ? systems.push(votingSystems[i]) : null));
-		const formattedData = { ...rawFormData, votingSystems: systems, userId: authUser.id };
+		const formattedVotingSystems: any[] = [];
+		rawFormData.votingSystems?.forEach((x, i) => {
+			x.selected === true ? formattedVotingSystems.push({ id: votingSystems[i]?.id, slug: votingSystems[i]?.slug }) : null;
+		});
+		const formattedChoices = rawFormData.choices?.map((x, i) => {
+			return { id: i, ...x };
+		});
+		const formattedData = { userId: authUser.id, ...rawFormData, choices: formattedChoices, votingSystems: formattedVotingSystems };
 		try {
 			assert(formattedData, newPollRequestSchema);
 			createPoll(formattedData);
@@ -70,7 +71,7 @@ const CreatePage = () => {
 					<input
 						name='title'
 						ref={register()}
-						className='block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+						className='block w-full mt-1 text-red-400 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
 						placeholder='Add a title here...'
 						type='text'
 						required
@@ -88,7 +89,7 @@ const CreatePage = () => {
 						<textarea
 							name='description'
 							ref={register()}
-							className='block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+							className='block w-full mt-1 text-red-400 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
 							placeholder='Add a description here...'
 							aria-describedby='description-optional'
 							rows={3}
@@ -101,12 +102,12 @@ const CreatePage = () => {
 						</label>
 					</div>
 					{choicesFieldArray.fields.map((item, index) => (
-						<div className={`flex ${index ? `mt-3` : `mt-1`}`} key={item.id}>
+						<div className={`flex ${index ? `mt-3` : `mt-1`}`} key={item.key}>
 							<input
 								name={`choices[${index}].choice`}
 								ref={register()}
 								type='text'
-								className='block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+								className='block w-full text-red-400 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
 								placeholder='Add a choice here...'
 								required
 								aria-labelledby='choices'
@@ -137,7 +138,7 @@ const CreatePage = () => {
 					<fieldset className='mt-3'>
 						<legend className='block text-sm font-semibold text-red-400'>Voting Systems</legend>
 						{votingSystemsArray.fields.map((item, index) => (
-							<div key={item.id} className='relative flex items-start mt-2'>
+							<div key={item.key} className='relative flex items-start mt-2'>
 								<div className='flex items-center h-5'>
 									<input
 										name={`votingSystems[${index}].selected`}
