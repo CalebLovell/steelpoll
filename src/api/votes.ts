@@ -1,5 +1,4 @@
-import { CreateVoteRequest, Vote } from '@utils/voteTypes';
-
+import { CreateVoteRequest } from '@utils/voteTypes';
 import firebase from '@utils/firebaseClient';
 
 const firestore = firebase.firestore();
@@ -20,16 +19,10 @@ export const createVote = async (createVoteRequest: CreateVoteRequest) => {
 	return res;
 };
 
-export const getResults = async (pollId: string) => {
+export const getResults = (pollId: string) => {
 	const pollsCollectionRef = firestore.collection(`polls`);
 	const pollDocRef = pollsCollectionRef.doc(pollId);
 	const resultsCollectionRef = pollDocRef.collection(`results`);
 	const docRef = resultsCollectionRef.orderBy(`createdAt`);
-	const snapshot = await docRef.get();
-
-	// const results: Vote[] = [];
-	// @ts-ignore
-	// snapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }));
-
-	return snapshot;
+	return docRef;
 };
