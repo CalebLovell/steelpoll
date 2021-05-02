@@ -10,21 +10,17 @@ const updatedAt = new Date().toISOString();
 export const createPoll = async (newPoll: CreatePollRequest) => {
 	const pollsCollectionRef = firestore.collection(`polls`);
 	const pollDocumentRef = pollsCollectionRef.doc();
-	const choices = newPoll.choices.map(x => x.choice);
-	const votingSystems = newPoll.votingSystems.map(x => x.slug);
 	await pollDocumentRef.set({
 		...newPoll,
-		choices,
-		votingSystems,
 		createdAt,
 		updatedAt,
 	});
 	return pollDocumentRef.id;
 };
 
-export const getPoll = async (id: string) => {
+export const getPoll = async (polldId: string) => {
 	const collectionRef = firestore.collection(`polls`);
-	const docRef = collectionRef.doc(id);
+	const docRef = collectionRef.doc(polldId);
 	const snapshot = await docRef.get();
 	const data = snapshot.data() as Poll;
 	return data;

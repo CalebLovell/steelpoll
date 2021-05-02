@@ -1,6 +1,17 @@
+/* eslint-disable quotes */
 export interface Vote {
-	user_id: string;
-	poll_id: string;
-	choice_id: string;
+	userId: string;
+	firstPastThePost?: { choiceId: number };
+	rankedChoice?: { choiceId: number; order: number }[];
+	STAR?: { choiceId: number; value: number }[];
 	createdAt: string;
+	updatedAt: string;
+}
+
+export interface CreateVoteRequest {
+	userId: string | null;
+	pollId: string;
+	firstPastThePost: { choiceId: number };
+	rankedChoice: { choiceId: number; order: number }[];
+	STAR: { choiceId: number; value: number }[];
 }

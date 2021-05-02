@@ -554,10 +554,10 @@
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.1.1.tgz#9daf5745156fd84b8e9889a2dc721f0c58e894aa"
   integrity sha512-CAEbWH7OIur6jEOzaai83jq3FmKmv4PmX1JYfs9IrYcGEVI/lyL1EXJGCj7eFVJ0bg5QR8LMxBlEtA+xKiLpFw==
 
-"@headlessui/react@^0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-0.3.1.tgz#62d8df3b49f7e212f81f7fa4ba3cefb8945720ec"
-  integrity sha512-GnAVXCLmDs3CFvmvYo4Iu/LqAWVIoS+bGo+eMADnbWgF8BeMX13sWMyb8eOdj7N9nqY9QA2AsMzqYdAIbbsRIw==
+"@headlessui/react@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-1.1.1.tgz#71ecb3444eb21947ceefe768a25efaba4f8eceb0"
+  integrity sha512-fxNKxRrjNXdNYNMhAVrv1nz0gIMX3JhFizTA9lNrEC8+aY3JR00GZTPhuG785RZGvnHXCdYCGHeAhqw9uRNRrA==
 
 "@heroicons/react@^1.0.1":
   version "1.0.1"
@@ -3814,6 +3814,11 @@ react-dom@17.0.1:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     scheduler "^0.20.1"
+
+react-firebase-hooks@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/react-firebase-hooks/-/react-firebase-hooks-3.0.4.tgz#2185357d2bd6f7292552bc65f2459bbf9364e673"
+  integrity sha512-eqhj8O5t/9nzGS/DfCGQX9goqbxTP2T/qrY2B13s4rx/VIJ4Bx3WnZgqxEVA0Y/mWZBh7gOlXSPdRGbxBq5d8g==
 
 react-focus-lock@^2.5.0:
   version "2.5.0"
