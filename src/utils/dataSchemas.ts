@@ -13,7 +13,7 @@ export const newPollRequestSchema: Describe<CreatePollRequest> = object({
 				choice: size(string(), 1, 500),
 			})
 		),
-		1,
+		2,
 		10
 	),
 	votingSystems: size(
@@ -30,6 +30,27 @@ export const newPollRequestSchema: Describe<CreatePollRequest> = object({
 });
 
 export const newVoteRequestSchema: Describe<CreateVoteRequest> = object({
-	// TODO
 	userId: nullable(size(string(), 1, 50)),
+	pollId: string(),
+	firstPastThePost: object({ choiceId: number() }),
+	rankedChoice: size(
+		array(
+			object({
+				choiceId: number(),
+				order: size(number(), 0, 9),
+			})
+		),
+		2,
+		10
+	),
+	STAR: size(
+		array(
+			object({
+				choiceId: number(),
+				value: size(number(), 1, 5),
+			})
+		),
+		2,
+		10
+	),
 });

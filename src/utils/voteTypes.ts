@@ -1,17 +1,17 @@
 /* eslint-disable quotes */
 export interface Vote {
 	userId: string;
-	'first-past-the-post'?: { id: number; selected: boolean };
-	'ranked-choice'?: { id: number; order: number }[];
-	STAR?: { id: number; value: number }[];
+	firstPastThePost?: { choiceId: number };
+	rankedChoice?: { choiceId: number; order: number }[];
+	STAR?: { choiceId: number; value: number }[];
 	createdAt: string;
 	updatedAt: string;
 }
 
 export interface CreateVoteRequest {
-	userId: string;
+	userId: string | null;
 	pollId: string;
-	'first-past-the-post': { id: number; selected: boolean };
-	'ranked-choice': { id: number; order: number }[];
-	STAR: { id: number, value: number }[];
+	firstPastThePost: { choiceId: number };
+	rankedChoice: { choiceId: number; order: number }[];
+	STAR: { choiceId: number; value: number }[];
 }

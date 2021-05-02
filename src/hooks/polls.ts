@@ -1,7 +1,8 @@
+import { CreatePollRequest, Poll } from '@utils/pollTypes';
+import { QueryOptions, useMutation, useQuery } from 'react-query';
 import { createPoll, getPoll, getPolls } from 'api/polls';
-import { useMutation, useQuery } from 'react-query';
 
-import { CreatePollRequest } from '@utils/pollTypes';
+import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { useToasts } from 'react-toast-notifications';
 
@@ -19,8 +20,11 @@ export const useCreatePoll = () => {
 	});
 };
 
-export const usePoll = (id: string) => {
-	return useQuery([`poll`, id], () => getPoll(id));
+export const usePoll = (id: string, opts: QueryOptions) => {
+	return useQuery<Poll, AxiosError, Poll>([`poll`, id], () => getPoll(id), {
+		// @ts-ignore
+		initialData: opts.initialData,
+	});
 };
 
 export const usePolls = () => {

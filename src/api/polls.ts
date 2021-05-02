@@ -18,9 +18,9 @@ export const createPoll = async (newPoll: CreatePollRequest) => {
 	return pollDocumentRef.id;
 };
 
-export const getPoll = async (id: string) => {
+export const getPoll = async (polldId: string) => {
 	const collectionRef = firestore.collection(`polls`);
-	const docRef = collectionRef.doc(id);
+	const docRef = collectionRef.doc(polldId);
 	const snapshot = await docRef.get();
 	const data = snapshot.data() as Poll;
 	return data;

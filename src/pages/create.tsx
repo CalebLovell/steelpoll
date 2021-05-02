@@ -25,7 +25,7 @@ const CreatePage = () => {
 	const choicesFieldArray = useFieldArray({ control, name: `choices`, keyName: `key` });
 	const votingSystemsArray = useFieldArray({ control, name: `votingSystems`, keyName: `key` });
 
-	const onSubmit = async (rawFormData: any) => {
+	const onSubmit = (rawFormData: any) => {
 		const formattedVotingSystems: any[] = [];
 		rawFormData.votingSystems?.forEach((x, i) => {
 			x.selected === true ? formattedVotingSystems.push({ id: votingSystems[i]?.id, slug: votingSystems[i]?.slug }) : null;

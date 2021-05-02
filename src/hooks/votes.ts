@@ -1,4 +1,4 @@
-import { createVote, getVotes } from 'api/votes';
+import { createVote, getResults } from 'api/votes';
 import { useMutation, useQuery } from 'react-query';
 
 import { CreateVoteRequest } from '@utils/voteTypes';
@@ -19,6 +19,6 @@ export const useCreateVote = () => {
 	});
 };
 
-export const useVotes = (pollId: string) => {
-	return useQuery([`votes`, pollId], () => getVotes(pollId));
+export const useResults = (pollId: string) => {
+	return useQuery([`results`, pollId], () => getResults(pollId));
 };

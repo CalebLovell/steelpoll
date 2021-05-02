@@ -8,9 +8,11 @@ const createdAt = new Date().toISOString();
 const updatedAt = new Date().toISOString();
 
 export const createVote = async (createVoteRequest: CreateVoteRequest) => {
-	const collectionRef = firestore.collection(`votes`);
-	const docRef = collectionRef.doc();
-	const res = await docRef.set({
+	const pollsCollectionRef = firestore.collection(`polls`);
+	const pollDocRef = pollsCollectionRef.doc(createVoteRequest?.pollId);
+	const resultsCollectionRef = pollDocRef.collection(`results`);
+	const newVoteDocRef = resultsCollectionRef.doc();
+	const res = await newVoteDocRef.set({
 		...createVoteRequest,
 		createdAt,
 		updatedAt,
@@ -18,14 +20,16 @@ export const createVote = async (createVoteRequest: CreateVoteRequest) => {
 	return res;
 };
 
-export const getVotes = async (pollId: string) => {
-	const collectionRef = firestore.collection(`votes`).where(`pollId`, `==`, pollId);
-	const docRef = collectionRef.orderBy(`createdAt`);
+export const getResults = async (pollId: string) => {
+	const pollsCollectionRef = firestore.collection(`polls`);
+	const pollDocRef = pollsCollectionRef.doc(pollId);
+	const resultsCollectionRef = pollDocRef.collection(`results`);
+	const docRef = resultsCollectionRef.orderBy(`createdAt`);
 	const snapshot = await docRef.get();
 
-	// const votes: Vote[] = [];
+	// const results: Vote[] = [];
 	// @ts-ignore
-	// snapshot.forEach(doc => votes.push({ id: doc.id, ...doc.data() }));
+	// snapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }));
 
 	return snapshot;
 };
