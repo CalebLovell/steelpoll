@@ -15,7 +15,6 @@ import { useCreateVote } from '@hooks/votes';
 import { usePoll } from '@hooks/polls';
 import { useRouter } from 'next/router';
 import { useToasts } from 'react-toast-notifications';
-import { votingSystems } from '@utils/votingSystems';
 
 export const getServerSideProps: GetServerSideProps = async context => {
 	try {
