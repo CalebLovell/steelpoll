@@ -30,9 +30,8 @@ export const getServerSideProps: GetServerSideProps = async context => {
 	}
 };
 
-resetServerContext();
-
 const PollPage: React.FC<{ poll: Poll }> = props => {
+	resetServerContext();
 	const authUser = useAuthUser();
 	const router = useRouter();
 	const { pollId } = router.query;
