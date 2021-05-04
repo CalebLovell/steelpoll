@@ -23,6 +23,13 @@ export const calculateFPTP = (votes: Vote[]) => {
 	}
 };
 
-// export const calculateRankedChoice = voteInfo => {
-// 	return voteInfo;
-// };
+export const calculateRankedChoice = (votes: Vote[]) => {
+	if (votes) {
+		const voteInfo = `idk yet`;
+		const calculateWinner = () => {
+			return 0;
+		};
+
+		return { voteInfo, winners: calculateWinner() };
+	}
+};

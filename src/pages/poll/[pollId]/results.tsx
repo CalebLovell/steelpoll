@@ -25,7 +25,7 @@ const ResultsPage = () => {
 	const router = useRouter();
 	const { pollId } = router.query;
 	// @ts-ignore
-	const { data: votes, isLoading, fptp } = useResults(pollId);
+	const { data: votes, isLoading, fptp, rankedChoice, STAR } = useResults(pollId);
 	// @ts-ignore
 	const { data: poll } = usePoll(pollId);
 
@@ -38,6 +38,17 @@ const ResultsPage = () => {
 					{votes && poll && (
 						<div>
 							{fptp?.winners && fptp?.winners?.map(winner => <p key={winner}>{poll?.choices?.find(x => x.id === Number(winner))?.choice}</p>)}
+						</div>
+					)}
+					{votes && poll && (
+						<div>
+							{rankedChoice?.winners &&
+								rankedChoice?.winners?.map(winner => <p key={winner}>{poll?.choices?.find(x => x.id === Number(winner))?.choice}</p>)}
+						</div>
+					)}
+					{votes && poll && (
+						<div>
+							{STAR?.winners && STAR?.winners?.map(winner => <p key={winner}>{poll?.choices?.find(x => x.id === Number(winner))?.choice}</p>)}
 						</div>
 					)}
 				</section>

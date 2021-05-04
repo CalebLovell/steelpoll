@@ -37,6 +37,8 @@ export const useResults = (pollId: string) => {
 	}, [error]);
 
 	const fptp = calculateFPTP(votes);
+	const rankedChoice = calculateFPTP(votes);
+	const STAR = calculateFPTP(votes);
 
-	return { data: votes, isLoading: loading, error: error, fptp };
+	return { data: votes, isLoading: loading, error: error, fptp, rankedChoice, STAR };
 };
