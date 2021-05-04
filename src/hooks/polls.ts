@@ -20,10 +20,10 @@ export const useCreatePoll = () => {
 	});
 };
 
-export const usePoll = (id: string, opts: QueryOptions) => {
+export const usePoll = (id: string, opts?: QueryOptions) => {
 	return useQuery<Poll, AxiosError, Poll>([`poll`, id], () => getPoll(id), {
 		// @ts-ignore
-		initialData: opts.initialData,
+		initialData: opts?.initialData,
 	});
 };
 

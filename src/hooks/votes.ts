@@ -1,7 +1,9 @@
+import * as React from 'react';
+
 import { createVote, getResults } from 'api/votes';
 
 import { CreateVoteRequest } from '@utils/voteTypes';
-import React from 'react';
+import { calculateFPTP } from '@utils/calculateWinner';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { useMutation } from 'react-query';
 import { useRouter } from 'next/router';
@@ -26,6 +28,7 @@ export const useResults = (pollId: string) => {
 	const [value, loading, error] = useCollection(getResults(pollId), {
 		snapshotListenOptions: { includeMetadataChanges: true },
 	});
+	const votes = value?.docs.map(x => x.data());
 
 	React.useEffect(() => {
 		if (error !== undefined)
@@ -33,5 +36,7 @@ export const useResults = (pollId: string) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [error]);
 
-	return { data: value, isLoading: loading, error: error };
+	const fptp = calculateFPTP(votes);
+
+	return { data: votes, isLoading: loading, error: error, fptp };
 };

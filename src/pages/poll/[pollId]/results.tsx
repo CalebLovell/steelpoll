@@ -1,7 +1,10 @@
+import * as React from 'react';
+
 import { useAuthUser, withAuthUser } from 'next-firebase-auth';
 
 import { Container } from '@components/Container';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { usePoll } from '@hooks/polls';
 import { useResults } from '@hooks/votes';
 import { useRouter } from 'next/router';
 
@@ -22,7 +25,9 @@ const ResultsPage = () => {
 	const router = useRouter();
 	const { pollId } = router.query;
 	// @ts-ignore
-	const { data: results, isLoading } = useResults(pollId);
+	const { data: votes, isLoading, fptp } = useResults(pollId);
+	// @ts-ignore
+	const { data: poll } = usePoll(pollId);
 
 	return (
 		<Container authUser={authUser}>
@@ -30,11 +35,9 @@ const ResultsPage = () => {
 				<section>
 					<h1 className='text-lg font-medium uppercase text-brand-accent-base'>Results!!!!</h1>
 					{isLoading && <span>Collection: Loading...</span>}
-					{results && (
+					{votes && poll && (
 						<div>
-							{results.docs.map(doc => (
-								<div key={doc.id}>{JSON.stringify(doc.data())}</div>
-							))}
+							{fptp?.winners && fptp?.winners?.map(winner => <p key={winner}>{poll?.choices?.find(x => x.id === Number(winner))?.choice}</p>)}
 						</div>
 					)}
 				</section>
