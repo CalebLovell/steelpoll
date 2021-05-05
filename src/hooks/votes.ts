@@ -1,9 +1,9 @@
 import * as React from 'react';
 
+import { calculateFPTP, calculateRankedChoice } from '@utils/calculateWinner';
 import { createVote, getResults } from 'api/votes';
 
 import { CreateVoteRequest } from '@utils/voteTypes';
-import { calculateFPTP } from '@utils/calculateWinner';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { useMutation } from 'react-query';
 import { useRouter } from 'next/router';
@@ -36,9 +36,9 @@ export const useResults = (pollId: string) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [error]);
 
-	const fptp = calculateFPTP(votes);
-	const rankedChoice = calculateFPTP(votes);
-	const STAR = calculateFPTP(votes);
+	const fptp = votes ? calculateFPTP(votes) : { votes: [], winners: [] };
+	const rankedChoice = votes ? calculateRankedChoice(votes) : { votes: [], winners: [] };
+	const STAR = votes ? calculateFPTP(votes) : { votes: [], winners: [] };
 
 	return { data: votes, isLoading: loading, error: error, fptp, rankedChoice, STAR };
 };

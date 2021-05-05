@@ -17,17 +17,11 @@ const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
 			staleTime: 1000 * 60 * 60 * 8,
-			onSuccess: data => {
-				console.log(data);
-			},
 			onError: (error: FirebaseError) => {
 				console.log(error);
 			},
 		},
 		mutations: {
-			onSuccess: data => {
-				console.log(data);
-			},
 			onError: (error: FirebaseError) => {
 				console.log(error);
 			},
