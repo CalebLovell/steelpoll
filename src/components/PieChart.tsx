@@ -27,7 +27,7 @@ const Arc = ({ d, i, createArc, percent }) => {
 };
 
 interface PieData {
-	label: string;
+	label: string | number;
 	value: number;
 }
 

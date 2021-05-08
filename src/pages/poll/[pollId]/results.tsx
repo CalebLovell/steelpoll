@@ -3,6 +3,7 @@ import * as React from 'react';
 import { useAuthUser, withAuthUser } from 'next-firebase-auth';
 
 import { Container } from '@components/Container';
+import { RankedChoiceTable } from '@components/RankedChoiceTable';
 import { ResultsTable } from '@components/ResultsTable';
 import dynamic from 'next/dynamic';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -33,11 +34,6 @@ const ResultsPage = () => {
 	// @ts-ignore
 	const { data: poll } = usePoll(pollId);
 
-	const data = [
-		{ label: `anything it dont matter`, value: 7 },
-		{ label: `anything it dont matter`, value: 3 },
-	];
-
 	return (
 		<Container authUser={authUser}>
 			<main className='container w-full min-h-content bg-brand-primary-light dark:bg-brand-primary-dark'>
@@ -54,9 +50,11 @@ const ResultsPage = () => {
 					)}
 					{votes && poll && rankedChoiceResults && (
 						<div>
-							{/* {rankedChoiceResults?.winners &&
-								rankedChoiceResults?.winners?.map(winner => <p key={winner}>{poll?.choices?.find(x => x.id === Number(winner))?.choice}</p>)} */}
-							<DynamicChart data={data} percent={true} />
+							Ranked Choice Winner:
+							{rankedChoiceResults?.winner && <p>{poll?.choices?.find(x => x.id === Number(rankedChoiceResults?.winner?.label))?.choice}</p>}
+							First round data chart
+							<RankedChoiceTable rounds={rankedChoiceResults?.rounds} />
+							<DynamicChart data={rankedChoiceResults?.votes} percent={true} />
 						</div>
 					)}
 					{/* {votes && poll && (

@@ -1,4 +1,4 @@
-import { countBy, sumBy } from 'lodash';
+import { countBy } from 'lodash';
 
 export const calculateFPTPResults = (fptpVotes: { choiceId: number }[]) => {
 	const voteInfo = countBy(fptpVotes.map(x => x.choiceId));
@@ -54,15 +54,26 @@ export const calculateRankedChoiceResults = (rankedChoiceVotes: { choiceId: numb
 				formattedData.push(x);
 			}
 		});
-		const percentsArray = formattedData.map(x => x.points);
+
+		let sum = 0;
+		for (let i = 0; i < rankedChoiceVotes?.length - 1; i++) {
+			sum += i;
+		}
+
+		const totalPoints = rankedChoiceVotes?.length * sum;
+		const percentsArray = formattedData.map(x => {
+			return { label: x.choice, value: x.points / totalPoints };
+		});
 		return percentsArray;
 	};
 
-	const calculateWinner = () => {
-		return 0;
-	};
+	const formattedVotes = formatVotes();
+	const winner = formattedVotes.reduce((prev, current) => (prev.value > current.value ? prev : current));
 
-	return { votes: formatVotes(), winners: calculateWinner() };
+	const round1 = { percent: winner.value };
+	const rounds = [round1];
+
+	return { votes: formattedVotes, winner, rounds };
 };
 
 export const calculateSTARResults = (STARVotes: { choiceId: number; value: number }[][]) => {
