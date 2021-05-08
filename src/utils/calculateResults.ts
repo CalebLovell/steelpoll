@@ -60,8 +60,6 @@ export const calculateRankedChoiceResults = (rankedChoiceVotes: { choiceId: numb
 			sum += i;
 		}
 
-		console.log(sum);
-
 		const totalPoints = rankedChoiceVotes?.length * sum;
 		const percentsArray = formattedData.map(x => {
 			return { label: x.choice, value: x.points / totalPoints };

@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
 			return { props: { poll: null } };
 		}
 	} catch (error) {
-		console.log(error);
+		console.log(error.message);
 		return { props: { poll: null } };
 	}
 };
