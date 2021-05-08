@@ -56,9 +56,11 @@ export const calculateRankedChoiceResults = (rankedChoiceVotes: { choiceId: numb
 		});
 
 		let sum = 0;
-		for (let i = 0; i < rankedChoiceVotes?.length - 1; i++) {
+		for (let i = 1; i <= rankedChoiceVotes[0]?.length; i++) {
 			sum += i;
 		}
+
+		console.log(sum);
 
 		const totalPoints = rankedChoiceVotes?.length * sum;
 		const percentsArray = formattedData.map(x => {

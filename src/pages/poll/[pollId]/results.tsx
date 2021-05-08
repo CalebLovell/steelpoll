@@ -43,7 +43,7 @@ const ResultsPage = () => {
 						<div>
 							FPTP Winner(s):
 							{fptpResults?.winners &&
-								fptpResults?.winners?.map(winner => <p key={winner}>{poll?.choices?.find(x => x.id === Number(winner))?.choice}</p>)}
+								fptpResults?.winners?.map((winner, i) => <p key={i}>{poll?.choices?.find(x => x.id === Number(winner))?.choice}</p>)}
 							<ResultsTable results={fptpResults} poll={poll} />
 							<DynamicChart data={fptpResults?.votes} />
 						</div>

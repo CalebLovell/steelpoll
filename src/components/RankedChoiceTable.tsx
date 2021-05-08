@@ -25,7 +25,9 @@ export const RankedChoiceTable: React.FC<Props> = ({ rounds }) => {
 								{rounds?.map((round, i) => (
 									<tr key={round.percent + i}>
 										<td className='px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap'>{`Round ${i + 1}`}</td>
-										<td className='px-6 py-4 text-sm text-gray-500 whitespace-nowrap'>{(round?.percent * 100).toFixed(2)}%</td>
+										<td className='px-6 py-4 text-sm text-gray-500 whitespace-nowrap'>
+											{typeof round.percent === `number` ? `${(round?.percent * 100).toFixed(2)}%` : ``}
+										</td>
 									</tr>
 								))}
 							</tbody>
