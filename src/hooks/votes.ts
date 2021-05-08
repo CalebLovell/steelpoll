@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { calculateFPTP, calculateRankedChoice } from '@utils/calculateWinner';
+import { CreateVoteRequest, Vote } from '@utils/voteTypes';
+import { calculateFPTPResults, calculateRankedChoiceResults, calculateSTARResults } from '@utils/calculateResults';
 import { createVote, getResults } from 'api/votes';
 
-import { CreateVoteRequest } from '@utils/voteTypes';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { useMutation } from 'react-query';
 import { useRouter } from 'next/router';
@@ -28,7 +28,7 @@ export const useResults = (pollId: string) => {
 	const [value, loading, error] = useCollection(getResults(pollId), {
 		snapshotListenOptions: { includeMetadataChanges: true },
 	});
-	const votes = value?.docs.map(x => x.data());
+	const votes = value?.docs.map(x => x.data() as Vote);
 
 	React.useEffect(() => {
 		if (error !== undefined)
@@ -36,9 +36,21 @@ export const useResults = (pollId: string) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [error]);
 
-	const fptp = votes ? calculateFPTP(votes) : { votes: [], winners: [] };
-	const rankedChoice = votes ? calculateRankedChoice(votes) : { votes: [], winners: [] };
-	const STAR = votes ? calculateFPTP(votes) : { votes: [], winners: [] };
+	if (votes) {
+		// Need to cast because .filter doesn't return correct types array
+		const fptpVotes = votes.map(x => x.firstPastThePost).filter(x => !!x) as { choiceId: number }[];
+		const fptpResults = calculateFPTPResults(fptpVotes);
 
-	return { data: votes, isLoading: loading, error: error, fptp, rankedChoice, STAR };
+		// Need to cast because .filter doesn't return correct types array
+		const rankedChoiceVotes = votes.map(x => x.rankedChoice).filter(x => !!x) as { choiceId: number; order: number }[][];
+		const rankedChoiceResults = calculateRankedChoiceResults(rankedChoiceVotes);
+
+		// Need to cast because .filter doesn't return correct types array
+		const STARVotes = votes.map(x => x.STAR).filter(x => !!x) as { choiceId: number; value: number }[][];
+		const STARResults = calculateSTARResults(STARVotes);
+
+		return { data: votes, isLoading: loading, error: error, fptpResults, rankedChoiceResults, STARResults };
+	} else {
+		return {};
+	}
 };
