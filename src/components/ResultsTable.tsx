@@ -21,8 +21,8 @@ export const ResultsTable: React.FC<Props> = ({ results, poll }) => {
 								</tr>
 							</thead>
 							<tbody className='bg-white divide-y divide-gray-200'>
-								{results?.votes?.map(vote => (
-									<tr key={vote?.value}>
+								{results?.votes?.map((vote, i) => (
+									<tr key={vote?.value + i}>
 										<td className='px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap'>
 											{poll?.choices?.find(x => x.id === Number(vote.label))?.choice}
 										</td>
