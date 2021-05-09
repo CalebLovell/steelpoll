@@ -22,6 +22,7 @@ export const Header = ({ authUser }: { authUser: AuthUserContext }) => {
 				<div className='flex items-center md:space-x-2'>
 					<Logo label={t(`header.home`)} />
 					<Link href='/create' label={t(`header.create`)} variant='link' />
+					<Link href='/polls' label={`Polls`} variant='link' />
 					{authUser.id ? <Link href='/account' label={t(`header.account`)} variant='link' /> : null}
 				</div>
 				<div className='flex items-center md:space-x-2 xl:space-x-10'>
