@@ -30,7 +30,7 @@ const ResultsPage = () => {
 	const router = useRouter();
 	const { pollId } = router.query;
 	// @ts-ignore
-	const { data: votes, isLoading, fptpResults, rankedChoiceResults } = useResults(pollId);
+	const { data: votes, isLoading, fptpResults, rankedChoiceResults, STARResults } = useResults(pollId);
 	// @ts-ignore
 	const { data: poll } = usePoll(pollId);
 
@@ -105,11 +105,14 @@ const ResultsPage = () => {
 							<DynamicChart data={rankedChoiceResults?.votes} isPercent={true} />
 						</div>
 					)}
-					{/* {votes && poll && (
+					{votes && poll && STARResults && (
 						<div>
-							{STAR?.winners && STAR?.winners?.map(winner => <p key={winner}>{poll?.choices?.find(x => x.id === Number(winner))?.choice}</p>)}
+							STAR Winner:
+							{STARResults?.winner && <p>{poll?.choices?.find(x => x.id === Number(STARResults?.winner?.label))?.choice}</p>}
+							<ResultsTable results={STARResults} poll={poll} isPercent={true} />
+							<DynamicChart data={STARResults?.votes} isPercent={true} />
 						</div>
-					)} */}
+					)}
 				</section>
 			</main>
 		</Container>

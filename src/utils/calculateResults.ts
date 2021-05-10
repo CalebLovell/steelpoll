@@ -74,28 +74,29 @@ export const calculateRankedChoiceResults = (rankedChoiceVotes: { choiceId: numb
 };
 
 export const calculateSTARResults = (STARVotes: { choiceId: number; value: number }[][]) => {
-	const allVotesArray: PointsHolder[][] = [];
-	STARVotes.forEach(vote => {
-		const totalPoints = vote?.length;
-		const voteArray: PointsHolder[] = [];
-		if (totalPoints) {
-			vote?.forEach(choice => {
-				const points = totalPoints - choice?.value;
-				const pointsVote = { choice: choice?.choiceId, points: points };
-				voteArray.push(pointsVote);
-			});
-		}
-		allVotesArray.push(voteArray);
-	});
-
 	const formatVotes = () => {
-		const voteInfo = {};
-		return voteInfo;
+		const data = STARVotes.flat();
+		const formattedData: { choiceId: number; points: number }[] = [];
+		data.forEach(x => {
+			const choiceObjExists = formattedData.some(element => element[`choiceId`] === x.choiceId);
+			if (choiceObjExists) {
+				const foundItem = formattedData.find(element => element.choiceId === x.choiceId);
+				foundItem ? (foundItem[`points`] = foundItem[`points`] + x.value) : null;
+			} else {
+				formattedData.push({ choiceId: x.choiceId, points: x.value });
+			}
+		});
+
+		const totalPoints = Object.values(formattedData).reduce((prev, current) => prev + current.points, 0);
+
+		const percentsArray = formattedData.map(x => {
+			return { label: x.choiceId, value: x.points / totalPoints };
+		});
+		return percentsArray;
 	};
 
-	const calculateWinner = () => {
-		return 0;
-	};
+	const formattedPercentVotes = formatVotes();
+	const winner = formattedPercentVotes.reduce((prev, current) => (prev.value > current.value ? prev : current));
 
-	return { votes: formatVotes(), winners: calculateWinner() };
+	return { votes: formatVotes(), winner };
 };
