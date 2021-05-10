@@ -101,9 +101,8 @@ const ResultsPage = () => {
 						<div>
 							Ranked Choice Winner:
 							{rankedChoiceResults?.winner && <p>{poll?.choices?.find(x => x.id === Number(rankedChoiceResults?.winner?.label))?.choice}</p>}
-							First round data chart
-							<RankedChoiceTable rounds={rankedChoiceResults?.rounds} />
-							<DynamicChart data={rankedChoiceResults?.votes} percent={true} />
+							<ResultsTable results={rankedChoiceResults} poll={poll} isPercent={true} />
+							<DynamicChart data={rankedChoiceResults?.votes} isPercent={true} />
 						</div>
 					)}
 					{/* {votes && poll && (

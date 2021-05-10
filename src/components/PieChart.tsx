@@ -14,13 +14,13 @@ const colors = [
 	`text-pink-500`,
 ];
 
-const Arc = ({ d, i, createArc, percent }) => {
+const Arc = ({ d, i, createArc, isPercent }) => {
 	const format = d3.format(`.0%`);
 	return (
 		<g key={i} className='arc'>
 			<path className={`arc ${colors[i]} fill-current`} d={createArc(d)} />
 			<text className='font-bold fill-current' transform={`translate(${createArc.centroid(d)})`} textAnchor='middle' alignmentBaseline='middle'>
-				{percent ? format(d.value) : d.value}
+				{isPercent ? format(d.value) : d.value}
 			</text>
 		</g>
 	);
@@ -33,10 +33,10 @@ interface PieData {
 
 interface Props {
 	data: PieData[];
-	percent?: boolean;
+	isPercent?: boolean;
 }
 
-export const PieChart: React.FC<Props> = ({ data, percent }) => {
+export const PieChart: React.FC<Props> = ({ data, isPercent = false }) => {
 	const innerRadius = 120;
 	const outerRadius = 200;
 
@@ -53,7 +53,7 @@ export const PieChart: React.FC<Props> = ({ data, percent }) => {
 			<svg viewBox='0 0 450 450'>
 				<g transform={`translate(${outerRadius} ${outerRadius})`}>
 					{pieData.map((d, i) => (
-						<Arc key={i} d={d} i={i} createArc={createArc} percent={percent} />
+						<Arc key={i} d={d} i={i} createArc={createArc} isPercent={isPercent} />
 					))}
 					<text className='font-bold fill-current' textAnchor='middle' alignmentBaseline='middle'>
 						This is Chart

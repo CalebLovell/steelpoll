@@ -67,13 +67,10 @@ export const calculateRankedChoiceResults = (rankedChoiceVotes: { choiceId: numb
 		return percentsArray;
 	};
 
-	const formattedVotes = formatVotes();
-	const winner = formattedVotes.reduce((prev, current) => (prev.value > current.value ? prev : current));
+	const formattedPercentVotes = formatVotes();
+	const winner = formattedPercentVotes.reduce((prev, current) => (prev.value > current.value ? prev : current));
 
-	const round1 = { percent: winner.value };
-	const rounds = [round1];
-
-	return { votes: formattedVotes, winner, rounds };
+	return { votes: formattedPercentVotes, winner };
 };
 
 export const calculateSTARResults = (STARVotes: { choiceId: number; value: number }[][]) => {

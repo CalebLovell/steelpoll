@@ -1,9 +1,10 @@
 interface Props {
 	results;
 	poll;
+	isPercent?: boolean;
 }
 
-export const ResultsTable: React.FC<Props> = ({ results, poll }) => {
+export const ResultsTable: React.FC<Props> = ({ results, poll, isPercent = false }) => {
 	return (
 		<div className='flex flex-col'>
 			<div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
@@ -26,7 +27,9 @@ export const ResultsTable: React.FC<Props> = ({ results, poll }) => {
 										<td className='px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap'>
 											{poll?.choices?.find(x => x.id === Number(vote.label))?.choice}
 										</td>
-										<td className='px-6 py-4 text-sm text-gray-500 whitespace-nowrap'>{vote?.value}</td>
+										<td className='px-6 py-4 text-sm text-gray-500 whitespace-nowrap'>
+											{isPercent ? `${(vote?.value * 100).toFixed(2)}%` : vote?.value}
+										</td>
 									</tr>
 								))}
 							</tbody>
