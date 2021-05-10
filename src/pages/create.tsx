@@ -58,30 +58,32 @@ const CreatePage = () => {
 
 	return (
 		<Container authUser={authUser}>
-			<main className='container flex items-center justify-center w-full min-h-content bg-brand-primary-light dark:bg-brand-primary-dark'>
+			<main className='container flex items-center justify-center w-full min-h-content bg-brand-primary'>
 				<form
-					className='w-full px-4 py-8 my-12 bg-white shadow-md dark:bg-brand-primary-base md:w-2/3 sm:rounded-lg sm:px-10'
+					className='w-full px-4 py-8 my-12 bg-brand-secondary md:w-2/3 sm:rounded-lg sm:px-10'
 					onSubmit={handleSubmit(onSubmit)}
 					autoComplete='off'
 				>
-					<h1 className='text-xl font-bold text-center text-red-400'>Add a Poll</h1>
-					<label htmlFor='title' className='block text-sm font-semibold text-red-400'>
+					<div className='flex justify-center'>
+						<h1 className='mb-2 text-3xl font-bold text-center text-brand-gradient'>Create a Poll</h1>
+					</div>
+					<label htmlFor='title' className='block text-sm font-semibold text-brand-purple'>
 						Title
 					</label>
 					<input
 						name='title'
 						ref={register()}
-						className='block w-full mt-1 text-red-400 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+						className='block w-full mt-1 rounded-md shadow-sm placeholder-text-brand-secondary bg-brand-secondary border-brand-primary text-brand-purple focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
 						placeholder='Add a title here...'
 						type='text'
 						required
 						maxLength={100}
 					/>
 					<div className='flex justify-between mt-4'>
-						<label htmlFor='description' className='block text-sm font-semibold text-red-400'>
+						<label htmlFor='description' className='block text-sm font-semibold text-brand-purple'>
 							Description
 						</label>
-						<span className='text-sm italic text-red-400 cursor-default' id='description-optional'>
+						<span className='text-sm italic cursor-default text-brand-pink' id='description-optional'>
 							Optional
 						</span>
 					</div>
@@ -89,7 +91,7 @@ const CreatePage = () => {
 						<textarea
 							name='description'
 							ref={register()}
-							className='block w-full mt-1 text-red-400 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+							className='block w-full mt-1 rounded-md shadow-sm border-brand-primary text-brand-purple focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
 							placeholder='Add a description here...'
 							aria-describedby='description-optional'
 							rows={3}
@@ -97,7 +99,7 @@ const CreatePage = () => {
 						/>
 					</div>
 					<div className='flex mt-4'>
-						<label id='choices' htmlFor='choices' className='inline-flex text-sm font-semibold text-red-400'>
+						<label id='choices' htmlFor='choices' className='inline-flex text-sm font-semibold text-brand-purple'>
 							Choices
 						</label>
 					</div>
@@ -107,18 +109,24 @@ const CreatePage = () => {
 								name={`choices[${index}].choice`}
 								ref={register()}
 								type='text'
-								className='block w-full text-red-400 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+								className='block w-full rounded-md shadow-sm placeholder-text-brand-secondary bg-brand-secondary border-brand-primary text-brand-purple focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
 								placeholder='Add a choice here...'
 								required
 								aria-labelledby='choices'
 								maxLength={500}
 							/>
 							<button
-								className='inline-flex items-center p-2 ml-3 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+								className='inline-flex items-center p-2 ml-3 bg-white border rounded-md shadow-sm border-brand-primary hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
 								type='button'
 								onClick={() => choicesFieldArray.remove(index)}
 							>
-								<svg className='w-4 text-gray-600' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+								<svg
+									className='w-4 text-brand-purple'
+									fill='none'
+									stroke='currentColor'
+									viewBox='0 0 24 24'
+									xmlns='http://www.w3.org/2000/svg'
+								>
 									<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M20 12H4' />
 								</svg>
 							</button>
@@ -126,17 +134,17 @@ const CreatePage = () => {
 					))}
 					<div className='flex justify-end w-full'>
 						<button
-							className='inline-flex items-center p-2 mt-3 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+							className='inline-flex items-center p-2 mt-3 bg-white border rounded-md shadow-sm border-brand-primary hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
 							type='button'
 							onClick={() => choicesFieldArray.append({ choice: `` })}
 						>
-							<svg className='w-4 text-red-400' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+							<svg className='w-4 text-brand-purple' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
 								<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 6v6m0 0v6m0-6h6m-6 0H6' />
 							</svg>
 						</button>
 					</div>
 					<fieldset className='mt-3'>
-						<legend className='block text-sm font-semibold text-red-400'>Voting Systems</legend>
+						<legend className='block text-sm font-semibold text-brand-purple'>Voting Systems</legend>
 						{votingSystemsArray.fields.map((item, index) => (
 							<div key={item.key} className='relative flex items-start mt-2'>
 								<div className='flex items-center h-5'>
@@ -144,19 +152,19 @@ const CreatePage = () => {
 										name={`votingSystems[${index}].selected`}
 										ref={register()}
 										type='checkbox'
-										className='w-4 h-4 text-indigo-500 border-gray-300 rounded focus:ring-indigo-500'
+										className='w-4 h-4 text-indigo-500 rounded placeholder-text-brand-secondary bg-brand-secondary border-brand-primary focus:ring-indigo-500'
 									/>
 								</div>
-								<label htmlFor={item.slug} className='ml-3 text-sm font-bold text-red-400'>
+								<label htmlFor={item.slug} className='ml-3 text-sm font-bold text-brand-purple'>
 									{item.name}
-									<p className='font-normal text-gray-400'>{item.description}</p>
+									<p className='font-normal text-brand-secondary'>{item.description}</p>
 								</label>
 							</div>
 						))}
 					</fieldset>
 					<button
 						type='submit'
-						className='inline-flex items-center px-3 py-2 mt-4 text-sm font-medium leading-4 text-black bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+						className='inline-flex items-center px-3 py-2 mt-4 text-sm font-medium leading-4 border rounded-md shadow-sm text-brand-primary border-brand-primary hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
 					>
 						Submit
 						{isLoading ? (

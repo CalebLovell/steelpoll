@@ -18,7 +18,7 @@ export const LanguageButton = () => {
 
 	return (
 		<Listbox value={router.locale} onChange={lang => onChange(lang)} as='div' className='relative rounded-md focus-brand'>
-			<Listbox.Button className='relative flex p-2 rounded-md focus-brand hover-brand text-brand-accent-base hover:text-white hover:dark:text-brand-accent-base'>
+			<Listbox.Button className='relative flex p-2 rounded-md focus-brand hover-brand text-brand-primary'>
 				<span className='mr-2 font-medium'>{router?.locale?.toUpperCase()}</span>
 				<svg className='w-6 h-6' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>
 					<path
@@ -33,7 +33,7 @@ export const LanguageButton = () => {
 					<Listbox.Option key={language.id} value={language.locale}>
 						{({ active }) => (
 							<div
-								className={`px-2 py-1 cursor-default text-right font-medium text-brand-accent-base ${
+								className={`px-2 py-1 cursor-default text-right font-medium text-brand-primary ${
 									active ? `bg-brand-primary-light dark:bg-gray-700` : `bg-white dark:bg-brand-primary-base`
 								}`}
 							>

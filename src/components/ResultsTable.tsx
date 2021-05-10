@@ -17,7 +17,7 @@ export const ResultsTable: React.FC<Props> = ({ results, poll, isPercent = false
 										Choice
 									</th>
 									<th scope='col' className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'>
-										Votes
+										{isPercent ? `Vote Percentage` : `Votes`}
 									</th>
 								</tr>
 							</thead>

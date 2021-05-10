@@ -1,5 +1,7 @@
 import * as React from 'react';
+
 import { Menu, Transition } from '@headlessui/react';
+
 import { UserCircleIcon } from '@heroicons/react/outline';
 import { useUser } from '@hooks/user';
 
@@ -23,7 +25,7 @@ export const ProfileDropdown = () => {
 						{user?.photoUrl ? (
 							<img className='w-8 h-8 rounded-full' src={user?.photoUrl} alt='profile face' />
 						) : (
-							<UserCircleIcon className='w-6 h-6 text-brand-accent-base' />
+							<UserCircleIcon className='w-6 h-6 text-black dark:text-white' />
 						)}
 					</Menu.Button>
 					<Transition

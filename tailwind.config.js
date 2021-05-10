@@ -14,6 +14,16 @@ module.exports = {
 			},
 			colors: {
 				brand: {
+					darkGrey: `rgb(44, 47, 48)`,
+					lightGrey: `rgb(51, 55, 56)`,
+					darkWhite: `rgb(243, 244, 246)`,
+					lightWhite: `rgb(255, 255, 255)`,
+					pink: `rgb(244, 47, 220)`,
+					purple: `rgb(173, 83, 218)`,
+					blue: `rgb(102, 120, 217)`,
+					lightBlue: `rgb(30, 156, 215)`,
+					steelDark: `rgb(102, 102, 102)`,
+					steelLight: `rgb(226, 227, 228)`,
 					primary: {
 						light: colors.gray[100],
 						base: `rgb(39,39,44)`,

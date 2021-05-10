@@ -16,7 +16,7 @@ export const DarkModeButton = () => {
 			name='dark-mode-toggle'
 			aria-label={t(`DarkModeButton`)}
 			type='button'
-			className='p-2 rounded-md focus-brand hover-brand text-brand-accent-base hover:text-white hover:dark:text-brand-accent-base'
+			className='p-2 rounded-md focus-brand hover-brand text-brand-primary'
 			onClick={() => setTheme(theme === `dark` ? `light` : `dark`)}
 		>
 			{mounted && (

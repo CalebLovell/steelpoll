@@ -32,9 +32,43 @@
 	@apply hover:bg-brand-accent-dark hover:text-white border-brand-accent-base dark:hover:bg-white dark:hover:text-brand-accent-base;
 }
 
+/* background colors */
+
+.bg-brand-primary {
+	@apply bg-brand-darkWhite dark:bg-brand-darkGrey;
+}
+
+.bg-brand-secondary {
+	@apply bg-brand-lightWhite dark:bg-brand-lightGrey;
+}
+
+.bg-brand-gradient {
+	@apply bg-gradient-to-r from-brand-pink via-brand-blue to-brand-lightBlue;
+}
+
+/* text colors */
+
+.text-brand-primary {
+	@apply text-black dark:text-white;
+}
+
+.text-brand-secondary {
+	@apply text-gray-500 dark:text-gray-400;
+}
+
+.text-brand-gradient {
+	@apply text-transparent bg-clip-text bg-gradient-to-r from-brand-pink via-brand-blue to-brand-lightBlue;
+}
+
+/* border colors */
+
+.border-brand-primary {
+	@apply border-gray-500 dark:border-brand-darkGrey;
+}
+
 /* custom scrollbar */
 ::-webkit-scrollbar {
-	width: 20px;
+	width: 16px;
 }
 
 ::-webkit-scrollbar-track {
@@ -42,9 +76,9 @@
 }
 
 ::-webkit-scrollbar-thumb {
-	background-color: #d6dee1;
+	background-color: #acaeaf;
 	border-radius: 20px;
-	border: 6px solid transparent;
+	border: 4px solid transparent;
 	background-clip: content-box;
 }
 
