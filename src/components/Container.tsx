@@ -18,9 +18,9 @@ interface Props {
 
 export const Container: React.FC<Props> = ({
 	metadata = {
-		title: `Steelpoll`,
-		description: `Create and vote on polls you can rely on`,
-		url: `https://steelpoll.vercel.app`,
+		title: `SteelPoll`,
+		description: `Create polls and get robust results instantly`,
+		url: `https://www.steelpoll.com`,
 		image: `https://caleb-next-starter.vercel.app/images/caleb-next-starter.png`,
 	},
 	authUser,
@@ -29,7 +29,7 @@ export const Container: React.FC<Props> = ({
 	const { mobileNavOpen } = useGlobalState();
 	const router = useRouter();
 	const { title, description, url, image } = metadata;
-	const domain = `steelpoll.vercel.app`;
+	const domain = `steelpoll.com`;
 	return (
 		<>
 			<PlausibleProvider domain={domain}>
