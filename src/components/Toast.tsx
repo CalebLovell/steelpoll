@@ -30,7 +30,7 @@ export const Toast: React.FC<ToastProps> = ({ appearance, onDismiss, children })
 						)} focus:outline-none focus:ring-2 focus:ring-offset-2 ${getFocusRingColor100(appearance)} ${getFocusRingColor600(appearance)}`}
 					>
 						<span className='sr-only'>Dismiss</span>
-						<XIcon className='w-6 h-6' />;
+						<XIcon className='w-6 h-6' />
 					</button>
 				</div>
 			</div>
