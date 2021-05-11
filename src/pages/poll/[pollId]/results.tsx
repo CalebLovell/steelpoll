@@ -3,11 +3,12 @@ import * as React from 'react';
 import { useAuthUser, withAuthUser } from 'next-firebase-auth';
 
 import { Container } from '@components/Container';
-import { ResultsTable } from '@components/ResultsTable';
-import dynamic from 'next/dynamic';
-import { usePoll } from '@hooks/polls';
-import { useResults } from '@hooks/votes';
-import { useRouter } from 'next/router';
+
+// import { ResultsTable } from '@components/ResultsTable';
+// import dynamic from 'next/dynamic';
+// import { usePoll } from '@hooks/polls';
+// import { useResults } from '@hooks/votes';
+// import { useRouter } from 'next/router';
 
 // import { withAuthUserTokenSSR } from 'next-firebase-auth';
 
@@ -15,7 +16,7 @@ import { useRouter } from 'next/router';
 
 // import { useTranslation } from 'react-i18next';
 
-const DynamicChart = dynamic(() => import(`@components/PieChart`).then(mod => mod.PieChart));
+// const DynamicChart = dynamic(() => import(`@components/PieChart`).then(mod => mod.PieChart));
 
 // export const getServerSideProps = withAuthUserTokenSSR()(async ({ locale }) => {
 // 	// @ts-ignore
@@ -30,12 +31,12 @@ const DynamicChart = dynamic(() => import(`@components/PieChart`).then(mod => mo
 const ResultsPage = () => {
 	const authUser = useAuthUser();
 	// const { t: home } = useTranslation(`home`);
-	const router = useRouter();
-	const { pollId } = router.query;
+	// const router = useRouter();
+	// const { pollId } = router.query;
 	// @ts-ignore
-	const { data: votes, isLoading, fptpResults, rankedChoiceResults, STARResults } = useResults(pollId);
+	// const { data: votes, isLoading, fptpResults, rankedChoiceResults, STARResults } = useResults(pollId);
 	// @ts-ignore
-	const { data: poll } = usePoll(pollId);
+	// const { data: poll } = usePoll(pollId);
 
 	const tabs = [
 		{ name: `First Past The Post`, href: `#`, current: false },
@@ -90,7 +91,7 @@ const ResultsPage = () => {
 							</div>
 						</div>
 					</div>
-					{isLoading && <span>Collection: Loading...</span>}
+					{/* {isLoading && <span>Collection: Loading...</span>}
 					{votes && poll && fptpResults && (
 						<div>
 							FPTP Winner(s):
@@ -115,7 +116,7 @@ const ResultsPage = () => {
 							<ResultsTable results={STARResults} poll={poll} isPercent={true} />
 							<DynamicChart data={STARResults?.votes} isPercent={true} />
 						</div>
-					)}
+					)} */}
 				</section>
 			</main>
 		</Container>
