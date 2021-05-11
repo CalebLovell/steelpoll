@@ -14,7 +14,7 @@ export const newPollRequestSchema: Describe<CreatePollRequest> = object({
 			})
 		),
 		2,
-		10
+		20
 	),
 	votingSystems: size(
 		array(
@@ -37,11 +37,11 @@ export const newVoteRequestSchema: Describe<CreateVoteRequest> = object({
 		array(
 			object({
 				choiceId: number(),
-				order: size(number(), 0, 9),
+				order: size(number(), 0, 19),
 			})
 		),
 		2,
-		10
+		20
 	),
 	STAR: size(
 		array(
@@ -51,6 +51,6 @@ export const newVoteRequestSchema: Describe<CreateVoteRequest> = object({
 			})
 		),
 		2,
-		10
+		20
 	),
 });
