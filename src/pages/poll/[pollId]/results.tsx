@@ -3,7 +3,6 @@ import * as React from 'react';
 import { useAuthUser, withAuthUser } from 'next-firebase-auth';
 
 import { Container } from '@components/Container';
-import { RankedChoiceTable } from '@components/RankedChoiceTable';
 import { ResultsTable } from '@components/ResultsTable';
 import dynamic from 'next/dynamic';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';

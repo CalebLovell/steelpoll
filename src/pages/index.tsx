@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import { MenuIcon, XIcon } from '@heroicons/react/outline';
-import { Popover, Transition } from '@headlessui/react';
 import { useAuthUser, withAuthUser } from 'next-firebase-auth';
 
 import { Container } from '@components/Container';

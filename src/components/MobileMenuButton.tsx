@@ -5,7 +5,7 @@ export const MobileMenuButton = () => {
 	const globalDispatch = useGlobalDispatch();
 	return (
 		<button
-			className='p-2 rounded-md focus-brand hover-brand text-brand-primary'
+			className='p-2 rounded-md focus-brand-without-border hover-brand text-brand-primary'
 			name='menu'
 			type='button'
 			onClick={() => globalDispatch({ type: `SET_MOBILE_NAV_OPEN`, payload: !mobileNavOpen })}

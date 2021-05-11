@@ -16,6 +16,7 @@ module.exports = {
 				brand: {
 					darkGrey: `rgb(44, 47, 48)`,
 					lightGrey: `rgb(51, 55, 56)`,
+					mediumGrey: `rgb(79, 86, 87)`,
 					darkWhite: `rgb(243, 244, 246)`,
 					lightWhite: `rgb(255, 255, 255)`,
 					pink: `rgb(244, 47, 220)`,

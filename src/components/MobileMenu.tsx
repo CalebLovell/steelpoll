@@ -19,7 +19,7 @@ export const MobileMenu = () => {
 	return (
 		<FocusLock>
 			<div className='absolute inset-x-0 top-0 z-20 m-2 transition origin-top-right transform'>
-				<div className='bg-white divide-y-2 rounded-lg shadow-lg min-height-mobile divide-gray-50 dark:divide-transparent dark:bg-brand-primary-base'>
+				<div className='divide-y-2 rounded-lg shadow-lg bg-brand-secondary min-height-mobile divide-gray-50 dark:divide-transparent'>
 					<div className='flex items-center justify-between p-2'>
 						<Logo label={t(`header.home`)} />
 						<MobileMenuButton />
@@ -33,11 +33,8 @@ export const MobileMenu = () => {
 						<Link href='/signup' label='Sign up' variant='button' />
 					</div>
 					<div className='flex items-center justify-center p-2'>
-						<p className='pr-2 font-medium text-center text-gray-500 dark:text-white'>Already have an account?</p>
-						<a
-							href='/signin'
-							className='p-1 text-base font-semibold rounded-md text-brand-accent-base hover:text-brand-accent-dark focus-brand'
-						>
+						<p className='pr-2 font-medium text-center text-brand-secondary'>Already have an account?</p>
+						<a href='/signin' className='p-1 text-base font-semibold rounded-md focus-brand-without-border'>
 							Sign in
 						</a>
 					</div>

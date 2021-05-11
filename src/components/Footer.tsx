@@ -8,7 +8,7 @@ export const Footer = () => {
 				<div className='flex justify-center space-x-6 md:order-2'>
 					<a
 						href='https://twitter.com/Caleb__Lovell'
-						className='text-gray-400 rounded-md focus-brand hover:text-brand-accent-base'
+						className='rounded-md text-brand-secondary focus-brand-without-border'
 						target='_blank'
 						rel='noreferrer'
 					>
@@ -19,7 +19,7 @@ export const Footer = () => {
 					</a>
 					<a
 						href='https://github.com/CalebLovell'
-						className='text-gray-400 rounded-md focus-brand hover:text-brand-accent-base'
+						className='rounded-md text-brand-secondary focus-brand-without-border'
 						target='_blank'
 						rel='noreferrer'
 					>
@@ -34,7 +34,7 @@ export const Footer = () => {
 					</a>
 					<a
 						href='https://www.linkedin.com/in/caleblovell/'
-						className='text-gray-400 rounded-md focus-brand hover:text-brand-accent-base'
+						className='rounded-md text-brand-secondary focus-brand-without-border'
 						target='_blank'
 						rel='noreferrer'
 					>
@@ -53,7 +53,7 @@ export const Footer = () => {
 					</a>
 				</div>
 				<div className='mt-8 md:mt-0 md:order-1'>
-					<p className='text-base text-center text-gray-400'>
+					<p className='text-base text-center text-brand-secondary'>
 						<span role='img' aria-label='copyright'>
 							©️
 						</span>

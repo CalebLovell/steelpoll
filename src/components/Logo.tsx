@@ -9,7 +9,7 @@ export const Logo = ({ label }: Props) => {
 		<Link href='/'>
 			<a
 				href='/'
-				className='flex items-center p-2 font-medium transition duration-150 ease-in-out rounded-md lg:px-4 focus-brand hover-brand text-brand-accent-base brand-ring'
+				className='flex items-center p-2 font-medium transition duration-150 ease-in-out rounded-md text-brand-primary lg:px-4 focus-brand-without-border hover-brand'
 			>
 				<svg className='inline w-6 h-6' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>
 					<path
