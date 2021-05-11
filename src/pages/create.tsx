@@ -4,13 +4,16 @@ import { useAuthUser, withAuthUser, withAuthUserTokenSSR } from 'next-firebase-a
 import { useFieldArray, useForm } from 'react-hook-form';
 
 import { Container } from '@components/Container';
+import { LoadingSpinner } from '@components/LoadingSpinner';
 import { newPollRequestSchema } from '@utils/dataSchemas';
 import { useCreatePoll } from '@hooks/polls';
+import { usePageIsLoading } from '@hooks/usePageIsLoading';
 import { useToasts } from 'react-toast-notifications';
 import { votingSystems } from '@utils/votingSystems';
 
 const CreatePage = () => {
 	const authUser = useAuthUser();
+	const pageIsLoading = usePageIsLoading();
 	const { addToast } = useToasts();
 	const { mutate: createPoll, isLoading } = useCreatePoll();
 	const { control, register, handleSubmit } = useForm({
@@ -144,7 +147,7 @@ const CreatePage = () => {
 										name={`votingSystems[${index}].selected`}
 										ref={register()}
 										type='checkbox'
-										className='w-4 h-4 text-indigo-500 border rounded placeholder-brand bg-brand-secondary border-brand focus-brand-with-border'
+										className='w-4 h-4 border rounded text-brand placeholder-brand bg-brand-secondary border-brand focus-brand-with-border'
 									/>
 								</div>
 								<label htmlFor={item.slug} className='ml-3 text-sm font-semibold text-brand-purple'>
@@ -156,24 +159,11 @@ const CreatePage = () => {
 					</div>
 					<button
 						type='submit'
-						className='inline-flex items-center px-3 py-2 mt-4 text-sm font-medium leading-4 border rounded-md shadow-sm text-brand-primary border-brand focus-brand-with-border'
+						disabled={isLoading || pageIsLoading}
+						className='inline-flex items-center px-4 py-2 mt-4 text-sm font-medium leading-4 border rounded-md shadow-sm text-brand-primary border-brand focus-brand-with-border'
 					>
 						Submit
-						{isLoading ? (
-							<svg
-								className='w-4 h-4 ml-2 text-accent-primary animate-spin'
-								xmlns='http://www.w3.org/2000/svg'
-								fill='none'
-								viewBox='0 0 24 24'
-							>
-								<circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4'></circle>
-								<path
-									className='opacity-75'
-									fill='currentColor'
-									d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
-								></path>
-							</svg>
-						) : null}
+						{isLoading && <LoadingSpinner />}
 					</button>
 				</form>
 			</main>

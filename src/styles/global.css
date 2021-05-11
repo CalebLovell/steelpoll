@@ -21,7 +21,7 @@
 /* focus effects */
 
 .focus-brand-with-border {
-	@apply focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-brand-purple focus:border-brand-purple;
+	@apply focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-brand-purple focus:border-brand-purple dark:focus:ring-brand-purple dark:focus:border-brand-purple;
 }
 
 .focus-brand-without-border {
@@ -51,7 +51,7 @@
 /* text colors */
 
 .text-brand-primary {
-	@apply text-black dark:text-white;
+	@apply text-black dark:text-gray-300;
 }
 
 .text-brand-secondary {
@@ -75,6 +75,7 @@
 }
 
 /* custom scrollbar */
+
 ::-webkit-scrollbar {
 	width: 16px;
 }

@@ -6,12 +6,14 @@ import { useAuthUser, withAuthUser } from 'next-firebase-auth';
 
 import { Container } from '@components/Container';
 import { GetServerSideProps } from 'next';
+import { LoadingSpinner } from '@components/LoadingSpinner';
 import { MenuIcon } from '@heroicons/react/outline';
 import { Poll } from '@utils/pollTypes';
 import { RadioGroup } from '@headlessui/react';
 import { getPoll } from 'api/polls';
 import { newVoteRequestSchema } from '@utils/dataSchemas';
 import { useCreateVote } from '@hooks/votes';
+import { usePageIsLoading } from '@hooks/usePageIsLoading';
 import { usePoll } from '@hooks/polls';
 import { useRouter } from 'next/router';
 import { useToasts } from 'react-toast-notifications';
@@ -34,6 +36,7 @@ const PollPage: React.FC<{ poll: Poll }> = props => {
 	resetServerContext();
 	const authUser = useAuthUser();
 	const router = useRouter();
+	const pageIsLoading = usePageIsLoading();
 	const { pollId } = router.query;
 	// @ts-ignore
 	const { data: poll } = usePoll(pollId, {
@@ -223,24 +226,11 @@ const PollPage: React.FC<{ poll: Poll }> = props => {
 					<button
 						type='button'
 						onClick={onSubmit}
-						className='inline-flex items-center px-3 py-2 mt-4 text-sm font-medium leading-4 text-black bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+						disabled={isLoading || pageIsLoading}
+						className='inline-flex items-center px-4 py-2 mt-4 text-sm font-medium leading-4 text-black bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
 					>
 						Vote
-						{isLoading ? (
-							<svg
-								className='w-4 h-4 ml-2 text-accent-primary animate-spin'
-								xmlns='http://www.w3.org/2000/svg'
-								fill='none'
-								viewBox='0 0 24 24'
-							>
-								<circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4'></circle>
-								<path
-									className='opacity-75'
-									fill='currentColor'
-									d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
-								></path>
-							</svg>
-						) : null}
+						{isLoading && <LoadingSpinner />}
 					</button>
 				</form>
 			</main>
