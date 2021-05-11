@@ -1,6 +1,6 @@
 import { MinusIcon, PlusIcon } from '@heroicons/react/solid';
 import { StructError, assert } from 'superstruct';
-import { useAuthUser, withAuthUser, withAuthUserTokenSSR } from 'next-firebase-auth';
+import { useAuthUser, withAuthUser } from 'next-firebase-auth';
 import { useFieldArray, useForm } from 'react-hook-form';
 
 import { Container } from '@components/Container';
