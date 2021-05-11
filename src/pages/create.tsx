@@ -171,6 +171,4 @@ const CreatePage = () => {
 	);
 };
 
-export const getServerSideProps = withAuthUserTokenSSR()();
-
 export default withAuthUser()(CreatePage);

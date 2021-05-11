@@ -1,28 +1,31 @@
 import * as React from 'react';
 
-import { useAuthUser, withAuthUser, withAuthUserTokenSSR } from 'next-firebase-auth';
+import { useAuthUser, withAuthUser } from 'next-firebase-auth';
 
 import { Container } from '@components/Container';
 import { ResultsTable } from '@components/ResultsTable';
 import dynamic from 'next/dynamic';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { usePoll } from '@hooks/polls';
 import { useResults } from '@hooks/votes';
 import { useRouter } from 'next/router';
+
+// import { withAuthUserTokenSSR } from 'next-firebase-auth';
+
+// import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 // import { useTranslation } from 'react-i18next';
 
 const DynamicChart = dynamic(() => import(`@components/PieChart`).then(mod => mod.PieChart));
 
-export const getServerSideProps = withAuthUserTokenSSR()(async ({ locale }) => {
-	// @ts-ignore
-	const translations = await serverSideTranslations(locale, [`common`]);
-	return {
-		props: {
-			...translations,
-		},
-	};
-});
+// export const getServerSideProps = withAuthUserTokenSSR()(async ({ locale }) => {
+// 	// @ts-ignore
+// 	const translations = await serverSideTranslations(locale, [`common`]);
+// 	return {
+// 		props: {
+// 			...translations,
+// 		},
+// 	};
+// });
 
 const ResultsPage = () => {
 	const authUser = useAuthUser();
