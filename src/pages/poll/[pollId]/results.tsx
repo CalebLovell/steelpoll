@@ -15,6 +15,7 @@ import { useRouter } from 'next/router';
 const DynamicChart = dynamic(() => import(`@components/PieChart`).then(mod => mod.PieChart));
 
 export const getServerSideProps = withAuthUserTokenSSR()(async ({ locale }) => {
+	// @ts-ignore
 	const translations = await serverSideTranslations(locale, [`common`]);
 	return {
 		props: {
