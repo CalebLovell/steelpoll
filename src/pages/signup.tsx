@@ -42,13 +42,17 @@ const SignupPage = () => {
 	return (
 		<Container authUser={authUser}>
 			<main className='container flex items-center justify-center min-h-content bg-brand-primary'>
-				<div className='px-4 py-8 shadow bg-brand-secondary sm:rounded-lg sm:px-10'>
-					<div className='sm:mx-auto sm:w-full sm:max-w-md'>
-						<img className='w-auto h-12 mx-auto' src='https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg' alt='Workflow' />
-						<h1 className='mt-6 text-3xl font-extrabold text-center text-brand-primary '>{t(`header.signup`)}</h1>
+				<div className='px-4 py-4 my-4 rounded-lg shadow sm:py-8 bg-brand-secondary sm:px-10'>
+					<div className='hidden sm:block sm:mx-auto sm:w-full sm:max-w-md'>
+						<img
+							className='hidden w-auto h-12 mx-auto sm:block'
+							src='https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
+							alt='Workflow'
+						/>
+						<h1 className='text-3xl font-extrabold text-center sm:mt-6 text-brand-primary '>{t(`header.signup`)}</h1>
 					</div>
 					<form onSubmit={handleSubmit(onSubmit)}>
-						<div className='mt-5'>
+						<div className='sm:mt-5'>
 							<label htmlFor='name' className='text-sm font-medium text-brand-purple'>
 								Name
 							</label>

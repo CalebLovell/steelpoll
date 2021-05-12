@@ -41,10 +41,14 @@ const LoginPage = () => {
 	return (
 		<Container authUser={authUser}>
 			<main className='container flex items-center justify-center min-h-content bg-brand-primary'>
-				<div className='px-4 py-8 shadow bg-brand-secondary sm:rounded-lg sm:px-10'>
+				<div className='px-4 py-8 my-4 rounded-lg shadow bg-brand-secondary sm:px-10'>
 					<div className='sm:mx-auto sm:w-full sm:max-w-md'>
-						<img className='w-auto h-12 mx-auto' src='https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg' alt='Workflow' />
-						<h1 className='mt-6 text-3xl font-extrabold text-center text-brand-primary '>{t(`header.signin`)}</h1>
+						<img
+							className='hidden w-auto h-12 mx-auto sm:block'
+							src='https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
+							alt='Workflow'
+						/>
+						<h1 className='text-3xl font-extrabold text-center sm:mt-6 text-brand-primary '>{t(`header.signin`)}</h1>
 					</div>
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<div className='mt-5'>
