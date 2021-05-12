@@ -59,7 +59,7 @@ const LoginPage = () => {
 								name='email'
 								type='email'
 								autoComplete='email'
-								placeholder='email@example.com'
+								placeholder='john@example.com'
 								ref={register()}
 								required
 								className='w-full mt-2 border rounded-md shadow-sm placeholder-brand bg-brand-secondary border-brand text-brand-primary focus-brand-with-border sm:text-sm'

@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { colors, fontFamily } = require(`tailwindcss/defaultTheme`);
+const { fontFamily } = require(`tailwindcss/defaultTheme`);
 
 module.exports = {
+	mode: `jit`,
 	purge: [`./src/pages/**/*.{js,ts,jsx,tsx}`, `./src/components/**/*.{js,ts,jsx,tsx}`],
 	corePlugins: {
 		container: false,
@@ -25,16 +26,6 @@ module.exports = {
 					lightBlue: `rgb(30, 156, 215)`,
 					steelDark: `rgb(102, 102, 102)`,
 					steelLight: `rgb(226, 227, 228)`,
-					primary: {
-						light: colors.gray[100],
-						base: `rgb(39,39,44)`,
-						dark: `rgb(33,33,37)`,
-					},
-					accent: {
-						light: colors.blue[400],
-						base: colors.blue[500],
-						dark: colors.blue[600],
-					},
 				},
 			},
 			height: {
@@ -43,11 +34,6 @@ module.exports = {
 			minHeight: {
 				content: `var(--h-content-area)`,
 			},
-		},
-	},
-	variants: {
-		extend: {
-			borderWidth: [`hover`, `focus`],
 		},
 	},
 	plugins: [

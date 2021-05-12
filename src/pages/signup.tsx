@@ -59,7 +59,7 @@ const SignupPage = () => {
 							<input
 								name='name'
 								type='text'
-								placeholder='Jane Doe'
+								placeholder='John Doe'
 								autoComplete='name'
 								ref={register()}
 								className='w-full mt-2 border rounded-md shadow-sm placeholder-brand bg-brand-secondary border-brand text-brand-primary focus-brand-with-border sm:text-sm'
@@ -72,7 +72,7 @@ const SignupPage = () => {
 							<input
 								name='email'
 								type='email'
-								placeholder='email@example.com'
+								placeholder='john@example.com'
 								autoComplete='email'
 								ref={register()}
 								required
