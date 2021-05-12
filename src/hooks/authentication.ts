@@ -1,5 +1,12 @@
 import { LoginRequest, SignupRequest } from '@utils/userTypes';
-import { authLogout, createAuthWithEmail, createAuthWithGithub, createAuthWithGoogle, createAuthWithTwitter, loginWithEmail } from 'api/authentication';
+import {
+	authLogout,
+	createAuthWithEmail,
+	createAuthWithGithub,
+	createAuthWithGoogle,
+	createAuthWithTwitter,
+	loginWithEmail,
+} from 'api/authentication';
 import { useMutation, useQueryClient } from 'react-query';
 
 import { FirebaseError } from 'firebase-admin';

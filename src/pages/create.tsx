@@ -87,9 +87,7 @@ const CreatePage = () => {
 						<label htmlFor='description' className='block text-base font-semibold text-brand-purple'>
 							Description
 						</label>
-						<span className='text-sm italic cursor-default text-brand-pink'>
-							Optional
-						</span>
+						<span className='text-sm italic cursor-default text-brand-pink'>Optional</span>
 					</div>
 					<div className='mt-1'>
 						<textarea
