@@ -1,5 +1,5 @@
 import { LoginRequest, SignupRequest } from '@utils/userTypes';
-import { authLogout, createAuthWithEmail, createAuthWithGithub, loginWithEmail } from 'api/authentication';
+import { authLogout, createAuthWithEmail, createAuthWithGithub, createAuthWithGoogle, createAuthWithTwitter, loginWithEmail } from 'api/authentication';
 import { useMutation, useQueryClient } from 'react-query';
 
 import { FirebaseError } from 'firebase-admin';
@@ -53,6 +53,46 @@ export const useAuthWithGithub = () => {
 	const toasts = useToasts();
 	const createUserMutation = useCreateUser();
 	return useMutation(() => createAuthWithGithub(), {
+		onError: (error: FirebaseError) => {
+			toasts.addToast(error.message, { appearance: `error` });
+		},
+		onSuccess: data => {
+			if (data.additionalUserInfo?.isNewUser) {
+				createUserMutation.mutate({
+					uid: data.user?.uid,
+					name: data.user?.displayName,
+					email: data.user?.email,
+					providerId: data.additionalUserInfo?.providerId,
+				});
+			}
+		},
+	});
+};
+
+export const useAuthWithTwitter = () => {
+	const toasts = useToasts();
+	const createUserMutation = useCreateUser();
+	return useMutation(() => createAuthWithTwitter(), {
+		onError: (error: FirebaseError) => {
+			toasts.addToast(error.message, { appearance: `error` });
+		},
+		onSuccess: data => {
+			if (data.additionalUserInfo?.isNewUser) {
+				createUserMutation.mutate({
+					uid: data.user?.uid,
+					name: data.user?.displayName,
+					email: data.user?.email,
+					providerId: data.additionalUserInfo?.providerId,
+				});
+			}
+		},
+	});
+};
+
+export const useAuthWithGoogle = () => {
+	const toasts = useToasts();
+	const createUserMutation = useCreateUser();
+	return useMutation(() => createAuthWithGoogle(), {
 		onError: (error: FirebaseError) => {
 			toasts.addToast(error.message, { appearance: `error` });
 		},

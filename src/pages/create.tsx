@@ -83,11 +83,11 @@ const CreatePage = () => {
 						required
 						maxLength={100}
 					/>
-					<div className='flex justify-between mt-4'>
+					<div className='flex items-end justify-between mt-4'>
 						<label htmlFor='description' className='block text-base font-semibold text-brand-purple'>
 							Description
 						</label>
-						<span className='text-sm italic cursor-default text-brand-pink' id='description-optional'>
+						<span className='text-sm italic cursor-default text-brand-pink'>
 							Optional
 						</span>
 					</div>

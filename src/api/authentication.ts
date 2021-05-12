@@ -13,6 +13,18 @@ export const createAuthWithGithub = async () => {
 	return res;
 };
 
+export const createAuthWithTwitter = async () => {
+	const twitter = new firebase.auth.TwitterAuthProvider();
+	const res = await firebase.auth().signInWithPopup(twitter);
+	return res;
+};
+
+export const createAuthWithGoogle = async () => {
+	const google = new firebase.auth.GoogleAuthProvider();
+	const res = await firebase.auth().signInWithPopup(google);
+	return res;
+};
+
 export const loginWithEmail = async (credentials: LoginRequest) => {
 	const res = await firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password);
 	return res;
