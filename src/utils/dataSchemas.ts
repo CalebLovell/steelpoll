@@ -1,4 +1,4 @@
-import { Describe, array, nullable, number, object, optional, size, string } from 'superstruct';
+import { Describe, array, boolean, nullable, number, object, optional, size, string } from 'superstruct';
 
 import { CreatePollRequest } from '@utils/pollTypes';
 import { CreateVoteRequest } from '@utils/voteTypes';
@@ -26,6 +26,10 @@ export const newPollRequestSchema: Describe<CreatePollRequest> = object({
 		1,
 		3
 	),
+	options: object({
+		private: boolean(),
+		protected: boolean(),
+	}),
 	userId: nullable(size(string(), 1, 50)),
 });
 

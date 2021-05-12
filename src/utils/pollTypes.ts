@@ -13,6 +13,10 @@ export interface CreatePollRequest {
 	description?: string;
 	choices: Choice[];
 	votingSystems: VotingSystem[];
+	options: {
+		private: boolean;
+		protected: boolean;
+	};
 	userId: string | null;
 }
 

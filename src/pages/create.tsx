@@ -24,6 +24,10 @@ const CreatePage = () => {
 			votingSystems: votingSystems.map(x => {
 				return { ...x, selected: false };
 			}),
+			options: {
+				private: false,
+				protected: false,
+			},
 		},
 	});
 	const choicesFieldArray = useFieldArray({ control, name: `choices`, keyName: `key` });
@@ -64,7 +68,7 @@ const CreatePage = () => {
 		<Container authUser={authUser}>
 			<main className='container flex items-center justify-center w-full min-h-content bg-brand-primary'>
 				<form
-					className='w-full px-4 py-8 my-12 bg-brand-secondary md:w-2/3 sm:rounded-lg sm:px-10'
+					className='w-full px-4 py-8 my-4 rounded-lg shadow md:max-w-6xl bg-brand-secondary sm:px-10'
 					onSubmit={handleSubmit(onSubmit)}
 					autoComplete='off'
 				>
@@ -135,10 +139,10 @@ const CreatePage = () => {
 							<PlusIcon className='w-4 text-brand-purple' />
 						</button>
 					</div>
-					<div className='mt-3'>
+					<div>
 						<p className='block text-base font-semibold text-brand-purple'>Voting Systems</p>
 						{votingSystemsArray.fields.map((item, index) => (
-							<div key={item.key} className='relative flex items-start mt-2'>
+							<div key={item.key} className='flex mt-2'>
 								<div className='flex items-center h-5'>
 									<input
 										id={item.slug}
@@ -154,6 +158,37 @@ const CreatePage = () => {
 								</label>
 							</div>
 						))}
+					</div>
+					<p className='block mt-3 text-base font-semibold text-brand-purple'>Options</p>
+					<div className='flex mt-2'>
+						<div className='flex items-center h-5'>
+							<input
+								id='options.private'
+								name='options.private'
+								ref={register()}
+								type='checkbox'
+								className='w-4 h-4 border rounded text-brand placeholder-brand bg-brand-secondary border-brand focus-brand-with-border'
+							/>
+						</div>
+						<label htmlFor='options.private' className='block ml-3 text-sm font-semibold text-brand-purple'>
+							Private
+							<p className='font-normal text-brand-secondary'>Only discoverable via URL</p>
+						</label>
+					</div>
+					<div className='flex mt-2'>
+						<div className='flex items-center h-5'>
+							<input
+								id='options.protected'
+								name='options.protected'
+								ref={register()}
+								type='checkbox'
+								className='w-4 h-4 border rounded text-brand placeholder-brand bg-brand-secondary border-brand focus-brand-with-border'
+							/>
+						</div>
+						<label htmlFor='options.protected' className='block ml-3 text-sm font-semibold text-brand-purple'>
+							Protected
+							<p className='font-normal text-brand-secondary'>Only registered users can vote</p>
+						</label>
 					</div>
 					<button
 						type='submit'
