@@ -4,10 +4,8 @@ import { Menu, Transition } from '@headlessui/react';
 
 import { UserCircleIcon } from '@heroicons/react/outline';
 import { useLogout } from '@hooks/authentication';
-import { useUser } from '@hooks/user';
 
 export const ProfileDropdown = () => {
-	const { data: user } = useUser();
 	const { mutate: logout } = useLogout();
 	return (
 		<Menu as='div' className='relative flex-shrink-0 ml-4'>
@@ -15,11 +13,7 @@ export const ProfileDropdown = () => {
 				<>
 					<Menu.Button className='flex p-2 text-sm rounded-md text-brand-primary hover-brand focus-brand-without-border'>
 						<span className='sr-only'>Open user menu</span>
-						{user?.photoUrl ? (
-							<img className='w-8 h-8 rounded-full' src={user?.photoUrl} alt='profile face' />
-						) : (
-							<UserCircleIcon className='w-6 h-6' />
-						)}
+						<UserCircleIcon className='w-6 h-6' />
 					</Menu.Button>
 					<Transition
 						show={open}

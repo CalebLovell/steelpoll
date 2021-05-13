@@ -1,5 +1,6 @@
 import { CreateUserRequest, User } from '@utils/userTypes';
 
+import { AuthUser } from 'next-firebase-auth';
 import firebase from '@utils/firebaseClient';
 
 const firestore = firebase.firestore();
@@ -32,9 +33,9 @@ export const createUser = async (user: CreateUserRequest) => {
 	return res;
 };
 
-export const deleteUser = async uid => {
+export const deleteUser = async (user: AuthUser) => {
 	const usersCollectionRef = firestore.collection(`users`);
-	const userDocumentRef = usersCollectionRef.doc(uid);
+	const userDocumentRef = usersCollectionRef.doc(user.id);
 	const res = userDocumentRef.delete();
 	return res;
 };

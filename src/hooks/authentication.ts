@@ -5,12 +5,15 @@ import {
 	createAuthWithGithub,
 	createAuthWithGoogle,
 	createAuthWithTwitter,
+	deleteAuthUser,
 	loginWithEmail,
+	resetPassword,
 } from 'api/authentication';
+import { useCreateUser, useDeleteUserFromDatabase } from './user';
 import { useMutation, useQueryClient } from 'react-query';
 
+import { AuthUser } from 'next-firebase-auth';
 import { FirebaseError } from 'firebase-admin';
-import { useCreateUser } from './user';
 import { useRouter } from 'next/router';
 import { useToasts } from 'react-toast-notifications';
 
@@ -52,6 +55,18 @@ export const useCreateAuthWithEmail = () => {
 					},
 				}
 			);
+		},
+	});
+};
+
+export const useResetPassword = () => {
+	const toasts = useToasts();
+	return useMutation((email: string) => resetPassword(email), {
+		onError: (error: FirebaseError) => {
+			toasts.addToast(error.message, { appearance: `error` });
+		},
+		onSuccess: () => {
+			toasts.addToast(`Email sent!`, { appearance: `success` });
 		},
 	});
 };
@@ -119,13 +134,32 @@ export const useAuthWithGoogle = () => {
 export const useLogout = () => {
 	const toasts = useToasts();
 	const queryClient = useQueryClient();
+	const router = useRouter();
 	return useMutation(authLogout, {
 		onError: (error: FirebaseError) => {
 			toasts.addToast(error.message, { appearance: `error` });
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries(`user`);
+			router.push(`/`);
 			toasts.addToast(`Logged out.`, { appearance: `success` });
+			queryClient.clear();
+		},
+	});
+};
+
+export const useDeleteAuthUser = () => {
+	const toasts = useToasts();
+	const queryClient = useQueryClient();
+	const router = useRouter();
+	return useMutation(deleteAuthUser, {
+		onError: (error: FirebaseError) => {
+			toasts.addToast(error.message, { appearance: `error` });
+		},
+		onSuccess: () => {
+			// TODO fix error here
+			router.push(`/`);
+			queryClient.clear();
+			toasts.addToast(`Account deleted!`, { appearance: `success` });
 		},
 	});
 };

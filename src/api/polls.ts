@@ -28,7 +28,7 @@ export const getPoll = async (polldId: string) => {
 
 export const getPolls = async () => {
 	const collectionRef = firestore.collection(`polls`);
-	const docRef = collectionRef.where(`options.private`, `==`, true).limit(50);
+	const docRef = collectionRef.where(`options.private`, `==`, false).limit(50);
 	const snapshot = await docRef.get();
 
 	const polls: Poll[] = [];

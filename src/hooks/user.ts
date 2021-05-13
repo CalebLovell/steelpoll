@@ -1,9 +1,10 @@
-import { createUser, getUser } from 'api/user';
+import { AuthUser, useAuthUser } from 'next-firebase-auth';
+import { createUser, deleteUser, getUser } from 'api/user';
 import { useMutation, useQuery } from 'react-query';
 
 import { CreateUserRequest } from '@utils/userTypes';
 import { FirebaseError } from 'firebase-admin';
-import { useAuthUser } from 'next-firebase-auth';
+import { useDeleteAuthUser } from './authentication';
 import { useToasts } from 'react-toast-notifications';
 
 export const useUser = () => {
@@ -20,8 +21,18 @@ export const useCreateUser = () => {
 		onError: (error: FirebaseError) => {
 			toasts.addToast(error.message, { appearance: `error` });
 		},
+	});
+};
+
+export const useDeleteUserFromDatabase = () => {
+	const toasts = useToasts();
+	const { mutate: deleteAuthUser } = useDeleteAuthUser();
+	return useMutation((user: AuthUser) => deleteUser(user), {
+		onError: (error: FirebaseError) => {
+			toasts.addToast(error.message, { appearance: `error` });
+		},
 		onSuccess: () => {
-			toasts.addToast(`Account created!`, { appearance: `success` });
+			deleteAuthUser();
 		},
 	});
 };

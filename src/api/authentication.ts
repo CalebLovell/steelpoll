@@ -7,6 +7,11 @@ export const createAuthWithEmail = async (signupRequest: SignupRequest) => {
 	return res;
 };
 
+export const resetPassword = async (email: string) => {
+	const res = await firebase.auth().sendPasswordResetEmail(email);
+	return res;
+};
+
 export const createAuthWithGithub = async () => {
 	const github = new firebase.auth.GithubAuthProvider();
 	const res = await firebase.auth().signInWithPopup(github);
@@ -32,5 +37,10 @@ export const loginWithEmail = async (credentials: LoginRequest) => {
 
 export const authLogout = async () => {
 	const res = await firebase.auth().signOut();
+	return res;
+};
+
+export const deleteAuthUser = async () => {
+	const res = await firebase.auth().currentUser?.delete();
 	return res;
 };

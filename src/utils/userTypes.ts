@@ -9,7 +9,6 @@ export interface User {
 	name: string;
 	email: string;
 	providerId: string;
-	photoUrl: string;
 	createdAt: string;
 	updatedAt: string;
 }
