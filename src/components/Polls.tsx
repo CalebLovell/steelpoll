@@ -1,6 +1,6 @@
 import { Poll } from '@utils/pollTypes';
 
-export const PollCard = ({ poll }: { poll: Poll }) => {
+const PollCard = ({ poll }: { poll: Poll }) => {
 	return (
 		<li>
 			<a href={`poll/${poll.id}`} className='flex col-span-1 rounded-md shadow-sm'>
@@ -22,5 +22,18 @@ export const PollCard = ({ poll }: { poll: Poll }) => {
 				</div>
 			</a>
 		</li>
+	);
+};
+
+export const Polls = ({ polls }: { polls: Poll[] | undefined }) => {
+	return (
+		<div>
+			<h1 className='text-lg font-medium uppercase text-brand-accent-base'>Polls</h1>
+			<ul className='grid grid-cols-1 gap-5 mt-3 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4'>
+				{polls?.reverse().map(poll => (
+					<PollCard key={poll.title} poll={poll} />
+				))}
+			</ul>
+		</div>
 	);
 };

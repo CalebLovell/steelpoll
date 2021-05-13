@@ -1,9 +1,11 @@
 import { AuthAction, useAuthUser, withAuthUser } from 'next-firebase-auth';
 
 import { Container } from '@components/Container';
+import { Polls } from '@components/Polls';
 import { useForm } from 'react-hook-form';
 import { useLogout } from '@hooks/authentication';
 import { useUser } from '@hooks/user';
+import { useUserPolls } from '@hooks/polls';
 
 // import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 // import { useTranslation } from 'react-i18next';
@@ -20,9 +22,9 @@ import { useUser } from '@hooks/user';
 const AccountPage = () => {
 	const authUser = useAuthUser();
 	const { data: user } = useUser();
-
 	const { mutate: logout } = useLogout();
 	// const { mutate: changePassword } = useChangePassword();
+	const { data: polls } = useUserPolls(authUser.id);
 	// const { t } = useTranslation(`common`);
 
 	const { register, handleSubmit } = useForm({
@@ -71,6 +73,7 @@ const AccountPage = () => {
 						</button>
 					</div>
 				</form>
+				<Polls polls={polls} />
 			</main>
 		</Container>
 	);

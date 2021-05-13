@@ -1,6 +1,6 @@
 import { CreatePollRequest, Poll } from '@utils/pollTypes';
 import { QueryOptions, useMutation, useQuery } from 'react-query';
-import { createPoll, getPoll, getPolls } from 'api/polls';
+import { createPoll, getPoll, getPolls, getPollsByUser } from 'api/polls';
 
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
@@ -29,4 +29,10 @@ export const usePoll = (id: string, opts?: QueryOptions) => {
 
 export const usePolls = () => {
 	return useQuery(`polls`, getPolls);
+};
+
+export const useUserPolls = (userId: string | null) => {
+	return useQuery([`userPolls`, userId], () => getPollsByUser(userId), {
+		enabled: !!userId,
+	});
 };

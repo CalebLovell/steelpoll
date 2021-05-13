@@ -28,7 +28,20 @@ export const getPoll = async (polldId: string) => {
 
 export const getPolls = async () => {
 	const collectionRef = firestore.collection(`polls`);
-	const docRef = collectionRef.orderBy(`createdAt`).limit(50);
+	const docRef = collectionRef.where(`options.private`, `==`, true).limit(50);
+	const snapshot = await docRef.get();
+
+	const polls: Poll[] = [];
+
+	// @ts-ignore
+	snapshot.forEach(doc => polls.push({ id: doc.id, ...doc.data() }));
+
+	return polls;
+};
+
+export const getPollsByUser = async (userId: string | null) => {
+	const collectionRef = firestore.collection(`polls`);
+	const docRef = collectionRef.where(`userId`, `==`, userId).limit(50);
 	const snapshot = await docRef.get();
 
 	const polls: Poll[] = [];
