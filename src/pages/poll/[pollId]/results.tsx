@@ -46,7 +46,7 @@ const ResultsPage = () => {
 
 	return (
 		<Container authUser={authUser}>
-			<main className='container w-full min-h-content bg-brand-primary-light dark:bg-brand-primary-dark'>
+			<main className='container w-full min-h-content bg-brand-primary'>
 				<section>
 					<div className='pb-5 border-b border-gray-200 sm:pb-0'>
 						<h3 className='text-lg font-medium leading-6 text-gray-900'>Candidates</h3>
