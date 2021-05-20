@@ -3,11 +3,11 @@
 	"trailingSlash": false,
 	"headers": [
 		{
-			"source": "/fonts/inter-var.ttf",
+			"source": "/(.*)",
 			"headers": [
 				{
-					"key": "Cache-Control",
-					"value": "public, max-age=31536000, immutable"
+					"key": "Permissions-Policy",
+					"value": "interest-cohort=()"
 				}
 			]
 		}
