@@ -26,6 +26,10 @@ export interface Poll {
 	description?: string;
 	choices: Choice[];
 	votingSystems: VotingSystem[];
+	options: {
+		private: boolean;
+		protected: boolean;
+	};
 	createdAt: string;
 	updatedAt: string;
 	userId: string;

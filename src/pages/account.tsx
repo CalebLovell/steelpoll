@@ -3,6 +3,8 @@ import { useDeleteUserFromDatabase, useUser } from '@hooks/user';
 
 import { Container } from '@components/Container';
 import { Polls } from '@components/Polls';
+import { UserIcon } from '@heroicons/react/outline';
+import dayjs from 'dayjs';
 import { getPollsByUser } from 'api/polls';
 import { useLogout } from '@hooks/authentication';
 import { useUserPolls } from '@hooks/polls';
@@ -21,7 +23,7 @@ import { useUserPolls } from '@hooks/polls';
 
 const AccountPage = () => {
 	const authUser = useAuthUser();
-	const { data: user } = useUser();
+	const { data: user } = useUser(authUser.id);
 	const { mutate: logout } = useLogout();
 	const { data: polls } = useUserPolls(authUser.id);
 	const { mutate: deleteUser } = useDeleteUserFromDatabase();
@@ -32,31 +34,30 @@ const AccountPage = () => {
 		if (res) deleteUser(authUser);
 	};
 
+	const date = user?.createdAt ? dayjs(user?.createdAt).format(`MMMM D, YYYY`) : ``;
+
 	return (
 		<Container authUser={authUser}>
-			<main className='container flex flex-col items-center justify-center min-h-content bg-brand-primary-light dark:bg-brand-primary-dark'>
-				<h1>{user?.name}</h1>
-				<h1>{user?.email}</h1>
-				<h1>{user?.providerId}</h1>
-				<div>
-					<button
-						type='button'
-						onClick={() => logout()}
-						className='flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-					>
-						LOGOUT
-					</button>
+			<main className='container flex flex-col items-center min-h-content bg-brand-primary'>
+				<div className='w-full p-4 my-4 rounded-lg bg-brand-secondary'>
+					<div className='flex flex-col items-center mt-6 space-y-2'>
+						<div className='flex items-center justify-center w-32 h-32 rounded-full bg-brand-primary'>
+							<UserIcon className='w-16 h-16 text-brand-primary' />
+						</div>
+						<p className='text-3xl font-medium text-brand-primary'>{user?.name}</p>
+						<p className='font-normal text-md text-brand-primary'>{user?.email}</p>
+						<p className='text-sm font-normal text-brand-primary'>Account Created: {date}</p>
+						<div className='flex'>
+							<button type='button' onClick={() => logout()} className='btn-primary'>
+								Logout
+							</button>
+							<button type='button' onClick={onDeleteUser} className='btn-secondary'>
+								Delete Account
+							</button>
+						</div>
+					</div>
+					<Polls polls={polls} />
 				</div>
-				<div>
-					<button
-						type='button'
-						onClick={onDeleteUser}
-						className='flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-					>
-						Delete Account
-					</button>
-				</div>
-				<Polls polls={polls} />
 			</main>
 		</Container>
 	);

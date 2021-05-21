@@ -1,15 +1,14 @@
-import { AuthUser, useAuthUser } from 'next-firebase-auth';
 import { createUser, deleteUser, getUser } from 'api/user';
 import { useMutation, useQuery } from 'react-query';
 
+import { AuthUser } from 'next-firebase-auth';
 import { CreateUserRequest } from '@utils/userTypes';
 import { FirebaseError } from 'firebase-admin';
 import { useDeleteAuthUser } from './authentication';
 import { useToasts } from 'react-toast-notifications';
 
-export const useUser = () => {
-	const { id } = useAuthUser();
-	return useQuery(`user`, () => getUser(id), {
+export const useUser = (id: string | null) => {
+	return useQuery([`user`, id], () => getUser(id), {
 		enabled: !!id,
 		staleTime: 1000 * 60 * 60,
 	});

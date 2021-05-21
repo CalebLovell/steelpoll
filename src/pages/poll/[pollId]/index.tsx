@@ -17,6 +17,7 @@ import { usePageIsLoading } from '@hooks/usePageIsLoading';
 import { usePoll } from '@hooks/polls';
 import { useRouter } from 'next/router';
 import { useToasts } from 'react-toast-notifications';
+import { useUser } from '@hooks/user';
 
 export const getServerSideProps: GetServerSideProps = async context => {
 	try {
@@ -37,11 +38,11 @@ const PollPage: React.FC<{ poll: Poll }> = props => {
 	const authUser = useAuthUser();
 	const router = useRouter();
 	const pageIsLoading = usePageIsLoading();
-	const { pollId } = router.query;
-	// @ts-ignore
+	const { pollId }: { pollId: string } = router.query;
 	const { data: poll } = usePoll(pollId, {
 		initialData: props.poll,
 	});
+	const { data: user } = useUser(pollId);
 	const { addToast } = useToasts();
 	const [firstPastThePost, setFirstPastThePost] = React.useState(poll?.choices[0]);
 	const [rankedChoice, setRankedChoice] = React.useState(poll?.choices);
@@ -120,10 +121,10 @@ const PollPage: React.FC<{ poll: Poll }> = props => {
 
 	return (
 		<Container authUser={authUser}>
-			<main className='container flex flex-col justify-center w-full min-h-content bg-brand-primary-light dark:bg-brand-primary-dark'>
-				<p className='text-base font-medium leading-6 text-gray-900'>{poll?.title}</p>
-				<p className='text-sm leading-5 text-gray-500'>{poll?.description}</p>
-				<p className='text-sm leading-5 text-gray-500'>Poll created by: {poll?.userId ? poll?.userId : `Anonymous`}</p>
+			<main className='container flex flex-col justify-center w-full min-h-content bg-brand-primary'>
+				<p className='text-base font-medium leading-6 text-brand-primary'>{poll?.title}</p>
+				<p className='text-sm leading-5 text-brand-secondary'>{poll?.description}</p>
+				<p className='text-sm leading-5 text-brand-secondary'>Poll created by: {user?.name ? user?.name : `Anonymous`}</p>
 				<form>
 					{poll?.votingSystems?.some(x => x.slug === `first-past-the-post`) && (
 						<RadioGroup value={firstPastThePost} onChange={setFirstPastThePost}>

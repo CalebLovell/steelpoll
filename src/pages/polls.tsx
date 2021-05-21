@@ -16,18 +16,20 @@ export const getStaticProps = async ({ locale }) => {
 	};
 };
 
-const HomePage = () => {
+const PollsPage = () => {
 	const authUser = useAuthUser();
 	const { data: polls } = usePolls();
 	// const { t: home } = useTranslation(`home`);
 
 	return (
 		<Container authUser={authUser}>
-			<main className='container w-full min-h-content bg-brand-primary-light dark:bg-brand-primary-dark'>
-				<Polls polls={polls} />
+			<main className='container flex justify-center w-full min-h-content bg-brand-primary'>
+				<div className='w-full p-4 my-4 rounded-lg bg-brand-secondary'>
+					<Polls polls={polls} />
+				</div>
 			</main>
 		</Container>
 	);
 };
 
-export default withAuthUser()(HomePage);
+export default withAuthUser()(PollsPage);
