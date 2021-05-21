@@ -9,11 +9,10 @@ import {
 	loginWithEmail,
 	resetPassword,
 } from 'api/authentication';
-import { useCreateUser, useDeleteUserFromDatabase } from './user';
 import { useMutation, useQueryClient } from 'react-query';
 
-import { AuthUser } from 'next-firebase-auth';
 import { FirebaseError } from 'firebase-admin';
+import { useCreateUser } from './user';
 import { useRouter } from 'next/router';
 import { useToasts } from 'react-toast-notifications';
 

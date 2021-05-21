@@ -3,10 +3,9 @@ import { useDeleteUserFromDatabase, useUser } from '@hooks/user';
 
 import { Container } from '@components/Container';
 import { Polls } from '@components/Polls';
-import { UserIcon } from '@heroicons/react/outline';
+import { UserIcon } from '@heroicons/react/solid';
 import dayjs from 'dayjs';
 import { getPollsByUser } from 'api/polls';
-import { useLogout } from '@hooks/authentication';
 import { useUserPolls } from '@hooks/polls';
 
 // import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -24,7 +23,6 @@ import { useUserPolls } from '@hooks/polls';
 const AccountPage = () => {
 	const authUser = useAuthUser();
 	const { data: user } = useUser(authUser.id);
-	const { mutate: logout } = useLogout();
 	const { data: polls } = useUserPolls(authUser.id);
 	const { mutate: deleteUser } = useDeleteUserFromDatabase();
 	// const { t } = useTranslation(`common`);
@@ -39,25 +37,18 @@ const AccountPage = () => {
 	return (
 		<Container authUser={authUser}>
 			<main className='container flex flex-col items-center min-h-content bg-brand-primary'>
-				<div className='w-full p-4 my-4 rounded-lg bg-brand-secondary'>
-					<div className='flex flex-col items-center mt-6 space-y-2'>
-						<div className='flex items-center justify-center w-32 h-32 rounded-full bg-brand-primary'>
-							<UserIcon className='w-16 h-16 text-brand-primary' />
-						</div>
-						<p className='text-3xl font-medium text-brand-primary'>{user?.name}</p>
-						<p className='font-normal text-md text-brand-primary'>{user?.email}</p>
-						<p className='text-sm font-normal text-brand-primary'>Account Created: {date}</p>
-						<div className='flex'>
-							<button type='button' onClick={() => logout()} className='btn-primary'>
-								Logout
-							</button>
-							<button type='button' onClick={onDeleteUser} className='btn-secondary'>
-								Delete Account
-							</button>
-						</div>
+				<div className='flex flex-col items-center my-4 space-y-2'>
+					<div className='flex items-center justify-center w-32 h-32 rounded-full bg-brand-secondary '>
+						<UserIcon className='w-16 h-16 text-brand-primary' />
 					</div>
-					<Polls polls={polls} />
+					<p className='text-3xl font-medium text-brand-primary'>{user?.name}</p>
+					<p className='font-normal text-md text-brand-primary'>{user?.email}</p>
+					<p className='text-sm font-normal text-brand-primary'>Account created on {date}</p>
+					<button type='button' onClick={onDeleteUser} className='btn-secondary'>
+						Delete Account
+					</button>
 				</div>
+				<Polls polls={polls} />
 			</main>
 		</Container>
 	);

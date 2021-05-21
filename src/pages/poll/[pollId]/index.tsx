@@ -38,6 +38,7 @@ const PollPage: React.FC<{ poll: Poll }> = props => {
 	const authUser = useAuthUser();
 	const router = useRouter();
 	const pageIsLoading = usePageIsLoading();
+	// @ts-ignore
 	const { pollId }: { pollId: string } = router.query;
 	const { data: poll } = usePoll(pollId, {
 		initialData: props.poll,

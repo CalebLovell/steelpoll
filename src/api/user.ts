@@ -35,7 +35,7 @@ export const createUser = async (user: CreateUserRequest) => {
 
 export const deleteUser = async (user: AuthUser) => {
 	const usersCollectionRef = firestore.collection(`users`);
-	const userDocumentRef = usersCollectionRef.doc(user.id);
+	const userDocumentRef = usersCollectionRef.doc(user.id ? user.id : undefined);
 	const res = userDocumentRef.delete();
 	return res;
 };

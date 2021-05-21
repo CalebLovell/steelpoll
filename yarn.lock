@@ -4527,10 +4527,10 @@ react-refresh@0.8.3:
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.8.3.tgz#721d4657672d400c5e3c75d063c4a85fb2d5d68f"
   integrity sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg==
 
-react-toast-notifications@^2.4.0:
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/react-toast-notifications/-/react-toast-notifications-2.4.3.tgz#ebf2ee776615a97906cef214352cfd9fe800c583"
-  integrity sha512-Ya/i2dCjN95Ytb/pwbAVmDMSKQwGeeGOhUThtjFQx2XAFKE+fQnodLlIylhgZfsInxdUXPFGFnzTdGS8JafuLA==
+react-toast-notifications@^2.4.4:
+  version "2.4.4"
+  resolved "https://registry.yarnpkg.com/react-toast-notifications/-/react-toast-notifications-2.4.4.tgz#a4b46195b437f312d72f552073957e3a1916f1ab"
+  integrity sha512-FNekr4IIeZZ+9B7LO4Wdqfp16jX6yH6A3HMajbPHpfPwhmcqIX///wPhdbcef9bQaa+NZwdyCHKeCSC6eFnduw==
   dependencies:
     "@emotion/core" "^10.0.14"
     react-transition-group "^4.4.1"

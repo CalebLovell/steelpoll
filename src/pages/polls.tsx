@@ -23,10 +23,9 @@ const PollsPage = () => {
 
 	return (
 		<Container authUser={authUser}>
-			<main className='container flex justify-center w-full min-h-content bg-brand-primary'>
-				<div className='w-full p-4 my-4 rounded-lg bg-brand-secondary'>
-					<Polls polls={polls} />
-				</div>
+			<main className='container flex flex-col w-full min-h-content bg-brand-primary'>
+				<h1 className='mt-4 text-2xl font-medium text-center text-brand-primary'>Explore Polls</h1>
+				<Polls polls={polls} />
 			</main>
 		</Container>
 	);

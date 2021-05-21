@@ -34,7 +34,7 @@
 		"react-focus-lock": "^2.5.0",
 		"react-hook-form": "^6.15.4",
 		"react-query": "3.12.0",
-		"react-toast-notifications": "^2.4.0",
+		"react-toast-notifications": "^2.4.4",
 		"react-use-keypress": "^1.2.0",
 		"superstruct": "^0.14.2"
 	},
