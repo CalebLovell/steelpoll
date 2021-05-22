@@ -24,8 +24,8 @@ module.exports = {
 					purple: `rgb(173, 83, 218)`,
 					blue: `#5152E5`,
 					lightBlue: `#6ED5F0`,
-					steelDark: `rgb(102, 102, 102)`,
-					steelLight: `rgb(226, 227, 228)`,
+					steelDark: `rgb(80, 80, 80)`,
+					steelLight: `#afacb1`,
 				},
 			},
 			height: {
