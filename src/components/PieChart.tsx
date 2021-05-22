@@ -49,17 +49,15 @@ export const PieChart: React.FC<Props> = ({ data, isPercent = false }) => {
 	const pieData = createPie(data);
 
 	return (
-		<div className='w-96 h-96'>
-			<svg viewBox='0 0 450 450'>
-				<g transform={`translate(${outerRadius} ${outerRadius})`}>
-					{pieData.map((d, i) => (
-						<Arc key={i} d={d} i={i} createArc={createArc} isPercent={isPercent} />
-					))}
-					<text className='font-bold fill-current' textAnchor='middle' alignmentBaseline='middle'>
-						This is Chart
-					</text>
-				</g>
-			</svg>
-		</div>
+		<svg viewBox='0 0 450 450'>
+			<g transform={`translate(${outerRadius} ${outerRadius})`}>
+				{pieData.map((d, i) => (
+					<Arc key={i} d={d} i={i} createArc={createArc} isPercent={isPercent} />
+				))}
+				<text className='font-bold fill-current' textAnchor='middle' alignmentBaseline='middle'>
+					This is Chart
+				</text>
+			</g>
+		</svg>
 	);
 };

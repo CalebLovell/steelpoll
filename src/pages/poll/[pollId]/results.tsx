@@ -30,90 +30,58 @@ const ResultsPage = () => {
 	const router = useRouter();
 	const { pollId } = router.query;
 	// @ts-ignore
-	const { data: votes, isLoading, fptpResults, rankedChoiceResults, STARResults } = useResults(pollId);
+	const { data: votes, fptpResults, rankedChoiceResults, STARResults } = useResults(pollId);
 	// @ts-ignore
 	const { data: poll } = usePoll(pollId);
 
-	const tabs = [
-		{ name: `First Past The Post`, href: `#`, current: false },
-		{ name: `Ranked Choice`, href: `#`, current: false },
-		{ name: `STAR`, href: `#`, current: false },
-	];
-
-	function classNames(...classes) {
-		return classes.filter(Boolean).join(` `);
-	}
-
 	return (
 		<Container authUser={authUser}>
-			<main className='container w-full min-h-content bg-brand-primary'>
-				<section>
-					<div className='pb-5 border-b border-gray-200 sm:pb-0'>
-						<h3 className='text-lg font-medium leading-6 text-gray-900'>Candidates</h3>
-						<div className='mt-3 sm:mt-4'>
-							<div className='sm:hidden'>
-								<label htmlFor='current-tab' className='sr-only'>
-									Select a tab
-								</label>
-								<select
-									id='current-tab'
-									name='current-tab'
-									className='block w-full py-2 pl-3 pr-10 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
-									defaultValue={tabs.find(tab => tab.current)?.name}
-								>
-									{tabs.map(tab => (
-										<option key={tab.name}>{tab.name}</option>
-									))}
-								</select>
-							</div>
-							<div className='hidden sm:block'>
-								<nav className='flex -mb-px space-x-8'>
-									{tabs.map(tab => (
-										<a
-											key={tab.name}
-											href={tab.href}
-											className={classNames(
-												tab.current
-													? `border-indigo-500 text-indigo-600`
-													: `border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300`,
-												`whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm`
-											)}
-											aria-current={tab.current ? `page` : undefined}
-										>
-											{tab.name}
-										</a>
-									))}
-								</nav>
-							</div>
-						</div>
-					</div>
-					{isLoading && <span>Collection: Loading...</span>}
-					{votes && poll && fptpResults && (
-						<div>
+			<main className='container flex flex-col items-center py-10 space-y-10 min-h-content bg-brand-primary'>
+				{votes && poll && fptpResults && (
+					<section className='p-4 rounded-md bg-brand-secondary'>
+						<p className='mb-4 text-lg font-medium text-center text-brand-primary'>
 							FPTP Winner(s):
 							{fptpResults?.winners &&
-								fptpResults?.winners?.map((winner, i) => <p key={i}>{poll?.choices?.find(x => x.id === Number(winner))?.choice}</p>)}
+								fptpResults?.winners?.map((winner, i) => <span key={i}>{poll?.choices?.find(x => x.id === Number(winner))?.choice}</span>)}
+						</p>
+						<div className='flex flex-col space-x-8 space-y-4 md:flex-row'>
 							<ResultsTable results={fptpResults} poll={poll} />
-							<DynamicChart data={fptpResults?.votes} />
+							<div className='w-64 h-64'>
+								<DynamicChart data={fptpResults?.votes} />
+							</div>
 						</div>
-					)}
-					{votes && poll && rankedChoiceResults && (
-						<div>
+					</section>
+				)}
+				{votes && poll && rankedChoiceResults && (
+					<section className='p-4 rounded-md bg-brand-secondary'>
+						<p className='mb-4 text-lg font-medium text-center text-brand-primary'>
 							Ranked Choice Winner:
-							{rankedChoiceResults?.winner && <p>{poll?.choices?.find(x => x.id === Number(rankedChoiceResults?.winner?.label))?.choice}</p>}
-							<ResultsTable results={rankedChoiceResults} poll={poll} isPercent={true} />
-							<DynamicChart data={rankedChoiceResults?.votes} isPercent={true} />
+							{rankedChoiceResults?.winner && (
+								<span>{poll?.choices?.find(x => x.id === Number(rankedChoiceResults?.winner?.label))?.choice}</span>
+							)}
+						</p>
+						<div className='flex flex-col space-x-8 space-y-4 md:flex-row'>
+							<ResultsTable results={rankedChoiceResults} poll={poll} />
+							<div className='w-64 h-64'>
+								<DynamicChart data={rankedChoiceResults?.votes} />
+							</div>
 						</div>
-					)}
-					{votes && poll && STARResults && (
-						<div>
+					</section>
+				)}
+				{votes && poll && STARResults && (
+					<section className='p-4 rounded-md bg-brand-secondary'>
+						<p className='mb-4 text-lg font-medium text-center text-brand-primary'>
 							STAR Winner:
-							{STARResults?.winner && <p>{poll?.choices?.find(x => x.id === Number(STARResults?.winner?.label))?.choice}</p>}
-							<ResultsTable results={STARResults} poll={poll} isPercent={true} />
-							<DynamicChart data={STARResults?.votes} isPercent={true} />
+							{STARResults?.winner && <span>{poll?.choices?.find(x => x.id === Number(STARResults?.winner?.label))?.choice}</span>}
+						</p>
+						<div className='flex flex-col space-x-8 space-y-4 md:flex-row'>
+							<ResultsTable results={STARResults} poll={poll} />
+							<div className='w-64 h-64'>
+								<DynamicChart data={STARResults?.votes} />
+							</div>
 						</div>
-					)}
-				</section>
+					</section>
+				)}
 			</main>
 		</Container>
 	);
