@@ -61,6 +61,7 @@ module.exports = {
 		'prefer-template': `error`,
 		quotes: [`error`, `backtick`],
 		'react/prop-types': `off`,
+		'react/display-name': `off`,
 		semi: [`error`, `always`],
 		'semi-spacing': `error`,
 		'semi-style': [`error`, `last`],

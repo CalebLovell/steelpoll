@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as d3 from 'd3';
 
+import { LoadingSpinner } from './LoadingSpinner';
+
 const Arc = ({ d, createArc, color }) => {
 	const choiceTextFits = d.endAngle - d.startAngle > 0.75;
 

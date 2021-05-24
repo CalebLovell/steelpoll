@@ -35,7 +35,7 @@ const ResultsPage = () => {
 			<main className='container flex flex-col items-center py-4 space-y-4 sm:py-10 sm:space-y-10 min-h-content bg-brand-primary'>
 				{votes && poll && fptpResults && <ResultSection title='First Past the Post Results' poll={poll} results={fptpResults} />}
 				{votes && poll && rankedChoiceResults && <ResultSection title='Ranked Choice Results' poll={poll} results={rankedChoiceResults} />}
-				{votes && poll && STARResults && <ResultSection title='STAR Results' poll={poll} results={STARResults} />}
+				{votes && poll && STARResults && <ResultSection title='Score Then Automatic Runoff (STAR) Results' poll={poll} results={STARResults} />}
 			</main>
 		</Container>
 	);
