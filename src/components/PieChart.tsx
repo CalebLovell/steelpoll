@@ -1,26 +1,31 @@
 import * as React from 'react';
 import * as d3 from 'd3';
 
-const colors = [
-	`text-red-500`,
-	`text-green-500`,
-	`text-blue-500`,
-	`text-yellow-500`,
-	`text-purple-500`,
-	`text-red-500`,
-	`text-yellow-500`,
-	`text-blue-500`,
-	`text-purple-500`,
-	`text-pink-500`,
-];
+const Arc = ({ d, i, createArc, color }) => {
+	const choiceTextFits = d.endAngle - d.startAngle > 0.75;
 
-const Arc = ({ d, i, createArc, isPercent }) => {
-	const format = d3.format(`.0%`);
 	return (
-		<g key={i} className='arc'>
-			<path className={`arc ${colors[i]} fill-current`} d={createArc(d)} />
-			<text className='font-bold fill-current' transform={`translate(${createArc.centroid(d)})`} textAnchor='middle' alignmentBaseline='middle'>
-				{isPercent ? format(d?.value) : d?.value}
+		<g key={i}>
+			<path className='fill-current' d={createArc(d)} color={color(d.data.choiceId)} />
+			{choiceTextFits ? (
+				<text
+					className='text-xl font-bold dotme'
+					transform={`translate(${createArc.centroid(d)})`}
+					textAnchor='middle'
+					alignmentBaseline='middle'
+					y={-12}
+				>
+					Choice {d.data.choiceId + 1}
+				</text>
+			) : null}
+			<text
+				className='text-xl font-medium'
+				transform={`translate(${createArc.centroid(d)})`}
+				textAnchor='middle'
+				alignmentBaseline='middle'
+				y={choiceTextFits ? 12 : 0}
+			>
+				{(d.value * 100).toFixed(1)}%
 			</text>
 		</g>
 	);
@@ -33,30 +38,31 @@ interface PieData {
 
 interface Props {
 	data: PieData[];
-	isPercent?: boolean;
 }
 
-export const PieChart: React.FC<Props> = ({ data, isPercent = false }) => {
-	const innerRadius = 120;
+export const PieChart: React.FC<Props> = ({ data }) => {
+	const innerRadius = 60;
 	const outerRadius = 200;
 
 	const createPie = d3
 		.pie<PieData>()
 		.padAngle(0.04)
-		.value(d => d?.value)
+		.value(d => d.value)
 		.sortValues(null);
 	const createArc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius).cornerRadius(8);
 	const pieData = createPie(data);
+
+	const color = d3
+		.scaleOrdinal()
+		.domain(data.map(d => d.choiceId.toString()))
+		.range(d3.quantize(t => d3.interpolateSinebow(t * 0.91 + 0.05), data.length).reverse());
 
 	return (
 		<svg viewBox='0 0 450 450'>
 			<g transform={`translate(${outerRadius} ${outerRadius})`}>
 				{pieData.map((d, i) => (
-					<Arc key={i} d={d} i={i} createArc={createArc} isPercent={isPercent} />
+					<Arc key={i} d={d} i={i} createArc={createArc} color={color} />
 				))}
-				<text className='font-bold fill-current' textAnchor='middle' alignmentBaseline='middle'>
-					This is Chart
-				</text>
 			</g>
 		</svg>
 	);
