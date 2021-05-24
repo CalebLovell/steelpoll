@@ -48,6 +48,7 @@ const AccountPage = () => {
 						Delete Account
 					</button>
 				</div>
+				<h1 className='w-full pl-2 text-2xl font-medium text-left text-brand-primary'>My Polls</h1>
 				<Polls polls={polls} />
 			</main>
 		</Container>
