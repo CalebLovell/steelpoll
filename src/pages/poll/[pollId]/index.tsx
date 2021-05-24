@@ -129,7 +129,7 @@ const PollPage: React.FC<{ poll: Poll }> = props => {
 				<form>
 					{poll?.votingSystems?.some(x => x.slug === `first-past-the-post`) && (
 						<RadioGroup value={firstPastThePost} onChange={setFirstPastThePost}>
-							<RadioGroup.Label>First Past The Post (Winner Take All)</RadioGroup.Label>
+							<RadioGroup.Label className='text-brand-primary'>First Past The Post (Winner Take All)</RadioGroup.Label>
 							<div className='-space-y-px bg-white rounded-md'>
 								{poll?.choices.map((choice, i) => (
 									<RadioGroup.Option
