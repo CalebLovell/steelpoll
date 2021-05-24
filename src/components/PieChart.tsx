@@ -20,14 +20,14 @@ const Arc = ({ d, i, createArc, isPercent }) => {
 		<g key={i} className='arc'>
 			<path className={`arc ${colors[i]} fill-current`} d={createArc(d)} />
 			<text className='font-bold fill-current' transform={`translate(${createArc.centroid(d)})`} textAnchor='middle' alignmentBaseline='middle'>
-				{isPercent ? format(d.value) : d.value}
+				{isPercent ? format(d?.value) : d?.value}
 			</text>
 		</g>
 	);
 };
 
 interface PieData {
-	label: string | number;
+	choiceId: string | number;
 	value: number;
 }
 
@@ -43,7 +43,7 @@ export const PieChart: React.FC<Props> = ({ data, isPercent = false }) => {
 	const createPie = d3
 		.pie<PieData>()
 		.padAngle(0.04)
-		.value(d => d.value)
+		.value(d => d?.value)
 		.sortValues(null);
 	const createArc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius).cornerRadius(8);
 	const pieData = createPie(data);

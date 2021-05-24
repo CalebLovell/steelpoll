@@ -19,15 +19,24 @@ export const ResultsTable: React.FC<Props> = ({ results, poll }) => {
 				</thead>
 				<tbody className='divide-y divide-gray-200 dark:divide-brand-mediumGrey'>
 					{results?.votes
-						?.sort((a, b) => b.value - a.value)
-						.map((vote, i) => (
-							<tr key={vote?.value + i}>
-								<td className='px-4 py-4 text-sm font-medium text-brand-primary whitespace-nowrap'>
-									{poll?.choices?.find(x => x.id === Number(vote.label))?.choice}
-								</td>
-								<td className='px-4 py-4 text-sm text-brand-primary whitespace-nowrap'>{(vote?.value * 100).toFixed(2)}%</td>
-							</tr>
-						))}
+						?.sort((a, b) => b?.value - a?.value)
+						.map((vote, i) => {
+							const isWinner = results?.winners?.includes(vote.choiceId);
+							return (
+								<tr key={vote?.value + i}>
+									<td
+										className={`px-4 py-4 text-sm font-medium whitespace-nowrap ${isWinner ? `text-brand-gradient` : `text-brand-primary`}`}
+									>
+										{poll?.choices?.find(x => x.id === Number(vote.choiceId))?.choice}
+									</td>
+									<td
+										className={`px-4 py-4 text-sm font-medium whitespace-nowrap ${isWinner ? `text-brand-gradient` : `text-brand-primary`}`}
+									>
+										{(vote?.value * 100).toFixed(2)}%
+									</td>
+								</tr>
+							);
+						})}
 				</tbody>
 			</table>
 		</div>
