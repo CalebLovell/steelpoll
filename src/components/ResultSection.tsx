@@ -59,19 +59,21 @@ export const ResultSection = ({ title, poll, results }) => {
 				</div>
 			</div>
 			<div className='flex justify-between mt-4'>
-				<button
-					type='button'
-					onClick={() => location.reload()}
-					className='flex items-center justify-center px-4 py-1 mr-6 text-sm font-normal text-center md:mr-20 btn-primary'
-				>
-					Manually Refresh
-					<RefreshIcon className='w-4 h-4 ml-1 text-white' aria-hidden='true' />
-				</button>
+				<div className='flex flex-col justify-center md:flex-row'>
+					<button
+						type='button'
+						onClick={() => location.reload()}
+						className='flex items-center justify-center px-4 py-1 mr-6 text-sm font-normal text-center md:mr-20 btn-primary'
+					>
+						Manually Refresh
+						<RefreshIcon className='w-6 h-6 ml-1 text-white sm:w-4 sm:h-4' aria-hidden='true' />
+					</button>
+				</div>
 				<div className='flex flex-col md:flex-row'>
 					<Link href={`/poll/${pollId}`}>
 						<a href={`/poll/${pollId}`} className='flex items-center justify-center px-4 py-1 text-sm font-normal text-center btn-primary'>
 							Back to Vote
-							<ArchiveIcon className='w-4 h-4 ml-1 text-white' aria-hidden='true' />
+							<ArchiveIcon className='w-6 h-6 ml-1 text-white sm:w-4 sm:h-4' aria-hidden='true' />
 						</a>
 					</Link>
 					<CopyToClipboard text={`www.steelpoll.com/poll/${pollId}/results`}>
@@ -80,11 +82,11 @@ export const ResultSection = ({ title, poll, results }) => {
 							onClick={() => setCopied(true)}
 							className='flex items-center justify-center px-4 py-1 mt-2 text-sm font-normal text-center md:mt-0 md:ml-3 btn-primary'
 						>
-							Copy Link to Share
+							<span className='block'>Copy Link</span>
 							{copied ? (
-								<ClipboardCheckIcon className='w-4 h-4 ml-1 text-white' aria-hidden='true' />
+								<ClipboardCheckIcon className='w-6 h-6 ml-1 text-white sm:w-4 sm:h-4' aria-hidden='true' />
 							) : (
-								<ClipboardCopyIcon className='w-4 h-4 ml-1 text-white' aria-hidden='true' />
+								<ClipboardCopyIcon className='w-6 h-6 ml-1 text-white sm:w-4 sm:h-4' aria-hidden='true' />
 							)}
 						</button>
 					</CopyToClipboard>
