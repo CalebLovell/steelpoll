@@ -35,7 +35,7 @@ export const ResultSection = ({ title, poll, results }) => {
 	const time = poll?.createdAt ? dayjs(poll?.createdAt).fromNow() : ``;
 
 	return (
-		<section className='relative w-full p-4 rounded-md sm:p-4 bg-brand-secondary md:w-auto'>
+		<section className='relative w-full max-w-3xl p-4 rounded-md sm:p-4 bg-brand-secondary'>
 			<div className='flex items-center'>
 				<div className='w-14' />
 				<p className='mb-2 ml-auto mr-1 text-lg font-medium text-center sm:mr-0 sm:text-2xl text-brand-primary'>{title}</p>
@@ -52,28 +52,28 @@ export const ResultSection = ({ title, poll, results }) => {
 			<p className='mb-4 text-sm font-normal text-center sm:text-md text-brand-secondary'>
 				Created {time} on {date}
 			</p>
-			<div className='flex flex-col items-center space-y-4 md:space-y-0 md:space-x-6 lg:space-x-12 md:flex-row md:items-start'>
+			<div className='flex flex-col items-center justify-between space-y-4 md:space-y-0 md:space-x-6 lg:space-x-12 md:flex-row md:items-start'>
 				<ResultsTable results={results} poll={poll} />
-				<div className='w-60 sm:w-72 sm:h-72 md:w-84 md:h-84 h-60'>
+				<div className='w-full max-w-sm'>
 					<DynamicChart data={results?.votes} />
 				</div>
 			</div>
-			<div className='flex justify-between mt-4'>
+			<div className='flex flex-col justify-between mt-4 space-y-2 sm:space-y-0 sm:flex-row'>
 				<div className='flex flex-col justify-center md:flex-row'>
 					<button
 						type='button'
 						onClick={() => location.reload()}
-						className='flex items-center justify-center px-4 py-1 mr-6 text-sm font-normal text-center md:mr-20 btn-primary'
+						className='flex items-center justify-center px-4 py-1 text-sm font-normal text-center sm:mr-6 md:mr-24 btn-primary'
 					>
 						Manually Refresh
-						<RefreshIcon className='w-6 h-6 ml-1 text-white sm:w-4 sm:h-4' aria-hidden='true' />
+						<RefreshIcon className='w-5 h-5 ml-2 text-white sm:w-4 sm:h-4' aria-hidden='true' />
 					</button>
 				</div>
 				<div className='flex flex-col md:flex-row'>
 					<Link href={`/poll/${pollId}`}>
 						<a href={`/poll/${pollId}`} className='flex items-center justify-center px-4 py-1 text-sm font-normal text-center btn-primary'>
 							Back to Vote
-							<ArchiveIcon className='w-6 h-6 ml-1 text-white sm:w-4 sm:h-4' aria-hidden='true' />
+							<ArchiveIcon className='w-5 h-5 ml-2 text-white sm:w-4 sm:h-4' aria-hidden='true' />
 						</a>
 					</Link>
 					<CopyToClipboard text={`www.steelpoll.com/poll/${pollId}/results`}>
@@ -84,9 +84,9 @@ export const ResultSection = ({ title, poll, results }) => {
 						>
 							<span className='block'>Copy Link</span>
 							{copied ? (
-								<ClipboardCheckIcon className='w-6 h-6 ml-1 text-white sm:w-4 sm:h-4' aria-hidden='true' />
+								<ClipboardCheckIcon className='w-5 h-5 ml-2 text-white sm:w-4 sm:h-4' aria-hidden='true' />
 							) : (
-								<ClipboardCopyIcon className='w-6 h-6 ml-1 text-white sm:w-4 sm:h-4' aria-hidden='true' />
+								<ClipboardCopyIcon className='w-5 h-5 ml-2 text-white sm:w-4 sm:h-4' aria-hidden='true' />
 							)}
 						</button>
 					</CopyToClipboard>

@@ -13,7 +13,7 @@ export const ResultsTable: React.FC<Props> = ({ results, poll }) => {
 		.domain(results?.votes?.map(d => d.choiceId.toString()))
 		.range(d3.quantize(t => d3.interpolateSinebow(t * 0.91 + 0.05), results?.votes.length + 1).reverse());
 	return (
-		<table className='max-w-2xl min-w-full divide-y divide-gray-200 rounded-lg shadow md:min-w-min dark:divide-brand-mediumGrey bg-brand-primary'>
+		<table className='max-w-2xl min-w-full divide-y divide-gray-200 rounded-lg md:w-full md:max-w-none md:min-w-min dark:divide-brand-mediumGrey bg-brand-primary'>
 			<thead>
 				<tr>
 					<th
