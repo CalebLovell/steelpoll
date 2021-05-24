@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 
 const PollCard = ({ poll }: { poll: Poll }) => {
 	return (
-		<li key={poll.title} className='col-span-1 p-4 space-y-3 rounded-lg shadow bg-brand-secondary'>
+		<li key={poll.id} className='col-span-1 p-4 space-y-3 rounded-lg shadow bg-brand-secondary'>
 			<div className='flex items-center justify-between'>
 				<h3 className='text-sm font-medium truncate text-brand-primary'>{poll?.title}</h3>
 				<div className={`px-2 rounded-full flex items-center ${poll?.options?.protected ? `bg-blue-100` : `bg-green-100`}`}>
@@ -38,7 +38,7 @@ export const Polls = ({ polls }: { polls: Poll[] | undefined }) => {
 	return (
 		<ul className='grid w-full grid-cols-1 gap-6 my-4 sm:grid-cols-2 lg:grid-cols-3'>
 			{polls?.reverse().map(poll => (
-				<PollCard key={poll?.id} poll={poll} />
+				<PollCard key={poll.id} poll={poll} />
 			))}
 		</ul>
 	);

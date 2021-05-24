@@ -1,4 +1,4 @@
-interface Choice {
+export interface Choice {
 	id: number;
 	choice: string;
 }

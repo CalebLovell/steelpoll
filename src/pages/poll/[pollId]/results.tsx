@@ -30,40 +30,40 @@ const ResultsPage = () => {
 	const router = useRouter();
 	// @ts-ignore
 	const { pollId }: { pollId: string } = router.query;
-	const { data: votes, fptpResults, rankedChoiceResults, STARResults } = useResults(pollId);
 	const { data: poll } = usePoll(pollId);
+	const { data: votes, fptpResults, rankedChoiceResults, STARResults } = useResults(pollId, poll?.choices);
 
 	return (
 		<Container authUser={authUser}>
 			<main className='container flex flex-col items-center py-4 space-y-4 sm:py-10 sm:space-y-10 min-h-content bg-brand-primary'>
 				{votes && poll && fptpResults && (
-					<section className='max-w-xl p-4 rounded-md bg-brand-secondary'>
-						<p className='mb-4 text-lg font-medium text-center truncate text-brand-primary'>First Past The Post</p>
-						<div className='flex flex-col space-x-8 space-y-4 md:flex-row'>
+					<section className='p-4 rounded-md sm:p-4 bg-brand-secondary'>
+						<p className='mb-4 text-lg font-medium text-center truncate sm:text-2xl text-brand-primary'>First Past The Post Results</p>
+						<div className='flex flex-col items-center space-y-4 md:space-x-6 lg:space-x-12 md:flex-row md:items-start'>
 							<ResultsTable results={fptpResults} poll={poll} />
-							<div className='w-64 h-64'>
+							<div className='w-60 sm:w-72 sm:h-72 md:w-84 md:h-84 h-60'>
 								<DynamicChart data={fptpResults?.votes} />
 							</div>
 						</div>
 					</section>
 				)}
 				{votes && poll && rankedChoiceResults && (
-					<section className='p-4 rounded-md bg-brand-secondary'>
-						<p className='mb-4 text-lg font-medium text-center text-brand-primary'>Ranked Choice</p>
-						<div className='flex flex-col space-x-8 space-y-4 md:flex-row'>
+					<section className='p-4 rounded-md sm:p-4 bg-brand-secondary'>
+						<p className='mb-4 text-lg font-medium text-center sm:text-2xl text-brand-primary'>Ranked Choice Results</p>
+						<div className='flex flex-col items-center space-y-4 md:space-x-6 lg:space-x-12 md:flex-row md:items-start'>
 							<ResultsTable results={rankedChoiceResults} poll={poll} />
-							<div className='w-64 h-64'>
+							<div className='w-60 sm:w-72 sm:h-72 md:w-84 md:h-84 h-60'>
 								<DynamicChart data={rankedChoiceResults?.votes} />
 							</div>
 						</div>
 					</section>
 				)}
 				{votes && poll && STARResults && (
-					<section className='p-4 rounded-md bg-brand-secondary'>
-						<p className='mb-4 text-lg font-medium text-center text-brand-primary'>Score Then Automatic Runoff (STAR)</p>
-						<div className='flex flex-col space-x-8 space-y-4 md:flex-row'>
+					<section className='p-4 rounded-md sm:p-4 bg-brand-secondary'>
+						<p className='mb-4 text-lg font-medium text-center sm:text-2xl text-brand-primary'>Score Then Automatic Runoff (STAR) Results</p>
+						<div className='flex flex-col items-center space-y-4 md:space-x-6 lg:space-x-12 md:flex-row md:items-start'>
 							<ResultsTable results={STARResults} poll={poll} />
-							<div className='w-64 h-64'>
+							<div className='w-60 sm:w-72 sm:h-72 md:w-84 md:h-84 h-60'>
 								<DynamicChart data={STARResults?.votes} />
 							</div>
 						</div>

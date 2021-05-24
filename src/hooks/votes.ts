@@ -4,6 +4,7 @@ import { CreateVoteRequest, Vote } from '@utils/voteTypes';
 import { calculateFPTPResults, calculateRankedChoiceResults, calculateSTARResults } from '@utils/calculateResults';
 import { createVote, getResults } from 'api/votes';
 
+import { Choice } from '@utils/pollTypes';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { useMutation } from 'react-query';
 import { useRouter } from 'next/router';
@@ -23,7 +24,7 @@ export const useCreateVote = () => {
 	});
 };
 
-export const useResults = (pollId: string) => {
+export const useResults = (pollId: string, choices: Choice[] | undefined) => {
 	const toasts = useToasts();
 	const [value, loading, error] = useCollection(getResults(pollId), {
 		snapshotListenOptions: { includeMetadataChanges: true },
@@ -39,7 +40,7 @@ export const useResults = (pollId: string) => {
 	if (votes) {
 		// Need to cast because .filter doesn't return correct types array
 		const fptpVotes = votes.map(x => x.firstPastThePost).filter(x => !!x) as { choiceId: number }[];
-		const fptpResults = calculateFPTPResults(fptpVotes);
+		const fptpResults = calculateFPTPResults(fptpVotes, choices);
 
 		// Need to cast because .filter doesn't return correct types array
 		const rankedChoiceVotes = votes.map(x => x.rankedChoice).filter(x => !!x) as { choiceId: number; order: number }[][];

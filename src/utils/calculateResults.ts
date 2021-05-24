@@ -1,6 +1,7 @@
+import { Choice } from './pollTypes';
 import { countBy } from 'lodash';
 
-export const calculateFPTPResults = (fptpVotes: { choiceId: number }[]) => {
+export const calculateFPTPResults = (fptpVotes: { choiceId: number }[], choices: Choice[] | undefined) => {
 	const voteInfo = countBy(fptpVotes.map(x => x.choiceId));
 
 	const formatVotes = () => {
@@ -10,7 +11,17 @@ export const calculateFPTPResults = (fptpVotes: { choiceId: number }[]) => {
 		}
 		return data;
 	};
-	const formattedPercentVotes = formatVotes();
+
+	const formattedVotes = formatVotes();
+
+	const noVotesArray: { choiceId: number; value: number }[] = [];
+
+	choices?.forEach(x => {
+		const wasVotedFor = formattedVotes.some(y => y.choiceId === x.id);
+		if (!wasVotedFor) noVotesArray.push({ choiceId: x.id, value: 0 });
+	});
+
+	const formattedPercentVotes = formattedVotes.concat(noVotesArray);
 
 	const calculateWinners = () => {
 		const highestVal = formattedPercentVotes.reduce((max, x) => (x.value > max ? x.value : max), formattedPercentVotes[0].value);
