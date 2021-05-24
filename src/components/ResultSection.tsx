@@ -28,7 +28,8 @@ export const ResultSection = ({ title, poll, results }) => {
 
 	return (
 		<section className='relative w-full p-4 rounded-md sm:p-4 bg-brand-secondary md:w-auto'>
-			<span className='absolute inline-flex items-center tracking-wider text-red-500 uppercase right-4'>
+			<p className='mb-2 text-lg font-medium text-center sm:text-2xl text-brand-primary'>{title}</p>
+			<span className='absolute inline-flex items-center mt-1 tracking-wider text-red-500 uppercase top-4 right-4'>
 				Live
 				<svg aria-hidden='true' className='inline-flex items-center w-4 h-4 ml-2 text-center' viewBox='0 0 576 512'>
 					<path
@@ -37,8 +38,6 @@ export const ResultSection = ({ title, poll, results }) => {
 					/>
 				</svg>
 			</span>
-
-			<p className='mb-2 text-lg font-medium text-center sm:text-2xl text-brand-primary'>{title}</p>
 			<p className='mb-4 text-sm font-normal text-center sm:text-md text-brand-secondary'>
 				Created {time} on {date}
 			</p>
