@@ -57,16 +57,10 @@ const HomePage = () => {
 						account or payment needed!
 					</p>
 					<div className='flex flex-col sm:flex-row sm:justify-center'>
-						<a
-							href='/create'
-							className='px-8 py-3 text-base font-medium btn-primary md:py-4 md:text-lg md:px-10'
-						>
+						<a href='/create' className='px-8 py-3 text-base font-medium btn-primary md:py-4 md:text-lg md:px-10'>
 							Create a Poll
 						</a>
-						<a
-							href='/polls'
-							className='px-8 py-3 mt-3 text-base font-medium btn-secondary sm:mt-0 sm:ml-3 md:py-4 md:text-lg md:px-10'
-						>
+						<a href='/polls' className='px-8 py-3 mt-3 text-base font-medium btn-secondary sm:mt-0 sm:ml-3 md:py-4 md:text-lg md:px-10'>
 							Explore Polls
 						</a>
 					</div>

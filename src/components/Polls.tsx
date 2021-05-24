@@ -21,11 +21,17 @@ const PollCard = ({ poll }: { poll: Poll }) => {
 			</div>
 			<p className='text-sm truncate text-brand-secondary'>{`Created on ${dayjs(poll?.createdAt).format(`MMMM D, YYYY`)}`}</p>
 			<div className='flex justify-between'>
-				<a href={`poll/${poll?.id}`} className='flex items-center justify-center text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-4 ring-offset-brand-white dark:ring-offset-brand-lightGrey focus:ring-brand-purple'>
+				<a
+					href={`poll/${poll?.id}`}
+					className='flex items-center justify-center text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-4 ring-offset-brand-white dark:ring-offset-brand-lightGrey focus:ring-brand-purple'
+				>
 					<ArchiveIcon className='w-5 h-5 text-brand-blue' aria-hidden='true' />
 					<span className='ml-3 text-brand-primary hover-brand'>Vote Now</span>
 				</a>
-				<a href={`poll/${poll?.id}/results`} className='flex items-center justify-center text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-4 ring-offset-brand-white dark:ring-offset-brand-lightGrey focus:ring-brand-purple'>
+				<a
+					href={`poll/${poll?.id}/results`}
+					className='flex items-center justify-center text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-4 ring-offset-brand-white dark:ring-offset-brand-lightGrey focus:ring-brand-purple'
+				>
 					<ChartPieIcon className='w-5 h-5 text-brand-blue' aria-hidden='true' />
 					<span className='ml-3 text-brand-primary hover-brand'>View Results</span>
 				</a>
