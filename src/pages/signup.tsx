@@ -5,6 +5,7 @@ import { EyeIcon, EyeOffIcon } from '@heroicons/react/solid';
 import { useAuthWithGithub, useAuthWithGoogle, useAuthWithTwitter, useCreateAuthWithEmail } from '@hooks/authentication';
 
 import { Container } from '@components/Container';
+import Link from 'next/link';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -162,6 +163,17 @@ const SignupPage = () => {
 							</button>
 						</div>
 					</div>
+					<p className='max-w-sm mt-5 text-xs text-center text-brand-secondary'>
+						By signing up, you agree to the{` `}
+						<Link href='/terms'>
+							<a href='/terms'>Terms of Use</a>
+						</Link>
+						{` `}and{` `}
+						<Link href='/privacy'>
+							<a href='/privacy'>Privacy Policy</a>
+						</Link>
+						.
+					</p>
 				</div>
 			</main>
 		</Container>
