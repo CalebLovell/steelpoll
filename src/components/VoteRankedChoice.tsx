@@ -38,7 +38,11 @@ export const VoteRankedChoice = ({ poll }: { poll: Poll | undefined }) => {
 			<DragDropContext onDragEnd={reorder}>
 				<Droppable droppableId='ranked'>
 					{droppableProvided => (
-						<ul className='border border-gray-300 divide-y divide-gray-300 dark:border-gray-700 dark:divide-gray-700' {...droppableProvided.droppableProps} ref={droppableProvided.innerRef}>
+						<ul
+							className='border border-gray-300 divide-y divide-gray-300 dark:border-gray-700 dark:divide-gray-700'
+							{...droppableProvided.droppableProps}
+							ref={droppableProvided.innerRef}
+						>
 							{rankedChoice?.map((choice, index) => (
 								<Draggable key={choice.id} draggableId={choice.id.toString()} index={index}>
 									{(draggableProvided, snapshot) => (

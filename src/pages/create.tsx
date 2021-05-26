@@ -3,8 +3,8 @@ import { StructError, assert } from 'superstruct';
 import { useAuthUser, withAuthUser } from 'next-firebase-auth';
 import { useFieldArray, useForm } from 'react-hook-form';
 
-import { Container } from '@components/Container';
 import { LoadingSpinner } from '@components/LoadingSpinner';
+import { PageWrapper } from '@components/PageWrapper';
 import { newPollRequestSchema } from '@utils/dataSchemas';
 import { useCreatePoll } from '@hooks/polls';
 import { usePageIsLoading } from '@hooks/usePageIsLoading';
@@ -64,8 +64,13 @@ const CreatePage = () => {
 		}
 	};
 
+	const metadata = {
+		title: `Create a Poll`,
+		description: `Create three different kinds of polls`,
+	};
+
 	return (
-		<Container authUser={authUser}>
+		<PageWrapper authUser={authUser} metadata={metadata}>
 			<main className='container flex items-center justify-center w-full min-h-content bg-brand-primary'>
 				<form
 					className='w-full px-4 py-8 my-4 rounded-lg shadow md:max-w-6xl bg-brand-secondary sm:px-10'
@@ -200,7 +205,7 @@ const CreatePage = () => {
 					</button>
 				</form>
 			</main>
-		</Container>
+		</PageWrapper>
 	);
 };
 

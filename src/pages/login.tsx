@@ -4,7 +4,7 @@ import { AuthAction, useAuthUser, withAuthUser } from 'next-firebase-auth';
 import { EyeIcon, EyeOffIcon } from '@heroicons/react/solid';
 import { useAuthWithGithub, useAuthWithGoogle, useAuthWithTwitter, useEmailLogin } from '@hooks/authentication';
 
-import { Container } from '@components/Container';
+import { PageWrapper } from '@components/PageWrapper';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -38,8 +38,13 @@ const LoginPage = () => {
 		loginWithEmail({ email: x.email, password: x.password });
 	};
 
+	const metadata = {
+		title: `Login`,
+		description: `Login to your account`,
+	};
+
 	return (
-		<Container authUser={authUser}>
+		<PageWrapper authUser={authUser} metadata={metadata}>
 			<main className='container flex items-center justify-center min-h-content bg-brand-primary'>
 				<div className='px-4 py-8 my-4 rounded-lg shadow bg-brand-secondary sm:px-10'>
 					<div className='sm:mx-auto sm:w-full sm:max-w-md'>
@@ -150,7 +155,7 @@ const LoginPage = () => {
 					</div>
 				</div>
 			</main>
-		</Container>
+		</PageWrapper>
 	);
 };
 

@@ -1,10 +1,14 @@
-import { Container } from '@components/Container';
+import { PageWrapper } from '@components/PageWrapper';
 import { useAuthUser } from 'next-firebase-auth';
 
 const PrivacyPage = () => {
 	const authUser = useAuthUser();
+	const metadata = {
+		title: `Privacy Policy`,
+		description: `Learn about how SteelPoll protects your privacy`,
+	};
 	return (
-		<Container authUser={authUser}>
+		<PageWrapper authUser={authUser} metadata={metadata}>
 			<main className='container flex items-center justify-center bg-brand-primary min-h-content'>
 				<div className='max-w-2xl p-4 my-4 space-y-4 rounded-lg bg-brand-secondary'>
 					<h1 className='text-3xl text-brand-primary'>Privacy Policy</h1>
@@ -28,7 +32,7 @@ const PrivacyPage = () => {
 					</p>
 				</div>
 			</main>
-		</Container>
+		</PageWrapper>
 	);
 };
 

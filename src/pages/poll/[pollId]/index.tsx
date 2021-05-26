@@ -3,9 +3,9 @@ import * as React from 'react';
 import { StructError, assert } from 'superstruct';
 import { useAuthUser, withAuthUser } from 'next-firebase-auth';
 
-import { Container } from '@components/Container';
 import { GetServerSideProps } from 'next';
 import { LoadingSpinner } from '@components/LoadingSpinner';
+import { PageWrapper } from '@components/PageWrapper';
 import { Poll } from '@utils/pollTypes';
 import { VoteFPTP } from '@components/VoteFPTP';
 import { VoteRankedChoice } from '@components/VoteRankedChoice';
@@ -86,8 +86,13 @@ const PollPage: React.FC<{ poll: Poll }> = props => {
 		}
 	};
 
+	const metadata = {
+		title: poll?.title,
+		description: `Vote on the poll: ${poll?.title}`,
+	};
+
 	return (
-		<Container authUser={authUser}>
+		<PageWrapper authUser={authUser} metadata={metadata}>
 			<main className='container flex justify-center w-full min-h-content bg-brand-primary'>
 				<form className='flex flex-col w-full max-w-4xl my-4 space-y-4 sm:my-6 sm:space-y-6'>
 					<VoteTitleSection poll={poll} user={user} />
@@ -111,7 +116,7 @@ const PollPage: React.FC<{ poll: Poll }> = props => {
 					</button>
 				</form>
 			</main>
-		</Container>
+		</PageWrapper>
 	);
 };
 

@@ -1,10 +1,14 @@
-import { Container } from '@components/Container';
+import { PageWrapper } from '@components/PageWrapper';
 import { useAuthUser } from 'next-firebase-auth';
 
 const TermsPage = () => {
 	const authUser = useAuthUser();
+	const metadata = {
+		title: `Terms of Use`,
+		description: `Learn about the rules for using SteelPoll`,
+	};
 	return (
-		<Container authUser={authUser}>
+		<PageWrapper authUser={authUser} metadata={metadata}>
 			<main className='container flex items-center justify-center bg-brand-primary min-h-content'>
 				<div className='max-w-2xl p-4 my-4 space-y-4 rounded-lg bg-brand-secondary'>
 					<h1 className='text-3xl text-brand-primary'>Terms of Use</h1>
@@ -30,7 +34,7 @@ const TermsPage = () => {
 					</p>
 				</div>
 			</main>
-		</Container>
+		</PageWrapper>
 	);
 };
 

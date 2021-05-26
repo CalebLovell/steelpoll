@@ -3,7 +3,7 @@ import * as React from 'react';
 import { ArchiveIcon, ChartPieIcon, CheckIcon, PencilIcon, ShareIcon } from '@heroicons/react/solid';
 import { useAuthUser, withAuthUser } from 'next-firebase-auth';
 
-import { Container } from '@components/Container';
+import { PageWrapper } from '@components/PageWrapper';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 // import { useTranslation } from 'react-i18next';
@@ -43,7 +43,7 @@ const HomePage = () => {
 	];
 
 	return (
-		<Container authUser={authUser}>
+		<PageWrapper authUser={authUser}>
 			<main className='container flex flex-col items-center w-full text-center bg-brand-primary'>
 				<section className='flex flex-col justify-center space-y-8 min-h-content'>
 					<h1 className='text-4xl font-extrabold text-brand-primary sm:text-5xl md:text-6xl'>
@@ -99,7 +99,7 @@ const HomePage = () => {
 					</dl>
 				</section>
 			</main>
-		</Container>
+		</PageWrapper>
 	);
 };
 

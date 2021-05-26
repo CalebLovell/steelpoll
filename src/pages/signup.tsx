@@ -4,8 +4,8 @@ import { AuthAction, useAuthUser, withAuthUser } from 'next-firebase-auth';
 import { EyeIcon, EyeOffIcon } from '@heroicons/react/solid';
 import { useAuthWithGithub, useAuthWithGoogle, useAuthWithTwitter, useCreateAuthWithEmail } from '@hooks/authentication';
 
-import { Container } from '@components/Container';
 import Link from 'next/link';
+import { PageWrapper } from '@components/PageWrapper';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -40,8 +40,13 @@ const SignupPage = () => {
 		createAuthWithEmail(x);
 	};
 
+	const metadata = {
+		title: `Sign Up`,
+		description: `Sign Up for a free account`,
+	};
+
 	return (
-		<Container authUser={authUser}>
+		<PageWrapper authUser={authUser} metadata={metadata}>
 			<main className='container flex items-center justify-center min-h-content bg-brand-primary'>
 				<div className='px-4 py-4 my-4 rounded-lg shadow sm:py-8 bg-brand-secondary sm:px-10'>
 					<div className='hidden sm:block sm:mx-auto sm:w-full sm:max-w-md'>
@@ -180,7 +185,7 @@ const SignupPage = () => {
 					</p>
 				</div>
 			</main>
-		</Container>
+		</PageWrapper>
 	);
 };
 

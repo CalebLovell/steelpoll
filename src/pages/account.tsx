@@ -1,7 +1,7 @@
 import { AuthAction, useAuthUser, withAuthUser, withAuthUserSSR } from 'next-firebase-auth';
 import { useDeleteUserFromDatabase, useUser } from '@hooks/user';
 
-import { Container } from '@components/Container';
+import { PageWrapper } from '@components/PageWrapper';
 import { Polls } from '@components/Polls';
 import { UserIcon } from '@heroicons/react/solid';
 import dayjs from 'dayjs';
@@ -34,8 +34,13 @@ const AccountPage = () => {
 
 	const date = user?.createdAt ? dayjs(user?.createdAt).format(`MMMM D, YYYY`) : ``;
 
+	const metadata = {
+		title: `Account`,
+		description: `View your account details`,
+	};
+
 	return (
-		<Container authUser={authUser}>
+		<PageWrapper authUser={authUser} metadata={metadata}>
 			<main className='container flex flex-col items-center min-h-content bg-brand-primary'>
 				<div className='flex flex-col items-center my-4 space-y-2'>
 					<div className='flex items-center justify-center w-32 h-32 rounded-full bg-brand-secondary '>
@@ -51,7 +56,7 @@ const AccountPage = () => {
 				<h1 className='w-full pl-2 text-2xl font-medium text-left text-brand-primary'>My Polls</h1>
 				<Polls polls={polls} />
 			</main>
-		</Container>
+		</PageWrapper>
 	);
 };
 

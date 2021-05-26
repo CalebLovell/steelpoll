@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { useAuthUser, withAuthUser, withAuthUserTokenSSR } from 'next-firebase-auth';
 
-import { Container } from '@components/Container';
+import { PageWrapper } from '@components/PageWrapper';
 import { ResultSection } from '@components/ResultSection';
 import { VoteTitleSection } from '@components/VoteTitleSection';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -33,8 +33,13 @@ const ResultsPage = () => {
 	const { data: user } = useUser(pollId);
 	const { data: votes, fptpResults, rankedChoiceResults, STARResults } = useResults(pollId, poll?.choices);
 
+	const metadata = {
+		title: poll?.title,
+		description: `View results for the poll: ${poll?.title}`,
+	};
+
 	return (
-		<Container authUser={authUser}>
+		<PageWrapper authUser={authUser} metadata={metadata}>
 			<main className='container flex justify-center w-full min-h-content bg-brand-primary'>
 				<div className='flex flex-col items-center w-full max-w-4xl my-4 space-y-4 sm:my-6 sm:space-y-6'>
 					<VoteTitleSection poll={poll} user={user} />
@@ -45,7 +50,7 @@ const ResultsPage = () => {
 					)}
 				</div>
 			</main>
-		</Container>
+		</PageWrapper>
 	);
 };
 
