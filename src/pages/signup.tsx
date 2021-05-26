@@ -54,7 +54,7 @@ const SignupPage = () => {
 					</div>
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<div className='sm:mt-5'>
-							<label htmlFor='name' className='text-sm font-medium text-brand-purple'>
+							<label htmlFor='name' className='text-sm font-medium text-brand-blue'>
 								Name
 							</label>
 							<input
@@ -67,7 +67,7 @@ const SignupPage = () => {
 							/>
 						</div>
 						<div className='mt-5'>
-							<label htmlFor='email' className='text-sm font-medium text-brand-purple'>
+							<label htmlFor='email' className='text-sm font-medium text-brand-blue'>
 								Email Address
 							</label>
 							<input
@@ -82,7 +82,7 @@ const SignupPage = () => {
 						</div>
 
 						<div className='mt-5'>
-							<label htmlFor='password' className='text-sm font-medium text-brand-purple'>
+							<label htmlFor='password' className='text-sm font-medium text-brand-blue'>
 								Password
 							</label>
 							<div className='relative mt-2'>

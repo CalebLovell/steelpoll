@@ -17,7 +17,7 @@ export const AboutDropdown = () => {
 				<>
 					<Popover.Button className='inline-flex items-center p-2 ml-2 text-base font-medium rounded-md text-brand-primary group hover-brand focus-brand-without-border'>
 						<span>About</span>
-						<ChevronDownIcon className='w-5 h-5 ml-2 text-brand-primary group-hover:text-brand-pink' aria-hidden='true' />
+						<ChevronDownIcon className='w-5 h-5 ml-2 text-brand-primary group-hover:text-brand-blue' aria-hidden='true' />
 					</Popover.Button>
 					<Transition
 						show={open}

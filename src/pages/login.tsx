@@ -52,7 +52,7 @@ const LoginPage = () => {
 					</div>
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<div className='mt-5'>
-							<label htmlFor='email' className='text-sm font-medium text-brand-purple'>
+							<label htmlFor='email' className='text-sm font-medium text-brand-blue'>
 								Email Address
 							</label>
 							<input
@@ -67,7 +67,7 @@ const LoginPage = () => {
 						</div>
 
 						<div className='mt-5'>
-							<label htmlFor='password' className='text-sm font-medium text-brand-purple'>
+							<label htmlFor='password' className='text-sm font-medium text-brand-blue'>
 								Password
 							</label>
 							<div className='relative mt-2'>

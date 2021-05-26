@@ -29,17 +29,17 @@ const HomePage = () => {
 	];
 
 	const features = [
-		{ name: `Tracking Free`, description: `Absolutely no tracking or selling of your data.` },
-		{ name: `Blazing Fast`, description: `SteelPoll was built with maximum speed in mind.` },
+		{ name: `Tracking Free`, description: `Absolutely no tracking or selling of your data` },
+		{ name: `Blazing Fast`, description: `SteelPoll was built with maximum speed in mind` },
 		{
 			name: `Control of Your Data`,
-			description: `Sick of this site? Completely delete your account whenever you want from the account tab.`,
+			description: `Sick of this site? Completely delete your account whenever you want from the account tab`,
 		},
-		{ name: `Easy to Use`, description: `Built with the user experience as our top priority.` },
-		{ name: `Secure`, description: `Create polls that are open to anyone or restricted to authorized, registered accounts only.` },
-		{ name: `Private`, description: `Create private polls only viewable by sharing your unique url.` },
-		{ name: `Fully Accessible`, description: `Built with keyboard-only users and screen readers considered from the start.` },
-		{ name: `Mobile Responsive`, description: `Works just as well on your phone, laptop, tablet or desktop computer.` },
+		{ name: `Easy to Use`, description: `Built with the user experience as our top priority` },
+		{ name: `Secure`, description: `Create polls that are open to anyone or restricted to authorized, registered accounts only` },
+		{ name: `Private`, description: `Create private polls only viewable by sharing your unique url` },
+		{ name: `Fully Accessible`, description: `Built with keyboard-only users and screen readers considered from the start` },
+		{ name: `Mobile Responsive`, description: `Works just as well on your phone, laptop, tablet or desktop computer` },
 	];
 
 	return (

@@ -73,9 +73,9 @@ const CreatePage = () => {
 					autoComplete='off'
 				>
 					<div className='flex justify-center'>
-						<h1 className='mb-2 text-3xl font-bold text-center text-brand-gradient'>Create a Poll</h1>
+						<h1 className='mb-2 text-3xl font-bold text-center text-brand-blue'>Create a Poll</h1>
 					</div>
-					<label htmlFor='title' className='block text-base font-semibold text-brand-purple'>
+					<label htmlFor='title' className='block text-base font-semibold text-brand-blue'>
 						Title
 					</label>
 					<input
@@ -88,10 +88,10 @@ const CreatePage = () => {
 						maxLength={100}
 					/>
 					<div className='flex items-end justify-between mt-4'>
-						<label htmlFor='description' className='block text-base font-semibold text-brand-purple'>
+						<label htmlFor='description' className='block text-base font-semibold text-brand-blue'>
 							Description
 						</label>
-						<span className='text-sm italic cursor-default text-brand-pink'>Optional</span>
+						<span className='text-sm italic cursor-default text-brand-secondary'>Optional</span>
 					</div>
 					<div className='mt-1'>
 						<textarea
@@ -105,7 +105,7 @@ const CreatePage = () => {
 						/>
 					</div>
 					<div className='flex mt-4'>
-						<label id='choices' htmlFor='choices' className='inline-flex text-base font-semibold text-brand-purple'>
+						<label id='choices' htmlFor='choices' className='inline-flex text-base font-semibold text-brand-blue'>
 							Choices
 						</label>
 					</div>
@@ -126,7 +126,7 @@ const CreatePage = () => {
 								type='button'
 								onClick={() => choicesFieldArray.remove(index)}
 							>
-								<MinusIcon className='w-4 text-brand-purple' />
+								<MinusIcon className='w-4 text-brand-blue' />
 							</button>
 						</div>
 					))}
@@ -136,11 +136,11 @@ const CreatePage = () => {
 							type='button'
 							onClick={() => choicesFieldArray.append({ choice: `` })}
 						>
-							<PlusIcon className='w-4 text-brand-purple' />
+							<PlusIcon className='w-4 text-brand-blue' />
 						</button>
 					</div>
 					<div>
-						<p className='block text-base font-semibold text-brand-purple'>Voting Systems</p>
+						<p className='block text-base font-semibold text-brand-blue'>Voting Systems</p>
 						{votingSystemsArray.fields.map((item, index) => (
 							<div key={item.key} className='flex mt-2'>
 								<div className='flex items-center h-5'>
@@ -149,17 +149,17 @@ const CreatePage = () => {
 										name={`votingSystems[${index}].selected`}
 										ref={register()}
 										type='checkbox'
-										className='w-4 h-4 border rounded text-brand placeholder-brand bg-brand-secondary border-brand focus-brand-with-border'
+										className='w-4 h-4 border rounded placeholder-brand bg-brand-secondary border-brand focus-brand-with-border'
 									/>
 								</div>
-								<label htmlFor={item.slug} className='ml-3 text-sm font-semibold text-brand-purple'>
+								<label htmlFor={item.slug} className='ml-3 text-sm font-semibold text-brand-primary'>
 									{item.name}
 									<p className='font-normal text-brand-secondary'>{item.description}</p>
 								</label>
 							</div>
 						))}
 					</div>
-					<p className='block mt-3 text-base font-semibold text-brand-purple'>Options</p>
+					<p className='block mt-3 text-base font-semibold text-brand-blue'>Options</p>
 					<div className='flex mt-2'>
 						<div className='flex items-center h-5'>
 							<input
@@ -167,10 +167,10 @@ const CreatePage = () => {
 								name='options.private'
 								ref={register()}
 								type='checkbox'
-								className='w-4 h-4 border rounded text-brand placeholder-brand bg-brand-secondary border-brand focus-brand-with-border'
+								className='w-4 h-4 border rounded placeholder-brand bg-brand-secondary border-brand focus-brand-with-border'
 							/>
 						</div>
-						<label htmlFor='options.private' className='block ml-3 text-sm font-semibold text-brand-purple'>
+						<label htmlFor='options.private' className='block ml-3 text-sm font-semibold text-brand-primary'>
 							Private
 							<p className='font-normal text-brand-secondary'>Only discoverable via URL</p>
 						</label>
@@ -182,10 +182,10 @@ const CreatePage = () => {
 								name='options.protected'
 								ref={register()}
 								type='checkbox'
-								className='w-4 h-4 border rounded text-brand placeholder-brand bg-brand-secondary border-brand focus-brand-with-border'
+								className='w-4 h-4 border rounded placeholder-brand bg-brand-secondary border-brand focus-brand-with-border'
 							/>
 						</div>
-						<label htmlFor='options.protected' className='block ml-3 text-sm font-semibold text-brand-purple'>
+						<label htmlFor='options.protected' className='block ml-3 text-sm font-semibold text-brand-primary'>
 							Protected
 							<p className='font-normal text-brand-secondary'>Only registered users can vote</p>
 						</label>
