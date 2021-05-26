@@ -28,9 +28,9 @@ export const LanguageButton = () => {
 					<Listbox.Option
 						key={language.id}
 						value={language.locale}
-						className={({ active }) => `${active ? `bg-gray-100 dark:bg-brand-mediumGrey` : ``}`}
+						className={({ active }) => `${active ? `bg-gray-100 dark:bg-gray-700` : ``}`}
 					>
-						<div className='block px-4 py-2 text-sm text-brand-primary'>{language.name}</div>
+						<div className='block px-4 py-2 text-sm hover-brand text-brand-primary'>{language.name}</div>
 					</Listbox.Option>
 				))}
 			</Listbox.Options>

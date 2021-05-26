@@ -35,7 +35,7 @@ export const AboutDropdown = () => {
 									<a
 										key={item.name}
 										href={item.href}
-										className='p-2 transition duration-150 ease-in-out rounded-md hover:bg-gray-100 dark:hover:bg-brand-mediumGrey focus-brand-without-border'
+										className='p-2 transition duration-150 ease-in-out rounded-md hover-brand hover:bg-gray-100 dark:hover:bg-gray-700 focus-brand-without-border'
 									>
 										<p className='text-base font-medium text-brand-primary'>{item.name}</p>
 										<p className='mt-1 text-sm text-brand-secondary'>{item.description}</p>
