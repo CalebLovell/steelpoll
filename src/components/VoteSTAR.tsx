@@ -42,9 +42,9 @@ export const VoteSTAR = ({ poll }: { poll: Poll | undefined }) => {
 				Assign each choice a value from 1 to 5. 1 is the lowest score, 5 is the highest. All the votes will be added together. The top two choices
 				will participate in an instant runoff round, where the option that more voters preferred between those two will become the winner!
 			</p>
-			<ul>
+			<ul className='border border-gray-300 divide-y divide-gray-300 dark:border-gray-700 dark:divide-gray-700'>
 				{poll?.choices?.map((choice, i) => (
-					<li key={choice?.id} className='flex items-center p-4 space-x-4 border border-gray-300 dark:border-gray-700 bg-brand-primary'>
+					<li key={choice?.id} className='flex items-center p-4 space-x-4 bg-brand-primary'>
 						<input
 							className='w-20 border-gray-300 rounded-md bg-brand-secondary dark:border-gray-700 text-brand-primary'
 							name={`choice-${i + 1}`}

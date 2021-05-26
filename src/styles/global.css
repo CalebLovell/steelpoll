@@ -37,11 +37,11 @@
 /* background colors */
 
 .bg-brand-primary {
-	@apply bg-brand-darkWhite dark:bg-gray-900;
+	@apply bg-gray-200 dark:bg-gray-900;
 }
 
 .bg-brand-secondary {
-	@apply bg-brand-lightWhite dark:bg-gray-800;
+	@apply bg-gray-50 dark:bg-gray-800;
 }
 
 .bg-brand-gradient {
@@ -65,7 +65,7 @@
 /* border colors */
 
 .border-brand {
-	@apply border-gray-500 dark:border-brand-mediumGrey;
+	@apply border-gray-500 dark:border-gray-700;
 }
 
 /* placeholder colors */

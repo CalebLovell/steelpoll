@@ -30,7 +30,7 @@ export const VoteFPTP = ({ poll }: { poll: Poll | undefined }) => {
 				<p className='mb-4 font-normal text-center text-md text-brand-secondary'>
 					Select one of the available choices. Whichever has the most votes will win!
 				</p>
-				<div className='mt-2 bg-brand-primary'>
+				<div className='mt-2 border border-gray-300 divide-y divide-gray-300 dark:border-gray-700 dark:divide-gray-700 bg-brand-primary'>
 					{poll?.choices?.map((choice, i) => (
 						<RadioGroup.Option
 							key={choice.id}
@@ -39,8 +39,8 @@ export const VoteFPTP = ({ poll }: { poll: Poll | undefined }) => {
 								classNames(
 									i === 0 ? `` : ``,
 									i === poll?.choices?.length - 1 ? `` : ``,
-									checked ? `bg-indigo-50 dark:bg-gray-700 z-10 border-brand-blue` : `border-gray-300 dark:border-gray-700`,
-									`relative p-4 flex cursor-pointer focus:outline-none border`
+									checked ? `bg-indigo-100 dark:bg-gray-700` : ``,
+									`relative p-4 flex cursor-pointer focus:outline-none`
 								)
 							}
 						>
@@ -51,7 +51,7 @@ export const VoteFPTP = ({ poll }: { poll: Poll | undefined }) => {
 											className={classNames(
 												checked
 													? `bg-brand-blue border-white dark:border-gray-700 outline-none ring-2 ring-offset-1 ring-brand-blue dark:ring-offset-gray-700`
-													: `border-gray-300`,
+													: `border-gray-500`,
 												`h-4 w-4 mt-0.5 cursor-pointer rounded-full border flex items-center justify-center`
 											)}
 											aria-hidden='true'

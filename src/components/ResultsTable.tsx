@@ -13,12 +13,12 @@ export const ResultsTable: React.FC<Props> = ({ results, poll }) => {
 		.domain(results?.votes?.map(d => d.choiceId.toString()))
 		.range(d3.quantize(t => d3.interpolateSinebow(t * 0.91 + 0.05), results?.votes.length + 1).reverse());
 	return (
-		<table className='max-w-2xl min-w-full divide-y divide-gray-200 rounded-lg md:w-full md:max-w-none md:min-w-min dark:divide-brand-mediumGrey bg-brand-primary'>
+		<table className='max-w-2xl min-w-full divide-y divide-gray-500 rounded-lg md:w-full md:max-w-none md:min-w-min dark:divide-gray-700 bg-brand-primary'>
 			<thead>
 				<tr>
 					<th
 						scope='col'
-						className='px-3 py-3 text-xs font-medium tracking-wider text-left uppercase border-r border-gray-200 sm:px-4 text-brand-secondary dark:border-brand-mediumGrey'
+						className='px-3 py-3 text-xs font-medium tracking-wider text-left uppercase border-r border-brand sm:px-4 text-brand-secondary'
 					>
 						#
 					</th>
@@ -30,7 +30,7 @@ export const ResultsTable: React.FC<Props> = ({ results, poll }) => {
 					</th>
 				</tr>
 			</thead>
-			<tbody className='divide-y divide-gray-200 dark:divide-brand-mediumGrey'>
+			<tbody className='divide-y divide-gray-500 dark:divide-gray-700'>
 				{results?.votes
 					?.sort((a, b) => b?.value - a?.value)
 					.map(vote => {
@@ -42,7 +42,7 @@ export const ResultsTable: React.FC<Props> = ({ results, poll }) => {
 								<td className='flex px-3 py-3 text-sm font-medium sm:px-4' style={{ color }}>
 									{vote.choiceId + 1}
 								</td>
-								<td className='px-3 py-3 text-sm font-medium border-l border-gray-200 sm:px-4 text-brand-primary dark:border-brand-mediumGrey'>
+								<td className='px-3 py-3 text-sm font-medium border-l border-brand sm:px-4 text-brand-primary'>
 									{poll?.choices?.find(x => x.id === Number(vote.choiceId))?.choice}
 								</td>
 								<td className='flex items-center justify-between px-3 py-3 text-sm font-medium sm:px-4 text-brand-primary'>
