@@ -23,7 +23,7 @@ export const MobileMenu = () => {
 	return (
 		<FocusLock>
 			<div className='absolute inset-x-0 top-0 z-20 m-2 transition origin-top-right transform'>
-				<div className='divide-y-2 rounded-lg shadow-lg bg-brand-secondary min-height-mobile divide-gray-50 dark:divide-transparent'>
+				<div className='divide-y-2 divide-gray-100 rounded-lg shadow-lg bg-brand-secondary min-height-mobile dark:divide-gray-700'>
 					<div className='flex items-center justify-between p-2'>
 						<Logo label={t(`header.home`)} />
 						<MobileMenuButton />
@@ -45,22 +45,22 @@ export const MobileMenu = () => {
 								</button>
 							</>
 						)}
+						{!authUser.id && (
+							<div className='w-full'>
+								<div className='flex flex-col p-2'>
+									<a href='/signup' className='p-2 font-medium text-center btn-primary'>
+										Sign Up
+									</a>
+								</div>
+								<div className='flex items-center justify-center p-2'>
+									<p className='pr-2 font-medium text-center text-brand-secondary'>Already have an account?</p>
+									<a href='/login' className='p-1 text-base font-semibold rounded-md text-brand-primary focus-brand-without-border'>
+										Log in
+									</a>
+								</div>
+							</div>
+						)}
 					</nav>
-					{!authUser.id && (
-						<>
-							<div className='flex flex-col p-2'>
-								<a href='/signup' className='p-2 font-medium text-center btn-primary'>
-									Sign Up
-								</a>
-							</div>
-							<div className='flex items-center justify-center p-2'>
-								<p className='pr-2 font-medium text-center text-brand-secondary'>Already have an account?</p>
-								<a href='/login' className='p-1 text-base font-semibold rounded-md text-brand-primary focus-brand-without-border'>
-									Log in
-								</a>
-							</div>
-						</>
-					)}
 				</div>
 			</div>
 		</FocusLock>
