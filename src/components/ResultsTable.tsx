@@ -46,7 +46,7 @@ export const ResultsTable: React.FC<Props> = ({ results, poll }) => {
 									{poll?.choices?.find(x => x.id === Number(vote.choiceId))?.choice}
 								</td>
 								<td className='flex items-center justify-between px-3 py-3 text-sm font-medium sm:px-4 text-brand-primary'>
-									{(vote?.value * 100).toFixed(1)}%{isWinner && <StarIcon className='w-5 h-5 text-yellow-500' />}
+									{(vote?.value * 100).toFixed(1)}%{isWinner && <StarIcon className='w-5 h-5 ml-2 text-yellow-500' />}
 								</td>
 							</tr>
 						);

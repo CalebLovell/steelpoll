@@ -35,7 +35,7 @@ export const ResultSection = ({ title, poll, results }) => {
 	const time = poll?.createdAt ? dayjs(poll?.createdAt).fromNow() : ``;
 
 	return (
-		<section className='relative w-full max-w-3xl p-4 rounded-md sm:p-4 bg-brand-secondary'>
+		<section className='w-full p-4 rounded-md sm:p-4 bg-brand-secondary'>
 			<div className='flex items-center'>
 				<div className='w-14' />
 				<p className='mb-2 ml-auto mr-1 text-lg font-medium text-center sm:mr-0 sm:text-2xl text-brand-primary'>{title}</p>

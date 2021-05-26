@@ -10,18 +10,15 @@ import { Poll } from '@utils/pollTypes';
 import { VoteFPTP } from '@components/VoteFPTP';
 import { VoteRankedChoice } from '@components/VoteRankedChoice';
 import { VoteSTAR } from '@components/VoteSTAR';
-import dayjs from 'dayjs';
+import { VoteTitleSection } from '@components/VoteTitleSection';
 import { getPoll } from 'api/polls';
 import { newVoteRequestSchema } from '@utils/dataSchemas';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import { useCreateVote } from '@hooks/votes';
 import { usePageIsLoading } from '@hooks/usePageIsLoading';
 import { usePoll } from '@hooks/polls';
 import { useRouter } from 'next/router';
 import { useToasts } from 'react-toast-notifications';
 import { useUser } from '@hooks/user';
-
-dayjs.extend(relativeTime);
 
 export const getServerSideProps: GetServerSideProps = async context => {
 	try {
@@ -89,32 +86,30 @@ const PollPage: React.FC<{ poll: Poll }> = props => {
 		}
 	};
 
-	const time = poll?.createdAt ? dayjs(poll?.createdAt).fromNow() : ``;
-
 	return (
 		<Container authUser={authUser}>
-			<main className='container flex flex-col items-center w-full min-h-content bg-brand-primary'>
-				<div className='max-w-3xl'>
-					<h1 className='mt-6 text-2xl font-medium text-center text-brand-primary'>{poll?.title}</h1>
-					<h2 className='mt-2 text-base font-normal text-center text-brand-primary'>{poll?.description}</h2>
-					<p className='mt-2 text-base text-center text-brand-secondary'>
-						Poll created by {user?.name ? user?.name : `Anonymous`} {time}
-					</p>
-					<form className='flex flex-col w-full my-6 space-y-6'>
+			<main className='container flex justify-center w-full min-h-content bg-brand-primary'>
+				<form className='flex flex-col w-full max-w-4xl my-4 space-y-4 sm:my-6 sm:space-y-6'>
+					<VoteTitleSection poll={poll} user={user} />
+					<section className='w-full p-4 rounded-md sm:p-4 bg-brand-secondary'>
 						{poll?.votingSystems?.some(x => x.slug === `first-past-the-post`) && <VoteFPTP poll={poll} />}
+					</section>
+					<section className='w-full p-4 rounded-md sm:p-4 bg-brand-secondary'>
 						{poll?.votingSystems?.some(x => x?.slug === `ranked-choice`) && <VoteRankedChoice poll={poll} />}
+					</section>
+					<section className='w-full p-4 rounded-md sm:p-4 bg-brand-secondary'>
 						{poll?.votingSystems?.some(x => x?.slug === `STAR`) && <VoteSTAR poll={poll} />}
-						<button
-							type='button'
-							onClick={onSubmit}
-							disabled={isLoading || pageIsLoading}
-							className='flex items-center justify-center px-4 py-2 text-sm font-medium btn-primary'
-						>
-							Vote
-							{isLoading && <LoadingSpinner />}
-						</button>
-					</form>
-				</div>
+					</section>
+					<button
+						type='button'
+						onClick={onSubmit}
+						disabled={isLoading || pageIsLoading}
+						className='flex items-center justify-center px-4 py-2 text-sm font-medium btn-primary'
+					>
+						Vote
+						{isLoading && <LoadingSpinner />}
+					</button>
+				</form>
 			</main>
 		</Container>
 	);

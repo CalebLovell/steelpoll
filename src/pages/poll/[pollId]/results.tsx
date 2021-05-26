@@ -4,10 +4,12 @@ import { useAuthUser, withAuthUser, withAuthUserTokenSSR } from 'next-firebase-a
 
 import { Container } from '@components/Container';
 import { ResultSection } from '@components/ResultSection';
+import { VoteTitleSection } from '@components/VoteTitleSection';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { usePoll } from '@hooks/polls';
 import { useResults } from '@hooks/votes';
 import { useRouter } from 'next/router';
+import { useUser } from '@hooks/user';
 
 // import { useTranslation } from 'react-i18next';
 
@@ -28,14 +30,20 @@ const ResultsPage = () => {
 	// @ts-ignore
 	const { pollId }: { pollId: string } = router.query;
 	const { data: poll } = usePoll(pollId);
+	const { data: user } = useUser(pollId);
 	const { data: votes, fptpResults, rankedChoiceResults, STARResults } = useResults(pollId, poll?.choices);
 
 	return (
 		<Container authUser={authUser}>
-			<main className='container flex flex-col items-center py-4 space-y-4 sm:py-10 sm:space-y-10 min-h-content bg-brand-primary'>
-				{votes && poll && fptpResults && <ResultSection title='First Past the Post Results' poll={poll} results={fptpResults} />}
-				{votes && poll && rankedChoiceResults && <ResultSection title='Ranked Choice Results' poll={poll} results={rankedChoiceResults} />}
-				{votes && poll && STARResults && <ResultSection title='Score Then Automatic Runoff (STAR) Results' poll={poll} results={STARResults} />}
+			<main className='container flex justify-center w-full min-h-content bg-brand-primary'>
+				<div className='flex flex-col items-center w-full max-w-4xl my-4 space-y-4 sm:my-6 sm:space-y-6'>
+					<VoteTitleSection poll={poll} user={user} />
+					{votes && poll && fptpResults && <ResultSection title='First Past the Post Results' poll={poll} results={fptpResults} />}
+					{votes && poll && rankedChoiceResults && <ResultSection title='Ranked Choice Results' poll={poll} results={rankedChoiceResults} />}
+					{votes && poll && STARResults && (
+						<ResultSection title='Score Then Automatic Runoff (STAR) Results' poll={poll} results={STARResults} />
+					)}
+				</div>
 			</main>
 		</Container>
 	);
