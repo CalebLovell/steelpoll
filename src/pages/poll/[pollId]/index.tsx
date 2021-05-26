@@ -1,23 +1,27 @@
 import * as React from 'react';
 
-import { DragDropContext, Draggable, DropResult, Droppable, resetServerContext } from 'react-beautiful-dnd';
 import { StructError, assert } from 'superstruct';
 import { useAuthUser, withAuthUser } from 'next-firebase-auth';
 
 import { Container } from '@components/Container';
 import { GetServerSideProps } from 'next';
 import { LoadingSpinner } from '@components/LoadingSpinner';
-import { MenuIcon } from '@heroicons/react/outline';
 import { Poll } from '@utils/pollTypes';
-import { RadioGroup } from '@headlessui/react';
+import { VoteFPTP } from '@components/VoteFPTP';
+import { VoteRankedChoice } from '@components/VoteRankedChoice';
+import { VoteSTAR } from '@components/VoteSTAR';
+import dayjs from 'dayjs';
 import { getPoll } from 'api/polls';
 import { newVoteRequestSchema } from '@utils/dataSchemas';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import { useCreateVote } from '@hooks/votes';
 import { usePageIsLoading } from '@hooks/usePageIsLoading';
 import { usePoll } from '@hooks/polls';
 import { useRouter } from 'next/router';
 import { useToasts } from 'react-toast-notifications';
 import { useUser } from '@hooks/user';
+
+dayjs.extend(relativeTime);
 
 export const getServerSideProps: GetServerSideProps = async context => {
 	try {
@@ -34,7 +38,6 @@ export const getServerSideProps: GetServerSideProps = async context => {
 };
 
 const PollPage: React.FC<{ poll: Poll }> = props => {
-	resetServerContext();
 	const authUser = useAuthUser();
 	const router = useRouter();
 	const pageIsLoading = usePageIsLoading();
@@ -45,25 +48,20 @@ const PollPage: React.FC<{ poll: Poll }> = props => {
 	});
 	const { data: user } = useUser(pollId);
 	const { addToast } = useToasts();
-	const [firstPastThePost, setFirstPastThePost] = React.useState(poll?.choices[0]);
-	const [rankedChoice, setRankedChoice] = React.useState(poll?.choices);
-	const [STAR, setSTAR] = React.useState(
-		poll?.choices?.map(x => {
-			return {
-				choiceId: x.id,
-				value: 1,
-			};
-		})
-	);
-
 	const { mutate: createVote, isLoading } = useCreateVote();
 
 	const onSubmit = () => {
-		const formattedFirstPastThePost = { choiceId: firstPastThePost?.id };
-		const formattedRankedChoice = rankedChoice?.map((x, i) => {
+		const formattedFirstPastThePost = { choiceId: poll?.choices[0]?.id };
+		const formattedRankedChoice = poll?.choices?.map((x, i) => {
 			return {
 				choiceId: x.id,
 				order: i,
+			};
+		});
+		const formattedSTAR = poll?.choices?.map(x => {
+			return {
+				choiceId: x.id,
+				value: 1,
 			};
 		});
 		const formattedData = {
@@ -71,7 +69,7 @@ const PollPage: React.FC<{ poll: Poll }> = props => {
 			userId: authUser.id,
 			firstPastThePost: formattedFirstPastThePost,
 			rankedChoice: formattedRankedChoice,
-			STAR,
+			STAR: formattedSTAR,
 		};
 		try {
 			assert(formattedData, newVoteRequestSchema);
@@ -91,150 +89,32 @@ const PollPage: React.FC<{ poll: Poll }> = props => {
 		}
 	};
 
-	const reorder = (result: DropResult) => {
-		if (!result.destination) return;
-		if (result.destination.index === result.source.index) return;
-		if (rankedChoice) {
-			const items = rankedChoice && Array.from(rankedChoice);
-			const [reorderedItem] = items?.splice(result.source.index, 1);
-			items?.splice(result.destination.index, 0, reorderedItem);
-			setRankedChoice(items);
-		}
-	};
-
-	function classNames(...classes) {
-		return classes.filter(Boolean).join(` `);
-	}
-
-	const onChange = (e, index) => {
-		const currentState = STAR;
-		const newArray: any[] = [];
-		currentState?.forEach((x, i) => {
-			if (i === index) {
-				const newObj = { ...x, value: Number(e.currentTarget.value) };
-				newArray.push(newObj);
-			} else {
-				newArray.push(x);
-			}
-		});
-		setSTAR(newArray);
-	};
+	const time = poll?.createdAt ? dayjs(poll?.createdAt).fromNow() : ``;
 
 	return (
 		<Container authUser={authUser}>
-			<main className='container flex flex-col justify-center w-full min-h-content bg-brand-primary'>
-				<p className='text-base font-medium leading-6 text-brand-primary'>{poll?.title}</p>
-				<p className='text-sm leading-5 text-brand-secondary'>{poll?.description}</p>
-				<p className='text-sm leading-5 text-brand-secondary'>Poll created by: {user?.name ? user?.name : `Anonymous`}</p>
-				<form>
-					{poll?.votingSystems?.some(x => x.slug === `first-past-the-post`) && (
-						<RadioGroup value={firstPastThePost} onChange={setFirstPastThePost}>
-							<RadioGroup.Label className='text-brand-primary'>First Past The Post (Winner Take All)</RadioGroup.Label>
-							<div className='-space-y-px bg-white rounded-md'>
-								{poll?.choices.map((choice, i) => (
-									<RadioGroup.Option
-										key={choice?.choice}
-										value={choice}
-										className={({ checked }) =>
-											classNames(
-												i === 0 ? `rounded-tl-md rounded-tr-md` : ``,
-												i === poll?.choices?.length - 1 ? `rounded-bl-md rounded-br-md` : ``,
-												checked ? `bg-indigo-50 border-indigo-200 z-10` : `border-gray-200`,
-												`relative border p-4 flex cursor-pointer focus:outline-none`
-											)
-										}
-									>
-										{({ active, checked }) => (
-											<>
-												<span
-													className={classNames(
-														checked ? `bg-indigo-600 border-transparent` : `bg-white border-gray-300`,
-														active ? `ring-2 ring-offset-2 ring-indigo-500` : ``,
-														`h-4 w-4 mt-0.5 cursor-pointer rounded-full border flex items-center justify-center`
-													)}
-													aria-hidden='true'
-												>
-													<span className='rounded-full bg-white w-1.5 h-1.5' />
-												</span>
-												<div className='flex flex-col ml-3'>
-													<RadioGroup.Label
-														as='span'
-														className={classNames(checked ? `text-indigo-900` : `text-gray-900`, `block text-sm font-medium`)}
-													>
-														{choice?.choice}
-													</RadioGroup.Label>
-												</div>
-											</>
-										)}
-									</RadioGroup.Option>
-								))}
-							</div>
-						</RadioGroup>
-					)}
-					{poll?.votingSystems?.some(x => x?.slug === `ranked-choice`) && (
-						<DragDropContext onDragEnd={reorder}>
-							<Droppable droppableId='ranked'>
-								{droppableProvided => (
-									<ul className='-space-y-px bg-white rounded-md' {...droppableProvided.droppableProps} ref={droppableProvided.innerRef}>
-										{rankedChoice?.map((choice, i) => (
-											<Draggable key={choice?.id} draggableId={choice?.choice} index={i}>
-												{draggableProvided => (
-													<li
-														ref={draggableProvided.innerRef}
-														{...draggableProvided.draggableProps}
-														{...draggableProvided.dragHandleProps}
-														className={`flex items-center border p-4 ${
-															i === 0 ? `rounded-tl-md rounded-tr-md` : `rounded-bl-md rounded-br-md`
-														} ${true ? `bg-indigo-50 border-indigo-200 z-10` : `border-gray-200`}`}
-													>
-														<MenuIcon className='w-5 h-5' />
-														<p className='ml-3'>{choice?.choice}</p>
-													</li>
-												)}
-											</Draggable>
-										))}
-										{droppableProvided.placeholder}
-									</ul>
-								)}
-							</Droppable>
-						</DragDropContext>
-					)}
-					{poll?.votingSystems?.some(x => x?.slug === `STAR`) && (
-						<ul className='-space-y-px bg-white rounded-md'>
-							{poll?.choices?.map((choice, i) => (
-								<li
-									key={choice?.id}
-									className={`flex items-center border ${i === 0 ? `rounded-tl-md rounded-tr-md` : `rounded-bl-md rounded-br-md`} ${
-										true ? `bg-indigo-50 border-indigo-200 z-10` : `border-gray-200`
-									}`}
-								>
-									<label htmlFor={`choice-${i + 1}`} className='sr-only'>
-										Choice {i + 1}
-									</label>
-									<input
-										name={`choice-${i + 1}`}
-										type='number'
-										value={STAR ? STAR[i]?.value : 1}
-										onChange={e => onChange(e, i)}
-										min={1}
-										max={5}
-										className='block w-20 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-brand-primary-base'
-									/>
-									<p className='text-brand-primary-base'>{choice?.choice}</p>
-								</li>
-							))}
-						</ul>
-					)}
-					<button
-						type='button'
-						onClick={onSubmit}
-						disabled={isLoading || pageIsLoading}
-						className='inline-flex items-center px-4 py-2 mt-4 text-sm font-medium leading-4 text-black bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-					>
-						Vote
-						{isLoading && <LoadingSpinner />}
-					</button>
-				</form>
+			<main className='container flex flex-col items-center w-full min-h-content bg-brand-primary'>
+				<div className='max-w-3xl'>
+					<h1 className='mt-6 text-2xl font-medium text-center text-brand-primary'>{poll?.title}</h1>
+					<h2 className='mt-2 text-base font-normal text-center text-brand-primary'>{poll?.description}</h2>
+					<p className='mt-2 text-base text-center text-brand-secondary'>
+						Poll created by {user?.name ? user?.name : `Anonymous`} {time}
+					</p>
+					<form className='flex flex-col w-full my-6 space-y-6'>
+						{poll?.votingSystems?.some(x => x.slug === `first-past-the-post`) && <VoteFPTP poll={poll} />}
+						{poll?.votingSystems?.some(x => x?.slug === `ranked-choice`) && <VoteRankedChoice poll={poll} />}
+						{poll?.votingSystems?.some(x => x?.slug === `STAR`) && <VoteSTAR poll={poll} />}
+						<button
+							type='button'
+							onClick={onSubmit}
+							disabled={isLoading || pageIsLoading}
+							className='flex items-center justify-center px-4 py-2 text-sm font-medium btn-primary'
+						>
+							Vote
+							{isLoading && <LoadingSpinner />}
+						</button>
+					</form>
+				</div>
 			</main>
 		</Container>
 	);

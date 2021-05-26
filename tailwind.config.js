@@ -25,7 +25,7 @@ module.exports = {
 					blue: `#5152E5`,
 					lightBlue: `#6ED5F0`,
 					steelDark: `rgb(80, 80, 80)`,
-					steelLight: `#afacb1`,
+					steelLight: `#909495`,
 				},
 			},
 			height: {

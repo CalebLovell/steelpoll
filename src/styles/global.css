@@ -37,11 +37,11 @@
 /* background colors */
 
 .bg-brand-primary {
-	@apply bg-brand-darkWhite dark:bg-brand-darkGrey;
+	@apply bg-brand-darkWhite dark:bg-gray-900;
 }
 
 .bg-brand-secondary {
-	@apply bg-brand-lightWhite dark:bg-brand-lightGrey;
+	@apply bg-brand-lightWhite dark:bg-gray-800;
 }
 
 .bg-brand-gradient {
