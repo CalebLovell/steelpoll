@@ -53,7 +53,7 @@ const HomePage = () => {
 						<span className='text-brand-primary'>in Seconds</span>
 					</h1>
 					<p className='max-w-md mx-auto text-base text-brand-secondary sm:text-lg md:text-xl md:max-w-3xl'>
-						Like a straw poll, but with more useful results. Discover the consensus answer to your question, or simply the most popular. No
+						Like a straw poll, but with more robust results. Discover the consensus answer to your question, or simply the most popular. No
 						account or payment needed!
 					</p>
 					<div className='flex flex-col sm:flex-row sm:justify-center'>

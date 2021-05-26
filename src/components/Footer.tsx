@@ -10,15 +10,12 @@ export const Footer = () => {
 						©️
 					</span>
 					{t(`footer.p`)}
-					<span role='img' aria-label='smiling-face-with-hearts'>
-						{` `}🥰
-					</span>
 				</p>
 			</div>
 			<div className='flex justify-center space-x-6'>
 				<a
 					href='https://twitter.com/Caleb__Lovell'
-					className='rounded-md text-brand-secondary focus-brand-without-border'
+					className='rounded-md text-brand-secondary hover-brand focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-purple dark:focus:ring-offset-brand-lightGrey'
 					target='_blank'
 					rel='noreferrer'
 				>
@@ -29,7 +26,7 @@ export const Footer = () => {
 				</a>
 				<a
 					href='https://github.com/CalebLovell'
-					className='rounded-md text-brand-secondary focus-brand-without-border'
+					className='rounded-md text-brand-secondary hover-brand focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-purple dark:focus:ring-offset-brand-lightGrey'
 					target='_blank'
 					rel='noreferrer'
 				>
@@ -44,7 +41,7 @@ export const Footer = () => {
 				</a>
 				<a
 					href='https://www.linkedin.com/in/caleblovell/'
-					className='rounded-md text-brand-secondary focus-brand-without-border'
+					className='rounded-md text-brand-secondary hover-brand focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-purple dark:focus:ring-offset-brand-lightGrey'
 					target='_blank'
 					rel='noreferrer'
 				>

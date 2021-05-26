@@ -1,3 +1,6 @@
+import * as React from 'react';
+
+import { AboutDropdown } from './AboutDropdown';
 import { AuthUserContext } from 'next-firebase-auth';
 import { DarkModeButton } from './DarkModeButton';
 import { LanguageButton } from './LanguageButton';
@@ -24,8 +27,8 @@ export const Header = ({ authUser }: { authUser: AuthUserContext }) => {
 					<div className='flex items-center md:space-x-2'>
 						<Logo label={t(`header.home`)} />
 						<Link href='/create' label={t(`header.create`)} variant='link' />
-						<Link href='/polls' label={`Polls`} variant='link' />
-						{authUser.id ? <Link href='/account' label={t(`header.account`)} variant='link' /> : null}
+						<Link href='/polls' label={t(`header.polls`)} variant='link' />
+						<AboutDropdown />
 					</div>
 					<div className='flex items-center md:space-x-2 xl:space-x-10'>
 						<div className='flex items-center space-x-2'>

@@ -166,11 +166,15 @@ const SignupPage = () => {
 					<p className='max-w-sm mt-5 text-xs text-center text-brand-secondary'>
 						By signing up, you agree to the{` `}
 						<Link href='/terms'>
-							<a className='link-brand' href='/terms'>Terms of Use</a>
+							<a className='link-brand' href='/terms'>
+								Terms of Use
+							</a>
 						</Link>
 						{` `}and{` `}
 						<Link href='/privacy'>
-							<a className='link-brand' href='/privacy'>Privacy Policy</a>
+							<a className='link-brand' href='/privacy'>
+								Privacy Policy
+							</a>
 						</Link>
 						.
 					</p>

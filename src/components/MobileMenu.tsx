@@ -4,13 +4,17 @@ import FocusLock from 'react-focus-lock';
 import { Link } from '@components/Link';
 import { Logo } from '@components/Logo';
 import { MobileMenuButton } from '@components/MobileMenuButton';
+import { useAuthUser } from 'next-firebase-auth';
 import { useGlobalDispatch } from './GlobalProvider';
 import useKeypress from 'react-use-keypress';
+import { useLogout } from '@hooks/authentication';
 import { useTranslation } from 'react-i18next';
 
 export const MobileMenu = () => {
 	const globalDispatch = useGlobalDispatch();
 	const { t } = useTranslation(`common`);
+	const authUser = useAuthUser();
+	const { mutate: logout } = useLogout();
 
 	useKeypress([`Escape`], (event: KeyboardEvent) => {
 		if (event.key === `Escape`) globalDispatch({ type: `SET_MOBILE_NAV_OPEN`, payload: false });
@@ -25,19 +29,38 @@ export const MobileMenu = () => {
 						<MobileMenuButton />
 					</div>
 					<nav className='flex flex-col items-start p-2 space-y-2'>
-						<Link href='/about' label='About' variant='mobile' />
-						<Link href='/blog' label='Blog' variant='mobile' />
-						<Link href='/contact' label='Contact' variant='mobile' />
+						<Link href='/create' label='Create a Poll' variant='mobile' />
+						<Link href='/polls' label='Explore Polls' variant='mobile' />
+						<Link href='/tech' label='Tech Stack' variant='mobile' />
+						<Link href='/terms' label='Terms of Use' variant='mobile' />
+						<Link href='/privacy' label='Privacy Policy' variant='mobile' />
+						{authUser.id && (
+							<>
+								<Link href='/account' label='Account' variant='mobile' />
+								<button
+									onClick={() => logout()}
+									className='w-full p-2 font-medium text-left transition duration-150 ease-in-out rounded-md focus-brand-without-border hover-brand lg:px-4 text-brand-primary'
+								>
+									Logout
+								</button>
+							</>
+						)}
 					</nav>
-					<div className='flex flex-col p-2'>
-						<Link href='/signup' label='Sign up' variant='button' />
-					</div>
-					<div className='flex items-center justify-center p-2'>
-						<p className='pr-2 font-medium text-center text-brand-secondary'>Already have an account?</p>
-						<a href='/signin' className='p-1 text-base font-semibold rounded-md focus-brand-without-border'>
-							Sign in
-						</a>
-					</div>
+					{!authUser.id && (
+						<>
+							<div className='flex flex-col p-2'>
+								<a href='/signup' className='p-2 font-medium text-center btn-primary'>
+									Sign Up
+								</a>
+							</div>
+							<div className='flex items-center justify-center p-2'>
+								<p className='pr-2 font-medium text-center text-brand-secondary'>Already have an account?</p>
+								<a href='/login' className='p-1 text-base font-semibold rounded-md text-brand-primary focus-brand-without-border'>
+									Log in
+								</a>
+							</div>
+						</>
+					)}
 				</div>
 			</div>
 		</FocusLock>

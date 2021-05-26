@@ -77,17 +77,17 @@
 /* button styles */
 
 .btn-primary {
-	@apply text-white border-2 rounded-md border-brand-blue bg-brand-blue hover:bg-indigo-700 hover:border-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-purple dark:focus:ring-brand-purple dark:focus:ring-offset-brand-lightGrey;
+	@apply text-white transition duration-150 ease-in-out border-2 rounded-md border-brand-blue bg-brand-blue hover:bg-indigo-700 hover:border-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-purple dark:focus:ring-brand-purple dark:focus:ring-offset-brand-lightGrey;
 }
 
 .btn-secondary {
-	@apply bg-transparent border-2 rounded-md border-brand-lightBlue text-brand-lightBlue hover:bg-brand-lightBlue hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-purple dark:focus:ring-brand-purple dark:focus:ring-offset-brand-lightGrey;
+	@apply transition duration-150 ease-in-out bg-transparent border-2 rounded-md border-brand-lightBlue text-brand-lightBlue hover:bg-brand-lightBlue hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-purple dark:focus:ring-brand-purple dark:focus:ring-offset-brand-lightGrey;
 }
 
 /* link styles */
 
 .link-brand {
-	@apply rounded-md text-brand-blue hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-brand-purple dark:focus:ring-brand-purple dark:focus:ring-offset-brand-lightGrey;
+	@apply transition duration-150 ease-in-out rounded-md text-brand-blue hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-brand-purple dark:focus:ring-brand-purple dark:focus:ring-offset-brand-lightGrey;
 }
 
 /* custom scrollbar */

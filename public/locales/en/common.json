@@ -2,12 +2,13 @@
 	"header": {
 		"home": "SteelPoll",
 		"create": "Create a Poll",
-		"account": "Account",
+		"polls": "Explore Polls",
+		"about": "About",
 		"login": "Log in",
 		"signup": "Sign up",
 		"darkModeButton": "Toggle dark mode"
 	},
 	"footer": {
-		"p": "2021 Caleb Lovell. Thanks for visiting!"
+		"p": "2021 Caleb Lovell, All rights reserved."
 	}
 }
