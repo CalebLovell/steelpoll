@@ -36,25 +36,29 @@ export const newPollRequestSchema: Describe<CreatePollRequest> = object({
 export const newVoteRequestSchema: Describe<CreateVoteRequest> = object({
 	userId: nullable(size(string(), 1, 50)),
 	pollId: string(),
-	firstPastThePost: object({ choiceId: number() }),
-	rankedChoice: size(
-		array(
-			object({
-				choiceId: number(),
-				order: size(number(), 0, 19),
-			})
-		),
-		2,
-		20
+	firstPastThePost: optional(object({ choiceId: number() })),
+	rankedChoice: optional(
+		size(
+			array(
+				object({
+					choiceId: number(),
+					order: size(number(), 0, 19),
+				})
+			),
+			2,
+			20
+		)
 	),
-	STAR: size(
-		array(
-			object({
-				choiceId: number(),
-				value: size(number(), 1, 5),
-			})
-		),
-		2,
-		20
+	STAR: optional(
+		size(
+			array(
+				object({
+					choiceId: number(),
+					value: size(number(), 1, 5),
+				})
+			),
+			2,
+			20
+		)
 	),
 });

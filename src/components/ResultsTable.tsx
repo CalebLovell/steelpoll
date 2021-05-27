@@ -7,7 +7,7 @@ interface Props {
 	poll;
 }
 
-export const ResultsTable: React.FC<Props> = ({ results, poll }) => {
+export const ResultsTable: React.FC<Props> = ({ results = [], poll }) => {
 	const createColor = d3
 		.scaleOrdinal()
 		.domain(results?.votes?.map(d => d.choiceId.toString()))

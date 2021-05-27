@@ -55,9 +55,9 @@ const PollPage: React.FC<{ poll: Poll | null; user: User | null }> = props => {
 		const formattedData = {
 			pollId: pollId,
 			userId: authUser.id,
-			firstPastThePost: formattedFirstPastThePost,
-			rankedChoice: formattedRankedChoice,
-			STAR,
+			...(poll?.votingSystems.some(x => x.slug === `first-past-the-post`) && { firstPastThePost: formattedFirstPastThePost }),
+			...(poll?.votingSystems.some(x => x.slug === `ranked-choice`) && { rankedChoice: formattedRankedChoice }),
+			...(poll?.votingSystems.some(x => x.slug === `STAR`) && { STAR }),
 		};
 		try {
 			assert(formattedData, newVoteRequestSchema);
