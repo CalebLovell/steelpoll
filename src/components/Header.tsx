@@ -36,7 +36,7 @@ export const Header = ({ authUser }: { authUser: AuthUserContext }) => {
 							<DarkModeButton />
 						</div>
 						<div className='flex items-center md:space-x-2'>
-							{authUser.id ? (
+							{!!authUser.id ? (
 								<ProfileDropdown />
 							) : (
 								<>
