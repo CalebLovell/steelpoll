@@ -50,7 +50,7 @@ export const PageWrapper: React.FC<Props> = ({ metadata, authUser, children }) =
 					<meta property='og:description' content={description} key='ogdesc' />
 					<meta property='og:site_name' content='SteelPoll' />
 					<meta property='og:type' content='website' key='ogtype' />
-					<meta name='twitter:card' content='summary_large_image' key='twcard' />
+					<meta name='twitter:card' content='summary' key='twcard' />
 					<meta name='twitter:site' content='@Caleb__Lovell' key='twhandle' />
 					<meta name='twitter:title' content={title} key='twtitle' />
 					<meta name='twitter:image' content={image} key='twimage' />
