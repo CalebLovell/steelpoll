@@ -58,8 +58,6 @@ const AccountPage: React.FC<{ user: User; polls: Poll[] }> = props => {
 
 export const getServerSideProps = withAuthUserSSR({
 	whenUnauthed: AuthAction.REDIRECT_TO_LOGIN,
-	appPageURL: `/`,
-	authPageURL: `/login`,
 })(async ({ AuthUser, locale }) => {
 	const translations = await serverSideTranslations(locale ? locale : ``, [`common`]);
 	const polls = await getPollsByUser(AuthUser.id);
