@@ -31,14 +31,11 @@ export const ResultSection = ({ title, poll, results }) => {
 	// @ts-ignore
 	const { pollId }: { pollId: string } = router.query;
 
-	const date = poll?.createdAt ? dayjs(poll?.createdAt).format(`MMMM D, YYYY`) : ``;
-	const time = poll?.createdAt ? dayjs(poll?.createdAt).fromNow() : ``;
-
 	return (
 		<section className='w-full p-4 rounded-md sm:p-4 bg-brand-secondary'>
 			<div className='flex items-center'>
 				<div className='w-14' />
-				<p className='mb-2 ml-auto mr-1 text-lg font-medium text-center sm:mr-0 sm:text-2xl text-brand-primary'>{title}</p>
+				<p className='mb-4 ml-auto mr-1 text-lg font-medium text-center sm:mr-0 sm:text-2xl text-brand-primary'>{title}</p>
 				<p className='inline-flex items-center pb-2 ml-auto tracking-wider text-red-500 uppercase'>
 					Live
 					<svg aria-hidden='true' className='inline-flex items-center w-4 h-4 ml-2 text-center' viewBox='0 0 576 512'>
@@ -49,9 +46,6 @@ export const ResultSection = ({ title, poll, results }) => {
 					</svg>
 				</p>
 			</div>
-			<p className='mb-4 text-sm font-normal text-center sm:text-md text-brand-secondary'>
-				Created {time} on {date}
-			</p>
 			<div className='flex flex-col items-center justify-between space-y-4 md:space-y-0 md:space-x-6 lg:space-x-12 md:flex-row md:items-start'>
 				<ResultsTable results={results} poll={poll} />
 				<div className='w-full max-w-sm'>
