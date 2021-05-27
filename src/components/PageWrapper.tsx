@@ -43,8 +43,8 @@ export const PageWrapper: React.FC<Props> = ({ metadata, authUser, children }) =
 					<link rel='icon' type='image/png' sizes='16x16' href='/favicons/favicon-16x16.png' />
 					<link rel='manifest' href='/favicons/site.webmanifest' />
 					<meta property='og:image' content={image} key='ogimage' />
-					<meta property='og:image:width' content='1200' key='ogimagewidth' />
-					<meta property='og:image:height' content='630' key='ogimageheight' />
+					<meta property='og:image:width' content='600' key='ogimagewidth' />
+					<meta property='og:image:height' content='600' key='ogimageheight' />
 					<meta property='og:url' content={`https://steelpoll.com${router.asPath}`} key='ogurl' />
 					<meta property='og:title' content={title} key='ogtitle' />
 					<meta property='og:description' content={description} key='ogdesc' />
