@@ -1,9 +1,10 @@
 import * as React from 'react';
 
 import FocusLock from 'react-focus-lock';
-import { Link } from '@components/Link';
+import Link from 'next/link';
 import { Logo } from '@components/Logo';
 import { MobileMenuButton } from '@components/MobileMenuButton';
+import { Link as MyLink } from '@components/Link';
 import { useAuthUser } from 'next-firebase-auth';
 import { useGlobalDispatch } from './GlobalProvider';
 import useKeypress from 'react-use-keypress';
@@ -29,14 +30,14 @@ export const MobileMenu = () => {
 						<MobileMenuButton />
 					</div>
 					<nav className='flex flex-col items-start p-2 space-y-2'>
-						<Link href='/create' label='Create a Poll' variant='mobile' />
-						<Link href='/polls' label='Explore Polls' variant='mobile' />
-						<Link href='/tech' label='Tech Stack' variant='mobile' />
-						<Link href='/terms' label='Terms of Use' variant='mobile' />
-						<Link href='/privacy' label='Privacy Policy' variant='mobile' />
+						<MyLink href='/create' label='Create a Poll' variant='mobile' />
+						<MyLink href='/polls' label='Explore Polls' variant='mobile' />
+						<MyLink href='/tech' label='Tech Stack' variant='mobile' />
+						<MyLink href='/terms' label='Terms of Use' variant='mobile' />
+						<MyLink href='/privacy' label='Privacy Policy' variant='mobile' />
 						{authUser.id && (
 							<>
-								<Link href='/account' label='Account' variant='mobile' />
+								<MyLink href='/account' label='Account' variant='mobile' />
 								<button
 									onClick={() => logout()}
 									className='w-full p-2 font-medium text-left transition duration-150 ease-in-out rounded-md focus-brand-without-border hover-brand lg:px-4 text-brand-primary'
@@ -48,15 +49,19 @@ export const MobileMenu = () => {
 						{!authUser.id && (
 							<div className='w-full'>
 								<div className='flex flex-col p-2'>
-									<a href='/signup' className='p-2 font-medium text-center btn-primary'>
-										Sign Up
-									</a>
+									<Link href='/signup'>
+										<a href='/signup' className='p-2 font-medium text-center btn-primary'>
+											Sign Up
+										</a>
+									</Link>
 								</div>
 								<div className='flex items-center justify-center p-2'>
 									<p className='pr-2 font-medium text-center text-brand-secondary'>Already have an account?</p>
-									<a href='/login' className='p-1 text-base font-semibold rounded-md text-brand-primary focus-brand-without-border'>
-										Log in
-									</a>
+									<Link href='/login'>
+										<a href='/login' className='p-1 text-base font-semibold rounded-md text-brand-primary focus-brand-without-border'>
+											Log in
+										</a>
+									</Link>
 								</div>
 							</div>
 						)}

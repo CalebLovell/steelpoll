@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Popover, Transition } from '@headlessui/react';
 
 import { ChevronDownIcon } from '@heroicons/react/solid';
+import Link from 'next/link';
 
 const options = [
 	{ name: `Tech Stack`, description: `Learn about how this site was built`, href: `/tech` },
@@ -32,14 +33,15 @@ export const AboutDropdown = () => {
 						<Popover.Panel static className='absolute z-10 w-screen max-w-xs px-2 mt-3 transform -translate-x-1/2 left-1/2 sm:px-0'>
 							<div className='flex flex-col p-4 space-y-4 overflow-hidden rounded-lg shadow-lg bg-brand-secondary'>
 								{options.map(item => (
-									<a
-										key={item.name}
-										href={item.href}
-										className='p-2 transition duration-150 ease-in-out rounded-md hover-brand hover:bg-gray-100 dark:hover:bg-gray-700 focus-brand-without-border'
-									>
-										<p className='text-base font-medium text-brand-primary'>{item.name}</p>
-										<p className='mt-1 text-sm text-brand-secondary'>{item.description}</p>
-									</a>
+									<Link href={item.href} key={item.name}>
+										<a
+											href={item.href}
+											className='p-2 transition duration-150 ease-in-out rounded-md hover-brand hover:bg-gray-100 dark:hover:bg-gray-700 focus-brand-without-border'
+										>
+											<p className='text-base font-medium text-brand-primary'>{item.name}</p>
+											<p className='mt-1 text-sm text-brand-secondary'>{item.description}</p>
+										</a>
+									</Link>
 								))}
 							</div>
 						</Popover.Panel>
