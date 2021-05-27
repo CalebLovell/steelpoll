@@ -43,7 +43,7 @@ const PollPage: React.FC<{ poll: Poll }> = props => {
 	const { data: poll } = usePoll(pollId, {
 		initialData: props.poll,
 	});
-	const { data: user } = useUser(pollId);
+	const { data: user } = useUser(poll?.userId);
 	const { addToast } = useToasts();
 	const { mutate: createVote, isLoading } = useCreateVote();
 	const [firstPastThePost, setFirstPastThePost] = React.useState(poll?.choices[0]);

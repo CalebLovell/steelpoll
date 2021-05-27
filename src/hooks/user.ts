@@ -7,9 +7,9 @@ import { FirebaseError } from 'firebase-admin';
 import { useDeleteAuthUser } from './authentication';
 import { useToasts } from 'react-toast-notifications';
 
-export const useUser = (id: string | null) => {
-	return useQuery([`user`, id], () => getUser(id), {
-		enabled: !!id,
+export const useUser = (userId: string | null | undefined) => {
+	return useQuery([`user`, userId], () => getUser(userId), {
+		enabled: !!userId,
 		staleTime: 1000 * 60 * 60,
 	});
 };

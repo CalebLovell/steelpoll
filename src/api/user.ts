@@ -8,10 +8,10 @@ const firestore = firebase.firestore();
 const createdAt = new Date().toISOString();
 const updatedAt = new Date().toISOString();
 
-export const getUser = async (uid: string | null) => {
+export const getUser = async (userId: string | null | undefined) => {
 	const collectionRef = firestore.collection(`users`);
-	if (uid) {
-		const docRef = collectionRef.doc(uid);
+	if (userId) {
+		const docRef = collectionRef.doc(userId);
 		const snapshot = await docRef.get();
 		const data = snapshot.data() as User;
 		return data;

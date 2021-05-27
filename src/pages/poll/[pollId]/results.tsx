@@ -30,7 +30,7 @@ const ResultsPage = () => {
 	// @ts-ignore
 	const { pollId }: { pollId: string } = router.query;
 	const { data: poll } = usePoll(pollId);
-	const { data: user } = useUser(pollId);
+	const { data: user } = useUser(poll?.userId);
 	const { data: votes, fptpResults, rankedChoiceResults, STARResults } = useResults(pollId, poll?.choices);
 
 	const metadata = {
