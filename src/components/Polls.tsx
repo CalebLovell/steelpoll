@@ -43,7 +43,7 @@ const PollCard = ({ poll }: { poll: Poll }) => {
 export const Polls = ({ polls }: { polls: Poll[] | undefined }) => {
 	return (
 		<ul className='grid w-full grid-cols-1 gap-6 my-4 sm:grid-cols-2 lg:grid-cols-3'>
-			{polls?.reverse().map(poll => (
+			{polls?.map(poll => (
 				<PollCard key={poll.id} poll={poll} />
 			))}
 		</ul>

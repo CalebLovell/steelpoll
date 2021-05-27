@@ -3,8 +3,12 @@ import * as React from 'react';
 import { useAuthUser, withAuthUser, withAuthUserTokenSSR } from 'next-firebase-auth';
 
 import { PageWrapper } from '@components/PageWrapper';
+import { Poll } from '@utils/pollTypes';
 import { ResultSection } from '@components/ResultSection';
+import { User } from '@utils/userTypes';
 import { VoteTitleSection } from '@components/VoteTitleSection';
+import { getPoll } from 'api/polls';
+import { getUser } from 'api/user';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { usePoll } from '@hooks/polls';
 import { useResults } from '@hooks/votes';
@@ -13,24 +17,39 @@ import { useUser } from '@hooks/user';
 
 // import { useTranslation } from 'react-i18next';
 
-export const getServerSideProps = withAuthUserTokenSSR()(async ({ locale }) => {
+export const getServerSideProps = withAuthUserTokenSSR()(async ({ locale, params }) => {
 	// @ts-ignore
 	const translations = await serverSideTranslations(locale, [`common`]);
+	let poll: Poll | null;
+	let user: User | null;
+	if (typeof params?.pollId === `string`) {
+		poll = await getPoll(params.pollId);
+		user = await getUser(poll.userId);
+	} else {
+		poll = null;
+		user = null;
+	}
 	return {
 		props: {
+			poll,
+			user,
 			...translations,
 		},
 	};
 });
 
-const ResultsPage = () => {
+const ResultsPage: React.FC<{ poll: Poll; user: User }> = props => {
 	const authUser = useAuthUser();
 	// const { t: home } = useTranslation(`home`);
 	const router = useRouter();
 	// @ts-ignore
 	const { pollId }: { pollId: string } = router.query;
-	const { data: poll } = usePoll(pollId);
-	const { data: user } = useUser(poll?.userId);
+	const { data: poll } = usePoll(pollId, {
+		initialData: props.poll,
+	});
+	const { data: user } = useUser(poll?.userId, {
+		initialData: props.user,
+	});
 	const { data: votes, fptpResults, rankedChoiceResults, STARResults } = useResults(pollId, poll?.choices);
 
 	const metadata = {

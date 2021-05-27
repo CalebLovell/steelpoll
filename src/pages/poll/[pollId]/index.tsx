@@ -7,11 +7,13 @@ import { GetServerSideProps } from 'next';
 import { LoadingSpinner } from '@components/LoadingSpinner';
 import { PageWrapper } from '@components/PageWrapper';
 import { Poll } from '@utils/pollTypes';
+import { User } from '@utils/userTypes';
 import { VoteFPTP } from '@components/VoteFPTP';
 import { VoteRankedChoice } from '@components/VoteRankedChoice';
 import { VoteSTAR } from '@components/VoteSTAR';
 import { VoteTitleSection } from '@components/VoteTitleSection';
 import { getPoll } from 'api/polls';
+import { getUser } from 'api/user';
 import { newVoteRequestSchema } from '@utils/dataSchemas';
 import { useCreateVote } from '@hooks/votes';
 import { usePageIsLoading } from '@hooks/usePageIsLoading';
@@ -20,21 +22,25 @@ import { useRouter } from 'next/router';
 import { useToasts } from 'react-toast-notifications';
 import { useUser } from '@hooks/user';
 
-export const getServerSideProps: GetServerSideProps = async context => {
-	try {
-		if (typeof context?.params?.pollId === `string`) {
-			const poll = await getPoll(context.params.pollId);
-			return { props: { poll } };
-		} else {
-			return { props: { poll: null } };
-		}
-	} catch (error) {
-		console.log(error.message);
-		return { props: { poll: null } };
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+	let poll: Poll | null;
+	let user: User | null;
+	if (typeof params?.pollId === `string`) {
+		poll = await getPoll(params.pollId);
+		user = await getUser(poll.userId);
+	} else {
+		poll = null;
+		user = null;
 	}
+	return {
+		props: {
+			poll,
+			user,
+		},
+	};
 };
 
-const PollPage: React.FC<{ poll: Poll }> = props => {
+const PollPage: React.FC<{ poll: Poll; user: User }> = props => {
 	const authUser = useAuthUser();
 	const router = useRouter();
 	const pageIsLoading = usePageIsLoading();
@@ -43,7 +49,9 @@ const PollPage: React.FC<{ poll: Poll }> = props => {
 	const { data: poll } = usePoll(pollId, {
 		initialData: props.poll,
 	});
-	const { data: user } = useUser(poll?.userId);
+	const { data: user } = useUser(poll?.userId, {
+		initialData: props.user,
+	});
 	const { addToast } = useToasts();
 	const { mutate: createVote, isLoading } = useCreateVote();
 	const [firstPastThePost, setFirstPastThePost] = React.useState(poll?.choices[0]);
@@ -92,7 +100,7 @@ const PollPage: React.FC<{ poll: Poll }> = props => {
 
 	const metadata = {
 		title: poll?.title,
-		description: `Vote Now: ${poll?.choices[0]}, ${poll?.choices[1]}...`,
+		description: `Vote now: ${poll?.choices[0].choice}, ${poll?.choices[1].choice}...`,
 	};
 
 	return (

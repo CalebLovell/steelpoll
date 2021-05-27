@@ -2,28 +2,26 @@ import { AuthAction, useAuthUser, withAuthUser, withAuthUserSSR } from 'next-fir
 import { useDeleteUserFromDatabase, useUser } from '@hooks/user';
 
 import { PageWrapper } from '@components/PageWrapper';
+import { Poll } from '@utils/pollTypes';
 import { Polls } from '@components/Polls';
+import { User } from '@utils/userTypes';
 import { UserIcon } from '@heroicons/react/solid';
 import dayjs from 'dayjs';
 import { getPollsByUser } from 'api/polls';
+import { getUser } from 'api/user';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useUserPolls } from '@hooks/polls';
 
-// import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 // import { useTranslation } from 'react-i18next';
 
-// export const getStaticProps = async ({ locale }) => {
-// 	const translations = await serverSideTranslations(locale, [`common`]);
-// 	return {
-// 		props: {
-// 			...translations,
-// 		},
-// 	};
-// };
-
-const AccountPage = () => {
+const AccountPage: React.FC<{ user: User; polls: Poll[] }> = props => {
 	const authUser = useAuthUser();
-	const { data: user } = useUser(authUser.id);
-	const { data: polls } = useUserPolls(authUser.id);
+	const { data: user } = useUser(authUser.id, {
+		initialData: props.user,
+	});
+	const { data: polls } = useUserPolls(authUser.id, {
+		initialData: props.polls,
+	});
 	const { mutate: deleteUser } = useDeleteUserFromDatabase();
 	// const { t } = useTranslation(`common`);
 
@@ -64,11 +62,15 @@ export const getServerSideProps = withAuthUserSSR({
 	whenUnauthed: AuthAction.REDIRECT_TO_LOGIN,
 	appPageURL: `/`,
 	authPageURL: `/login`,
-})(async ({ AuthUser }) => {
+})(async ({ AuthUser, locale }) => {
+	const translations = await serverSideTranslations(locale ? locale : ``, [`common`]);
 	const polls = await getPollsByUser(AuthUser.id);
+	const user = await getUser(AuthUser.id);
 	return {
 		props: {
 			polls,
+			user,
+			...translations,
 		},
 	};
 });
