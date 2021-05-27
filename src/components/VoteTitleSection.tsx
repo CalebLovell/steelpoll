@@ -8,7 +8,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 // import { useTranslation } from 'react-i18next';
 dayjs.extend(relativeTime);
 
-export const VoteTitleSection = ({ poll, user }: { poll: Poll | undefined; user: User | null | undefined }) => {
+export const VoteTitleSection = ({ poll, user }: { poll: Poll | null | undefined; user: User | null | undefined }) => {
 	const time = poll?.createdAt ? dayjs(poll?.createdAt).fromNow() : ``;
 
 	return (

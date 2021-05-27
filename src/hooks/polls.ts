@@ -19,15 +19,16 @@ export const useCreatePoll = () => {
 	});
 };
 
-export const usePoll = (pollId: string, opts?: QueryOptions): UseQueryResult<Poll, unknown> => {
-	// @ts-ignore
+export const usePoll = (pollId: string, initialData: Poll | null) => {
 	return useQuery([`poll`, pollId], () => getPoll(pollId), {
-		...opts,
+		initialData,
 	});
 };
 
-export const usePolls = () => {
-	return useQuery(`polls`, getPolls);
+export const usePolls = (initialData: Poll[] | null | undefined) => {
+	return useQuery([`polls`], getPolls, {
+		initialData,
+	});
 };
 
 export const useUserPolls = (userId: string | null, opts?: QueryOptions): UseQueryResult<Poll[], unknown> => {

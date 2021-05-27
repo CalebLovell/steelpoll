@@ -16,9 +16,7 @@ import { useUserPolls } from '@hooks/polls';
 
 const AccountPage: React.FC<{ user: User; polls: Poll[] }> = props => {
 	const authUser = useAuthUser();
-	const { data: user } = useUser(authUser.id, {
-		initialData: props.user,
-	});
+	const { data: user } = useUser(authUser.id, props.user);
 	const { data: polls } = useUserPolls(authUser.id, {
 		initialData: props.polls,
 	});

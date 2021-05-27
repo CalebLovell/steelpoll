@@ -6,6 +6,7 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { LoadingSpinner } from '@components/LoadingSpinner';
 import { PageWrapper } from '@components/PageWrapper';
 import { newPollRequestSchema } from '@utils/dataSchemas';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useCreatePoll } from '@hooks/polls';
 import { usePageIsLoading } from '@hooks/usePageIsLoading';
 import { useToasts } from 'react-toast-notifications';
@@ -207,6 +208,15 @@ const CreatePage = () => {
 			</main>
 		</PageWrapper>
 	);
+};
+
+export const getStaticProps = async ({ locale }) => {
+	const translations = await serverSideTranslations(locale, [`common`, `home`]);
+	return {
+		props: {
+			...translations,
+		},
+	};
 };
 
 export default withAuthUser()(CreatePage);

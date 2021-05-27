@@ -1,7 +1,9 @@
-import { PageWrapper } from '@components/PageWrapper';
-import { useAuthUser } from 'next-firebase-auth';
+import { useAuthUser, withAuthUser } from 'next-firebase-auth';
 
-const Custom404 = () => {
+import { PageWrapper } from '@components/PageWrapper';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
+const Custom500 = () => {
 	const authUser = useAuthUser();
 	const metadata = {
 		title: `Error 500`,
@@ -19,4 +21,13 @@ const Custom404 = () => {
 	);
 };
 
-export default Custom404;
+export const getStaticProps = async ({ locale }) => {
+	const translations = await serverSideTranslations(locale, [`common`, `home`]);
+	return {
+		props: {
+			...translations,
+		},
+	};
+};
+
+export default withAuthUser()(Custom500);

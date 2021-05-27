@@ -1,5 +1,7 @@
+import { useAuthUser, withAuthUser } from 'next-firebase-auth';
+
 import { PageWrapper } from '@components/PageWrapper';
-import { useAuthUser } from 'next-firebase-auth';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const TermsPage = () => {
 	const authUser = useAuthUser();
@@ -38,4 +40,13 @@ const TermsPage = () => {
 	);
 };
 
-export default TermsPage;
+export const getStaticProps = async ({ locale }) => {
+	const translations = await serverSideTranslations(locale, [`common`, `home`]);
+	return {
+		props: {
+			...translations,
+		},
+	};
+};
+
+export default withAuthUser()(TermsPage);

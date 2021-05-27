@@ -8,15 +8,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 // import { useTranslation } from 'react-i18next';
 
-export const getStaticProps = async ({ locale }) => {
-	const translations = await serverSideTranslations(locale, [`common`, `home`]);
-	return {
-		props: {
-			...translations,
-		},
-	};
-};
-
 const HomePage = () => {
 	const authUser = useAuthUser();
 	// const { t: home } = useTranslation(`home`);
@@ -101,6 +92,15 @@ const HomePage = () => {
 			</main>
 		</PageWrapper>
 	);
+};
+
+export const getStaticProps = async ({ locale }) => {
+	const translations = await serverSideTranslations(locale, [`common`, `home`]);
+	return {
+		props: {
+			...translations,
+		},
+	};
 };
 
 export default withAuthUser()(HomePage);

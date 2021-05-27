@@ -10,15 +10,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-export const getStaticProps = async ({ locale }) => {
-	const translations = await serverSideTranslations(locale, [`common`]);
-	return {
-		props: {
-			...translations,
-		},
-	};
-};
-
 const SignupPage = () => {
 	const authUser = useAuthUser();
 	const { mutate: createAuthWithEmail } = useCreateAuthWithEmail();
@@ -187,6 +178,15 @@ const SignupPage = () => {
 			</main>
 		</PageWrapper>
 	);
+};
+
+export const getStaticProps = async ({ locale }) => {
+	const translations = await serverSideTranslations(locale, [`common`]);
+	return {
+		props: {
+			...translations,
+		},
+	};
 };
 
 export default withAuthUser({

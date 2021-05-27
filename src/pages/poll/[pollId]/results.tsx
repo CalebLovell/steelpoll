@@ -1,7 +1,8 @@
 import * as React from 'react';
 
-import { useAuthUser, withAuthUser, withAuthUserTokenSSR } from 'next-firebase-auth';
+import { useAuthUser, withAuthUser } from 'next-firebase-auth';
 
+import { GetServerSideProps } from 'next';
 import { PageWrapper } from '@components/PageWrapper';
 import { Poll } from '@utils/pollTypes';
 import { ResultSection } from '@components/ResultSection';
@@ -15,41 +16,13 @@ import { useResults } from '@hooks/votes';
 import { useRouter } from 'next/router';
 import { useUser } from '@hooks/user';
 
-// import { useTranslation } from 'react-i18next';
-
-export const getServerSideProps = withAuthUserTokenSSR()(async ({ locale, params }) => {
-	// @ts-ignore
-	const translations = await serverSideTranslations(locale, [`common`]);
-	let poll: Poll | null;
-	let user: User | null;
-	if (typeof params?.pollId === `string`) {
-		poll = await getPoll(params.pollId);
-		user = await getUser(poll.userId);
-	} else {
-		poll = null;
-		user = null;
-	}
-	return {
-		props: {
-			poll,
-			user,
-			...translations,
-		},
-	};
-});
-
-const ResultsPage: React.FC<{ poll: Poll; user: User }> = props => {
+const ResultsPage: React.FC<{ poll: Poll | null; user: User | null }> = props => {
 	const authUser = useAuthUser();
-	// const { t: home } = useTranslation(`home`);
 	const router = useRouter();
 	// @ts-ignore
 	const { pollId }: { pollId: string } = router.query;
-	const { data: poll } = usePoll(pollId, {
-		initialData: props.poll,
-	});
-	const { data: user } = useUser(poll?.userId, {
-		initialData: props.user,
-	});
+	const { data: poll } = usePoll(pollId, props.poll);
+	const { data: user } = useUser(poll?.userId, props.user);
 	const { data: votes, fptpResults, rankedChoiceResults, STARResults } = useResults(pollId, poll?.choices);
 
 	const metadata = {
@@ -71,6 +44,27 @@ const ResultsPage: React.FC<{ poll: Poll; user: User }> = props => {
 			</main>
 		</PageWrapper>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ locale, params }) => {
+	// @ts-ignore
+	const translations = await serverSideTranslations(locale, [`common`]);
+	let poll: Poll | null;
+	let user: User | null;
+	if (typeof params?.pollId === `string`) {
+		poll = await getPoll(params.pollId);
+		user = await getUser(poll.userId);
+	} else {
+		poll = null;
+		user = null;
+	}
+	return {
+		props: {
+			poll,
+			user,
+			...translations,
+		},
+	};
 };
 
 export default withAuthUser()(ResultsPage);

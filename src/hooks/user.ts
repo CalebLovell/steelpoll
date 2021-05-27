@@ -1,18 +1,18 @@
 import { CreateUserRequest, User } from '@utils/userTypes';
-import { QueryOptions, UseQueryResult, useMutation, useQuery } from 'react-query';
 import { createUser, deleteUser, getUser } from 'api/user';
+import { useMutation, useQuery } from 'react-query';
 
 import { AuthUser } from 'next-firebase-auth';
 import { FirebaseError } from 'firebase-admin';
 import { useDeleteAuthUser } from './authentication';
 import { useToasts } from 'react-toast-notifications';
 
-export const useUser = (userId: string | null | undefined, opts?: QueryOptions): UseQueryResult<User | null, unknown> => {
+export const useUser = (userId: string | null | undefined, initialData: User | null) => {
 	// @ts-ignore
 	return useQuery([`user`, userId], () => getUser(userId), {
 		enabled: !!userId,
 		staleTime: 1000 * 60 * 60 * 24,
-		...opts,
+		initialData,
 	});
 };
 

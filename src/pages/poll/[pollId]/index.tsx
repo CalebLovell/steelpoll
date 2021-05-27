@@ -15,6 +15,7 @@ import { VoteTitleSection } from '@components/VoteTitleSection';
 import { getPoll } from 'api/polls';
 import { getUser } from 'api/user';
 import { newVoteRequestSchema } from '@utils/dataSchemas';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useCreateVote } from '@hooks/votes';
 import { usePageIsLoading } from '@hooks/usePageIsLoading';
 import { usePoll } from '@hooks/polls';
@@ -22,36 +23,14 @@ import { useRouter } from 'next/router';
 import { useToasts } from 'react-toast-notifications';
 import { useUser } from '@hooks/user';
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-	let poll: Poll | null;
-	let user: User | null;
-	if (typeof params?.pollId === `string`) {
-		poll = await getPoll(params.pollId);
-		user = await getUser(poll.userId);
-	} else {
-		poll = null;
-		user = null;
-	}
-	return {
-		props: {
-			poll,
-			user,
-		},
-	};
-};
-
-const PollPage: React.FC<{ poll: Poll; user: User }> = props => {
+const PollPage: React.FC<{ poll: Poll | null; user: User | null }> = props => {
 	const authUser = useAuthUser();
 	const router = useRouter();
 	const pageIsLoading = usePageIsLoading();
 	// @ts-ignore
 	const { pollId }: { pollId: string } = router.query;
-	const { data: poll } = usePoll(pollId, {
-		initialData: props.poll,
-	});
-	const { data: user } = useUser(poll?.userId, {
-		initialData: props.user,
-	});
+	const { data: poll } = usePoll(pollId, props.poll);
+	const { data: user } = useUser(poll?.userId, props.user);
 	const { addToast } = useToasts();
 	const { mutate: createVote, isLoading } = useCreateVote();
 	const [firstPastThePost, setFirstPastThePost] = React.useState(poll?.choices[0]);
@@ -136,6 +115,27 @@ const PollPage: React.FC<{ poll: Poll; user: User }> = props => {
 			</main>
 		</PageWrapper>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ locale, params }) => {
+	// @ts-ignore
+	const translations = await serverSideTranslations(locale, [`common`]);
+	let poll: Poll | null;
+	let user: User | null;
+	if (typeof params?.pollId === `string`) {
+		poll = await getPoll(params.pollId);
+		user = await getUser(poll.userId);
+	} else {
+		poll = null;
+		user = null;
+	}
+	return {
+		props: {
+			poll,
+			user,
+			...translations,
+		},
+	};
 };
 
 export default withAuthUser()(PollPage);
