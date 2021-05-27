@@ -96,15 +96,21 @@ const PollPage: React.FC<{ poll: Poll }> = props => {
 			<main className='container flex justify-center w-full min-h-content bg-brand-primary'>
 				<form className='flex flex-col w-full max-w-4xl my-4 space-y-4 sm:my-6 sm:space-y-6'>
 					<VoteTitleSection poll={poll} user={user} />
-					<section className='w-full p-4 rounded-md sm:p-4 bg-brand-secondary'>
-						{poll?.votingSystems?.some(x => x.slug === `first-past-the-post`) && <VoteFPTP poll={poll} />}
-					</section>
-					<section className='w-full p-4 rounded-md sm:p-4 bg-brand-secondary'>
-						{poll?.votingSystems?.some(x => x?.slug === `ranked-choice`) && <VoteRankedChoice poll={poll} />}
-					</section>
-					<section className='w-full p-4 rounded-md sm:p-4 bg-brand-secondary'>
-						{poll?.votingSystems?.some(x => x?.slug === `STAR`) && <VoteSTAR poll={poll} />}
-					</section>
+					{poll?.votingSystems?.some(x => x.slug === `first-past-the-post`) && (
+						<section className='w-full p-4 rounded-md sm:p-4 bg-brand-secondary'>
+							<VoteFPTP poll={poll} />
+						</section>
+					)}
+					{poll?.votingSystems?.some(x => x?.slug === `ranked-choice`) && (
+						<section className='w-full p-4 rounded-md sm:p-4 bg-brand-secondary'>
+							<VoteRankedChoice poll={poll} />
+						</section>
+					)}
+					{poll?.votingSystems?.some(x => x?.slug === `STAR`) && (
+						<section className='w-full p-4 rounded-md sm:p-4 bg-brand-secondary'>
+							<VoteSTAR poll={poll} />
+						</section>
+					)}
 					<button
 						type='button'
 						onClick={onSubmit}
