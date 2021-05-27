@@ -27,7 +27,7 @@ const ResultsPage: React.FC<{ poll: Poll | null; user: User | null }> = props =>
 
 	const metadata = {
 		title: poll?.title,
-		description: `View results for the poll: ${poll?.title}`,
+		description: `View results in real-time now`,
 	};
 
 	return (
