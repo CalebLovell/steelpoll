@@ -15,18 +15,17 @@ interface Props {
 	authUser: any;
 }
 
-export const PageWrapper: React.FC<Props> = ({
-	metadata = {
+export const PageWrapper: React.FC<Props> = ({ metadata, authUser, children }) => {
+	const { mobileNavOpen } = useGlobalState();
+	const router = useRouter();
+
+	const defaultMetadata = {
+		...metadata,
 		title: `SteelPoll`,
 		description: `Create polls and get robust results instantly`,
 		image: `https://steelpoll.com/images/steelpoll_pie_chart.png`,
-	},
-	authUser,
-	children,
-}) => {
-	const { mobileNavOpen } = useGlobalState();
-	const router = useRouter();
-	const { title, description, image } = metadata;
+	};
+	const { title, description, image } = defaultMetadata;
 
 	return (
 		<>
