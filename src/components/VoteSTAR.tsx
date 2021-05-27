@@ -7,15 +7,7 @@ import Link from 'next/link';
 import { Poll } from '@utils/pollTypes';
 import { useRouter } from 'next/router';
 
-export const VoteSTAR = ({ poll }: { poll: Poll | undefined }) => {
-	const [STAR, setSTAR] = React.useState(
-		poll?.choices?.map(x => {
-			return {
-				choiceId: x.id,
-				value: 3,
-			};
-		})
-	);
+export const VoteSTAR = ({ poll, STAR, setSTAR }: { poll: Poll | undefined; STAR; setSTAR }) => {
 	const [copied, setCopied] = React.useState(false);
 	const router = useRouter();
 	// @ts-ignore

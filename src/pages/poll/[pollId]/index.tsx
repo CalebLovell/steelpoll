@@ -46,19 +46,23 @@ const PollPage: React.FC<{ poll: Poll }> = props => {
 	const { data: user } = useUser(pollId);
 	const { addToast } = useToasts();
 	const { mutate: createVote, isLoading } = useCreateVote();
+	const [firstPastThePost, setFirstPastThePost] = React.useState(poll?.choices[0]);
+	const [rankedChoice, setRankedChoice] = React.useState(poll?.choices);
+	const [STAR, setSTAR] = React.useState(
+		poll?.choices?.map(x => {
+			return {
+				choiceId: x.id,
+				value: 3,
+			};
+		})
+	);
 
 	const onSubmit = () => {
-		const formattedFirstPastThePost = { choiceId: poll?.choices[0]?.id };
-		const formattedRankedChoice = poll?.choices?.map((x, i) => {
+		const formattedFirstPastThePost = { choiceId: firstPastThePost?.id };
+		const formattedRankedChoice = rankedChoice?.map((x, i) => {
 			return {
 				choiceId: x.id,
 				order: i,
-			};
-		});
-		const formattedSTAR = poll?.choices?.map(x => {
-			return {
-				choiceId: x.id,
-				value: 1,
 			};
 		});
 		const formattedData = {
@@ -66,7 +70,7 @@ const PollPage: React.FC<{ poll: Poll }> = props => {
 			userId: authUser.id,
 			firstPastThePost: formattedFirstPastThePost,
 			rankedChoice: formattedRankedChoice,
-			STAR: formattedSTAR,
+			STAR,
 		};
 		try {
 			assert(formattedData, newVoteRequestSchema);
@@ -98,17 +102,17 @@ const PollPage: React.FC<{ poll: Poll }> = props => {
 					<VoteTitleSection poll={poll} user={user} />
 					{poll?.votingSystems?.some(x => x.slug === `first-past-the-post`) && (
 						<section className='w-full p-4 rounded-md sm:p-4 bg-brand-secondary'>
-							<VoteFPTP poll={poll} />
+							<VoteFPTP poll={poll} firstPastThePost={firstPastThePost} setFirstPastThePost={setFirstPastThePost} />
 						</section>
 					)}
 					{poll?.votingSystems?.some(x => x?.slug === `ranked-choice`) && (
 						<section className='w-full p-4 rounded-md sm:p-4 bg-brand-secondary'>
-							<VoteRankedChoice poll={poll} />
+							<VoteRankedChoice poll={poll} rankedChoice={rankedChoice} setRankedChoice={setRankedChoice} />
 						</section>
 					)}
 					{poll?.votingSystems?.some(x => x?.slug === `STAR`) && (
 						<section className='w-full p-4 rounded-md sm:p-4 bg-brand-secondary'>
-							<VoteSTAR poll={poll} />
+							<VoteSTAR poll={poll} STAR={STAR} setSTAR={setSTAR} />
 						</section>
 					)}
 					<button

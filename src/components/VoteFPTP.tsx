@@ -12,8 +12,7 @@ function classNames(...classes) {
 	return classes.filter(Boolean).join(` `);
 }
 
-export const VoteFPTP = ({ poll }: { poll: Poll | undefined }) => {
-	const [firstPastThePost, setFirstPastThePost] = React.useState(poll?.choices[0]);
+export const VoteFPTP = ({ poll, firstPastThePost, setFirstPastThePost }: { poll: Poll | undefined, firstPastThePost, setFirstPastThePost }) => {
 	const [copied, setCopied] = React.useState(false);
 	const router = useRouter();
 	// @ts-ignore

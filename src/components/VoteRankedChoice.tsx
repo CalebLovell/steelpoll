@@ -9,9 +9,8 @@ import { MenuIcon } from '@heroicons/react/outline';
 import { Poll } from '@utils/pollTypes';
 import { useRouter } from 'next/router';
 
-export const VoteRankedChoice = ({ poll }: { poll: Poll | undefined }) => {
+export const VoteRankedChoice = ({ poll, rankedChoice, setRankedChoice }: { poll: Poll | undefined; rankedChoice; setRankedChoice }) => {
 	resetServerContext();
-	const [rankedChoice, setRankedChoice] = React.useState(poll?.choices);
 	const [copied, setCopied] = React.useState(false);
 	const router = useRouter();
 	// @ts-ignore
