@@ -19,7 +19,7 @@ export const PageWrapper: React.FC<Props> = ({
 	metadata = {
 		title: `SteelPoll`,
 		description: `Create polls and get robust results instantly`,
-		image: ``,
+		image: `https://steelpoll.com/images/steelpoll_pie_chart.png`,
 	},
 	authUser,
 	children,

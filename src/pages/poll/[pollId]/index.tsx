@@ -92,7 +92,7 @@ const PollPage: React.FC<{ poll: Poll }> = props => {
 
 	const metadata = {
 		title: poll?.title,
-		description: `Vote on the poll: ${poll?.title}`,
+		description: `Vote Now: ${poll?.choices[0]}, ${poll?.choices[1]}...`,
 	};
 
 	return (
