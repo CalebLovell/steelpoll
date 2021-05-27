@@ -37,17 +37,13 @@ const LoginPage = () => {
 	return (
 		<PageWrapper authUser={authUser} metadata={metadata}>
 			<main className='container flex items-center justify-center min-h-content bg-brand-primary'>
-				<div className='px-4 py-8 my-4 rounded-lg shadow bg-brand-secondary sm:px-10'>
+				<div className='max-w-sm px-4 py-8 my-4 rounded-lg shadow bg-brand-secondary sm:px-10'>
 					<div className='sm:mx-auto sm:w-full sm:max-w-md'>
-						<img
-							className='hidden w-auto h-12 mx-auto sm:block'
-							src='https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
-							alt='Workflow'
-						/>
-						<h1 className='text-3xl font-extrabold text-center sm:mt-6 text-brand-primary '>{t(`header.signin`)}</h1>
+						<img className='w-auto h-6 mx-auto sm:h-10' src='/images/steelpoll_logo_full.png' alt='steelpoll logo' />
+						<h1 className='my-3 text-xl font-extrabold text-center sm:text-2xl text-brand-primary '>{t(`header.login`)}</h1>
 					</div>
 					<form onSubmit={handleSubmit(onSubmit)}>
-						<div className='mt-5'>
+						<div>
 							<label htmlFor='email' className='text-sm font-medium text-brand-blue'>
 								Email Address
 							</label>

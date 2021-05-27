@@ -39,17 +39,13 @@ const SignupPage = () => {
 	return (
 		<PageWrapper authUser={authUser} metadata={metadata}>
 			<main className='container flex items-center justify-center min-h-content bg-brand-primary'>
-				<div className='px-4 py-4 my-4 rounded-lg shadow sm:py-8 bg-brand-secondary sm:px-10'>
-					<div className='hidden sm:block sm:mx-auto sm:w-full sm:max-w-md'>
-						<img
-							className='hidden w-auto h-12 mx-auto sm:block'
-							src='https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
-							alt='Workflow'
-						/>
-						<h1 className='text-3xl font-extrabold text-center sm:mt-6 text-brand-primary '>{t(`header.signup`)}</h1>
+				<div className='max-w-sm px-4 py-4 my-4 rounded-lg shadow sm:py-8 bg-brand-secondary sm:px-10'>
+					<div className='sm:mx-auto sm:w-full sm:max-w-md'>
+						<img className='w-auto h-6 mx-auto sm:h-10' src='/images/steelpoll_logo_full.png' alt='steelpoll logo' />
+						<h1 className='my-3 text-xl font-extrabold text-center sm:text-2xl text-brand-primary '>{t(`header.signup`)}</h1>
 					</div>
 					<form onSubmit={handleSubmit(onSubmit)}>
-						<div className='sm:mt-5'>
+						<div>
 							<label htmlFor='name' className='text-sm font-medium text-brand-blue'>
 								Name
 							</label>
