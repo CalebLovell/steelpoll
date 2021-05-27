@@ -42,20 +42,20 @@ export const PageWrapper: React.FC<Props> = ({ metadata, authUser, children }) =
 					<link rel='icon' type='image/png' sizes='32x32' href='/favicons/favicon-32x32.png' />
 					<link rel='icon' type='image/png' sizes='16x16' href='/favicons/favicon-16x16.png' />
 					<link rel='manifest' href='/favicons/site.webmanifest' />
-					<meta property='og:image' content={image} key='ogimage' />
-					<meta property='og:image:width' content='450' key='ogimagewidth' />
-					<meta property='og:image:height' content='450' key='ogimageheight' />
-					<meta property='og:url' content={`https://steelpoll.com${router.asPath}`} key='ogurl' />
-					<meta property='og:title' content={title} key='ogtitle' />
-					<meta property='og:description' content={description} key='ogdesc' />
+					<meta property='og:image' content={image} />
+					<meta property='og:image:width' content='450' />
+					<meta property='og:image:height' content='450' />
+					<meta property='og:url' content={`https://steelpoll.com${router.asPath}`} />
+					<meta property='og:title' content={title} />
+					<meta property='og:description' content={description} />
 					<meta property='og:site_name' content='SteelPoll' />
-					<meta property='og:type' content='website' key='ogtype' />
-					<meta name='twitter:card' content='summary' key='twcard' />
-					<meta name='twitter:site' content='@Caleb__Lovell' key='twhandle' />
-					<meta name='twitter:title' content={title} key='twtitle' />
-					<meta name='twitter:image' content={image} key='twimage' />
-					<meta name='twitter:description' content={description} key='twdesc' />
-					<meta name='twitter:image:alt' content={description} key='twimagealt' />
+					<meta property='og:type' content='website' />
+					<meta name='twitter:card' content='summary' />
+					<meta name='twitter:site' content='@Caleb__Lovell' />
+					<meta name='twitter:title' content={title} />
+					<meta name='twitter:image' content={image} />
+					<meta name='twitter:description' content={description} />
+					<meta name='twitter:image:alt' content={description} />
 				</Head>
 			</PlausibleProvider>
 			<Header authUser={authUser} />
