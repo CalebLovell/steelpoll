@@ -27,8 +27,6 @@ export const PageWrapper: React.FC<Props> = ({ metadata, authUser, children }) =
 	};
 	const { title, description, image } = defaultMetadata;
 
-	console.log(defaultMetadata);
-
 	return (
 		<>
 			<PlausibleProvider domain='steelpoll.com'>
