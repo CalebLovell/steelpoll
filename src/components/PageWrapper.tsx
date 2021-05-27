@@ -20,12 +20,14 @@ export const PageWrapper: React.FC<Props> = ({ metadata, authUser, children }) =
 	const router = useRouter();
 
 	const defaultMetadata = {
-		...metadata,
 		title: `SteelPoll`,
 		description: `Create polls and get robust results instantly`,
 		image: `https://steelpoll.com/images/steelpoll_pie_chart.png`,
+		...metadata,
 	};
 	const { title, description, image } = defaultMetadata;
+
+	console.log(defaultMetadata);
 
 	return (
 		<>
