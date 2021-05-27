@@ -38,7 +38,7 @@ const AccountPage: React.FC<{ user: User; polls: Poll[] }> = props => {
 	return (
 		<PageWrapper authUser={authUser} metadata={metadata}>
 			<main className='container flex flex-col items-center min-h-content bg-brand-primary'>
-				<div className='flex flex-col items-center my-4 space-y-2'>
+				<div className='flex flex-col items-center mt-4 space-y-2'>
 					<div className='flex items-center justify-center w-32 h-32 rounded-full bg-brand-secondary '>
 						<UserIcon className='w-16 h-16 text-brand-primary' />
 					</div>
