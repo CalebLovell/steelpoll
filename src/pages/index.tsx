@@ -36,7 +36,7 @@ const HomePage = () => {
 	return (
 		<PageWrapper authUser={authUser}>
 			<main className='container flex flex-col items-center w-full text-center bg-brand-primary'>
-				<section className='flex flex-col justify-center space-y-8 min-h-content'>
+				<section className='flex flex-col justify-center pt-2 space-y-8 min-h-content'>
 					<h1 className='text-4xl font-extrabold text-brand-primary sm:text-5xl md:text-6xl'>
 						<span className='text-brand-primary'>Create a </span>
 						<span className='text-brand-steelLight'>Steel</span>
