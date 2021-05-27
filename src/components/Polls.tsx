@@ -9,7 +9,7 @@ const PollCard = ({ poll }: { poll: Poll }) => {
 			<div className='flex items-center justify-between'>
 				<h3 className='text-sm font-medium truncate text-brand-primary'>{poll?.title}</h3>
 				<div className={`px-2 rounded-full flex items-center ${poll?.options?.protected ? `bg-blue-100` : `bg-green-100`}`}>
-					<p className={`text-sm font-medium ${poll?.options?.protected ? `text-brand-blue` : `text-green-800`}`}>
+					<p className={`px-1 text-sm font-medium text-center ${poll?.options?.protected ? `text-brand-blue` : `text-green-800`}`}>
 						{poll?.options?.protected ? `Users Only` : `Open To All`}
 					</p>
 					{poll?.options?.protected ? (
