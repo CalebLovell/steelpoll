@@ -59,7 +59,7 @@ export const PieChart: React.FC<Props> = ({ data }) => {
 		.range(d3.quantize(t => d3.interpolateSinebow(t * 0.91 + 0.07), filteredData.length + 1).reverse());
 
 	return (
-		<svg viewBox='0 0 450 450'>
+		<svg viewBox='0 0 400 400'>
 			<g transform={`translate(${outerRadius} ${outerRadius})`}>
 				{pieData.map(d => (
 					<Arc key={d.data.choiceId} d={d} createArc={createArc} color={color} />
