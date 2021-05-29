@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { initAuth } from '@utils/initAuth';
 import { unsetAuthCookies } from 'next-firebase-auth';
+import { withSentry } from '@sentry/nextjs';
 
 initAuth();
 
@@ -14,4 +15,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 	return res.status(200).json({ success: true });
 };
 
-export default handler;
+export default withSentry(handler);
