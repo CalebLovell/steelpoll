@@ -62,7 +62,7 @@ export const useResults = (pollId: string, choices: Choice[] | undefined) => {
 		// console.log(STARVotes);
 		const STARResults = STARVotes?.length > 0 ? calculateSTARResults(STARVotes) : null;
 
-		return { hasAnyVotes, data: votes, isLoading: loading, error, fptpResults, rankedChoiceResults, STARResults };
+		return { hasAnyVotes, data: votes, votesCast: votes.length, isLoading: loading, error, fptpResults, rankedChoiceResults, STARResults };
 	} else {
 		return { hasAnyVotes };
 	}

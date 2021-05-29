@@ -24,7 +24,7 @@ const DynamicChart = dynamic(() => import(`@components/PieChart`).then(mod => mo
 	ssr: false,
 });
 
-export const ResultSection = ({ title, poll, results }) => {
+export const ResultSection = ({ title, poll, votesCast, results }) => {
 	const [copied, setCopied] = React.useState(false);
 	// const { t: home } = useTranslation(`home`);
 	const router = useRouter();
@@ -37,6 +37,8 @@ export const ResultSection = ({ title, poll, results }) => {
 	});
 
 	const plural = winners.length > 1;
+
+	console.log(results);
 
 	return (
 		<section className='w-full p-4 rounded-md sm:p-4 bg-brand-secondary'>
@@ -53,8 +55,8 @@ export const ResultSection = ({ title, poll, results }) => {
 					</svg>
 				</p>
 			</div>
-			<p className='mb-2 font-semibold text-center text-md text-brand-primary'>Total Votes: {results?.votes?.length}</p>
-			<p className='mb-4 font-normal text-center text-md text-brand-secondary'>{`Winner${plural ? `s` : ``}: ${winners?.map(
+			<p className='mb-2 font-semibold text-center text-md text-brand-secondary'>Total Votes: {votesCast}</p>
+			<p className='mb-4 font-normal text-center text-md text-brand-primary'>{`Winner${plural ? `s` : ``}: ${winners?.map(
 				winner => ` ${poll?.choices?.find(x => x.id === winner.choiceId)?.choice}`
 			)}`}</p>
 			<div className='flex flex-col items-center justify-between space-y-4 md:space-y-0 md:flex-row md:items-start'>

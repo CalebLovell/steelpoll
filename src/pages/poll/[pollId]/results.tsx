@@ -25,7 +25,7 @@ const ResultsPage: React.FC<{ poll: Poll | null; user: User | null }> = props =>
 	const { pollId }: { pollId: string } = router.query;
 	const { data: poll } = usePoll(pollId, props.poll);
 	const { data: user } = useUser(poll?.userId, props.user);
-	const { hasAnyVotes, data: votes, fptpResults, rankedChoiceResults, STARResults } = useResults(pollId, poll?.choices);
+	const { hasAnyVotes, data: votes, votesCast, fptpResults, rankedChoiceResults, STARResults } = useResults(pollId, poll?.choices);
 
 	const metadata = {
 		title: `Results: ${poll?.title}`,
@@ -51,10 +51,14 @@ const ResultsPage: React.FC<{ poll: Poll | null; user: User | null }> = props =>
 							</Link>
 						</div>
 					)}
-					{votes && poll && fptpResults && <ResultSection title='First Past the Post Results' poll={poll} results={fptpResults} />}
-					{votes && poll && rankedChoiceResults && <ResultSection title='Ranked Choice Results' poll={poll} results={rankedChoiceResults} />}
+					{votes && poll && fptpResults && (
+						<ResultSection title='First Past the Post Results' poll={poll} votesCast={votesCast} results={fptpResults} />
+					)}
+					{votes && poll && rankedChoiceResults && (
+						<ResultSection title='Ranked Choice Results' poll={poll} votesCast={votesCast} results={rankedChoiceResults} />
+					)}
 					{votes && poll && STARResults && (
-						<ResultSection title='Score Then Automatic Runoff (STAR) Results' poll={poll} results={STARResults} />
+						<ResultSection title='Score Then Automatic Runoff (STAR) Results' poll={poll} votesCast={votesCast} results={STARResults} />
 					)}
 				</div>
 			</main>
