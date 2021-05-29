@@ -30,8 +30,8 @@ const LoginPage = () => {
 	};
 
 	const metadata = {
-		title: `Login`,
-		description: `Login to your account`,
+		title: `Login - SteelPoll`,
+		description: `Login to your SteelPoll account`,
 	};
 
 	return (

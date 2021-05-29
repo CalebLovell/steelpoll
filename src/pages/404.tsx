@@ -6,7 +6,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 const Custom404 = () => {
 	const authUser = useAuthUser();
 	const metadata = {
-		title: `Error 404`,
+		title: `Error 404 - SteelPoll`,
 		description: `This page could not be found!`,
 	};
 	return (

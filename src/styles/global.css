@@ -81,7 +81,7 @@
 }
 
 .btn-secondary {
-	@apply transition duration-150 ease-in-out bg-transparent border-2 rounded-md border-brand-lightBlue text-brand-lightBlue hover:bg-brand-lightBlue hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-blue dark:focus:ring-brand-blue dark:focus:ring-offset-brand-lightGrey;
+	@apply transition duration-150 ease-in-out bg-transparent border-2 rounded-md dark:text-brand-steelLight dark:border-brand-steelLight dark:hover:bg-brand-steelLight text-brand-steelDark border-brand-steelDark hover:bg-brand-steelDark hover:text-white dark:hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-blue dark:focus:ring-brand-blue dark:focus:ring-offset-brand-lightGrey;
 }
 
 /* link styles */

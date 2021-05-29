@@ -6,7 +6,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 const Custom500 = () => {
 	const authUser = useAuthUser();
 	const metadata = {
-		title: `Error 500`,
+		title: `Error 500 - SteelPoll`,
 		description: `Server-side error occurred`,
 	};
 	return (

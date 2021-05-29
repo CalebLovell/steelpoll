@@ -31,7 +31,7 @@ const AccountPage: React.FC<{ user: User; polls: Poll[] }> = props => {
 	const date = user?.createdAt ? dayjs(user?.createdAt).format(`MMMM D, YYYY`) : ``;
 
 	const metadata = {
-		title: `Account`,
+		title: `Account - SteelPoll`,
 		description: `View your account details`,
 	};
 

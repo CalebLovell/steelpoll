@@ -23,10 +23,10 @@ const ResultsPage: React.FC<{ poll: Poll | null; user: User | null }> = props =>
 	const { pollId }: { pollId: string } = router.query;
 	const { data: poll } = usePoll(pollId, props.poll);
 	const { data: user } = useUser(poll?.userId, props.user);
-	const { data: votes, fptpResults, rankedChoiceResults, STARResults } = useResults(pollId, poll?.choices);
+	const { hasVotes, data: votes, fptpResults, rankedChoiceResults, STARResults } = useResults(pollId, poll?.choices);
 
 	const metadata = {
-		title: poll?.title,
+		title: `Results: ${poll?.title}`,
 		description: `View results in real-time now`,
 	};
 
@@ -35,6 +35,7 @@ const ResultsPage: React.FC<{ poll: Poll | null; user: User | null }> = props =>
 			<main className='container flex justify-center w-full min-h-content bg-brand-primary'>
 				<div className='flex flex-col items-center w-full max-w-4xl my-4 space-y-4 sm:my-6 sm:space-y-6'>
 					<VoteTitleSection poll={poll} user={user} />
+					{hasVotes === false && <p>Nobody has voted on this poll yet.</p>}
 					{votes && poll && fptpResults && <ResultSection title='First Past the Post Results' poll={poll} results={fptpResults} />}
 					{votes && poll && rankedChoiceResults && <ResultSection title='Ranked Choice Results' poll={poll} results={rankedChoiceResults} />}
 					{votes && poll && STARResults && (

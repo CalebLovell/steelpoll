@@ -6,7 +6,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 const TechPage = () => {
 	const authUser = useAuthUser();
 	const metadata = {
-		title: `Tech Stack`,
+		title: `Tech Stack - SteelPoll`,
 		description: `Learn about how SteelPoll was built`,
 	};
 	return (

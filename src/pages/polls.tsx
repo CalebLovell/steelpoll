@@ -16,8 +16,8 @@ const PollsPage: React.FC<{ polls: Poll[] }> = props => {
 	// const { t: home } = useTranslation(`home`);
 
 	const metadata = {
-		title: `Explore Polls`,
-		description: `View the most recently created 20 polls`,
+		title: `Explore Polls - SteelPoll`,
+		description: `View the most recently created polls`,
 	};
 
 	return (

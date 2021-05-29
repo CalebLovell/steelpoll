@@ -32,8 +32,8 @@ const SignupPage = () => {
 	};
 
 	const metadata = {
-		title: `Sign Up`,
-		description: `Sign Up for a free account`,
+		title: `Sign Up - SteelPoll`,
+		description: `Sign Up for a free SteelPoll account`,
 	};
 
 	return (

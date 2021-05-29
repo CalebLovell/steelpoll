@@ -6,7 +6,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 const PrivacyPage = () => {
 	const authUser = useAuthUser();
 	const metadata = {
-		title: `Privacy Policy`,
+		title: `Privacy Policy - SteelPoll`,
 		description: `Learn about how SteelPoll protects your privacy`,
 	};
 	return (

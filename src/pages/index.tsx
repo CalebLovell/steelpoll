@@ -40,7 +40,7 @@ const HomePage = () => {
 				<section className='flex flex-col justify-center pt-2 space-y-8 min-h-content'>
 					<h1 className='text-4xl font-extrabold text-brand-primary sm:text-5xl md:text-6xl'>
 						<span className='text-brand-primary'>Create a </span>
-						<span className='text-brand-steelLight'>Steel</span>
+						<span className='text-brand-steelDark dark:text-brand-steelLight'>Steel</span>
 						<span className='text-brand-gradient'>Poll{` `}</span>
 						<span className='text-brand-primary'>in Seconds</span>
 					</h1>

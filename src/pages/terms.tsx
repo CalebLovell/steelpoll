@@ -6,7 +6,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 const TermsPage = () => {
 	const authUser = useAuthUser();
 	const metadata = {
-		title: `Terms of Use`,
+		title: `Terms of Use - SteelPoll`,
 		description: `Learn about the rules for using SteelPoll`,
 	};
 	return (
