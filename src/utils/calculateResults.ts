@@ -1,5 +1,6 @@
+import { countBy, forEach, maxBy } from 'lodash';
+
 import { Choice } from './pollTypes';
-import { countBy } from 'lodash';
 
 export const calculateFPTPResults = (fptpVotes: { choiceId: number }[], choices: Choice[] | undefined) => {
 	if (fptpVotes) {
@@ -125,25 +126,29 @@ export const calculateSTARResults = (STARVotes: { choiceId: number; value: numbe
 
 		const scoringVotes = formatVotesForScoringRound();
 
-		const calculateScoreWinners = () => {
+		const sortScoringVotes = () => {
 			const winners = scoringVotes.sort((a, b) => {
 				return b.value - a.value;
 			});
 			return winners;
 		};
+		const sorted = sortScoringVotes();
 
-		// TODO account for ties in the scoring round better. If 3+ values tie for first place
-		// right now, this will arbitrary take the first two instead of all of them
-		const scoreWinners = calculateScoreWinners().slice(0, 2);
+		const maxVal1 = maxBy(sorted, x => x.value)?.value;
+		const maxVal1Removed = sorted.filter(x => x.value !== maxVal1);
+		const maxVal2 = maxBy(maxVal1Removed, x => x.value)?.value;
+		const scoreWinners = sorted.filter(x => x.value === maxVal1 || x.value === maxVal2);
 
 		const calculateRunoffContestants = () => {
 			const runoffCountHolder: { choiceId: number; value: number }[] = [];
 			STARVotes.forEach(vote => {
-				const winnerChoices = vote.filter(x => x.choiceId === scoreWinners[0].choiceId || x.choiceId === scoreWinners[1].choiceId);
-				if (winnerChoices[0].value === winnerChoices[1].value) return runoffCountHolder.push(winnerChoices[0], winnerChoices[1]);
-				else if (winnerChoices[0].value > winnerChoices[1].value) return runoffCountHolder.push(winnerChoices[0]);
-				else if (winnerChoices[0].value < winnerChoices[1].value) return runoffCountHolder.push(winnerChoices[1]);
-				else return;
+				const winnerChoices = vote.filter(x => {
+					const included = scoreWinners.some(y => y.choiceId === x.choiceId);
+					return included ? x : null;
+				});
+				const highestVoteValue = maxBy(winnerChoices, x => x.value)?.value;
+				const winningVotes = winnerChoices.filter(x => x.value === highestVoteValue);
+				winningVotes.forEach(x => runoffCountHolder.push(x));
 			});
 			return runoffCountHolder;
 		};
@@ -170,7 +175,7 @@ export const calculateSTARResults = (STARVotes: { choiceId: number; value: numbe
 					const included = potentialWinners.some(y => y.choiceId === x.choiceId);
 					return included ? x : null;
 				});
-				console.log(filteredScoringVotes);
+				// console.log(filteredScoringVotes);
 				const higherValue = filteredScoringVotes.reduce((max, x) => (x.value > max ? x.value : max), filteredScoringVotes[0].value);
 				const winners = filteredScoringVotes.filter(x => x.value === higherValue);
 				return winners;
