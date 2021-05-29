@@ -26,8 +26,8 @@ export const MobileMenu = () => {
 			<div className='absolute inset-x-0 top-0 z-20 m-2 transition origin-top-right transform'>
 				<div className='divide-y-2 divide-gray-100 rounded-lg shadow-lg bg-brand-secondary min-height-mobile dark:divide-gray-700'>
 					<div className='flex items-center justify-between p-2'>
-						<Logo label={t(`header.home`)} />
 						<MobileMenuButton />
+						<Logo label={t(`header.home`)} />
 					</div>
 					<nav className='flex flex-col items-start p-2 space-y-2'>
 						<MyLink href='/create' label='Create a Poll' variant='mobile' />
@@ -64,7 +64,7 @@ export const MobileMenu = () => {
 									<Link href='/login'>
 										<a
 											href='/login'
-											className='p-1 text-base font-semibold rounded-md text-brand-primary focus-brand-without-border'
+											className='p-1 text-base font-semibold rounded-md text-brand-primary hover-brand focus-brand-without-border'
 											onClick={() => globalDispatch({ type: `SET_MOBILE_NAV_OPEN`, payload: false })}
 										>
 											Log in

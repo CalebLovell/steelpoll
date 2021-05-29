@@ -45,7 +45,7 @@ const AccountPage: React.FC<{ user: User; polls: Poll[] }> = props => {
 					<p className='text-3xl font-medium text-brand-primary'>{user?.name}</p>
 					<p className='font-normal text-md text-brand-primary'>{user?.email}</p>
 					<p className='text-sm font-normal text-brand-primary'>Account created on {date}</p>
-					<button type='button' onClick={onDeleteUser} className='px-4 py-1 text-sm font-normal btn-primary'>
+					<button type='button' onClick={onDeleteUser} className='px-4 py-1 mt-1 text-sm font-normal btn-primary'>
 						Delete Account
 					</button>
 				</div>

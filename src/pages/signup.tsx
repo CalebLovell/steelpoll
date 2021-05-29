@@ -40,10 +40,7 @@ const SignupPage = () => {
 		<PageWrapper authUser={authUser} metadata={metadata}>
 			<main className='container flex items-center justify-center min-h-content bg-brand-primary'>
 				<div className='max-w-sm px-4 py-4 my-4 rounded-lg shadow sm:py-8 bg-brand-secondary sm:px-10'>
-					<div className='sm:mx-auto sm:w-full sm:max-w-md'>
-						<img className='w-auto h-6 mx-auto sm:h-10' src='/images/steelpoll_logo_full.png' alt='steelpoll logo' />
-						<h1 className='my-3 text-xl font-extrabold text-center sm:text-2xl text-brand-primary '>{t(`header.signup`)}</h1>
-					</div>
+					<h1 className='mb-3 text-2xl font-extrabold text-center text-brand-primary'>{t(`header.signup`)}</h1>
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<div>
 							<label htmlFor='name' className='text-sm font-medium text-brand-blue'>

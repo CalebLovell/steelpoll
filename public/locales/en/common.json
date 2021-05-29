@@ -4,8 +4,8 @@
 		"create": "Create a Poll",
 		"polls": "Explore Polls",
 		"about": "About",
-		"login": "Log in",
-		"signup": "Sign up",
+		"login": "Log In",
+		"signup": "Sign Up",
 		"darkModeButton": "Toggle dark mode"
 	},
 	"footer": {
