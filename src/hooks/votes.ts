@@ -25,11 +25,23 @@ export const useCreateVote = () => {
 };
 
 export const useResults = (pollId: string, choices: Choice[] | undefined) => {
-	const toasts = useToasts();
 	const [value, loading, error] = useCollection(getResults(pollId), {
 		snapshotListenOptions: { includeMetadataChanges: true },
 	});
-	const votes = value?.docs.map(x => x.data() as Vote);
+	const toasts = useToasts();
+	const votes = value?.docs.map(x => x.data());
+	const checkHasAnyVotes = () => {
+		if (loading) {
+			return true;
+		} else {
+			if (Array.isArray(votes) && votes.length > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	};
+	const hasAnyVotes = checkHasAnyVotes();
 
 	React.useEffect(() => {
 		if (error !== undefined)
@@ -37,21 +49,21 @@ export const useResults = (pollId: string, choices: Choice[] | undefined) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [error]);
 
-	if (votes) {
-		// Need to cast because .filter doesn't return correct types array
-		const fptpVotes = votes.map(x => x.firstPastThePost).filter(x => !!x) as { choiceId: number }[];
-		const fptpResults = calculateFPTPResults(fptpVotes, choices);
+	if (votes && hasAnyVotes) {
+		const fptpVotes = votes?.map(x => x.firstPastThePost).filter(x => !!x);
+		const fptpResults = fptpVotes?.length > 0 ? calculateFPTPResults(fptpVotes, choices) : null;
 
 		// Need to cast because .filter doesn't return correct types array
-		const rankedChoiceVotes = votes.map(x => x.rankedChoice).filter(x => !!x) as { choiceId: number; order: number }[][];
-		const rankedChoiceResults = calculateRankedChoiceResults(rankedChoiceVotes);
+		const rankedChoiceVotes = votes?.map(x => x.rankedChoice).filter(x => !!x);
+		const rankedChoiceResults = rankedChoiceVotes?.length > 0 ? calculateRankedChoiceResults(rankedChoiceVotes) : null;
 
 		// Need to cast because .filter doesn't return correct types array
-		const STARVotes = votes.map(x => x.STAR).filter(x => !!x) as { choiceId: number; value: number }[][];
-		const STARResults = calculateSTARResults(STARVotes);
+		const STARVotes = votes?.map(x => x.STAR).filter(x => !!x);
+		// console.log(STARVotes);
+		const STARResults = STARVotes?.length > 0 ? calculateSTARResults(STARVotes) : null;
 
-		return { data: votes, isLoading: loading, error: error, fptpResults, rankedChoiceResults, STARResults };
+		return { hasAnyVotes, data: votes, isLoading: loading, error, fptpResults, rankedChoiceResults, STARResults };
 	} else {
-		return {};
+		return { hasAnyVotes };
 	}
 };

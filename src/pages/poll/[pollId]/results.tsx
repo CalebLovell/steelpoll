@@ -2,7 +2,9 @@ import * as React from 'react';
 
 import { useAuthUser, withAuthUser } from 'next-firebase-auth';
 
+import { ArchiveIcon } from '@heroicons/react/solid';
 import { GetServerSideProps } from 'next';
+import Link from 'next/link';
 import { PageWrapper } from '@components/PageWrapper';
 import { Poll } from '@utils/pollTypes';
 import { ResultSection } from '@components/ResultSection';
@@ -23,7 +25,7 @@ const ResultsPage: React.FC<{ poll: Poll | null; user: User | null }> = props =>
 	const { pollId }: { pollId: string } = router.query;
 	const { data: poll } = usePoll(pollId, props.poll);
 	const { data: user } = useUser(poll?.userId, props.user);
-	const { hasVotes, data: votes, fptpResults, rankedChoiceResults, STARResults } = useResults(pollId, poll?.choices);
+	const { hasAnyVotes, data: votes, fptpResults, rankedChoiceResults, STARResults } = useResults(pollId, poll?.choices);
 
 	const metadata = {
 		title: `Results: ${poll?.title}`,
@@ -35,7 +37,20 @@ const ResultsPage: React.FC<{ poll: Poll | null; user: User | null }> = props =>
 			<main className='container flex justify-center w-full min-h-content bg-brand-primary'>
 				<div className='flex flex-col items-center w-full max-w-4xl my-4 space-y-4 sm:my-6 sm:space-y-6'>
 					<VoteTitleSection poll={poll} user={user} />
-					{hasVotes === false && <p>Nobody has voted on this poll yet.</p>}
+					{hasAnyVotes === false && (
+						<div className='flex flex-col justify-center'>
+							<p className='pt-6 pb-4 font-normal text-center text-md text-brand-primary'>Nobody has voted on this poll yet!</p>
+							<Link href={`/poll/${pollId}`}>
+								<a
+									href={`/poll/${pollId}`}
+									className='flex items-center justify-center px-4 py-1 text-sm font-normal text-center btn-primary'
+								>
+									Vote Now
+									<ArchiveIcon className='w-5 h-5 ml-2 text-white sm:w-4 sm:h-4' aria-hidden='true' />
+								</a>
+							</Link>
+						</div>
+					)}
 					{votes && poll && fptpResults && <ResultSection title='First Past the Post Results' poll={poll} results={fptpResults} />}
 					{votes && poll && rankedChoiceResults && <ResultSection title='Ranked Choice Results' poll={poll} results={rankedChoiceResults} />}
 					{votes && poll && STARResults && (

@@ -31,11 +31,18 @@ export const ResultSection = ({ title, poll, results }) => {
 	// @ts-ignore
 	const { pollId }: { pollId: string } = router.query;
 
+	const winners = results?.votes?.filter(vote => {
+		const isWinner = results?.winners?.includes(vote.choiceId);
+		return isWinner ? vote : null;
+	});
+
+	const plural = winners.length > 1;
+
 	return (
 		<section className='w-full p-4 rounded-md sm:p-4 bg-brand-secondary'>
 			<div className='flex items-center'>
 				<div className='w-14' />
-				<p className='mb-4 ml-auto mr-1 text-lg font-medium text-center sm:mr-0 sm:text-2xl text-brand-primary'>{title}</p>
+				<p className='mb-2 ml-auto mr-1 text-lg font-medium text-center sm:mr-0 sm:text-2xl text-brand-primary'>{title}</p>
 				<p className='inline-flex items-center pb-2 ml-auto tracking-wider text-red-500 uppercase'>
 					Live
 					<svg aria-hidden='true' className='inline-flex items-center w-4 h-4 ml-2 text-center' viewBox='0 0 576 512'>
@@ -46,9 +53,13 @@ export const ResultSection = ({ title, poll, results }) => {
 					</svg>
 				</p>
 			</div>
-			<div className='flex flex-col items-center justify-between space-y-4 md:space-y-0 md:space-x-6 lg:space-x-12 md:flex-row md:items-start'>
+			<p className='mb-2 font-semibold text-center text-md text-brand-primary'>Total Votes: {results?.votes?.length}</p>
+			<p className='mb-4 font-normal text-center text-md text-brand-secondary'>{`Winner${plural ? `s` : ``}: ${winners?.map(
+				winner => ` ${poll?.choices?.find(x => x.id === winner.choiceId)?.choice}`
+			)}`}</p>
+			<div className='flex flex-col items-center justify-between space-y-4 md:space-y-0 md:flex-row md:items-start'>
 				<ResultsTable results={results} poll={poll} />
-				<div className='w-full max-w-sm'>
+				<div className='w-full max-w-sm ml-0 md:ml-4'>
 					<DynamicChart data={results?.votes} />
 				</div>
 			</div>

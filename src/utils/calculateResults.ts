@@ -2,36 +2,40 @@ import { Choice } from './pollTypes';
 import { countBy } from 'lodash';
 
 export const calculateFPTPResults = (fptpVotes: { choiceId: number }[], choices: Choice[] | undefined) => {
-	const voteInfo = countBy(fptpVotes.map(x => x.choiceId));
+	if (fptpVotes) {
+		const voteInfo = countBy(fptpVotes.map(x => x.choiceId));
 
-	const formatVotes = () => {
-		const data: { choiceId: number; value: number }[] = [];
-		for (const [key, value] of Object.entries(voteInfo)) {
-			data.push({ choiceId: Number(key), value: value / fptpVotes.length });
-		}
-		return data;
-	};
+		const formatVotes = () => {
+			const data: { choiceId: number; value: number }[] = [];
+			for (const [key, value] of Object.entries(voteInfo)) {
+				data.push({ choiceId: Number(key), value: value / fptpVotes.length });
+			}
+			return data;
+		};
 
-	const formattedVotes = formatVotes();
+		const formattedVotes = formatVotes();
 
-	const noVotesArray: { choiceId: number; value: number }[] = [];
+		const noVotesArray: { choiceId: number; value: number }[] = [];
 
-	choices?.forEach(x => {
-		const wasVotedFor = formattedVotes.some(y => y.choiceId === x.id);
-		if (!wasVotedFor) noVotesArray.push({ choiceId: x.id, value: 0 });
-	});
+		choices?.forEach(x => {
+			const wasVotedFor = formattedVotes.some(y => y.choiceId === x.id);
+			if (!wasVotedFor) noVotesArray.push({ choiceId: x.id, value: 0 });
+		});
 
-	const formattedPercentVotes = formattedVotes.concat(noVotesArray);
+		const formattedPercentVotes = formattedVotes.concat(noVotesArray);
 
-	const calculateWinners = () => {
-		const highestVal = formattedPercentVotes.reduce((max, x) => (x.value > max ? x.value : max), formattedPercentVotes[0].value);
-		const winners = formattedPercentVotes.filter(x => x.value === highestVal);
-		return winners;
-	};
+		const calculateWinners = () => {
+			const highestVal = formattedPercentVotes.reduce((max, x) => (x.value > max ? x.value : max), formattedPercentVotes[0].value);
+			const winners = formattedPercentVotes.filter(x => x.value === highestVal);
+			return winners;
+		};
 
-	const winners = calculateWinners().map(x => x.choiceId);
+		const winners = calculateWinners().map(x => x.choiceId);
 
-	return { votes: formattedPercentVotes, winners };
+		return { votes: formattedPercentVotes, winners };
+	} else {
+		return { votes: [], winners: [] };
+	}
 };
 
 interface PointsHolder {
@@ -40,126 +44,146 @@ interface PointsHolder {
 }
 
 export const calculateRankedChoiceResults = (rankedChoiceVotes: { choiceId: number; order: number }[][]) => {
-	const allVotesArray: PointsHolder[][] = [];
-	rankedChoiceVotes.forEach(vote => {
-		const totalPoints = vote?.length;
-		const voteArray: PointsHolder[] = [];
-		if (totalPoints) {
-			vote?.forEach(choice => {
-				const points = totalPoints - choice?.order;
-				const pointsVote = { choice: choice?.choiceId, points: points };
-				voteArray.push(pointsVote);
-			});
-		}
-		allVotesArray.push(voteArray);
-	});
-
-	const formatVotes = () => {
-		const data = allVotesArray.flat();
-		const formattedData: PointsHolder[] = [];
-		data.forEach(x => {
-			const choiceObjExists = formattedData.some(element => element[`choice`] === x.choice);
-			if (choiceObjExists) {
-				const foundItem = formattedData.find(element => element.choice === x.choice);
-				foundItem ? (foundItem[`points`] = foundItem[`points`] + x.points) : null;
-			} else {
-				formattedData.push(x);
+	if (rankedChoiceVotes) {
+		const allVotesArray: PointsHolder[][] = [];
+		rankedChoiceVotes.forEach(vote => {
+			const totalPoints = vote?.length;
+			const voteArray: PointsHolder[] = [];
+			if (totalPoints) {
+				vote?.forEach(choice => {
+					const points = totalPoints - choice?.order;
+					const pointsVote = { choice: choice?.choiceId, points: points };
+					voteArray.push(pointsVote);
+				});
 			}
+			allVotesArray.push(voteArray);
 		});
 
-		let sum = 0;
-		for (let i = 1; i <= rankedChoiceVotes[0]?.length; i++) {
-			sum += i;
-		}
+		const formatVotes = () => {
+			const data = allVotesArray.flat();
+			const formattedData: PointsHolder[] = [];
+			data.forEach(x => {
+				const choiceObjExists = formattedData.some(element => element[`choice`] === x.choice);
+				if (choiceObjExists) {
+					const foundItem = formattedData.find(element => element.choice === x.choice);
+					foundItem ? (foundItem[`points`] = foundItem[`points`] + x.points) : null;
+				} else {
+					formattedData.push(x);
+				}
+			});
 
-		const totalPoints = rankedChoiceVotes?.length * sum;
-		const percentsArray = formattedData.map(x => {
-			return { choiceId: x.choice, value: x.points / totalPoints };
-		});
-		return percentsArray;
-	};
+			let sum = 0;
+			for (let i = 1; i <= rankedChoiceVotes[0]?.length; i++) {
+				sum += i;
+			}
 
-	const formattedPercentVotes = formatVotes();
+			const totalPoints = rankedChoiceVotes?.length * sum;
+			const percentsArray = formattedData.map(x => {
+				return { choiceId: x.choice, value: x.points / totalPoints };
+			});
+			return percentsArray;
+		};
 
-	const calculateWinners = () => {
-		const highestVal = formattedPercentVotes.reduce((max, x) => (x.value > max ? x.value : max), formattedPercentVotes[0].value);
-		const winners = formattedPercentVotes.filter(x => x.value === highestVal);
-		return winners;
-	};
+		const formattedPercentVotes = formatVotes();
 
-	const winners = calculateWinners().map(x => x.choiceId);
+		const calculateWinners = () => {
+			const highestVal = formattedPercentVotes.reduce((max, x) => (x.value > max ? x.value : max), formattedPercentVotes[0].value);
+			const winners = formattedPercentVotes.filter(x => x.value === highestVal);
+			return winners;
+		};
 
-	return { votes: formattedPercentVotes, winners };
+		const winners = calculateWinners().map(x => x.choiceId);
+
+		return { votes: formattedPercentVotes, winners };
+	} else {
+		return { votes: [], winners: [] };
+	}
 };
 
 export const calculateSTARResults = (STARVotes: { choiceId: number; value: number }[][]) => {
-	const formatVotesForScoringRound = () => {
-		const data = STARVotes.flat();
-		const formattedData: { choiceId: number; points: number }[] = [];
-		data.forEach(x => {
-			const choiceObjExists = formattedData.some(element => element[`choiceId`] === x.choiceId);
-			if (choiceObjExists) {
-				const foundItem = formattedData.find(element => element.choiceId === x.choiceId);
-				foundItem ? (foundItem[`points`] = foundItem[`points`] + x.value) : null;
-			} else {
-				formattedData.push({ choiceId: x.choiceId, points: x.value });
+	if (STARVotes) {
+		const formatVotesForScoringRound = () => {
+			const data = STARVotes.flat();
+			const formattedData: { choiceId: number; points: number }[] = [];
+			data.forEach(x => {
+				const choiceObjExists = formattedData.some(element => element[`choiceId`] === x.choiceId);
+				if (choiceObjExists) {
+					const foundItem = formattedData.find(element => element.choiceId === x.choiceId);
+					foundItem ? (foundItem[`points`] = foundItem[`points`] + x.value) : null;
+				} else {
+					formattedData.push({ choiceId: x.choiceId, points: x.value });
+				}
+			});
+
+			const totalPoints = Object.values(formattedData).reduce((prev, current) => prev + current.points, 0);
+
+			const percentsArray = formattedData.map(x => {
+				return { choiceId: x.choiceId, value: x.points / totalPoints };
+			});
+			return percentsArray;
+		};
+
+		const scoringVotes = formatVotesForScoringRound();
+
+		const calculateScoreWinners = () => {
+			const winners = scoringVotes.sort((a, b) => {
+				return b.value - a.value;
+			});
+			return winners;
+		};
+
+		// TODO account for ties in the scoring round better. If 3+ values tie for first place
+		// right now, this will arbitrary take the first two instead of all of them
+		const scoreWinners = calculateScoreWinners().slice(0, 2);
+
+		const calculateRunoffContestants = () => {
+			const runoffCountHolder: { choiceId: number; value: number }[] = [];
+			STARVotes.forEach(vote => {
+				const winnerChoices = vote.filter(x => x.choiceId === scoreWinners[0].choiceId || x.choiceId === scoreWinners[1].choiceId);
+				if (winnerChoices[0].value === winnerChoices[1].value) return runoffCountHolder.push(winnerChoices[0], winnerChoices[1]);
+				else if (winnerChoices[0].value > winnerChoices[1].value) return runoffCountHolder.push(winnerChoices[0]);
+				else if (winnerChoices[0].value < winnerChoices[1].value) return runoffCountHolder.push(winnerChoices[1]);
+				else return;
+			});
+			return runoffCountHolder;
+		};
+
+		const runoffCountHolder = calculateRunoffContestants();
+
+		const runoffInfo = countBy(runoffCountHolder.map(x => x.choiceId));
+
+		const formatRunoffInfo = () => {
+			const data: { choiceId: number; value: number }[] = [];
+			for (const [key, value] of Object.entries(runoffInfo)) {
+				data.push({ choiceId: Number(key), value: value });
 			}
-		});
+			return data;
+		};
 
-		const totalPoints = Object.values(formattedData).reduce((prev, current) => prev + current.points, 0);
+		const formattedRunoffInfo = formatRunoffInfo();
 
-		const percentsArray = formattedData.map(x => {
-			return { choiceId: x.choiceId, value: x.points / totalPoints };
-		});
-		return percentsArray;
-	};
+		const calculateWinners = () => {
+			const highestVal = formattedRunoffInfo.reduce((max, x) => (x.value > max ? x.value : max), formattedRunoffInfo[0].value);
+			const potentialWinners = formattedRunoffInfo.filter(x => x.value === highestVal);
+			if (potentialWinners.length > 1) {
+				const filteredScoringVotes = scoringVotes.filter(x => {
+					const included = potentialWinners.some(y => y.choiceId === x.choiceId);
+					return included ? x : null;
+				});
+				console.log(filteredScoringVotes);
+				const higherValue = filteredScoringVotes.reduce((max, x) => (x.value > max ? x.value : max), filteredScoringVotes[0].value);
+				const winners = filteredScoringVotes.filter(x => x.value === higherValue);
+				return winners;
+			} else {
+				const winners = formattedRunoffInfo.filter(x => x.value === highestVal);
+				return winners;
+			}
+		};
 
-	const scoringVotes = formatVotesForScoringRound();
+		const winners = calculateWinners().map(x => x.choiceId);
 
-	const calculateScoreWinners = () => {
-		const winners = scoringVotes.sort((a, b) => {
-			return b.value - a.value;
-		});
-		return winners;
-	};
-
-	// TODO account for ties in the scoring round better. If 3+ values tie for first place
-	// right now, this will arbitrary take the first two instead of all of them
-	const scoreWinners = calculateScoreWinners().slice(0, 2);
-
-	const calculateRunoffContestants = () => {
-		const runoffCountHolder: { choiceId: number; value: number }[] = [];
-		STARVotes.forEach(vote => {
-			const winnerChoices = vote.filter(x => x.choiceId === scoreWinners[0].choiceId || x.choiceId === scoreWinners[1].choiceId);
-			if (winnerChoices[0].value === winnerChoices[1].value) return runoffCountHolder.push(winnerChoices[0], winnerChoices[1]);
-			else if (winnerChoices[0].value > winnerChoices[1].value) return runoffCountHolder.push(winnerChoices[0]);
-			else if (winnerChoices[0].value < winnerChoices[1].value) return runoffCountHolder.push(winnerChoices[1]);
-			else return;
-		});
-		return runoffCountHolder;
-	};
-
-	const runoffCountHolder = calculateRunoffContestants();
-
-	const runoffInfo = countBy(runoffCountHolder.map(x => x.choiceId));
-
-	const formatRunoffInfo = () => {
-		const data: { choiceId: number; value: number }[] = [];
-		for (const [key, value] of Object.entries(runoffInfo)) {
-			data.push({ choiceId: Number(key), value: value });
-		}
-		return data;
-	};
-
-	const formattedRunoffInfo = formatRunoffInfo();
-
-	const calculateWinners = () => {
-		const highestVal = formattedRunoffInfo.reduce((max, x) => (x.value > max ? x.value : max), formattedRunoffInfo[0].value);
-		const winners = formattedRunoffInfo.filter(x => x.value === highestVal);
-		return winners;
-	};
-
-	const winners = calculateWinners().map(x => x.choiceId);
-
-	return { votes: scoringVotes, winners };
+		return { votes: scoringVotes, winners };
+	} else {
+		return { votes: [], winners: [] };
+	}
 };
