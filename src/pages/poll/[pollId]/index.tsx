@@ -61,7 +61,12 @@ const PollPage: React.FC<{ poll: Poll | null; user: User | null }> = props => {
 		};
 		try {
 			assert(formattedData, newVoteRequestSchema);
-			createVote(formattedData);
+			if (poll?.options.protected) {
+				if (authUser.id) createVote(formattedData);
+				else addToast(`This poll is protected. Please create an account to cast your vote!`, { appearance: `error` });
+			} else {
+				createVote(formattedData);
+			}
 		} catch (error) {
 			if (error instanceof StructError) {
 				switch (error.key) {

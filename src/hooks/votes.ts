@@ -15,7 +15,10 @@ export const useCreateVote = () => {
 	const router = useRouter();
 	return useMutation((newVote: CreateVoteRequest) => createVote(newVote), {
 		onError: (error: Error) => {
-			toasts.addToast(error.message, { appearance: `error` });
+			toasts.addToast(
+				`${error.message} If this is a protected poll, make sure you are logged in to be able to cast your vote. You may only vote once.`,
+				{ appearance: `error` }
+			);
 		},
 		onSuccess: (_, vars) => {
 			router.push(`/poll/${vars.pollId}/results`);

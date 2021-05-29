@@ -10,7 +10,7 @@ export const createVote = async (createVoteRequest: CreateVoteRequest) => {
 	const pollsCollectionRef = firestore.collection(`polls`);
 	const pollDocRef = pollsCollectionRef.doc(createVoteRequest?.pollId);
 	const resultsCollectionRef = pollDocRef.collection(`results`);
-	const newVoteDocRef = resultsCollectionRef.doc();
+	const newVoteDocRef = resultsCollectionRef.doc(createVoteRequest.userId ? createVoteRequest.userId : undefined);
 	const res = await newVoteDocRef.set({
 		...createVoteRequest,
 		createdAt,
