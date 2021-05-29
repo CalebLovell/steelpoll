@@ -38,8 +38,6 @@ export const ResultSection = ({ title, poll, votesCast, results }) => {
 
 	const plural = winners.length > 1;
 
-	console.log(results);
-
 	return (
 		<section className='w-full p-4 rounded-md sm:p-4 bg-brand-secondary'>
 			<div className='flex items-center'>

@@ -49,7 +49,7 @@ const AccountPage: React.FC<{ user: User; polls: Poll[] }> = props => {
 						Delete Account
 					</button>
 				</div>
-				<h1 className='w-full pl-2 text-2xl font-medium text-left text-brand-primary'>My Polls</h1>
+				<h1 className='w-full pt-2 pl-2 text-2xl font-medium text-left text-brand-primary'>My Polls</h1>
 				<Polls polls={polls} />
 			</main>
 		</PageWrapper>

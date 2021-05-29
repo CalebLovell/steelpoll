@@ -1,4 +1,5 @@
 import NextLink from 'next/link';
+import { useGlobalDispatch } from './GlobalProvider';
 
 interface Props {
 	href: string;
@@ -8,6 +9,7 @@ interface Props {
 }
 
 export const Link = ({ href, label, variant }: Props) => {
+	const globalDispatch = useGlobalDispatch();
 	const getClassName = () => {
 		switch (variant) {
 			case `link`:
@@ -21,7 +23,7 @@ export const Link = ({ href, label, variant }: Props) => {
 
 	return (
 		<NextLink href={href}>
-			<a href={href} className={getClassName()}>
+			<a href={href} className={getClassName()} onClick={() => globalDispatch({ type: `SET_MOBILE_NAV_OPEN`, payload: false })}>
 				{label}
 			</a>
 		</NextLink>

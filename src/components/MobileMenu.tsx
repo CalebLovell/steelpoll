@@ -50,7 +50,11 @@ export const MobileMenu = () => {
 							<div className='w-full'>
 								<div className='flex flex-col p-2'>
 									<Link href='/signup'>
-										<a href='/signup' className='p-2 font-medium text-center btn-primary'>
+										<a
+											href='/signup'
+											className='p-2 font-medium text-center btn-primary'
+											onClick={() => globalDispatch({ type: `SET_MOBILE_NAV_OPEN`, payload: false })}
+										>
 											Sign Up
 										</a>
 									</Link>
@@ -58,7 +62,11 @@ export const MobileMenu = () => {
 								<div className='flex items-center justify-center p-2'>
 									<p className='pr-2 font-medium text-center text-brand-secondary'>Already have an account?</p>
 									<Link href='/login'>
-										<a href='/login' className='p-1 text-base font-semibold rounded-md text-brand-primary focus-brand-without-border'>
+										<a
+											href='/login'
+											className='p-1 text-base font-semibold rounded-md text-brand-primary focus-brand-without-border'
+											onClick={() => globalDispatch({ type: `SET_MOBILE_NAV_OPEN`, payload: false })}
+										>
 											Log in
 										</a>
 									</Link>

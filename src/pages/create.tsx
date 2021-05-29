@@ -79,9 +79,9 @@ const CreatePage = () => {
 					autoComplete='off'
 				>
 					<div className='flex justify-center'>
-						<h1 className='mb-2 text-3xl font-bold text-center text-brand-blue'>Create a Poll</h1>
+						<h1 className='mb-2 text-3xl font-bold text-center text-brand-primary'>Create a Poll</h1>
 					</div>
-					<label htmlFor='title' className='block text-base font-semibold text-brand-blue'>
+					<label htmlFor='title' className='block text-base font-semibold text-brand-primary'>
 						Title
 					</label>
 					<input
@@ -94,7 +94,7 @@ const CreatePage = () => {
 						maxLength={100}
 					/>
 					<div className='flex items-end justify-between mt-4'>
-						<label htmlFor='description' className='block text-base font-semibold text-brand-blue'>
+						<label htmlFor='description' className='block text-base font-semibold text-brand-primary'>
 							Description
 						</label>
 						<span className='text-sm italic cursor-default text-brand-secondary'>Optional</span>
@@ -111,7 +111,7 @@ const CreatePage = () => {
 						/>
 					</div>
 					<div className='flex mt-4'>
-						<label id='choices' htmlFor='choices' className='inline-flex text-base font-semibold text-brand-blue'>
+						<label id='choices' htmlFor='choices' className='inline-flex text-base font-semibold text-brand-primary'>
 							Choices
 						</label>
 					</div>
@@ -132,7 +132,7 @@ const CreatePage = () => {
 								type='button'
 								onClick={() => choicesFieldArray.remove(index)}
 							>
-								<MinusIcon className='w-4 text-brand-blue' />
+								<MinusIcon className='w-4 text-brand-primary' />
 							</button>
 						</div>
 					))}
@@ -142,11 +142,11 @@ const CreatePage = () => {
 							type='button'
 							onClick={() => choicesFieldArray.append({ choice: `` })}
 						>
-							<PlusIcon className='w-4 text-brand-blue' />
+							<PlusIcon className='w-4 text-brand-primary' />
 						</button>
 					</div>
 					<div>
-						<p className='block text-base font-semibold text-brand-blue'>Voting Systems</p>
+						<p className='block text-base font-semibold text-brand-primary'>Voting Systems</p>
 						{votingSystemsArray.fields.map((item, index) => (
 							<div key={item.key} className='flex mt-2'>
 								<div className='flex items-center h-5'>
@@ -158,14 +158,14 @@ const CreatePage = () => {
 										className='w-4 h-4 border rounded placeholder-brand bg-brand-secondary border-brand focus-brand-with-border'
 									/>
 								</div>
-								<label htmlFor={item.slug} className='ml-3 text-sm font-semibold text-brand-primary'>
+								<label htmlFor={item.slug} className='ml-3 text-sm font-normal text-brand-primary'>
 									{item.name}
 									<p className='font-normal text-brand-secondary'>{item.description}</p>
 								</label>
 							</div>
 						))}
 					</div>
-					<p className='block mt-3 text-base font-semibold text-brand-blue'>Options</p>
+					<p className='block mt-3 text-base font-semibold text-brand-primary'>Options</p>
 					<div className='flex mt-2'>
 						<div className='flex items-center h-5'>
 							<input
@@ -176,7 +176,7 @@ const CreatePage = () => {
 								className='w-4 h-4 border rounded placeholder-brand bg-brand-secondary border-brand focus-brand-with-border'
 							/>
 						</div>
-						<label htmlFor='options.private' className='block ml-3 text-sm font-semibold text-brand-primary'>
+						<label htmlFor='options.private' className='block ml-3 text-sm font-normal text-brand-primary'>
 							Private
 							<p className='font-normal text-brand-secondary'>Only discoverable via URL</p>
 						</label>
