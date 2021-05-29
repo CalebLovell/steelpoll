@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import { CreateVoteRequest, Vote } from '@utils/voteTypes';
 import { calculateFPTPResults, calculateRankedChoiceResults, calculateSTARResults } from '@utils/calculateResults';
 import { createVote, getResults } from 'api/votes';
 
 import { Choice } from '@utils/pollTypes';
+import { CreateVoteRequest } from '@utils/voteTypes';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { useMutation } from 'react-query';
 import { useRouter } from 'next/router';

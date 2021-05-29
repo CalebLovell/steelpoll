@@ -1,4 +1,4 @@
-import { countBy, forEach, maxBy } from 'lodash';
+import { countBy, maxBy } from 'lodash';
 
 import { Choice } from './pollTypes';
 
