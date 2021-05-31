@@ -5,13 +5,11 @@ import { Poll } from '@utils/pollTypes';
 import { Polls } from '@components/Polls';
 import { getPolls } from 'api/polls';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { usePolls } from '@hooks/polls';
 
 // import { useTranslation } from 'react-i18next';
 
-const PollsPage: React.FC<{ polls: Poll[] }> = props => {
+const PollsPage: React.FC<{ polls: Poll[] }> = ({ polls }) => {
 	const authUser = useAuthUser();
-	const { data: polls } = usePolls(props.polls);
 
 	// const { t: home } = useTranslation(`home`);
 
@@ -38,6 +36,7 @@ export const getStaticProps = async ({ locale }) => {
 			polls,
 			...translations,
 		},
+		revalidate: 60 * 10, // 10 minutes
 	};
 };
 
