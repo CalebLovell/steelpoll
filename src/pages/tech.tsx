@@ -24,12 +24,6 @@ const TechPage = () => {
 					<h2 className='text-xl text-brand-primary'>Backend</h2>
 					<ul className='ml-5 space-y-1 list-disc'>
 						<li className='text-md text-brand-secondary'>
-							<a className='link-brand' href='https://vercel.com/' target='_blank' rel='noopener noreferrer'>
-								Vercel{` `}
-							</a>
-							for hosting
-						</li>
-						<li className='text-md text-brand-secondary'>
 							<a className='link-brand' href='https://www.npmjs.com/package/@firebase/firestore' target='_blank' rel='noopener noreferrer'>
 								Firebase Firestore{` `}
 							</a>
@@ -41,18 +35,24 @@ const TechPage = () => {
 							</a>
 							for authentication and authorization
 						</li>
+						<li className='text-md text-brand-secondary'>
+							<a className='link-brand' href='https://vercel.com/' target='_blank' rel='noopener noreferrer'>
+								Vercel{` `}
+							</a>
+							for hosting
+						</li>
 					</ul>
 					<h2 className='text-xl text-brand-primary'>Frontend</h2>
 					<ul className='ml-5 space-y-1 list-disc'>
 						<li className='text-md text-brand-secondary'>
 							<a className='link-brand' href='https://www.npmjs.com/package/react' target='_blank' rel='noopener noreferrer'>
-								React.js{` `}
+								React{` `}
 							</a>
 							as a UI library
 						</li>
 						<li className='text-md text-brand-secondary'>
 							<a className='link-brand' href='https://www.npmjs.com/package/next' target='_blank' rel='noopener noreferrer'>
-								Next.js{` `}
+								Next{` `}
 							</a>
 							as a React framework
 						</li>
@@ -60,7 +60,7 @@ const TechPage = () => {
 							<a className='link-brand' href='https://www.npmjs.com/package/typescript' target='_blank' rel='noopener noreferrer'>
 								TypeScript{` `}
 							</a>
-							for type safety and a better developer experience
+							for type safety and amazing developer experience
 						</li>
 						<li className='text-md text-brand-secondary'>
 							<a className='link-brand' href='https://www.npmjs.com/package/tailwindcss' target='_blank' rel='noopener noreferrer'>
@@ -81,28 +81,34 @@ const TechPage = () => {
 							for private, cookieless analytics
 						</li>
 						<li className='text-md text-brand-secondary'>
+							<a className='link-brand' href='https://www.npmjs.com/package/@sentry/nextjs' target='_blank' rel='noopener noreferrer'>
+								Sentry{` `}
+							</a>
+							for error monitoring
+						</li>
+						<li className='text-md text-brand-secondary'>
 							<a className='link-brand' href='https://www.npmjs.com/package/d3' target='_blank' rel='noopener noreferrer'>
 								D3{` `}
 							</a>
-							for reactive, responsive svg charts
+							for reactive svg charts
 						</li>
 						<li className='text-md text-brand-secondary'>
 							<a className='link-brand' href='https://www.npmjs.com/package/react-query' target='_blank' rel='noopener noreferrer'>
 								React Query{` `}
 							</a>
-							for handy data fetching hooks and state management
-						</li>
-						<li className='text-md text-brand-secondary'>
-							<a className='link-brand' href='https://www.npmjs.com/package/superstruct' target='_blank' rel='noopener noreferrer'>
-								Superstruct{` `}
-							</a>
-							for TypeScript friendly, functional data validation
+							for async data fetching hooks and state management
 						</li>
 						<li className='text-md text-brand-secondary'>
 							<a className='link-brand' href='https://www.npmjs.com/package/react-hook-form' target='_blank' rel='noopener noreferrer'>
 								React Hook Form{` `}
 							</a>
 							for performant, hook-based forms
+						</li>
+						<li className='text-md text-brand-secondary'>
+							<a className='link-brand' href='https://www.npmjs.com/package/superstruct' target='_blank' rel='noopener noreferrer'>
+								Superstruct{` `}
+							</a>
+							for TypeScript friendly, functional data validation
 						</li>
 						<li className='text-md text-brand-secondary'>
 							<a className='link-brand' href='https://www.npmjs.com/package/@headlessui/react' target='_blank' rel='noopener noreferrer'>
@@ -112,7 +118,7 @@ const TechPage = () => {
 						</li>
 						<li className='text-md text-brand-secondary'>
 							<a className='link-brand' href='https://www.npmjs.com/package/react-beautiful-dnd' target='_blank' rel='noopener noreferrer'>
-								React Beauitful DND{` `}
+								React Beauitful DnD{` `}
 							</a>
 							for accessible, draggable components when voting in Ranked Choice polls
 						</li>
