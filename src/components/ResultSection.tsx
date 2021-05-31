@@ -6,12 +6,8 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Link from 'next/link';
 import { LoadingSpinner } from './LoadingSpinner';
 import { ResultsTable } from '@components/ResultsTable';
-import dayjs from 'dayjs';
 import dynamic from 'next/dynamic';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import { useRouter } from 'next/router';
-
-dayjs.extend(relativeTime);
 
 // import { useTranslation } from 'react-i18next';
 
