@@ -76,7 +76,7 @@ export const VoteRankedChoice = ({ poll, rankedChoice, setRankedChoice }: { poll
 						<ChartPieIcon className='w-5 h-5 ml-2 text-white sm:w-4 sm:h-4' aria-hidden='true' />
 					</a>
 				</Link>
-				<CopyToClipboard text={`www.steelpoll.com/poll/${pollId}`}>
+				<CopyToClipboard text={`https://www.steelpoll.com/poll/${pollId}`}>
 					<button
 						type='button'
 						onClick={() => setCopied(true)}
