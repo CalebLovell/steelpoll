@@ -13,7 +13,7 @@ const TermsPage = () => {
 		<PageWrapper authUser={authUser} metadata={metadata}>
 			<main className='container flex items-center justify-center bg-brand-primary min-h-content'>
 				<div className='max-w-2xl p-4 my-4 space-y-4 rounded-lg sm:p-8 bg-brand-secondary'>
-					<h1 className='text-3xl text-brand-primary'>Terms of Use</h1>
+					<h1 className='text-3xl font-semibold text-brand-primary'>Terms of Use</h1>
 					<p className='text-md text-brand-secondary'>
 						SteelPoll is an open-source, personal project. Please follow basic rules of human decency when using this site.
 					</p>

@@ -13,7 +13,7 @@ const TechPage = () => {
 		<PageWrapper authUser={authUser} metadata={metadata}>
 			<main className='container flex items-center justify-center bg-brand-primary min-h-content'>
 				<div className='max-w-2xl p-4 my-4 space-y-4 rounded-lg sm:p-8 bg-brand-secondary'>
-					<h1 className='text-3xl text-brand-primary'>Tech Stack</h1>
+					<h1 className='text-3xl font-semibold text-brand-primary'>Tech Stack</h1>
 					<p className='text-md text-brand-secondary'>
 						SteelPoll is an open-source, personal project made by me, Caleb Lovell. The entire repository can be found hosted on Github{` `}
 						<a className='link-brand' href='https://github.com/CalebLovell/steelpoll' target='_blank' rel='noopener noreferrer'>

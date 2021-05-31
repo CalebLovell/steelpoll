@@ -13,7 +13,7 @@ const PrivacyPage = () => {
 		<PageWrapper authUser={authUser} metadata={metadata}>
 			<main className='container flex items-center justify-center bg-brand-primary min-h-content'>
 				<div className='max-w-2xl p-4 my-4 space-y-4 rounded-lg sm:p-8 bg-brand-secondary'>
-					<h1 className='text-3xl text-brand-primary'>Privacy Policy</h1>
+					<h1 className='text-3xl font-semibold text-brand-primary'>Privacy Policy</h1>
 					<p className='text-md text-brand-secondary'>
 						SteelPoll is built to be completely private by default. I do not store <strong>any</strong> of your data except what you{` `}
 						<i>explicitly</i> give me. SteelPoll opts out of Google fingerprinting and uses no tracking cookies to collect data.

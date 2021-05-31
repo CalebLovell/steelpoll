@@ -7,8 +7,8 @@ import Link from 'next/link';
 
 const options = [
 	{ name: `Tech Stack`, description: `Learn about how this site was built`, href: `/tech` },
-	{ name: `Terms of Use`, description: `Learn about the rules for using this site`, href: `/terms` },
 	{ name: `Privacy Policy`, description: `Learn how this site protects your privacy`, href: `/privacy` },
+	{ name: `Terms of Use`, description: `Learn about the rules for using this site`, href: `/terms` },
 ];
 
 export const AboutDropdown = () => {

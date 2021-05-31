@@ -30,17 +30,21 @@ export const MobileMenu = () => {
 						<Logo label={t(`header.home`)} />
 					</div>
 					<nav className='flex flex-col items-start p-2 space-y-2'>
+						<p className='mt-2 ml-2 text-sm font-semibold tracking-wider text-gray-400 uppercase'>Website</p>
 						<MyLink href='/create' label='Create a Poll' variant='mobile' />
 						<MyLink href='/polls' label='Explore Polls' variant='mobile' />
+						<p className='ml-2 text-sm font-semibold tracking-wider text-gray-400 uppercase'>About</p>
 						<MyLink href='/tech' label='Tech Stack' variant='mobile' />
-						<MyLink href='/terms' label='Terms of Use' variant='mobile' />
+						<p className='ml-2 text-sm font-semibold tracking-wider text-gray-400 uppercase'>Legal</p>
 						<MyLink href='/privacy' label='Privacy Policy' variant='mobile' />
+						<MyLink href='/terms' label='Terms of Use' variant='mobile' />
 						{authUser.id && (
 							<>
-								<MyLink href='/account' label='Account' variant='mobile' />
+								<p className='ml-2 text-sm font-semibold tracking-wider text-gray-400 uppercase'>Account</p>
+								<MyLink href='/account' label='My Account' variant='mobile' />
 								<button
 									onClick={() => logout()}
-									className='w-full p-2 font-medium text-left transition duration-150 ease-in-out rounded-md focus-brand-without-border hover-brand lg:px-4 text-brand-primary'
+									className='w-full p-2 ml-6 font-medium text-left transition duration-150 ease-in-out rounded-md focus-brand-without-border hover-brand lg:px-4 text-brand-primary'
 								>
 									Logout
 								</button>
