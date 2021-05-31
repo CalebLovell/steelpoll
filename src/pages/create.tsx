@@ -199,7 +199,7 @@ const CreatePage = () => {
 					<button
 						type='submit'
 						disabled={isLoading || pageIsLoading}
-						className='inline-flex items-center px-4 py-2 mt-4 text-sm font-medium leading-4 border rounded-md shadow-sm text-brand-primary border-brand focus-brand-with-border'
+						className='inline-flex items-center px-4 py-2 mt-4 text-sm font-medium leading-4 border btn-primary'
 					>
 						Submit
 						{isLoading && <LoadingSpinner />}

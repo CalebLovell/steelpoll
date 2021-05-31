@@ -8,7 +8,9 @@ const PollCard = ({ poll }: { poll: Poll }) => {
 	return (
 		<li key={poll.id} className='col-span-1 p-4 space-y-3 rounded-lg shadow bg-brand-secondary'>
 			<div className='flex items-center justify-between'>
-				<h3 className='mr-2 text-sm font-medium truncate text-brand-primary'>{poll?.title}</h3>
+				<h3 className='mr-2 text-sm font-medium truncate text-brand-primary' title={poll?.title}>
+					{poll?.title}
+				</h3>
 				<div className={`px-2 rounded-full flex items-center ${poll?.options?.protected ? `bg-blue-100` : `bg-green-100`}`}>
 					<p className={`w-20 text-sm font-medium text-center ${poll?.options?.protected ? `text-blue-800` : `text-green-800`}`}>
 						{poll?.options?.protected ? `Users Only` : `Open To All`}

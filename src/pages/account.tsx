@@ -38,14 +38,14 @@ const AccountPage: React.FC<{ user: User; polls: Poll[] }> = props => {
 	return (
 		<PageWrapper authUser={authUser} metadata={metadata}>
 			<main className='container flex flex-col items-center min-h-content bg-brand-primary'>
-				<div className='flex flex-col items-center mt-4 space-y-2'>
+				<div className='flex flex-col items-center mt-4 space-y-3'>
 					<div className='flex items-center justify-center w-32 h-32 rounded-full bg-brand-secondary '>
 						<UserIcon className='w-16 h-16 text-brand-primary' />
 					</div>
 					<p className='text-3xl font-medium text-brand-primary'>{user?.name}</p>
 					<p className='font-normal text-md text-brand-primary'>{user?.email}</p>
-					<p className='text-sm font-normal text-brand-primary'>Account created on {date}</p>
-					<button type='button' onClick={onDeleteUser} className='px-4 py-1 mt-1 text-sm font-normal btn-primary'>
+					<p className='pb-1 text-sm font-normal text-brand-primary'>Account created on {date}</p>
+					<button type='button' onClick={onDeleteUser} className='px-4 py-1 text-sm font-normal btn-primary'>
 						Delete Account
 					</button>
 				</div>
