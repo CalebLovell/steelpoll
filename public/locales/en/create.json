@@ -1,0 +1,66 @@
+{
+	"title": "Create a Poll",
+	"form": {
+		"title": {
+			"label": "Title",
+			"placeholder": "Add a title here..."
+		},
+		"description": {
+			"label": "Description",
+			"placeholder": "Add a description here...",
+			"optional": "Optional"
+		},
+		"choices": {
+			"label": "Choices",
+			"placeholder": "Add a choice here...",
+			"minus": "Delete previous choice",
+			"plus": "Add another choice"
+		},
+		"votingSystems": {
+			"label": "Voting Systems",
+			"name": "choices",
+			"system1": {
+				"name": "First Past the Post",
+				"description": "Also known as Winner Take All, the choice with a plurality of votes wins"
+			},
+			"system2": {
+				"name": "Ranked Choice",
+				"description": "Rank each choice in order of preference. SteelPoll uses a method called the Borda count to calculate the winner. This system will select a more broadly popular choice in comparison to First Past the Post voting"
+			},
+			"system3": {
+				"name": "Score then Automatic Runoff (STAR)",
+				"description": "Rank each choice between 1 and 5. The two choices with the highest total scores will compete in an instant runoff, which will select the choice preferred on more ballots as the final winner. This system allows voters to weight their preferences"
+			}
+		},
+		"options": {
+			"label": "Options",
+			"private": {
+				"name": "Private",
+				"description": "Only discoverable via URL"
+			},
+			"protected": {
+				"name": "Protected",
+				"description": "Only registered users can vote"
+			}
+		},
+		"submit": "Submit"
+	},
+	"instructions": {
+		"1": {
+			"name": "Create a Poll",
+			"description": "Choose between three types of polls depending on your needs"
+		},
+		"2": {
+			"name": "Share It",
+			"description": "Copy and paste your unique poll URL and share it with your friends"
+		},
+		"3": {
+			"name": "Cast Your Vote",
+			"description": "Use our simple, intuitive voting system to submit your opinion"
+		},
+		"4": {
+			"name": "Get Live Results",
+			"description": "Watch the results update in real-time as your friends cast their votes"
+		}
+	}
+}

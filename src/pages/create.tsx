@@ -10,13 +10,38 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useCreatePoll } from '@hooks/polls';
 import { usePageIsLoading } from '@hooks/usePageIsLoading';
 import { useToasts } from 'react-toast-notifications';
-import { votingSystems } from '@utils/votingSystems';
+import { useTranslation } from 'react-i18next';
 
 const CreatePage = () => {
 	const authUser = useAuthUser();
 	const pageIsLoading = usePageIsLoading();
 	const { addToast } = useToasts();
+	const { t: create } = useTranslation(`create`);
 	const { mutate: createPoll, isLoading } = useCreatePoll();
+	const votingSystems = [
+		{
+			id: 0,
+			slug: `first-past-the-post`,
+			type: `plurality`,
+			name: create(`form.votingSystems.system1.name`),
+			description: create(`form.votingSystems.system1.description`),
+		},
+		{
+			id: 1,
+			slug: `ranked-choice`,
+			type: `ordinal`,
+			name: create(`form.votingSystems.system2.name`),
+			description: create(`form.votingSystems.system2.description`),
+		},
+		{
+			id: 2,
+			slug: `STAR`,
+			type: `cardinal`,
+			name: create(`form.votingSystems.system3.name`),
+			description: create(`form.votingSystems.system3.description`),
+		},
+	];
+
 	const { control, register, handleSubmit } = useForm({
 		defaultValues: {
 			title: ``,
@@ -79,40 +104,40 @@ const CreatePage = () => {
 					autoComplete='off'
 				>
 					<div className='flex justify-center'>
-						<h1 className='mb-2 text-3xl font-bold text-center text-brand-primary'>Create a Poll</h1>
+						<h1 className='mb-2 text-3xl font-bold text-center text-brand-primary'>{create(`title`)}</h1>
 					</div>
 					<label htmlFor='title' className='block text-base font-semibold text-brand-primary'>
-						Title
+						{create(`form.title.label`)}
 					</label>
 					<input
 						name='title'
 						ref={register()}
 						className='block w-full mt-1 border rounded-md shadow-sm placeholder-brand bg-brand-secondary border-brand text-brand-primary focus-brand-with-border sm:text-sm'
-						placeholder='Add a title here...'
+						placeholder={create(`form.title.placeholder`)}
 						type='text'
 						required
 						maxLength={100}
 					/>
 					<div className='flex items-end justify-between mt-4'>
 						<label htmlFor='description' className='block text-base font-semibold text-brand-primary'>
-							Description
+							{create(`form.description.label`)}
 						</label>
-						<span className='text-sm italic cursor-default text-brand-secondary'>Optional</span>
+						<span className='text-sm italic cursor-default text-brand-secondary'>{create(`form.description.optional`)}</span>
 					</div>
 					<div className='mt-1'>
 						<textarea
 							name='description'
 							ref={register()}
 							className='block w-full mt-1 border rounded-md shadow-sm placeholder-brand border-brand bg-brand-secondary text-brand-primary focus-brand-with-border sm:text-sm'
-							placeholder='Add a description here...'
-							aria-describedby='description-optional'
+							placeholder={create(`form.description.placeholder`)}
+							aria-labelledby='description'
 							rows={3}
 							maxLength={2000}
 						/>
 					</div>
 					<div className='flex mt-4'>
 						<label id='choices' htmlFor='choices' className='inline-flex text-base font-semibold text-brand-primary'>
-							Choices
+							{create(`form.choices.label`)}
 						</label>
 					</div>
 					{choicesFieldArray.fields.map((item, index) => (
@@ -122,7 +147,7 @@ const CreatePage = () => {
 								ref={register()}
 								type='text'
 								className='block w-full border rounded-md shadow-sm placeholder-brand bg-brand-secondary border-brand text-brand-primary focus-brand-with-border sm:text-sm'
-								placeholder='Add a choice here...'
+								placeholder={create(`form.choices.placeholder`)}
 								required
 								aria-labelledby='choices'
 								maxLength={500}
@@ -132,6 +157,7 @@ const CreatePage = () => {
 								type='button'
 								onClick={() => choicesFieldArray.remove(index)}
 							>
+								<span className='sr-only'>{create(`form.choices.minus`)}</span>
 								<MinusIcon className='w-4 text-brand-primary' />
 							</button>
 						</div>
@@ -142,11 +168,12 @@ const CreatePage = () => {
 							type='button'
 							onClick={() => choicesFieldArray.append({ choice: `` })}
 						>
+							<span className='sr-only'>{create(`form.choices.plus`)}</span>
 							<PlusIcon className='w-4 text-brand-primary' />
 						</button>
 					</div>
 					<div>
-						<p className='block text-base font-semibold text-brand-primary'>Voting Systems</p>
+						<p className='block text-base font-semibold text-brand-primary'>{create(`form.votingSystems.label`)}</p>
 						{votingSystemsArray.fields.map((item, index) => (
 							<div key={item.key} className='flex mt-2'>
 								<div className='flex items-center h-5'>
@@ -165,7 +192,7 @@ const CreatePage = () => {
 							</div>
 						))}
 					</div>
-					<p className='block mt-3 text-base font-semibold text-brand-primary'>Options</p>
+					<p className='block mt-3 text-base font-semibold text-brand-primary'>{create(`form.options.label`)}</p>
 					<div className='flex mt-2'>
 						<div className='flex items-center h-5'>
 							<input
@@ -177,8 +204,8 @@ const CreatePage = () => {
 							/>
 						</div>
 						<label htmlFor='options.private' className='block ml-3 text-sm font-normal text-brand-primary'>
-							Private
-							<p className='font-normal text-brand-secondary'>Only discoverable via URL</p>
+							{create(`form.options.private.name`)}
+							<p className='font-normal text-brand-secondary'>{create(`form.options.private.description`)}</p>
 						</label>
 					</div>
 					<div className='flex mt-2'>
@@ -192,8 +219,8 @@ const CreatePage = () => {
 							/>
 						</div>
 						<label htmlFor='options.protected' className='block ml-3 text-sm font-semibold text-brand-primary'>
-							Protected
-							<p className='font-normal text-brand-secondary'>Only registered users can vote</p>
+							{create(`form.options.protected.name`)}
+							<p className='font-normal text-brand-secondary'>{create(`form.options.protected.description`)}</p>
 						</label>
 					</div>
 					<button
@@ -201,7 +228,7 @@ const CreatePage = () => {
 						disabled={isLoading || pageIsLoading}
 						className='inline-flex items-center px-4 py-2 mt-4 text-sm font-medium leading-4 border btn-primary'
 					>
-						Submit
+						{create(`form.submit`)}
 						{isLoading && <LoadingSpinner />}
 					</button>
 				</form>
@@ -211,7 +238,7 @@ const CreatePage = () => {
 };
 
 export const getStaticProps = async ({ locale }) => {
-	const translations = await serverSideTranslations(locale, [`common`, `home`]);
+	const translations = await serverSideTranslations(locale, [`common`, `create`]);
 	return {
 		props: {
 			...translations,
