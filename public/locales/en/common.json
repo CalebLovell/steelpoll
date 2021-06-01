@@ -2,7 +2,7 @@
 	"navigation": {
 		"website": {
 			"title": "Website",
-			"home": { "title": "SteelPoll" },
+			"home": { "title": "SteelPoll", "description": "Home" },
 			"create": { "title": "Create a Poll" },
 			"polls": { "title": "Explore Polls" }
 		},
