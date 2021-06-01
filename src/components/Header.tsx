@@ -11,7 +11,7 @@ import { ProfileDropdown } from './ProfileDropdown';
 import { useTranslation } from 'react-i18next';
 
 export const Header = ({ authUser }: { authUser: AuthUserContext }) => {
-	const { t } = useTranslation(`common`);
+	const { t: common } = useTranslation(`common`);
 	return (
 		<>
 			<div className='h-1 bg-brand-gradient' />
@@ -25,9 +25,9 @@ export const Header = ({ authUser }: { authUser: AuthUserContext }) => {
 				</div>
 				<nav className='items-center justify-between hidden h-full md:flex'>
 					<div className='flex items-center md:space-x-2'>
-						<Logo label={t(`header.home`)} />
-						<Link href='/create' label={t(`header.create`)} variant='link' />
-						<Link href='/polls' label={t(`header.polls`)} variant='link' />
+						<Logo label={common(`navigation.website.home.title`)} />
+						<Link href='/create' label={common(`navigation.website.create.title`)} variant='link' />
+						<Link href='/polls' label={common(`navigation.website.polls.title`)} variant='link' />
 						<AboutDropdown />
 					</div>
 					<div className='flex items-center md:space-x-2 xl:space-x-10'>
@@ -40,8 +40,8 @@ export const Header = ({ authUser }: { authUser: AuthUserContext }) => {
 								<ProfileDropdown />
 							) : (
 								<>
-									<Link href='/login' label={t(`header.login`)} variant='link' />
-									<Link href='/signup' label={t(`header.signup`)} variant='button' />
+									<Link href='/login' label={common(`navigation.auth.login.title`)} variant='link' />
+									<Link href='/signup' label={common(`navigation.auth.signup.title`)} variant='button' />
 								</>
 							)}
 						</div>

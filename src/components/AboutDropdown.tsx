@@ -4,20 +4,22 @@ import { Popover, Transition } from '@headlessui/react';
 
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import Link from 'next/link';
-
-const options = [
-	{ name: `Tech Stack`, description: `Learn about how this site was built`, href: `/tech` },
-	{ name: `Privacy Policy`, description: `Learn how this site protects your privacy`, href: `/privacy` },
-	{ name: `Terms of Use`, description: `Learn about the rules for using this site`, href: `/terms` },
-];
+import { useTranslation } from 'react-i18next';
 
 export const AboutDropdown = () => {
+	const { t: common } = useTranslation(`common`);
+
+	const options = [
+		{ name: common(`navigation.about.tech.title`), description: common(`navigation.about.tech.description`), href: `/tech` },
+		{ name: common(`navigation.legal.privacy.title`), description: common(`navigation.legal.privacy.description`), href: `/privacy` },
+		{ name: common(`navigation.legal.terms.title`), description: common(`navigation.legal.terms.description`), href: `/terms` },
+	];
 	return (
 		<Popover className='relative'>
 			{({ open }) => (
 				<>
 					<Popover.Button className='inline-flex items-center p-2 ml-2 text-base font-medium rounded-md text-brand-primary group hover-brand focus-brand-without-border'>
-						<span>About</span>
+						<span>{common(`navigation.about.title`)}</span>
 						<ChevronDownIcon className='w-5 h-5 ml-2 text-brand-primary group-hover:text-brand-blue' aria-hidden='true' />
 					</Popover.Button>
 					<Transition

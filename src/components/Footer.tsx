@@ -20,7 +20,7 @@ export const Footer = () => {
 		<footer className='container flex flex-col items-center my-6 space-y-6 md:my-12 bg-brand-secondary'>
 			<div className='flex justify-between w-full px-1 pb-6 border-b-2 border-gray-300 dark:border-gray-700'>
 				<div className='sm:w-10/12 sm:mr-2'>
-					<h3 className='text-sm font-semibold tracking-wider text-gray-400 uppercase'>Website</h3>
+					<h3 className='text-sm font-semibold tracking-wider text-gray-400 uppercase'>{t(`header.home`)}</h3>
 					<ul className='mt-4 space-y-4'>
 						{navigation.website.map(item => (
 							<li key={item.name}>

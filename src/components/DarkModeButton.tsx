@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 export const DarkModeButton = () => {
 	const [mounted, setMounted] = React.useState(false);
 	const { theme, setTheme } = useTheme();
-	const { t } = useTranslation(`common`);
+	const { t: common } = useTranslation(`common`);
 
 	// Wait for theme to load
 	React.useEffect(() => setMounted(true), []);
@@ -16,7 +16,7 @@ export const DarkModeButton = () => {
 	return (
 		<button
 			name='dark-mode-toggle'
-			aria-label={t(`DarkModeButton`)}
+			aria-label={common(`header.themeToggle`)}
 			type='button'
 			className='p-2 rounded-md focus-brand-without-border hover-brand text-brand-primary'
 			onClick={() => setTheme(theme === `dark` ? `light` : `dark`)}

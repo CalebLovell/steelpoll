@@ -1,12 +1,45 @@
 {
+	"navigation": {
+		"website": {
+			"title": "Website",
+			"home": { "title": "SteelPoll" },
+			"create": { "title": "Create a Poll" },
+			"polls": { "title": "Explore Polls" }
+		},
+		"about": {
+			"title": "About",
+			"tech": { "title": "Tech Stack", "description": "Learn about how this site was built" }
+		},
+		"legal": {
+			"title": "Legal",
+			"privacy": { "title": "Privacy Policy", "description": "Learn how this site protects your privacy" },
+			"terms": { "title": "Terms of Use", "description": "Learn about the rules for using this site" }
+		},
+		"auth": {
+			"title": "Account",
+			"login": { "title": "Log In", "description": "Already have an account?" },
+			"signup": { "title": "Sign Up" },
+			"account": { "title": "My Account" },
+			"logout": { "title": "Logout" }
+		}
+	},
+	"languages": {
+		"english": {
+			"name": "English",
+			"locale": "es"
+		},
+		"spanish": {
+			"name": "Español",
+			"locale": "es"
+		},
+		"portuguese": {
+			"name": "Português",
+			"locale": "pt"
+		}
+	},
 	"header": {
-		"home": "SteelPoll",
-		"create": "Create a Poll",
-		"polls": "Explore Polls",
-		"about": "About",
-		"login": "Log In",
-		"signup": "Sign Up",
-		"darkModeButton": "Toggle dark mode"
+		"themeToggle": "Toggle dark mode",
+		"userMenuToggle": "Open user menu"
 	},
 	"footer": {
 		"p": "2021 Caleb Lovell, All rights reserved."

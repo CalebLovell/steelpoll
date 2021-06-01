@@ -3,15 +3,16 @@ import * as React from 'react';
 import { GlobeAltIcon } from '@heroicons/react/solid';
 import { Listbox } from '@headlessui/react';
 import { useRouter } from 'next/router';
-
-const languages = [
-	{ id: 1, name: `English`, locale: `en` },
-	{ id: 2, name: `Español`, locale: `es` },
-	{ id: 3, name: `Português`, locale: `pt` },
-];
+import { useTranslation } from 'react-i18next';
 
 export const LanguageButton = () => {
 	const router = useRouter();
+	const { t: common } = useTranslation(`common`);
+	const languages = [
+		{ id: 1, name: common(`languages.english.name`), locale: common(`languages.english.locale`) },
+		{ id: 2, name: common(`languages.spanish.name`), locale: common(`languages.spanish.locale`) },
+		{ id: 3, name: common(`languages.portuguese.name`), locale: common(`languages.portuguese.locale`) },
+	];
 
 	const onChange = lang => {
 		router.push(router.pathname, router.pathname, { locale: lang });
