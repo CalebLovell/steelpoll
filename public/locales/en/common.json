@@ -44,6 +44,9 @@
 	"footer": {
 		"p": "2021 Caleb Lovell, All rights reserved."
 	},
+	"toast": {
+		"dismiss": "Dismiss"
+	},
 	"errors": {
 		"404": {
 			"name": "Error 404",

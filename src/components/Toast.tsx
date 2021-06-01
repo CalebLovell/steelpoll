@@ -1,9 +1,11 @@
 import { CheckCircleIcon, ExclamationIcon, InformationCircleIcon, XCircleIcon, XIcon } from '@heroicons/react/solid';
 
 import { ToastProps } from 'react-toast-notifications';
+import { useTranslation } from 'react-i18next';
 import { Transition } from '@headlessui/react';
 
 export const Toast: React.FC<ToastProps> = ({ appearance, onDismiss, children }) => {
+	const { t: common } = useTranslation(`common`);
 	return (
 		<Transition
 			show={true}
@@ -29,7 +31,7 @@ export const Toast: React.FC<ToastProps> = ({ appearance, onDismiss, children })
 							appearance
 						)} focus:outline-none focus:ring-2 focus:ring-offset-2 ${getFocusRingColor100(appearance)} ${getFocusRingColor600(appearance)}`}
 					>
-						<span className='sr-only'>Dismiss</span>
+						<span className='sr-only'>{common(`toast.dismiss`)}</span>
 						<XIcon className='w-6 h-6' />
 					</button>
 				</div>

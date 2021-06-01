@@ -6,21 +6,21 @@ import { Polls } from '@components/Polls';
 import { getPolls } from 'api/polls';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-// import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 const PollsPage: React.FC<{ polls: Poll[] }> = ({ polls }) => {
 	const authUser = useAuthUser();
-	// const { t: home } = useTranslation(`home`);
+	const { t: tPolls } = useTranslation(`polls`);
 
 	const metadata = {
-		title: `Explore Polls - SteelPoll`,
-		description: `View the most recently created polls`,
+		title: tPolls(`meta.title`),
+		description: tPolls(`meta.description`),
 	};
 
 	return (
 		<PageWrapper authUser={authUser} metadata={metadata}>
 			<main className='container flex flex-col w-full min-h-content bg-brand-primary'>
-				<h1 className='py-3 mt-4 text-3xl font-bold text-center text-brand-primary'>Explore Polls</h1>
+				<h1 className='py-3 mt-4 text-3xl font-bold text-center text-brand-primary'>{tPolls(`title.public`)}</h1>
 				<Polls polls={polls} />
 			</main>
 		</PageWrapper>
@@ -28,7 +28,7 @@ const PollsPage: React.FC<{ polls: Poll[] }> = ({ polls }) => {
 };
 
 export const getStaticProps = async ({ locale }) => {
-	const translations = await serverSideTranslations(locale, [`common`, `home`]);
+	const translations = await serverSideTranslations(locale, [`common`, `polls`]);
 	const polls = await getPolls();
 	const sortedPolls = polls.sort((a, b) => {
 		const dateA = new Date(a.createdAt).getTime();

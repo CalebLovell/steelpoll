@@ -1,4 +1,8 @@
 {
+	"meta": {
+		"title": "SteelPoll",
+		"description": "Create polls and get robust results instantly"
+	},
 	"section1": {
 		"part1": "Create a ",
 		"part2": "in Seconds",

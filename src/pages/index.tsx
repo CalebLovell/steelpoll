@@ -32,8 +32,13 @@ const HomePage = () => {
 		{ name: home(`features.8.name`), description: home(`features.8.description`) },
 	];
 
+	const metadata = {
+		title: home(`meta.title`),
+		description: home(`meta.description`),
+	};
+
 	return (
-		<PageWrapper authUser={authUser}>
+		<PageWrapper authUser={authUser} metadata={metadata}>
 			<main className='container flex flex-col items-center w-full text-center bg-brand-primary'>
 				<section className='flex flex-col justify-center pt-2 space-y-8 min-h-content'>
 					<h1 className='text-4xl font-extrabold text-brand-primary sm:text-5xl md:text-6xl'>

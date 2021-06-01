@@ -91,8 +91,8 @@ const CreatePage = () => {
 	};
 
 	const metadata = {
-		title: `Create a Poll - SteelPoll`,
-		description: `Create three different kinds of polls`,
+		title: create(`meta.title`),
+		description: create(`meta.description`),
 	};
 
 	return (
