@@ -15,7 +15,9 @@ const Custom404 = () => {
 		<PageWrapper authUser={authUser} metadata={metadata}>
 			<main className='container flex items-center justify-center bg-brand-primary min-h-content'>
 				<div className='flex flex-col items-center justify-center w-full h-full sm:flex-row'>
-					<h1 className='pb-4 mb-4 text-4xl border-b-2 sm:mb-0 sm:pb-0 sm:pr-4 sm:border-b-0 sm:border-r-2 text-brand-primary'>{common(`errors.404.name`)}</h1>
+					<h1 className='pb-4 mb-4 text-4xl border-b-2 sm:mb-0 sm:pb-0 sm:pr-4 sm:border-b-0 sm:border-r-2 text-brand-primary'>
+						{common(`errors.404.name`)}
+					</h1>
 					<h2 className='text-xl sm:ml-4 text-brand-primary'>{common(`errors.404.description`)}</h2>
 				</div>
 			</main>
