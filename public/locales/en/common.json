@@ -43,5 +43,11 @@
 	},
 	"footer": {
 		"p": "2021 Caleb Lovell, All rights reserved."
+	},
+	"errors": {
+		"404": {
+			"name": "Error 404",
+			"description": "This page could not be found!"
+		}
 	}
 }
