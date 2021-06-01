@@ -10,7 +10,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const PollsPage: React.FC<{ polls: Poll[] }> = ({ polls }) => {
 	const authUser = useAuthUser();
-
 	// const { t: home } = useTranslation(`home`);
 
 	const metadata = {
@@ -31,9 +30,15 @@ const PollsPage: React.FC<{ polls: Poll[] }> = ({ polls }) => {
 export const getStaticProps = async ({ locale }) => {
 	const translations = await serverSideTranslations(locale, [`common`, `home`]);
 	const polls = await getPolls();
+	const sortedPolls = polls.sort((a, b) => {
+		const dateA = new Date(a.createdAt).getTime();
+		const dateB = new Date(b.createdAt).getTime();
+		return dateA < dateB ? 1 : -1;
+	});
+
 	return {
 		props: {
-			polls,
+			polls: sortedPolls,
 			...translations,
 		},
 		revalidate: 60 * 10, // 10 minutes
