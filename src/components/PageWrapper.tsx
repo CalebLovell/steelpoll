@@ -22,7 +22,7 @@ export const PageWrapper: React.FC<Props> = ({ metadata, authUser, children }) =
 	const defaultMetadata = {
 		title: `SteelPoll`,
 		description: `Create polls and get robust results instantly`,
-		image: `https://www.steelpoll.com/images/steelpoll_image.png`,
+		image: `https://www.steelpoll.com/images/steelpoll.png`,
 		...metadata,
 	};
 	const { title, description, image } = defaultMetadata;
@@ -41,7 +41,7 @@ export const PageWrapper: React.FC<Props> = ({ metadata, authUser, children }) =
 					<meta property='og:type' content='website' />
 					<meta property='og:image' content={image} />
 					<meta property='og:image:width' content='1200' />
-					<meta property='og:image:height' content='627' />
+					<meta property='og:image:height' content='630' />
 					<meta property='og:image:type' content='image/png' />
 					<meta name='twitter:card' content='summary' />
 					<meta name='twitter:site' content='@Caleb__Lovell' />
