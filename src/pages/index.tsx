@@ -86,7 +86,7 @@ const HomePage = () => {
 							<div key={feature.name} className='relative'>
 								<CheckIcon className='absolute w-6 h-6 text-green-500' aria-hidden='true' />
 								<dt className='text-lg font-medium leading-6 text-brand-primary'>{feature.name}</dt>
-								<dd className='mt-2 text-base text-brand-secondary'>{feature.description}</dd>
+								<dd className='mt-2 text-base md:mt-5 text-brand-secondary'>{feature.description}</dd>
 							</div>
 						))}
 					</dl>

@@ -11,11 +11,11 @@
 	"section2": {
 		"h2": "How it works",
 		"p1": "A Fun Way to Create Polls",
-		"p2": "It does not get much easier... create and share your poll, then watch the results roll in and update in real-time!"
+		"p2": "Create and share your poll, then watch the results roll in and update in real-time!"
 	},
 	"section3": {
 		"h3": "Why Choose SteelPoll?",
-		"p": "We offer more robust, private polling than any alternatives, all for free!"
+		"p": "More robust, private polling than any alternatives, all for free!"
 	},
 	"instructions": {
 		"1": {
@@ -50,11 +50,11 @@
 		},
 		"4": {
 			"name": "Easy to Use",
-			"description": "Built with the user experience as our top priority"
+			"description": "SteelPoll makes creating and sharing polls as simple as possible"
 		},
 		"5": {
 			"name": "Secure",
-			"description": "Create polls that are open to anyone or restricted to authorized, registered accounts only"
+			"description": "Create polls that are open to anyone or restricted to registered accounts only"
 		},
 		"6": {
 			"name": "Private",
@@ -62,11 +62,11 @@
 		},
 		"7": {
 			"name": "Fully Accessible",
-			"description": "Built with keyboard-only users and screen readers considered from the start"
+			"description": "Built with keyboard only users and screen readers considered from the start"
 		},
 		"8": {
 			"name": "Mobile Responsive",
-			"description": "Works just as well on your phone, laptop, tablet or desktop computer"
+			"description": "Works on your phone, tablet or computer"
 		}
 	}
 }
