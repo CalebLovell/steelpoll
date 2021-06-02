@@ -3,7 +3,7 @@ import Document, { Head, Html, Main, NextScript } from 'next/document';
 class MyDocument extends Document {
 	render(): JSX.Element {
 		return (
-			<Html lang='en' prefix='og: http://ogp.me/ns#'>
+			<Html lang='en'>
 				<Head>
 					<link rel='preload' href='/fonts/inter-var.ttf' as='font' type='font/ttf' crossOrigin='anonymous' />
 					<link rel='icon' href='/favicons/favicon.ico' />
