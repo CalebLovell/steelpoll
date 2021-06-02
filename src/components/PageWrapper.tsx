@@ -22,7 +22,7 @@ export const PageWrapper: React.FC<Props> = ({ metadata, authUser, children }) =
 	const defaultMetadata = {
 		title: `SteelPoll`,
 		description: `Create polls and get robust results instantly`,
-		image: `https://steelpoll.com/images/steelpoll.png`,
+		image: `https://steelpoll.com/images/steelpoll_image.png`,
 		...metadata,
 	};
 	const { title, description, image } = defaultMetadata;
