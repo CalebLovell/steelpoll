@@ -19,7 +19,7 @@ export const Header = ({ authUser }: { authUser: AuthUserContext }) => {
 				<div className='flex items-center justify-between h-full md:hidden'>
 					<MobileMenuButton />
 					<div className='flex items-center space-x-2'>
-						<LanguageButton />
+						{/* <LanguageButton /> */}
 						<DarkModeButton />
 					</div>
 				</div>
@@ -32,7 +32,7 @@ export const Header = ({ authUser }: { authUser: AuthUserContext }) => {
 					</div>
 					<div className='flex items-center md:space-x-2 xl:space-x-10'>
 						<div className='flex items-center space-x-2'>
-							<LanguageButton />
+							{/* <LanguageButton /> */}
 							<DarkModeButton />
 						</div>
 						<div className='flex items-center md:space-x-2'>
