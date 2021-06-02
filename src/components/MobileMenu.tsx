@@ -44,7 +44,7 @@ export const MobileMenu = () => {
 								<MyLink href='/account' label={common(`navigation.auth.account.title`)} variant='mobile' />
 								<button
 									onClick={() => logout()}
-									className='w-full p-2 ml-6 font-medium text-left transition duration-150 ease-in-out rounded-md focus-brand-without-border hover-brand lg:px-4 text-brand-primary'
+									className='p-2 ml-6 font-medium text-left transition duration-150 ease-in-out rounded-md focus-brand-without-border hover-brand lg:px-4 text-brand-primary'
 								>
 									{common(`navigation.auth.logout.title`)}
 								</button>

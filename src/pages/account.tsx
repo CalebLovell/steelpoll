@@ -10,9 +10,8 @@ import dayjs from 'dayjs';
 import { getPollsByUser } from 'api/polls';
 import { getUser } from 'api/user';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useUserPolls } from '@hooks/polls';
-
 import { useTranslation } from 'react-i18next';
+import { useUserPolls } from '@hooks/polls';
 
 const AccountPage: React.FC<{ user: User; polls: Poll[] }> = props => {
 	const authUser = useAuthUser();
@@ -38,23 +37,25 @@ const AccountPage: React.FC<{ user: User; polls: Poll[] }> = props => {
 
 	return (
 		<PageWrapper authUser={authUser} metadata={metadata}>
-			<main className='container flex flex-col items-center min-h-content bg-brand-primary'>
-				<div className='flex flex-col items-center mt-4 space-y-3'>
-					<div className='flex items-center justify-center w-32 h-32 rounded-full bg-brand-secondary '>
-						<UserIcon className='w-16 h-16 text-brand-primary' />
+			<main className='container flex justify-center min-h-content bg-brand-primary'>
+				<div className='flex flex-col items-center w-full max-w-7xl'>
+					<div className='flex flex-col items-center mt-4 space-y-3'>
+						<div className='flex items-center justify-center w-32 h-32 rounded-full bg-brand-secondary '>
+							<UserIcon className='w-16 h-16 text-brand-primary' />
+						</div>
+						<p className='text-3xl font-medium text-brand-primary'>{user?.name}</p>
+						<p className='font-normal text-md text-brand-primary'>{user?.email}</p>
+						<p className='pb-1 text-sm font-normal text-brand-primary'>
+							{account(`created`)}
+							{date}
+						</p>
+						<button type='button' onClick={onDeleteUser} className='px-4 py-1 text-sm font-normal btn-primary'>
+							{account(`delete`)}
+						</button>
 					</div>
-					<p className='text-3xl font-medium text-brand-primary'>{user?.name}</p>
-					<p className='font-normal text-md text-brand-primary'>{user?.email}</p>
-					<p className='pb-1 text-sm font-normal text-brand-primary'>
-						{account(`created`)}
-						{date}
-					</p>
-					<button type='button' onClick={onDeleteUser} className='px-4 py-1 text-sm font-normal btn-primary'>
-						{account(`delete`)}
-					</button>
+					<h1 className='w-full pt-2 pl-2 text-2xl font-medium text-left text-brand-primary'>{tPolls(`title.private`)}</h1>
+					<Polls polls={polls} />
 				</div>
-				<h1 className='w-full pt-2 pl-2 text-2xl font-medium text-left text-brand-primary'>{tPolls(`title.private`)}</h1>
-				<Polls polls={polls} />
 			</main>
 		</PageWrapper>
 	);

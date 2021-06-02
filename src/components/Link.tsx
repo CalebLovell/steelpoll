@@ -17,7 +17,7 @@ export const Link = ({ href, label, variant }: Props) => {
 			case `button`:
 				return `p-2 text-center box-border font-medium transition duration-150 ease-in-out bg-black dark:bg-white rounded-md focus-brand-without-border hover-brand lg:px-4 text-white dark:text-black`;
 			case `mobile`:
-				return `ml-6 w-full text-left p-2 font-medium transition duration-150 ease-in-out rounded-md focus-brand-without-border hover-brand lg:px-4 text-brand-primary`;
+				return `ml-6 text-left p-2 font-medium transition duration-150 ease-in-out rounded-md focus-brand-without-border hover-brand text-brand-primary`;
 		}
 	};
 

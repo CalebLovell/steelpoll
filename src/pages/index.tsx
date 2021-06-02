@@ -6,7 +6,6 @@ import { useAuthUser, withAuthUser } from 'next-firebase-auth';
 import Link from 'next/link';
 import { PageWrapper } from '@components/PageWrapper';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-
 import { useTranslation } from 'react-i18next';
 
 const HomePage = () => {

@@ -5,7 +5,6 @@ import { Poll } from '@utils/pollTypes';
 import { Polls } from '@components/Polls';
 import { getPolls } from 'api/polls';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-
 import { useTranslation } from 'react-i18next';
 
 const PollsPage: React.FC<{ polls: Poll[] }> = ({ polls }) => {
@@ -19,9 +18,11 @@ const PollsPage: React.FC<{ polls: Poll[] }> = ({ polls }) => {
 
 	return (
 		<PageWrapper authUser={authUser} metadata={metadata}>
-			<main className='container flex flex-col w-full min-h-content bg-brand-primary'>
-				<h1 className='py-3 mt-4 text-3xl font-bold text-center text-brand-primary'>{tPolls(`title.public`)}</h1>
-				<Polls polls={polls} />
+			<main className='container flex justify-center min-h-content bg-brand-primary'>
+				<div className='flex flex-col w-full max-w-7xl '>
+					<h1 className='py-3 mt-4 text-3xl font-bold text-center text-brand-primary'>{tPolls(`title.public`)}</h1>
+					<Polls polls={polls} />
+				</div>
 			</main>
 		</PageWrapper>
 	);

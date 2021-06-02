@@ -54,14 +54,6 @@ module.exports = {
 						paddingLeft: `3rem`,
 						paddingRight: `3rem`,
 					},
-					'@screen lg': {
-						paddingLeft: `6rem`,
-						paddingRight: `6rem`,
-					},
-					'@screen xl': {
-						paddingLeft: `9rem`,
-						paddingRight: `9rem`,
-					},
 				},
 			});
 		},
