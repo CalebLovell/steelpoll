@@ -3,7 +3,7 @@ import Document, { Head, Html, Main, NextScript } from 'next/document';
 class MyDocument extends Document {
 	render(): JSX.Element {
 		return (
-			<Html lang='en'>
+			<Html lang='en' prefix='og: http://ogp.me/ns#'>
 				<Head>
 					<link rel='preload' href='/fonts/inter-var.ttf' as='font' type='font/ttf' crossOrigin='anonymous' />
 					<link rel='icon' href='/favicons/favicon.ico' />
@@ -13,8 +13,11 @@ class MyDocument extends Document {
 					<link href='/favicons/favicon-32x32.png' rel='icon' sizes='32x32' type='image/png' />
 					<link href='/favicons/favicon-16x16.png' rel='icon' sizes='16x16' type='image/png' />
 					<link color='#3b82f6' href='/favicons/safari-pinned-tab.svg' rel='mask-icon' />
-					<meta content='#ffffff' name='theme-color' />
-					<meta content='#ffffff' name='msapplication-TileColor' />
+					<link rel='mask-icon' href='/favicons/safari-pinned-tab.svg' color='#5bbad5' />
+					<meta charSet='UTF-8' />
+					<meta name='viewport' content='width=device-width, initial-scale=1' />
+					<meta name='theme-color' content='#ffffff' />
+					<meta name='msapplication-TileColor' content='#2b5797' />
 					<meta content='/favicons/browserconfig.xml' name='msapplication-config' />
 				</Head>
 				<body className='overflow-y-scroll text-brand bg-brand-secondary'>
