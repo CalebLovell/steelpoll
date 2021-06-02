@@ -36,6 +36,7 @@ export const PageWrapper: React.FC<Props> = ({ metadata, authUser, children }) =
 					<meta property='og:title' content={title} />
 					<meta property='og:description' content={description} />
 					<meta property='og:url' content={`https://steelpoll.com${router.asPath}`} />
+					<link rel='canonical' href={`https://steelpoll.com${router.asPath}`} />
 					<meta property='og:site_name' content='SteelPoll' />
 					<meta property='og:type' content='website' />
 					<meta property='og:image' content={image} />
