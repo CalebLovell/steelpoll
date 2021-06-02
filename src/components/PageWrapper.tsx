@@ -38,11 +38,11 @@ export const PageWrapper: React.FC<Props> = ({ metadata, authUser, children }) =
 					<meta property='og:url' content={`https://steelpoll.com${router.asPath}`} />
 					<meta property='og:site_name' content='SteelPoll' />
 					<meta property='og:type' content='website' />
-					<meta name='image' prefix='og: http://ogp.me/ns#' property='og:image' content={image} />
-					<meta prefix='og: http://ogp.me/ns#' property='og:image:secure_url' content={image} />
-					<meta prefix='og: http://ogp.me/ns#' property='og:image:type' content='image/png' />
-					<meta prefix='og: http://ogp.me/ns#' property='og:image:width' content='600' />
-					<meta prefix='og: http://ogp.me/ns#' property='og:image:height' content='300' />
+					<meta property='og:image' content={image} />
+					<meta property='og:image:secure_url' content={image} />
+					<meta property='og:image:type' content='image/png' />
+					<meta property='og:image:width' content='600' />
+					<meta property='og:image:height' content='300' />
 					<meta name='twitter:card' content='summary' />
 					<meta name='twitter:site' content='@Caleb__Lovell' />
 					<meta name='twitter:title' content={title} />

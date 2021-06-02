@@ -19,6 +19,7 @@ class MyDocument extends Document {
 					<meta name='theme-color' content='#ffffff' />
 					<meta name='msapplication-TileColor' content='#2b5797' />
 					<meta content='/favicons/browserconfig.xml' name='msapplication-config' />
+					<meta property='og:image' content='https://steelpoll.com/images/steelpoll.png' />
 				</Head>
 				<body className='overflow-y-scroll text-brand bg-brand-secondary'>
 					<Main />
