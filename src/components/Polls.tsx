@@ -51,7 +51,7 @@ const PollCard = ({ poll }: { poll: Poll }) => {
 
 export const Polls = ({ polls }: { polls: Poll[] | null | undefined }) => {
 	return (
-		<ul className='grid w-full grid-cols-1 gap-6 my-4 md:grid-cols-2 xl:grid-cols-3'>
+		<ul className='grid w-full grid-cols-1 gap-6 my-4 md:grid-cols-2'>
 			{polls?.map(poll => (
 				<PollCard key={poll.id} poll={poll} />
 			))}
