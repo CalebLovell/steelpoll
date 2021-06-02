@@ -3,12 +3,13 @@ import * as React from 'react';
 import { AboutDropdown } from './AboutDropdown';
 import { AuthUserContext } from 'next-firebase-auth';
 import { DarkModeButton } from './DarkModeButton';
-import { LanguageButton } from './LanguageButton';
 import { Link } from './Link';
 import { Logo } from './Logo';
 import { MobileMenuButton } from './MobileMenuButton';
 import { ProfileDropdown } from './ProfileDropdown';
 import { useTranslation } from 'react-i18next';
+
+// import { LanguageButton } from './LanguageButton';
 
 export const Header = ({ authUser }: { authUser: AuthUserContext }) => {
 	const { t: common } = useTranslation(`common`);
