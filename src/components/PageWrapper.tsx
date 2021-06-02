@@ -22,7 +22,7 @@ export const PageWrapper: React.FC<Props> = ({ metadata, authUser, children }) =
 	const defaultMetadata = {
 		title: `SteelPoll`,
 		description: `Create polls and get robust results instantly`,
-		image: `https://steelpoll.com/images/steelpoll_image.png`,
+		image: `https://www.steelpoll.com/images/steelpoll_image.png`,
 		...metadata,
 	};
 	const { title, description, image } = defaultMetadata;
@@ -35,8 +35,8 @@ export const PageWrapper: React.FC<Props> = ({ metadata, authUser, children }) =
 					<meta name='description' content={description} />
 					<meta property='og:title' content={title} />
 					<meta property='og:description' content={description} />
-					<meta property='og:url' content={`https://steelpoll.com${router.asPath}`} />
-					<link rel='canonical' href={`https://steelpoll.com${router.asPath}`} />
+					<meta property='og:url' content={`https://www.steelpoll.com${router.asPath}`} />
+					<link rel='canonical' href={`https://www.steelpoll.com${router.asPath}`} />
 					<meta property='og:site_name' content='SteelPoll' />
 					<meta property='og:type' content='website' />
 					<meta property='og:image' content={image} />
@@ -46,7 +46,7 @@ export const PageWrapper: React.FC<Props> = ({ metadata, authUser, children }) =
 					<meta name='twitter:card' content='summary' />
 					<meta name='twitter:site' content='@Caleb__Lovell' />
 					<meta name='twitter:title' content={title} />
-					<meta name='twitter:image' content='https://steelpoll.com/images/steelpoll_pie_chart.png' />
+					<meta name='twitter:image' content='https://www.steelpoll.com/images/steelpoll_pie_chart.png' />
 					<meta name='twitter:description' content={description} />
 					<meta name='twitter:image:alt' content={description} />
 				</Head>
