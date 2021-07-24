@@ -186,7 +186,7 @@ const CreatePage = () => {
 											className='w-4 h-4 border rounded placeholder-brand bg-brand-secondary border-brand focus-brand-with-border'
 										/>
 									</div>
-									<label htmlFor={item.slug} className='ml-3 text-sm font-normal text-brand-primary'>
+									<label htmlFor={item.slug} className='ml-3 text-sm font-medium text-brand-primary'>
 										{item.name}
 										<p className='font-normal text-brand-secondary'>{item.description}</p>
 									</label>
@@ -204,7 +204,7 @@ const CreatePage = () => {
 									className='w-4 h-4 border rounded placeholder-brand bg-brand-secondary border-brand focus-brand-with-border'
 								/>
 							</div>
-							<label htmlFor='options.private' className='block ml-3 text-sm font-normal text-brand-primary'>
+							<label htmlFor='options.private' className='block ml-3 text-sm font-medium text-brand-primary'>
 								{create(`form.options.private.name`)}
 								<p className='font-normal text-brand-secondary'>{create(`form.options.private.description`)}</p>
 							</label>
@@ -219,7 +219,7 @@ const CreatePage = () => {
 									className='w-4 h-4 border rounded placeholder-brand bg-brand-secondary border-brand focus-brand-with-border'
 								/>
 							</div>
-							<label htmlFor='options.protected' className='block ml-3 text-sm font-normal text-brand-primary'>
+							<label htmlFor='options.protected' className='block ml-3 text-sm font-semibold text-brand-primary'>
 								{create(`form.options.protected.name`)}
 								<p className='font-normal text-brand-secondary'>{create(`form.options.protected.description`)}</p>
 							</label>
