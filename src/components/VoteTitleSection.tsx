@@ -7,6 +7,26 @@ import { User } from '@utils/userTypes';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
+const localeObject = {
+	relativeTime: {
+		future: `in %s`,
+		past: `%s ago`,
+		s: `a few seconds`,
+		m: `a minute`,
+		mm: `%d minutes`,
+		h: `an hour`,
+		hh: `%d hours`,
+		d: `a day`,
+		dd: `%d days`,
+		M: `a month`,
+		MM: `%d months`,
+		y: `a year`,
+		yy: `%d years`,
+	},
+};
+
+dayjs.locale(`en`, localeObject);
+
 // import { useTranslation } from 'react-i18next';
 dayjs.extend(relativeTime);
 
