@@ -14,11 +14,10 @@ export const useCreateVote = () => {
 	const toasts = useToasts();
 	const router = useRouter();
 	return useMutation((newVote: CreateVoteRequest) => createVote(newVote), {
-		onError: (error: Error) => {
-			toasts.addToast(
-				`${error.message} If this is a protected poll, make sure you are logged in to be able to cast your vote. You may only vote once.`,
-				{ appearance: `error` }
-			);
+		onError: () => {
+			toasts.addToast(`You may only vote once. If this is a protected poll, make sure you are logged in to be able to cast your vote.`, {
+				appearance: `error`,
+			});
 		},
 		onSuccess: (_, vars) => {
 			router.push(`/poll/${vars.pollId}/results`);
