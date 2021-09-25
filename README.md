@@ -6,7 +6,7 @@ You can try it out for yourself at [https://www.steelpoll.com/](https://www.stee
 
 ## About
 
-This is a passion project created and maintained by [Caleb Lovell](https://www.caleblovell.dev/).
+This is a passion project created and maintained by me, [Caleb Lovell](https://www.caleblovell.dev/).
 
 Once upon a time, I studied political science and became fascinated by the way different voting systems prioritize different values, and can lead to vastly different outcomes.
 
@@ -26,4 +26,4 @@ To install and test this repo out locally:
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
-This site exists as a fun project to help people create and learn about alternative voting systems. You can welcome to reference or use it however you wish.
+This site exists as a fun project to help people create and learn about alternative voting systems. You are welcome to reference or use it however you wish.
