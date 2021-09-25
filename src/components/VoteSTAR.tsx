@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { ChartPieIcon, ClipboardCheckIcon, ClipboardCopyIcon } from '@heroicons/react/solid';
 
+import InputNumber from 'react-input-number';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import Link from 'next/link';
 import { Poll } from '@utils/pollTypes';
@@ -18,7 +19,7 @@ export const VoteSTAR = ({ poll, STAR, setSTAR }: { poll: Poll | undefined; STAR
 		const newArray: any[] = [];
 		currentState?.forEach((x, i) => {
 			if (i === index) {
-				const newObj = { ...x, value: Number(e.currentTarget.value) };
+				const newObj = { ...x, value: Number(e) };
 				newArray.push(newObj);
 			} else {
 				newArray.push(x);
@@ -37,7 +38,7 @@ export const VoteSTAR = ({ poll, STAR, setSTAR }: { poll: Poll | undefined; STAR
 			<ul className='border border-gray-300 divide-y divide-gray-300 dark:border-gray-700 dark:divide-gray-700'>
 				{poll?.choices?.map((choice, i) => (
 					<li key={choice?.id} className='flex items-center p-4 space-x-4 bg-brand-primary'>
-						<input
+						<InputNumber
 							className='w-20 border-gray-300 rounded-md bg-brand-secondary dark:border-gray-700 text-brand-primary'
 							name={`choice-${i + 1}`}
 							type='number'

@@ -4778,6 +4778,15 @@ react-i18next@^11.8.8:
     "@babel/runtime" "^7.13.6"
     html-parse-stringify2 "^2.0.1"
 
+react-input-number@^5.0.19:
+  version "5.0.19"
+  resolved "https://registry.yarnpkg.com/react-input-number/-/react-input-number-5.0.19.tgz#3ce3e9522190c908a0f616364ca735914648c83c"
+  integrity sha512-Aa9RmOoOgzCn6b/RYyrKRkBtIWGum6v9sA73rJFtl9N0O3kjWrAdj9lk09n9QoOaxvyEHc3GQZwLcUrBEIH2Cw==
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+    "@emotion/core" "^10.0.14"
+    lodash "^4.17.15"
+
 react-is@16.13.1, react-is@^16.13.1, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"

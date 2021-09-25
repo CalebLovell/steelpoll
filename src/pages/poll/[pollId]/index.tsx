@@ -73,6 +73,7 @@ const PollPage: React.FC<{ poll: Poll | null; user: User | null }> = props => {
 					case `firstPastThePost`:
 						return addToast(`Please select one choice.`, { appearance: `error` });
 					case `STAR`:
+					case `value`:
 						return addToast(`Please make sure all your STAR choices have values between 1 and 5.`, { appearance: `error` });
 					default:
 						console.log(error.message);
