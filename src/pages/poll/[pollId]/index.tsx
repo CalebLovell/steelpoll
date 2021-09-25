@@ -15,7 +15,6 @@ import { VoteTitleSection } from '@components/VoteTitleSection';
 import { getPoll } from 'api/polls';
 import { getUser } from 'api/user';
 import { newVoteRequestSchema } from '@utils/dataSchemas';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useCreateVote } from '@hooks/votes';
 import { usePageIsLoading } from '@hooks/usePageIsLoading';
 import { usePoll } from '@hooks/polls';
@@ -123,9 +122,7 @@ const PollPage: React.FC<{ poll: Poll | null; user: User | null }> = props => {
 	);
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ locale, params }) => {
-	// @ts-ignore
-	const translations = await serverSideTranslations(locale, [`common`]);
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 	let poll: Poll | null;
 	let user: User | null;
 	if (typeof params?.pollId === `string`) {
@@ -139,7 +136,6 @@ export const getServerSideProps: GetServerSideProps = async ({ locale, params })
 		props: {
 			poll,
 			user,
-			...translations,
 		},
 	};
 };

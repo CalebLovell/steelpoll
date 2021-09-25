@@ -9,11 +9,9 @@ import { useAuthUser } from 'next-firebase-auth';
 import { useGlobalDispatch } from './GlobalProvider';
 import useKeypress from 'react-use-keypress';
 import { useLogout } from '@hooks/authentication';
-import { useTranslation } from 'react-i18next';
 
 export const MobileMenu = () => {
 	const globalDispatch = useGlobalDispatch();
-	const { t: common } = useTranslation(`common`);
 	const authUser = useAuthUser();
 	const { mutate: logout } = useLogout();
 
@@ -27,26 +25,26 @@ export const MobileMenu = () => {
 				<div className='divide-y-2 divide-gray-100 rounded-lg shadow-lg bg-brand-secondary min-height-mobile dark:divide-gray-700'>
 					<div className='flex items-center justify-between p-2'>
 						<MobileMenuButton />
-						<Logo label={common(`navigation.website.home.title`)} />
+						<Logo label={`SteelPoll`} />
 					</div>
 					<nav className='flex flex-col items-start p-2 space-y-2'>
-						<p className='mt-2 ml-2 text-sm font-semibold tracking-wider text-gray-400 uppercase'>{common(`navigation.website.title`)}</p>
+						<p className='mt-2 ml-2 text-sm font-semibold tracking-wider text-gray-400 uppercase'>{`Website`}</p>
 						<MyLink href='/create' label='Create a Poll' variant='mobile' />
 						<MyLink href='/polls' label='Explore Polls' variant='mobile' />
-						<p className='ml-2 text-sm font-semibold tracking-wider text-gray-400 uppercase'>{common(`navigation.about.title`)}</p>
+						<p className='ml-2 text-sm font-semibold tracking-wider text-gray-400 uppercase'>{`About`}</p>
 						<MyLink href='/tech' label='Tech Stack' variant='mobile' />
-						<p className='ml-2 text-sm font-semibold tracking-wider text-gray-400 uppercase'>{common(`navigation.legal.title`)}</p>
+						<p className='ml-2 text-sm font-semibold tracking-wider text-gray-400 uppercase'>{`Legal`}</p>
 						<MyLink href='/privacy' label='Privacy Policy' variant='mobile' />
 						<MyLink href='/terms' label='Terms of Use' variant='mobile' />
 						{authUser.id && (
 							<>
-								<p className='ml-2 text-sm font-semibold tracking-wider text-gray-400 uppercase'>{common(`navigation.auth.title`)}</p>
-								<MyLink href='/account' label={common(`navigation.auth.account.title`)} variant='mobile' />
+								<p className='ml-2 text-sm font-semibold tracking-wider text-gray-400 uppercase'>{`Account`}</p>
+								<MyLink href='/account' label={`My Account`} variant='mobile' />
 								<button
 									onClick={() => logout()}
 									className='p-2 ml-6 font-medium text-left transition duration-150 ease-in-out rounded-md focus-brand-without-border hover-brand lg:px-4 text-brand-primary'
 								>
-									{common(`navigation.auth.logout.title`)}
+									Logout
 								</button>
 							</>
 						)}
@@ -59,19 +57,19 @@ export const MobileMenu = () => {
 											className='p-2 font-medium text-center btn-primary'
 											onClick={() => globalDispatch({ type: `SET_MOBILE_NAV_OPEN`, payload: false })}
 										>
-											{common(`navigation.auth.signup.title`)}
+											Sign Up
 										</a>
 									</Link>
 								</div>
 								<div className='flex items-center justify-center p-2'>
-									<p className='pr-2 font-medium text-center text-brand-secondary'>{common(`navigation.auth.login.description`)}</p>
+									<p className='pr-2 font-medium text-center text-brand-secondary'>Already have an account?</p>
 									<Link href='/login'>
 										<a
 											href='/login'
 											className='p-1 text-base font-semibold rounded-md text-brand-primary hover-brand focus-brand-without-border'
 											onClick={() => globalDispatch({ type: `SET_MOBILE_NAV_OPEN`, payload: false })}
 										>
-											{common(`navigation.auth.login.title`)}
+											Log In
 										</a>
 									</Link>
 								</div>

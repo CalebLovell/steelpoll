@@ -9,8 +9,6 @@ import { ResultsTable } from '@components/ResultsTable';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
-// import { useTranslation } from 'react-i18next';
-
 const DynamicChart = dynamic(() => import(`@components/PieChart`).then(mod => mod.PieChart), {
 	loading: () => (
 		<div className='flex items-center justify-center w-full h-full'>
@@ -22,7 +20,6 @@ const DynamicChart = dynamic(() => import(`@components/PieChart`).then(mod => mo
 
 export const ResultSection = ({ title, poll, votesCast, results }) => {
 	const [copied, setCopied] = React.useState(false);
-	// const { t: home } = useTranslation(`home`);
 	const router = useRouter();
 	// @ts-ignore
 	const { pollId }: { pollId: string } = router.query;

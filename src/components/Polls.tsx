@@ -3,10 +3,8 @@ import { ArchiveIcon, ChartPieIcon, LockClosedIcon, LockOpenIcon } from '@heroic
 import Link from 'next/link';
 import { Poll } from '@utils/pollTypes';
 import dayjs from 'dayjs';
-import { useTranslation } from 'react-i18next';
 
 const PollCard = ({ poll }: { poll: Poll }) => {
-	const { t: tPolls } = useTranslation(`polls`);
 	return (
 		<li key={poll.id} className='col-span-1 p-4 space-y-3 rounded-lg shadow bg-brand-secondary'>
 			<div className='flex items-center justify-between'>
@@ -15,7 +13,7 @@ const PollCard = ({ poll }: { poll: Poll }) => {
 				</h3>
 				<div className={`px-2 rounded-full flex items-center ${poll?.options?.protected ? `bg-blue-100` : `bg-green-100`}`}>
 					<p className={`w-20 text-sm font-medium text-center ${poll?.options?.protected ? `text-blue-800` : `text-green-800`}`}>
-						{poll?.options?.protected ? tPolls(`closed`) : tPolls(`open`)}
+						{poll?.options?.protected ? `Users Only` : `Open To All`}
 					</p>
 					{poll?.options?.protected ? (
 						<LockClosedIcon className={`w-4 h-4 ml-1 ${poll?.options?.protected ? `text-blue-800` : `text-green-800`}`} aria-hidden='true' />
@@ -24,7 +22,7 @@ const PollCard = ({ poll }: { poll: Poll }) => {
 					)}
 				</div>
 			</div>
-			<p className='text-sm truncate text-brand-secondary'>{`${tPolls(`created`)} ${dayjs(poll?.createdAt).format(`MMMM D, YYYY`)}`}</p>
+			<p className='text-sm truncate text-brand-secondary'>{`Created on ${dayjs(poll?.createdAt).format(`MMMM D, YYYY`)}`}</p>
 			<div className='flex justify-between'>
 				<Link href={`poll/${poll?.id}`}>
 					<a
@@ -32,7 +30,7 @@ const PollCard = ({ poll }: { poll: Poll }) => {
 						className='flex items-center justify-center text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-4 ring-offset-brand-white dark:ring-offset-brand-lightGrey focus:ring-brand-blue'
 					>
 						<ArchiveIcon className='w-5 h-5 text-brand-blue' aria-hidden='true' />
-						<span className='ml-3 text-brand-primary hover-brand'>{tPolls(`vote`)}</span>
+						<span className='ml-3 text-brand-primary hover-brand'>Vote Now</span>
 					</a>
 				</Link>
 				<Link href={`poll/${poll?.id}/results`}>
@@ -41,7 +39,7 @@ const PollCard = ({ poll }: { poll: Poll }) => {
 						className='flex items-center justify-center text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-4 ring-offset-brand-white dark:ring-offset-brand-lightGrey focus:ring-brand-blue'
 					>
 						<ChartPieIcon className='w-5 h-5 text-brand-blue' aria-hidden='true' />
-						<span className='ml-3 text-brand-primary hover-brand'>{tPolls(`results`)}</span>
+						<span className='ml-3 text-brand-primary hover-brand'>View Results</span>
 					</a>
 				</Link>
 			</div>

@@ -10,7 +10,6 @@ import { ThemeProvider } from 'next-themes';
 import { Toast } from '@components/Toast';
 import { ToastContainer } from '@components/ToastContainer';
 import { ToastProvider } from 'react-toast-notifications';
-import { appWithTranslation } from 'next-i18next';
 import { initAuth } from '@utils/initAuth';
 
 const queryClient = new QueryClient({
@@ -52,4 +51,4 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 	);
 };
 
-export default appWithTranslation(MyApp);
+export default MyApp;

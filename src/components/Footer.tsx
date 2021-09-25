@@ -1,18 +1,16 @@
 import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
 
 export const Footer = () => {
-	const { t: common } = useTranslation(`common`);
 	const navigation = {
 		website: [
-			{ name: common(`navigation.website.home.description`), href: `/` },
-			{ name: common(`navigation.website.create.title`), href: `/create` },
-			{ name: common(`navigation.website.polls.title`), href: `/polls` },
+			{ name: `Home`, href: `/` },
+			{ name: `Create a Poll`, href: `/create` },
+			{ name: `Explore Polls`, href: `/polls` },
 		],
-		about: [{ name: common(`navigation.about.tech.title`), href: `/tech` }],
+		about: [{ name: `Tech Stack`, href: `/tech` }],
 		legal: [
-			{ name: common(`navigation.legal.privacy.title`), href: `/privacy` },
-			{ name: common(`navigation.legal.terms.title`), href: `/terms` },
+			{ name: `Privacy Policy`, href: `/privacy` },
+			{ name: `Terms of Use`, href: `/terms` },
 		],
 	};
 
@@ -21,7 +19,7 @@ export const Footer = () => {
 			<div className='flex flex-col items-center w-full my-6 space-y-6 max-w-7xl'>
 				<div className='flex justify-between w-full px-1 pb-6 border-b-2 border-gray-300 dark:border-gray-700'>
 					<div className='sm:w-10/12 sm:mr-2'>
-						<h3 className='text-sm font-semibold tracking-wider text-gray-400 uppercase'>{common(`navigation.website.title`)}</h3>
+						<h3 className='text-sm font-semibold tracking-wider text-gray-400 uppercase'>Website</h3>
 						<ul className='mt-4 space-y-4'>
 							{navigation.website.map(item => (
 								<li key={item.name}>
@@ -36,7 +34,7 @@ export const Footer = () => {
 					</div>
 					<div className='flex flex-col space-y-4 sm:w-full sm:flex-row sm:space-y-0 sm:justify-between'>
 						<div className=''>
-							<h3 className='text-sm font-semibold tracking-wider text-gray-400 uppercase'>{common(`navigation.about.title`)}</h3>
+							<h3 className='text-sm font-semibold tracking-wider text-gray-400 uppercase'>About</h3>
 							<ul className='mt-4 space-y-4'>
 								{navigation.about.map(item => (
 									<li key={item.name}>
@@ -50,7 +48,7 @@ export const Footer = () => {
 							</ul>
 						</div>
 						<div className=''>
-							<h3 className='text-sm font-semibold tracking-wider text-gray-400 uppercase'>{common(`navigation.legal.title`)}</h3>
+							<h3 className='text-sm font-semibold tracking-wider text-gray-400 uppercase'>Legal</h3>
 							<ul className='mt-4 space-y-4'>
 								{navigation.legal.map(item => (
 									<li key={item.name}>
@@ -72,7 +70,7 @@ export const Footer = () => {
 							<span role='img' aria-label='copyright'>
 								©️
 							</span>
-							{common(`footer.p`)}
+							2021 Caleb Lovell, All rights reserved.
 						</p>
 					</div>
 					<div className='flex items-center justify-center mt-4 space-x-6 md:mt-0'>

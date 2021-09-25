@@ -47,7 +47,7 @@ const localeObject = {
 		y: `a year`,
 		yy: `%d years`,
 	},
-	meridiem: (hour) => {
+	meridiem: hour => {
 		// OPTIONAL, AM/PM
 		return hour > 12 ? `PM` : `AM`;
 	},
@@ -55,7 +55,6 @@ const localeObject = {
 
 dayjs.locale(localeObject, undefined, true);
 
-// import { useTranslation } from 'react-i18next';
 dayjs.extend(relativeTime);
 
 export const VoteTitleSection = ({ poll, user }: { poll: Poll | null | undefined; user: User | null | undefined }) => {

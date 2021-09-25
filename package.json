@@ -24,7 +24,6 @@
 		"lodash": "^4.17.21",
 		"next": "^10.2.0",
 		"next-firebase-auth": "^0.13.1",
-		"next-i18next": "^8.0.1",
 		"next-plausible": "^1.5.1",
 		"next-themes": "^0.0.12",
 		"react": "^17.0.2",

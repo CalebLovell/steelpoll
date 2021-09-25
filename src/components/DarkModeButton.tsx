@@ -3,12 +3,10 @@ import * as React from 'react';
 import { MoonIcon, SunIcon } from '@heroicons/react/solid';
 
 import { useTheme } from 'next-themes';
-import { useTranslation } from 'react-i18next';
 
 export const DarkModeButton = () => {
 	const [mounted, setMounted] = React.useState(false);
 	const { theme, setTheme } = useTheme();
-	const { t: common } = useTranslation(`common`);
 
 	// Wait for theme to load
 	React.useEffect(() => setMounted(true), []);
@@ -16,7 +14,7 @@ export const DarkModeButton = () => {
 	return (
 		<button
 			name='dark-mode-toggle'
-			aria-label={common(`header.themeToggle`)}
+			aria-label={`Toggle dark mode`}
 			type='button'
 			className='p-2 rounded-md focus-brand-without-border hover-brand text-brand-primary'
 			onClick={() => setTheme(theme === `dark` ? `light` : `dark`)}

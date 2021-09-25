@@ -7,12 +7,8 @@ import { Link } from './Link';
 import { Logo } from './Logo';
 import { MobileMenuButton } from './MobileMenuButton';
 import { ProfileDropdown } from './ProfileDropdown';
-import { useTranslation } from 'react-i18next';
-
-// import { LanguageButton } from './LanguageButton';
 
 export const Header = ({ authUser }: { authUser: AuthUserContext }) => {
-	const { t: common } = useTranslation(`common`);
 	return (
 		<>
 			<div className='h-1 bg-brand-gradient' />
@@ -20,16 +16,13 @@ export const Header = ({ authUser }: { authUser: AuthUserContext }) => {
 				<div className='w-full max-w-7xl'>
 					<div className='flex items-center justify-between h-full md:hidden'>
 						<MobileMenuButton />
-						<div className='flex items-center space-x-2'>
-							{/* <LanguageButton /> */}
-							<DarkModeButton />
-						</div>
+						<DarkModeButton />
 					</div>
 					<nav className='items-center justify-between hidden h-full md:flex'>
 						<div className='flex items-center md:space-x-2'>
-							<Logo label={common(`navigation.website.home.title`)} />
-							<Link href='/create' label={common(`navigation.website.create.title`)} variant='link' />
-							<Link href='/polls' label={common(`navigation.website.polls.title`)} variant='link' />
+							<Logo label={`SteelPoll`} />
+							<Link href='/create' label={`Create a Poll`} variant='link' />
+							<Link href='/polls' label={`Explore Polls`} variant='link' />
 							<AboutDropdown />
 						</div>
 						<div className='flex items-center md:space-x-2 xl:space-x-10'>
@@ -42,8 +35,8 @@ export const Header = ({ authUser }: { authUser: AuthUserContext }) => {
 									<ProfileDropdown />
 								) : (
 									<>
-										<Link href='/login' label={common(`navigation.auth.login.title`)} variant='link' />
-										<Link href='/signup' label={common(`navigation.auth.signup.title`)} variant='button' />
+										<Link href='/login' label={`Log In`} variant='link' />
+										<Link href='/signup' label={`Sign Up`} variant='button' />
 									</>
 								)}
 							</div>
