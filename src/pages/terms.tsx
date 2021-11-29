@@ -31,7 +31,7 @@ const TermsPage = () => {
 					</p>
 					<h3 className='text-xl text-brand-primary'>Contact</h3>
 					<p className='text-md text-brand-secondary'>
-						If you have any questions about these Terms of Use, you can contact me at caleblovell1@gmail.com.
+						If you have any questions about these terms of use, you can contact me at caleblovell1@gmail.com.
 					</p>
 				</div>
 			</main>
