@@ -24,8 +24,8 @@ const PrivacyPage = () => {
 					</p>
 					<h2 className='text-xl text-brand-primary'>Cookies</h2>
 					<p className='text-md text-brand-secondary'>
-						The only cookies used are essential session cookies for authorization and authentication. If you create an account with
-						SteelPoll, these will be used to help you log in and to create user-restricted polls.
+						The only cookies used are essential session cookies for authorization and authentication. If you create an account with SteelPoll,
+						these will be used to help you log in and to create user-restricted polls.
 					</p>
 					<h3 className='text-xl text-brand-primary'>Contact</h3>
 					<p className='text-md text-brand-secondary'>
